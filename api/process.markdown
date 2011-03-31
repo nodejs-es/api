@@ -1,25 +1,22 @@
 ## process
 
-The `process` object is a global object and can be accessed from anywhere.
-It is an instance of `EventEmitter`.
+El objeto `process` es un objeto global y puede ser accedido desde cualquier parte.
+Es una instancia de `EventEmitter`.
 
 
 ### Event: 'exit'
 
 `function () {}`
 
-Emitted when the process is about to exit.  This is a good hook to perform
-constant time checks of the module's state (like for unit tests).  The main
-event loop will no longer be run after the 'exit' callback finishes, so
-timers may not be scheduled.
+Emitido cuando el proceso está apunto de salir.  Este es un buen sitio(enganche) para realizar un control del tiempo constante del estado del módulo (por ejemplo para tests unitarios).  El bucle del evento principal no seguirá ejecutándose después de finalizar el callback 'exit', por lo tanto los timers no pueden ser programados.
 
-Example of listening for `exit`:
+Ejemplo escuchando a `exit`:
 
     process.on('exit', function () {
       process.nextTick(function () {
-       console.log('This will not run');
+       console.log('Esto no se ejecutará');
       });
-      console.log('About to exit.');
+      console.log('Apunto de salir.');
     });
 
 ### Event: 'uncaughtException'

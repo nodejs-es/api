@@ -4,11 +4,11 @@ El objeto `process` es un objeto global y puede ser accedido desde cualquier par
 Es una instancia de `EventEmitter`.
 
 
-### Event: 'exit'
+### Evento: 'exit'
 
 `function () {}`
 
-Emitido cuando el proceso está apunto de salir.  Este es un buen sitio(enganche) para realizar un control del tiempo constante del estado del módulo (por ejemplo para tests unitarios).  El bucle del evento principal no seguirá ejecutándose después de finalizar el callback 'exit', por lo tanto los timers no pueden ser programados.
+Emitido cuando el proceso está apunto de salir. Es un buen hook para realizar un control del tiempo constante del estado del módulo (por ejemplo para tests unitarios).  El bucle del evento principal no seguirá ejecutándose después de finalizar el callback 'exit', por lo tanto los timers no pueden ser programados.
 
 Ejemplo escuchando a `exit`:
 
@@ -20,7 +20,7 @@ Ejemplo escuchando a `exit`:
     });
 
 
-### Event: 'uncaughtException'
+### Evento: 'uncaughtException'
 
 `function (err) { }`
 

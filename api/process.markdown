@@ -45,7 +45,7 @@ Ejemplo escuchando a `uncaughtException`:
     nonexistentFunc();
     console.log('Esto no se ejecutará.');
 
-Nótese que `uncaughtException` es un mecanismo muy crudo para 
+Nótese que `uncaughtException` es un mecanismo muy básico para 
 manejar excepciones.  Usando try / catch en tu programa te dará más control sobre
 el flujo de tu programa. Especialmente para aplicaciones de servidor que están diseñados para
 ejecutarse eternamente, `uncaughtException` puede ser un mecanismo muy útil de seguridad.

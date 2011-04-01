@@ -1,13 +1,13 @@
-## Appendix 1 - Third Party Modules
+## Apéndice 1 - Módulos de terceros
 
-There are many third party modules for Node. At the time of writing, August
-2010, the master repository of modules is
-[the wiki page](http://github.com/joyent/node/wiki/modules).
+Existen muchos módulos de terceros para Node. En el momento de ser escrito esto,
+Agosto 2010, el repositorio principal de módulos es 
+[esta página del wiki](http://github.com/joyent/node/wiki/modules).
 
-This appendix is intended as a SMALL guide to new-comers to help them
-quickly find what are considered to be quality modules. It is not intended
-to be a complete list.  There may be better more complete modules found
-elsewhere.
+Este apéndice pretente ser una pequeña guía de ayuda a los recién llegados a
+que puedan encontrar rápidamente módulos de calidad. No prentede ser una
+lista completa. Ya que se puede encontrar mejores módulos y más completos en
+donde sea.
 
 - Module Installer: [npm](http://github.com/isaacs/npm)
 
@@ -41,4 +41,4 @@ elsewhere.
   [expresso](http://github.com/visionmedia/expresso),
   [mjsunit.runner](http://github.com/tmpvar/mjsunit.runner)
 
-Patches to this list are welcome.
+Parches a esta lista son bienvenidos.

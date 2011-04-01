@@ -1,18 +1,23 @@
-## Modules
+## Módulos
 
-Node uses the CommonJS module system.
+Node utiliza el sistema módulos de CommonJS.
 
 Node has a simple module loading system.  In Node, files and modules are in
 one-to-one correspondence.  As an example, `foo.js` loads the module
 `circle.js` in the same directory.
 
-The contents of `foo.js`:
+Node posee un secillo sistema de carga.  En Node, los ficheros y módulos son de
+correspondencia biunívoca.  A modo de ejemplo, `foo.js` carga el módulo
+`circle.js` en el mismo directorio.
+
+
+El contenido de `foo.js`:
 
     var circle = require('./circle.js');
-    console.log( 'The area of a circle of radius 4 is '
+    console.log( 'El área de un círculo con radio 4 es '
                + circle.area(4));
 
-The contents of `circle.js`:
+El contenido de `circle.js`:
 
     var PI = Math.PI;
 
@@ -24,149 +29,157 @@ The contents of `circle.js`:
       return 2 * PI * r;
     };
 
-The module `circle.js` has exported the functions `area()` and
-`circumference()`.  To export an object, add to the special `exports`
-object.
+El módulo `circle.js` ha exportado las functiones `area()` y
+`circumference()`.  Para exportar a un objeto, debe añadir el objeto especial
+`exports`.
 
-Variables
-local to the module will be private. In this example the variable `PI` is
-private to `circle.js`.
 
-### Core Modules
+Las variables locales del módulo seran privadas. En este ejemplo la variable `PI` es
+privada en `circle.js`.
 
-Node has several modules compiled into the binary.  These modules are
-described in greater detail elsewhere in this documentation.
+### Módulos básicos
 
-The core modules are defined in node's source in the `lib/` folder.
+Node posee varios módulos compilados en binario.  Estos módulos son
+descritos con más detalle en las siguientes secciones del documento.
 
-Core modules are always preferentially loaded if their identifier is
-passed to `require()`.  For instance, `require('http')` will always
-return the built in HTTP module, even if there is a file by that name.
+Los módulos básicos son definidos en el código fuente de node en la carpeta `lib/`.
 
-### File Modules
+Los módulos básicos tienen la preferencia de cargarse primero si su indentificador es
+pasado desde `require()`. Por ejemplo, `require('http')` siempre
+devolverá lo construido en el módulo HTTP, incluso si hay un fichero con ese nombre.
 
-If the exact filename is not found, then node will attempt to load the
-required filename with the added extension of `.js`, and then `.node`.
+### Módulo File
 
-`.js` files are interpreted as JavaScript text files, and `.node` files
-are interpreted as compiled addon modules loaded with `dlopen`.
+Si el nombre exacto del fichero no es encontrado, entonces node intentará cargar el
+el nombre del fichero seguido de la extensión `.js`, y a continuación con `.node`.
 
-A module prefixed with `'/'` is an absolute path to the file.  For
-example, `require('/home/marco/foo.js')` will load the file at
+Los ficheros `.js` son interpretados como ficheros de texto en JavaScript, y los ficheros `.node`
+son interpretados como extensiones de módulos compilados cargados con `dlopen`.
+
+Un módulo con el prefijo `'/'` indica la ruta exacta al fichero.  Por
+ejemplo, `require('/home/marco/foo.js')` cargará el fichero en
 `/home/marco/foo.js`.
 
-A module prefixed with `'./'` is relative to the file calling `require()`.
-That is, `circle.js` must be in the same directory as `foo.js` for
-`require('./circle')` to find it.
+Un módulo con el prefijo `'./'` es relativo al fichero llamado con `require()`.
+Es decir, `circle.js` debe estar en el mismo directorio que `foo.js` para que 
+`require('./circle')` lo encuentre.
 
-Without a leading '/' or './' to indicate a file, the module is either a
-"core module" or is loaded from a `node_modules` folder.
+Si se omite el uso de '/' o './' en el fichero, el módulo puede ser un
+"módulo básico" o se cargará desde la carpeta `node_modules`.
 
-### Loading from `node_modules` Folders
 
-If the module identifier passed to `require()` is not a native module,
-and does not begin with `'/'`, `'../'`, or `'./'`, then node starts at the
-parent directory of the current module, and adds `/node_modules`, and
-attempts to load the module from that location.
+### Cargando desde la carpeta `node_modules`
 
-If it is not found there, then it moves to the parent directory, and so
-on, until either the module is found, or the root of the tree is
-reached.
+Si el identificador del módulo pasa a `require()` no es un módulo nativo,
+y no comienza con `'/'`, `'../'`, o `'./'`, entonces node inicia en el 
+directorio principal del módulo actual, y añade `/node_modules`, e
+intenta cargar el módulo desde esa ubicación.
 
-For example, if the file at `'/home/ry/projects/foo.js'` called
-`require('bar.js')`, then node would look in the following locations, in
-this order:
+Si no se encuentra, entonces se dirige al directorio principal, y así 
+sucesivamente, hasta que el módulo es encontrado, o la raíz del árbol es
+encontrado.
+
+Por ejemplo, si el fichero en `'/home/ry/projects/foo.js'` es llamado como
+`require('bar.js')`, entonces node buscaría en las siguientes ubicaciones, en
+este orden:
 
 * `/home/ry/projects/node_modules/bar.js`
 * `/home/ry/node_modules/bar.js`
 * `/home/node_modules/bar.js`
 * `/node_modules/bar.js`
 
-This allows programs to localize their dependencies, so that they do not
-clash.
+Esto permite que los programas encuentren sus dependencias, de modo que no
+entren en conflicto.
 
-#### Optimizations to the `node_modules` Lookup Process
 
-When there are many levels of nested dependencies, it is possible for
-these file trees to get fairly long.  The following optimizations are thus
-made to the process.
+#### Optimización de proceso de búsqueda en `node_modules`
 
-First, `/node_modules` is never appended to a folder already ending in
+Cuando existen muchos niveles de dependencias anidadas, es posible que los
+árboles de directorios tomen bastante tiempo. Las siguientes optimizaciones se
+realizan para este proceso.
+
+Primero, `/node_modules` no debe ser anexado a una carpeta ya que termina en
 `/node_modules`.
 
-Second, if the file calling `require()` is already inside a `node_modules`
-hierarchy, then the top-most `node_modules` folder is treated as the
-root of the search tree.
+Segundo, si el fichero es llamado con  `require()` ya esta en la jerarquía de
+`node_modules`, entonces el nivel superior de la carpeta `node_modules` es tratada como
+la raíz del árbol de búsqueda.
 
 For example, if the file at
 `'/home/ry/projects/foo/node_modules/bar/node_modules/baz/quux.js'`
 called `require('asdf.js')`, then node would search the following
 locations:
 
+Por ejemplo, si el fichero en
+`'/home/ry/projects/foo/node_modules/bar/node_modules/baz/quux.js'`
+llama como `require('asdf.js')`, entonces node buscaría en las siguientes
+ubicaciones:
+
 * `/home/ry/projects/foo/node_modules/bar/node_modules/baz/node_modules/asdf.js`
 * `/home/ry/projects/foo/node_modules/bar/node_modules/asdf.js`
 * `/home/ry/projects/foo/node_modules/asdf.js`
 
-### Folders as Modules
+### Carpetas como módulos
 
-It is convenient to organize programs and libraries into self-contained
-directories, and then provide a single entry point to that library.
-There are three ways in which a folder may be passed to `require()` as
-an argument.
+Es conveniente organizar los programas y librerías en los mismos directorios,
+y proporcionar un único punto de entrar a la biblioteca.
+Existe tres formas en donde una carpeta pueda usar `require()` como
+un argumento.
 
-The first is to create a `package.json` file in the root of the folder,
-which specifies a `main` module.  An example package.json file might
-look like this:
+Lo primero es crear el fichero `package.json`en la raíz de la carpeta,
+que especifique el módulo `main`. Un ejemplo de package.json podría verse
+como esto:
+
 
     { "name" : "some-library",
       "main" : "./lib/some-library.js" }
 
-If this was in a folder at `./some-library`, then
-`require('./some-library')` would attempt to load
+Si fuera una carpeta en `./some-library`, entonces
+`require('./some-library')` trataría de cargar
 `./some-library/lib/some-library.js`.
 
-This is the extent of Node's awareness of package.json files.
+Este es el mayor grado de conciencia de Node con el fichero package.json .
 
-If there is no package.json file present in the directory, then node
-will attempt to load an `index.js` or `index.node` file out of that
-directory.  For example, if there was no package.json file in the above
-example, then `require('./some-library')` would attempt to load:
+Si no hay ningún fichero package.json presente en el directorio, entonces node
+intentará cargar el fichero `index.js` o `index.node` de ese directorio.
+Por ejemplo, si no hay ninguín fichero package.json en el ejemplo anterior,
+entonces `require('./some-library')` intentará cargar:
 
 * `./some-library/index.js`
 * `./some-library/index.node`
 
-### Caching
+### Almacenamiento en la caché
 
-Modules are cached after the first time they are loaded.  This means
-(among other things) that every call to `require('foo')` will get
-exactly the same object returned, if it would resolve to the same file.
+Los módulos se alamacenan en la caché después que fueron cargados por primera vez.
+Esto significa (entre otras cosas) que todas las llamadas a `require('foo')` retorna
+el mismo ojecto exacto, si se resolvería en el mismo fichero
 
-### All Together...
+### Todos juntos...
 
-To get the exact filename that will be loaded when `require()` is called, use
-the `require.resolve()` function.
+Para obtener el nombre exacto del fichero que se cargará cuando se llame con `require()`, use
+la función `require.resolve()`.
 
-Putting together all of the above, here is the high-level algorithm
-in pseudocode of what require.resolve does:
+Uniendo todo lo anterior, aquí se muestra un algoritmo de alto nievel
+en pseudocódigo de lo que haría require.resolve :
 
     require(X)
-    1. If X is a core module,
-       a. return the core module
+    1. Si X es módulo básico,
+       a. retornar el módulo básico
        b. STOP
-    2. If X begins with `./` or `/`,
+    2. Si X inicia con con `./` or `/`,
        a. LOAD_AS_FILE(Y + X)
        b. LOAD_AS_DIRECTORY(Y + X)
     3. LOAD_NODE_MODULES(X, dirname(Y))
     4. THROW "not found"
 
     LOAD_AS_FILE(X)
-    1. If X is a file, load X as JavaScript text.  STOP
-    2. If X.js is a file, load X.js as JavaScript text.  STOP
-    3. If X.node is a file, load X.node as binary addon.  STOP
+    1. Si X es un fichero, cargar X como texto JavaScript.  STOP
+    2. Si X.js es un fichero, cargar X.js como texto JavaScript.  STOP
+    3. Si X.node es un fichero, cargar X.node como extensión binaria.  STOP
 
     LOAD_AS_DIRECTORY(X)
-    1. If X/package.json is a file,
-       a. Parse X/package.json, and look for "main" field.
+    1. Si X/package.json es un fichero,
+       a. Parsear X/package.json, y buscar el campo "main".
        b. let M = X + (json main field)
        c. LOAD_AS_FILE(M)
     2. LOAD_AS_FILE(X/index)
@@ -179,7 +192,7 @@ in pseudocode of what require.resolve does:
 
     NODE_MODULES_PATHS(START)
     1. let PARTS = path split(START)
-    2. let ROOT = index of first instance of "node_modules" in PARTS, or 0
+    2. let ROOT = index es una instancia de "node_modules" en PARTS, o 0
     3. let I = count of PARTS - 1
     4. let DIRS = []
     5. while I > ROOT,
@@ -188,79 +201,79 @@ in pseudocode of what require.resolve does:
        b. DIRS = DIRS + DIR
     6. return DIRS
 
-### Loading from the `require.paths` Folders
+### Cargar desde las carpetas de `require.paths`
 
-In node, `require.paths` is an array of strings that represent paths to
-be searched for modules when they are not prefixed with `'/'`, `'./'`, or
-`'../'`.  For example, if require.paths were set to:
+En node, `require.paths` es un array de strings que representa las rutas de
+acceso a los módulos cuando estos no tienen el prefijo `'/'`, `'./'`, o
+`'../'`.  Por ejemplo, si establece require.paths como:
 
     [ '/home/micheil/.node_modules',
       '/usr/local/lib/node_modules' ]
 
-Then calling `require('bar/baz.js')` would search the following
-locations:
+A continuación se llama a `require('bar/baz.js')` y buscará en las siguientes
+ubicaciones:
 
 * 1: `'/home/micheil/.node_modules/bar/baz.js'`
 * 2: `'/usr/local/lib/node_modules/bar/baz.js'`
 
-The `require.paths` array can be mutated at run time to alter this
-behavior.
+El array en `require.paths` puede ser transformado en tiempo de ejecución para modificar
+este comportamiento.
 
-It is set initially from the `NODE_PATH` environment variable, which is
-a colon-delimited list of absolute paths.  In the previous example,
-the `NODE_PATH` environment variable might have been set to:
+Se establece inicialmente la variable de entorno `NODE_PATH`, que contiene 
+una lista delimitada por dos puntos de rutas exactas.  En el anterior ejemplo,
+la variable de entorno `NODE_PATH` puedo haber sido establecido como:
 
     /home/micheil/.node_modules:/usr/local/lib/node_modules
 
-Loading from the `require.paths` locations is only performed if the
-module could not be found using the `node_modules` algorithm above.
-Global modules are lower priority than bundled dependencies.
+Cargar las ubicaciones desde `require.paths` sólo se realiza si el
+módulon no se ha encontrado desde el algoritmo `node_modules`.
+Los módulos globarles son de baja prioridad para las dependencias de los paquetes.
 
-#### **Note:** Please Avoid Modifying `require.paths`
+#### **Nota:** Por favor evite la modificación de `require.paths`
 
-For compatibility reasons, `require.paths` is still given first priority
-in the module lookup process.  However, it may disappear in a future
-release.
+Por razones de compatibilidad, `require.paths` sigue siendo la primera prioridad
+en el proceso de búsquede de módulos. Sin embargo, puede desaparecer en una versión
+futura.
 
-While it seemed like a good idea at the time, and enabled a lot of
-useful experimentation, in practice a mutable `require.paths` list is
-often a troublesome source of confusion and headaches.
+Aunque parecía una buena idea en aquel tiempo, y ha permitido ser un 
+experimento muy útil, en la práctica la transformación de `require.paths` es una
+lista a menudo con problemas y dolores de cabeza.
 
-##### Setting `require.paths` to some other value does nothing.
+##### Establecer `require.paths` a algún otro valor para nada.
 
-This does not do what one might expect:
+Esto no hace nada de lo que se podría esperar:
 
     require.paths = [ '/usr/lib/node' ];
 
-All that does is lose the reference to the *actual* node module lookup
-paths, and create a new reference to some other thing that isn't used
-for anything.
+TOdo lo que hacer aquí es perder la referencia *actual* de node en la búsqueda
+de rutas, y crea una nueva referencia a otra cosa que no sirve
+para nada.
 
-##### Putting relative paths in `require.paths` is... weird.
+##### Poner rutas relativas en `require.paths` es... raro.
 
-If you do this:
+Si hace esto:
 
     require.paths.push('./lib');
 
-then it does *not* add the full resolved path to where `./lib`
-is on the filesystem.  Instead, it literally adds `'./lib'`,
-meaning that if you do `require('y.js')` in `/a/b/x.js`, then it'll look
-in `/a/b/lib/y.js`.  If you then did `require('y.js')` in
-`/l/m/n/o/p.js`, then it'd look in `/l/m/n/o/lib/y.js`.
+entonces *no* añada la ruta completa donde se resolvió `./lib`
+en este sistema de ficheros.  En cambio, esto añade literalmente `'./lib'`,
+lo que significa si hacer `require('y.js')` en  `/a/b/x.js`, entonces ser vería
+en `/a/b/lib/y.js`.  Si a continuación se usa `require('y.js')` en
+`/l/m/n/o/p.js`, entonces se vería en `/l/m/n/o/lib/y.js`.
 
-In practice, people have used this as an ad hoc way to bundle
-dependencies, but this technique is brittle.
+En la práctica, las personas han usado esto de una manera ad hoc para la
+dependencia de paquetes, pero esta técnica es frágil.
 
-##### Zero Isolation
+##### Cero aislamiento
 
-There is (by regrettable design), only one `require.paths` array used by
-all modules.
+Hay (por un diseño lamentable), sólo un array `require.paths` utilizado para
+todos los módulos.
 
-As a result, if one node program comes to rely on this behavior, it may
-permanently and subtly alter the behavior of all other node programs in
-the same process.  As the application stack grows, we tend to assemble
-functionality, and it is a problem with those parts interact in ways
-that are difficult to predict.
+Como resultado, si un programa en node de confiar en este comportamiento, es posible
+de que manera permanente y sutilmente altere el comportamiento de todos los programas 
+escritoes en node con el mismo proceso. A media que el stack crece, y se reune más
+funcionalidades, ya que esto es un problema con las partes que interactúan en forma
+difíciles de predecir.
 
 ## Addenda: Package Manager Tips
 

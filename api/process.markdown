@@ -1,80 +1,81 @@
 ## process
 
-The `process` object is a global object and can be accessed from anywhere.
-It is an instance of `EventEmitter`.
+El objeto `process` es un objeto global y puede ser accedido desde cualquier parte.
+Es una instancia de `EventEmitter`.
 
 
-### Event: 'exit'
+### Evento: 'exit'
 
 `function () {}`
 
-Emitted when the process is about to exit.  This is a good hook to perform
-constant time checks of the module's state (like for unit tests).  The main
-event loop will no longer be run after the 'exit' callback finishes, so
-timers may not be scheduled.
+Emitido cuando el proceso está apunto de salir. Es un buen hook para realizar 
+un control del tiempo constante del estado del módulo (por ejemplo para tests unitarios).  
+El bucle del evento principal no seguirá ejecutándose después de finalizar el callback 'exit', 
+por lo tanto los timers no pueden ser programados.
 
-Example of listening for `exit`:
+Ejemplo escuchando a `exit`:
 
     process.on('exit', function () {
       process.nextTick(function () {
-       console.log('This will not run');
+       console.log('Esto no se ejecutará');
       });
-      console.log('About to exit.');
+      console.log('Apunto de salir.');
     });
 
-### Event: 'uncaughtException'
+
+### Evento: 'uncaughtException'
 
 `function (err) { }`
 
-Emitted when an exception bubbles all the way back to the event loop. If a
-listener is added for this exception, the default action (which is to print
-a stack trace and exit) will not occur.
+Emitido cuando una excepción es devuelta hacia el bucle de evento. Si se
+ha añadido un listener a esta excepción, no se producirá la acción por defecto 
+(imprimir una traza del stack y salir).
 
-Example of listening for `uncaughtException`:
+Ejemplo escuchando a `uncaughtException`:
 
     process.on('uncaughtException', function (err) {
-      console.log('Caught exception: ' + err);
+      console.log('Excepción recogida: ' + err);
     });
 
     setTimeout(function () {
-      console.log('This will still run.');
+      console.log('Esto seguirá ejecutándose.');
     }, 500);
 
-    // Intentionally cause an exception, but don't catch it.
+    // Se fuerza una excepción, pero no se recoge.
     nonexistentFunc();
-    console.log('This will not run.');
+    console.log('Esto no se ejecutará.');
 
-Note that `uncaughtException` is a very crude mechanism for exception
-handling.  Using try / catch in your program will give you more control over
-your program's flow.  Especially for server programs that are designed to
-stay running forever, `uncaughtException` can be a useful safety mechanism.
+Nótese que `uncaughtException` es un mecanismo muy básico para 
+manejar excepciones.  Usando try / catch en tu programa te dará más control sobre
+el flujo de tu programa. Especialmente para aplicaciones de servidor que están diseñados para
+ejecutarse eternamente, `uncaughtException` puede ser un mecanismo muy útil de seguridad.
 
 
-### Signal Events
+### Eventos de señal
 
 `function () {}`
 
-Emitted when the processes receives a signal. See sigaction(2) for a list of
-standard POSIX signal names such as SIGINT, SIGUSR1, etc.
+Emitido cuando los procesos reciben una señal. Mirar sigaction(2) para una lista de 
+nombres de señal estándard POSIX como SIGINT, SIGUSR1, etc.
 
-Example of listening for `SIGINT`:
+Ejemplo escuchando a `SIGINT`:
 
-    // Start reading from stdin so we don't exit.
+    // Empieza leyendo de stdin para evitar salir.
     process.stdin.resume();
 
     process.on('SIGINT', function () {
-      console.log('Got SIGINT.  Press Control-D to exit.');
+      console.log('Recibido SIGINT.  Haz Control-D para salir.');
     });
 
-An easy way to send the `SIGINT` signal is with `Control-C` in most terminal
-programs.
+Una manera sencilla de enviar la señal `SIGINT` es con `Control-C` en la mayoria 
+de aplicaciones de terminal.
 
 
 ### process.stdout
 
-A `Writable Stream` to `stdout`.
+Un `Stream de Escritura` para `stdout`.
 
-Example: the definition of `console.log`
+Ejemplo: la definición de `console.log`
 
     console.log = function (d) {
       process.stdout.write(d + '\n');
@@ -83,15 +84,15 @@ Example: the definition of `console.log`
 
 ### process.stderr
 
-A writable stream to stderr. Writes on this stream are blocking.
+Un stream de escritura para stderr. Las escrituras en este stream son bloqueantes.
 
 
 ### process.stdin
 
-A `Readable Stream` for stdin. The stdin stream is paused by default, so one
-must call `process.stdin.resume()` to read from it.
+Un `Stream de Lectura` para stdin. El stream stdin se detiene por defecto, así que 
+se tiene que llamar a `process.stdin.resume()` para leer de él.
 
-Example of opening standard input and listening for both events:
+Ejemplo de como abir la entrada estándard (stdin) y escuchar a ambos eventos:
 
     process.stdin.resume();
     process.stdin.setEncoding('utf8');
@@ -107,16 +108,16 @@ Example of opening standard input and listening for both events:
 
 ### process.argv
 
-An array containing the command line arguments.  The first element will be
-'node', the second element will be the name of the JavaScript file.  The
-next elements will be any additional command line arguments.
+Un array que contiene los argumentos de la línea de comandos. El primer elemento será
+'node', el segundo elemento será el nombre del fichero JavaScript. Los
+siguientes elementos serán argumentos adicionales de la línea de comandos.
 
-    // print process.argv
+    // imprimir process.argv
     process.argv.forEach(function (val, index, array) {
       console.log(index + ': ' + val);
     });
 
-This will generate:
+Generará:
 
     $ node process-2.js one two=three four
     0: node
@@ -128,21 +129,21 @@ This will generate:
 
 ### process.execPath
 
-This is the absolute pathname of the executable that started the process.
+Es la ruta absoluta del ejecutable que inició el proceso.
 
-Example:
+Ejemplo:
 
     /usr/local/bin/node
 
 
 ### process.chdir(directory)
 
-Changes the current working directory of the process or throws an exception if that fails.
+Cambia el directorio actual de trabajo del proceso o lanza una excepción si falla.
 
-    console.log('Starting directory: ' + process.cwd());
+    console.log('Directorio inicial: ' + process.cwd());
     try {
       process.chdir('/tmp');
-      console.log('New directory: ' + process.cwd());
+      console.log('Directorio nuevo: ' + process.cwd());
     }
     catch (err) {
       console.log('chdir: ' + err);
@@ -152,108 +153,110 @@ Changes the current working directory of the process or throws an exception if t
 
 ### process.cwd()
 
-Returns the current working directory of the process.
+Devuelve el directorio actual de trabajo del proceso.
 
-    console.log('Current directory: ' + process.cwd());
+    console.log('Directorio actual: ' + process.cwd());
 
 
 ### process.env
 
-An object containing the user environment. See environ(7).
+Un objeto que contiene el entorno del usuario. Mirar environ(7).
 
 
 ### process.exit(code=0)
 
-Ends the process with the specified `code`.  If omitted, exit uses the
-'success' code `0`.
+Termina el proceso con el `code` especificado.  Si se omite, `exit` usa el código 
+de 'éxito' `0`.
 
-To exit with a 'failure' code:
+Para salir con un código de 'fallo':
 
     process.exit(1);
 
-The shell that executed node should see the exit code as 1.
+El shell que ha ejecutado node debería ver 1 como código de salida.
 
 
 ### process.getgid()
 
-Gets the group identity of the process. (See getgid(2).)
-This is the numerical group id, not the group name.
+Obtiene la identidad de grupo del proceso.  (Mirar getgid(2).)
+Es el id de grupo numérico, no el nombre del grupo.
 
-    console.log('Current gid: ' + process.getgid());
+    console.log('Actual gid: ' + process.getgid());
 
 
 ### process.setgid(id)
 
-Sets the group identity of the process. (See setgid(2).)  This accepts either
-a numerical ID or a groupname string. If a groupname is specified, this method
-blocks while resolving it to a numerical ID.
+Establece la identidad de grupo del proceso. (Mirar setgid(2).)  Acepta tanto 
+un ID numérico como una cadena de texto con el nombre del grupo. 
+Si se especifica el nombre del grupo, el método se bloquea mientras lo 
+resuelve a un ID numérico.
 
-    console.log('Current gid: ' + process.getgid());
+    console.log('Actual gid: ' + process.getgid());
     try {
       process.setgid(501);
-      console.log('New gid: ' + process.getgid());
+      console.log('Nuevo gid: ' + process.getgid());
     }
     catch (err) {
-      console.log('Failed to set gid: ' + err);
+      console.log('Fallo al cambiar el gid: ' + err);
     }
 
 
 ### process.getuid()
 
-Gets the user identity of the process. (See getuid(2).)
-This is the numerical userid, not the username.
+Obtiene la identidad de usuario del proceso. (Mirar getuid(2).)
+Es la id de usuario númerica, no el nombre de usuario.
 
-    console.log('Current uid: ' + process.getuid());
+    console.log('Actual uid: ' + process.getuid());
 
 
 ### process.setuid(id)
 
-Sets the user identity of the process. (See setuid(2).)  This accepts either
-a numerical ID or a username string.  If a username is specified, this method
-blocks while resolving it to a numerical ID.
+Establece la identidad de usuario del proceso. (Mirar setuid(2).)  Acepta tanto 
+un ID numérico como una cadena de texto con el nombre de usuario.  Si se especifica 
+el nombre de usuario, el método se bloquea mientras lo resuelve a un ID numérico.
 
-    console.log('Current uid: ' + process.getuid());
+    console.log('Actual uid: ' + process.getuid());
     try {
       process.setuid(501);
-      console.log('New uid: ' + process.getuid());
+      console.log('Nuevo uid: ' + process.getuid());
     }
     catch (err) {
-      console.log('Failed to set uid: ' + err);
+      console.log('Fallo al establecer uid: ' + err);
     }
 
 
 ### process.version
 
-A compiled-in property that exposes `NODE_VERSION`.
+Una propiedad dentro del compilado que expone `NODE_VERSION`.
 
-    console.log('Version: ' + process.version);
+    console.log('Versión: ' + process.version);
+
 
 ### process.installPrefix
 
-A compiled-in property that exposes `NODE_PREFIX`.
+Una propiedad dentro del compilado que expone `NODE_PREFIX`.
 
-    console.log('Prefix: ' + process.installPrefix);
+    console.log('Prefijo: ' + process.installPrefix);
 
 
 ### process.kill(pid, signal='SIGTERM')
 
-Send a signal to a process. `pid` is the process id and `signal` is the
-string describing the signal to send.  Signal names are strings like
-'SIGINT' or 'SIGUSR1'.  If omitted, the signal will be 'SIGTERM'.
-See kill(2) for more information.
+Envia una señal a un proceso. `pid` es la id de proceso y `signal` es la cadena de 
+texto que describe la señal a enviar.  Los nombres de señales son cadenas de texto
+ como 'SIGINT' o 'SIGUSR1'.  Si se omite, la señal será 'SIGTERM'.
+Mirar kill(2) para más información.
 
-Note that just because the name of this function is `process.kill`, it is
-really just a signal sender, like the `kill` system call.  The signal sent
-may do something other than kill the target process.
+Notar que ya que el nombre de la función es `process.kill`, se trata solo de 
+un emisor de señales, como la llamada a sistema `kill`. La señal enviada
+puede hacer algo más que matar el proceso escogido.
 
-Example of sending a signal to yourself:
+Ejemplo de como enviarse una señal a uno mismo:
 
     process.on('SIGHUP', function () {
-      console.log('Got SIGHUP signal.');
+      console.log('Recibida señal SIGHUP.');
     });
 
     setTimeout(function () {
-      console.log('Exiting.');
+      console.log('Saliendo.');
       process.exit(0);
     }, 100);
 
@@ -262,45 +265,45 @@ Example of sending a signal to yourself:
 
 ### process.pid
 
-The PID of the process.
+El PID del proceso.
 
-    console.log('This process is pid ' + process.pid);
+    console.log('El pid de este proceso es  ' + process.pid);
 
 ### process.title
 
-Getter/setter to set what is displayed in 'ps'.
+Getter/setter para establecer lo que mostrará 'ps'.
 
 
 ### process.platform
 
-What platform you're running on. `'linux2'`, `'darwin'`, etc.
+En que plataforma se está ejecutando. `'linux2'`, `'darwin'`, etc.
 
-    console.log('This platform is ' + process.platform);
+    console.log('La plataforma es ' + process.platform);
 
 
 ### process.memoryUsage()
 
-Returns an object describing the memory usage of the Node process.
+Devuelve un objeto describiendo el uso de la memoria del proceso Node.
 
     var util = require('util');
 
     console.log(util.inspect(process.memoryUsage()));
 
-This will generate:
+Generará:
 
     { rss: 4935680,
       vsize: 41893888,
       heapTotal: 1826816,
       heapUsed: 650472 }
 
-`heapTotal` and `heapUsed` refer to V8's memory usage.
+`heapTotal` y `heapUsed` se refieren al uso de la memoria de V8.
 
 
 ### process.nextTick(callback)
 
-On the next loop around the event loop call this callback.
-This is *not* a simple alias to `setTimeout(fn, 0)`, it's much more
-efficient.
+En la siguiente iteración del bucle del evento se llama a callback.
+No es simplemente un alias para `setTimeout(fn, 0)` , es mucho
+más eficiente.
 
     process.nextTick(function () {
       console.log('nextTick callback');
@@ -309,13 +312,13 @@ efficient.
 
 ### process.umask([mask])
 
-Sets or reads the process's file mode creation mask. Child processes inherit
-the mask from the parent process. Returns the old mask if `mask` argument is
-given, otherwise returns the current mask.
+Establece o lee la máscara del modo de creación del fichero del proceso. Los procesos 
+hijos heredan la máscara del proceso padre. Devuelve la antigua máscara si se pasa el argumento 
+`mask`, si no devuelve la máscara actual. 
 
     var oldmask, newmask = 0644;
 
     oldmask = process.umask(newmask);
-    console.log('Changed umask from: ' + oldmask.toString(8) +
-                ' to ' + newmask.toString(8));
+    console.log('Cambiada umask de: ' + oldmask.toString(8) +
+                ' a ' + newmask.toString(8));
 

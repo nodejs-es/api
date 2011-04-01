@@ -1,54 +1,48 @@
-## Global Objects
+## Objetos Globales
 
-These object are available in the global scope and can be accessed from anywhere.
+Estos objectos estan disponibles en el espacio global y puedes ser accedidos desde cualquier parte.
 
 ### global
 
-The global namespace object.
+El namespace del objeto global.
 
-In browsers, the top-level scope is the global scope. That means that in
-browsers if you're in the global scope `var something` will define a global
-variable. In Node this is different. The top-level scope is not the global
-scope; `var something` inside a Node module will be local to that module.
+En los navegadores, el espacio top-level es el espacio global. Esto significa que en los navegadores si tu estas en el espacio global `var something` definirá una variable. In Node esto es diferente. El espacio top-level no es el espacio global; `var something` dentro de un módulo de node será local para este módulo.
 
 ### process
 
-The process object. See the 'process object' section.
+El objeto process. Mira la sección 'objeto process'.
 
 ### require()
 
-To require modules. See the 'Modules' section.
+Para requerir módulos. Mira la sección 'Modulos'.
 
 ### require.resolve()
 
-Use the internal `require()` machinery to look up the location of a module,
-but rather than loading the module, just return the resolved filename.
+Usa el mecanismo interno de `require()` para buscar la localización de un módulo, pero en lugar de cargar el módulo, solo devuelve el nombre del fichero que lo contine.
 
 ### require.paths
 
-An array of search paths for `require()`.  This array can be modified to add
-custom paths.
+Un array de busqueda de rutas para `require()`. Este array puede ser modificado para añadirle rutas modificadas.
 
-Example: add a new path to the beginning of the search list
+Ejemplo: Añade una nueva ruta al comienzo de la lista de busqueda.
 
     require.paths.unshift('/usr/local/node');
 
 
 ### __filename
 
-The filename of the script being executed.  This is the absolute path, and not necessarily
-the same filename passed in as a command line argument.
+El nombre del fichero que contiene al script que esta siendo ejecutado. Este esta definido como ruta absoluta, y no es necesariamente el mismo nombre de fichero pasado como argumento en la linea de comando.
 
-Example: running `node example.js` from `/Users/mjr`
+Ejemplo: Ejecutando `node example.js` desde `/User/mjr`
 
     console.log(__filename);
     // /Users/mjr/example.js
 
 ### __dirname
 
-The dirname of the script being executed.
+El nombre del directorio del script que esta siendo ejecutado.
 
-Example: running `node example.js` from `/Users/mjr`
+Ejemplo:Ejecutando `node example.js` desde `/User/mjr`
 
     console.log(__dirname);
     // /Users/mjr
@@ -56,6 +50,4 @@ Example: running `node example.js` from `/Users/mjr`
 
 ### module
 
-A reference to the current module. In particular
-`module.exports` is the same as the `exports` object. See `src/node.js`
-for more information.
+Una referencia al actual módulo. En particular `module.exports` es igual al objeto `exports`. Mira `src/node.js` para más información.

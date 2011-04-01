@@ -8,7 +8,10 @@ Es una instancia de `EventEmitter`.
 
 `function () {}`
 
-Emitido cuando el proceso está apunto de salir. Es un buen hook para realizar un control del tiempo constante del estado del módulo (por ejemplo para tests unitarios).  El bucle del evento principal no seguirá ejecutándose después de finalizar el callback 'exit', por lo tanto los timers no pueden ser programados.
+Emitido cuando el proceso está apunto de salir. Es un buen hook para realizar 
+un control del tiempo constante del estado del módulo (por ejemplo para tests unitarios).  
+El bucle del evento principal no seguirá ejecutándose después de finalizar el callback 'exit', 
+por lo tanto los timers no pueden ser programados.
 
 Ejemplo escuchando a `exit`:
 
@@ -44,15 +47,15 @@ Ejemplo escuchando a `uncaughtException`:
 
 Nótese que `uncaughtException` es un mecanismo muy crudo para 
 manejar excepciones.  Usando try / catch en tu programa te dará más control sobre
-el flujo de tu programa. Especialmente para programas de servidor que están diseñados para
+el flujo de tu programa. Especialmente para aplicaciones de servidor que están diseñados para
 ejecutarse eternamente, `uncaughtException` puede ser un mecanismo muy útil de seguridad.
 
 
-### Signal Events
+### Eventos de señal
 
 `function () {}`
 
-Emitido cuando los procesos reciben una señal. Ver sigaction(2) para una lista de 
+Emitido cuando los procesos reciben una señal. Mirar sigaction(2) para una lista de 
 nombres de señal estándard POSIX como SIGINT, SIGUSR1, etc.
 
 Ejemplo escuchando a `SIGINT`:
@@ -65,7 +68,7 @@ Ejemplo escuchando a `SIGINT`:
     });
 
 Una manera sencilla de enviar la señal `SIGINT` es con `Control-C` en la mayoria 
-de programas de terminal.
+de aplicaciones de terminal.
 
 
 ### process.stdout
@@ -126,14 +129,14 @@ Generará:
 
 ### process.execPath
 
-Es la ruta exacta del ejecutable que inició el proceso.
+Es la ruta absoluta del ejecutable que inició el proceso.
 
 Ejemplo:
 
     /usr/local/bin/node
 
 
-### process.chdir(directorio)
+### process.chdir(directory)
 
 Cambia el directorio actual de trabajo del proceso o lanza una excepción si falla.
 
@@ -157,12 +160,12 @@ Devuelve el directorio actual de trabajo del proceso.
 
 ### process.env
 
-Un objeto que contiene el entorno del usuario. Ver environ(7).
+Un objeto que contiene el entorno del usuario. Mirar environ(7).
 
 
-### process.exit(código=0)
+### process.exit(code=0)
 
-Termina el proceso con el `código` especificado.  Si se omite, `exit` usa el código 
+Termina el proceso con el `code` especificado.  Si se omite, `exit` usa el código 
 de 'éxito' `0`.
 
 Para salir con un código de 'fallo':
@@ -174,15 +177,15 @@ El shell que ha ejecutado node debería ver 1 como código de salida.
 
 ### process.getgid()
 
-Gets the group identity of the process. (See getgid(2).)
-This is the numerical group id, not the group name.
+Obtiene la identidad de grupo del proceso.  (Mirar getgid(2).)
+Es el id de grupo numérico, no el nombre del grupo.
 
-    console.log('Current gid: ' + process.getgid());
+    console.log('Actual gid: ' + process.getgid());
 
 
 ### process.setgid(id)
 
-Establece la identidad de grupo del proceso. (Ver setgid(2).)  Acepta tanto 
+Establece la identidad de grupo del proceso. (Mirar setgid(2).)  Acepta tanto 
 un ID numérico como una cadena de texto con el nombre del grupo. 
 Si se especifica el nombre del grupo, el método se bloquea mientras lo 
 resuelve a un ID numérico.
@@ -199,7 +202,7 @@ resuelve a un ID numérico.
 
 ### process.getuid()
 
-Obtiene la identidad de usuario del proceso. (See getuid(2).)
+Obtiene la identidad de usuario del proceso. (Mirar getuid(2).)
 Es la id de usuario númerica, no el nombre de usuario.
 
     console.log('Actual uid: ' + process.getuid());
@@ -207,7 +210,7 @@ Es la id de usuario númerica, no el nombre de usuario.
 
 ### process.setuid(id)
 
-Establece la identidad de usuario del proceso. (Ver setuid(2).)  Acepta tanto 
+Establece la identidad de usuario del proceso. (Mirar setuid(2).)  Acepta tanto 
 un ID numérico como una cadena de texto con el nombre de usuario.  Si se especifica 
 el nombre de usuario, el método se bloquea mientras lo resuelve a un ID numérico.
 
@@ -235,15 +238,15 @@ Una propiedad dentro del compilado que expone `NODE_PREFIX`.
     console.log('Prefijo: ' + process.installPrefix);
 
 
-### process.kill(pid, señal='SIGTERM')
+### process.kill(pid, signal='SIGTERM')
 
-Envia una señal a un proceso. `pid` es la id de proceso y `señal` es la cadena de 
+Envia una señal a un proceso. `pid` es la id de proceso y `signal` es la cadena de 
 texto que describe la señal a enviar.  Los nombres de señales son cadenas de texto
  como 'SIGINT' o 'SIGUSR1'.  Si se omite, la señal será 'SIGTERM'.
-Ver kill(2) para más información.
+Mirar kill(2) para más información.
 
-Notar que ya que el nombre de la función es `process.kill`, es simplemente
-un emisor de señales, como la llamada a sistems `kill`. La señal enviada
+Notar que ya que el nombre de la función es `process.kill`, se trata solo de 
+un emisor de señales, como la llamada a sistema `kill`. La señal enviada
 puede hacer algo más que matar el proceso escogido.
 
 Ejemplo de como enviarse una señal a uno mismo:
@@ -298,8 +301,8 @@ Generará:
 
 ### process.nextTick(callback)
 
-En la siguiente iteración del bucle del evento llama a este callback.
-No es simplemente una alias para `setTimeout(fn, 0)` , es mucho
+En la siguiente iteración del bucle del evento se llama a callback.
+No es simplemente un alias para `setTimeout(fn, 0)` , es mucho
 más eficiente.
 
     process.nextTick(function () {
@@ -311,7 +314,7 @@ más eficiente.
 
 Establece o lee la máscara del modo de creación del fichero del proceso. Los procesos 
 hijos heredan la máscara del proceso padre. Devuelve la antigua máscara si se pasa el argumento 
-`máscara`, si no devuelve la máscara actual. 
+`mask`, si no devuelve la máscara actual. 
 
     var oldmask, newmask = 0644;
 

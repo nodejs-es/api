@@ -1,40 +1,40 @@
-## os Module
+## Módulo os
 
-Use `require('os')` to access this module.
+Utilice `require('os')` para acceder al módulo.
 
 ### os.hostname()
 
-Returns the hostname of the operating system.
+Devuelve el hostname del sistema operativo.
 
 ### os.type()
 
-Returns the operating system name.
+Devuelve el nombre del sistema operativo.
 
 ### os.release()
 
-Returns the operating system release.
+Devuelve la versión del sistema operativo.
 
 ### os.uptime()
 
-Returns the system uptime in seconds.
+Devuelve el uptime en segundos del sistema.
 
 ### os.loadavg()
 
-Returns an array containing the 1, 5, and 15 minute load averages.
+Devuelve un array conteniendo los promedios en 1, 5, y 15 minutos de carga.
 
 ### os.totalmem()
 
-Returns the total amount of system memory in bytes.
+Devuelve la cantidad total en memoria del sistema en bytes
 
 ### os.freemem()
 
-Returns the amount of free system memory in bytes.
+Devuelve la cantidad de memoria libre del sistema en bytes.
 
 ### os.cpus()
 
-Returns an array of objects containing information about each CPU/core installed: model, speed (in MHz), and times (an object containing the number of CPU ticks spent in: user, nice, sys, idle, and irq).
+Devuelve un array de objetos que contiene información acerca de cada CPU/core instalado: modelo, velocidad (en MHz), y los tiempos (un objeto que contiene el número de CPU usado por: usuario, nice, sys, idle, e irq).
 
-Example inspection of os.cpus:
+Ejemplo de inspección de os.cpus:
 
     [ { model: 'Intel(R) Core(TM) i7 CPU         860  @ 2.80GHz',
         speed: 2926,

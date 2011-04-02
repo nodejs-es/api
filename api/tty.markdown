@@ -1,15 +1,15 @@
-## TTY
+## TTY (Terminal)
 
-Use `require('tty')` to access this module.
+Utilice `require('tty')` para acceder al módulo.
 
-Example:
+Ejemplo:
 
     var tty = require('tty');
     tty.setRawMode(true);
     process.stdin.resume();
     process.stdin.on('keypress', function(char, key) {
       if (key && key.ctrl && key.name == 'c') {
-        console.log('graceful exit');
+        console.log('salida airosa');
         process.exit()
       }
     });
@@ -18,33 +18,33 @@ Example:
 
 ### tty.open(path, args=[])
 
-Spawns a new process with the executable pointed to by `path` as the session
-leader to a new pseudo terminal.
+Genera un nuevo proceso con el fichero ejecutable en la `ruta` como la sesión
+actual a una nueva pseudo terminal.
 
-Returns an array `[slaveFD, childProcess]`. `slaveFD` is the file descriptor
-of the slave end of the pseudo terminal. `childProcess` is a child process
-object.
+Devuelve un array `[slaveFD, childProcess]`. `slaveFD` es el descriptor de fichero
+esclavo de la pseudo terminal. `childProcess` es un proceso hijo de un 
+objeto.
 
 
 ### tty.isatty(fd)
 
-Returns `true` or `false` depending on if the `fd` is associated with a
+Devuelve `true` o `false` dependiendo si el `fd` es asociado con el
 terminal.
 
 
 ### tty.setRawMode(mode)
 
-`mode` should be `true` or `false`. This sets the properties of the current
-process's stdin fd to act either as a raw device or default.
+`mode` debe ser `true` o `false`. Se establece las propiedades al proceso actual
+de stdin fd para actuar ya sea como un dispositivo de modo sin formato o por omisión.
 
 
 ### tty.setWindowSize(fd, row, col)
 
-`ioctl`s the window size settings to the file descriptor.
+`ioctl` ajusta la configuración de la ventana del descriptor de fichero.
 
 
 ### tty.getWindowSize(fd)
 
-Returns `[row, col]` for the TTY associated with the file descriptor.
+Devuelve `[row, col]` associado a la TTY con el descriptor de fichero.
 
 

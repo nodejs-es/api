@@ -1,12 +1,12 @@
 ## HTTPS
 
-HTTPS is the HTTP protocol over TLS/SSL. In Node this is implemented as a
-separate module.
+HTTPS es el protocolo HTTP sobre TLS/SSL. En Node se implementa en un 
+módulo separado.
 
 ## https.Server
 ## https.createServer
 
-Example:
+Ejemplo:
 
     // curl -k https://localhost:8000/
     var https = require('https');
@@ -19,16 +19,16 @@ Example:
 
     https.createServer(options, function (req, res) {
       res.writeHead(200);
-      res.end("hello world\n");
+      res.end("hola mundo\n");
     }).listen(8000);
 
 
 ## https.request(options, callback)
 
-Makes a request to a secure web server.
-Similar options to `http.request()`.
+Hace una petición a un servidor web seguro.
+Opciones similares a `http.request()`.
 
-Example:
+Ejemplo:
 
     var https = require('https');
 
@@ -53,23 +53,22 @@ Example:
       console.error(e);
     });
 
-The options argument has the following options
+El argumento options tiene las siguientes opciones
 
-- host: IP or domain of host to make request to. Defaults to `'localhost'`.
-- port: port of host to request to. Defaults to 443.
-- path: Path to request. Default `'/'`.
-- method: HTTP request method. Default `'GET'`.
-- key: Private key to use for SSL. Default `null`.
-- cert: Public x509 certificate to use. Default `null`.
-- ca: An authority certificate or array of authority certificates to check
-  the remote host against.
+- host: IP o dominio del host al que hacer la petición. Por defecto `'localhost'`.
+- port: puerto del host al que hacer la petición. Por defecto 443.
+- path: Ruta de la petición. Por defecto `'/'`.
+- method: Método de la petición HTTP. Per defecto `'GET'`.
+- key: Clave privada a usar para SSL. Por defecto `null`.
+- cert: Certificado público x509 a usar. Por defecto `null`.
+- ca: Un certificado de autoridad o un array de certificados de autoridad para comprobar contra el host remoto.
 
 
 ## https.get(options, callback)
 
-Like `http.get()` but for HTTPS.
+Como `http.get()` pero para HTTPS.
 
-Example:
+Ejemplo:
 
     var https = require('https');
 

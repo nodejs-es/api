@@ -77,4 +77,4 @@ Llama a cada uno de los listeners en el orden en el que fueron pasados por pará
 
 `function (event, listener) { }`
 
-Este evento es emitido cada vez que alguien añade un nuevo listener.
+Este evento es emitido cada vez que se añade un nuevo listener.

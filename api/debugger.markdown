@@ -1,9 +1,10 @@
-## Debugger
+## Depurador
 
-V8 comes with an extensive debugger which is accessible out-of-process via a
-simple [TCP protocol](http://code.google.com/p/v8/wiki/DebuggerProtocol).
-Node has a built-in client for this debugger. To use this, start Node with the
-`debug` argument; a prompt will appear:
+V8 viene con con el complemento depurador (debugger), el cual puede ser accedido desde fuera 
+del proceso vía el [protocolo TCP](http://code.google.com/p/v8/wiki/DebuggerProtocol).
+Node posee un cliente incorporado para el depurador. Para usarlo, inicie Node con el argumento
+`debug`; y aparecerá:
+
 
     % node debug myscript.js
     debug>
@@ -12,38 +13,41 @@ At this point `myscript.js` is not yet running. To start the script, enter
 the command `run`. If everything works okay, the output should look like
 this:
 
+En este punto `myscript.js` no está ejecutándose. Para iniciar el script, ingrese
+el comando `run`. Si todo funciona bien, la salida debe ser algo similar a:
+
     % node debug myscript.js
     debug> run
     debugger listening on port 5858
     connecting...ok
 
-Node's debugger client doesn't support the full range of commands, but
-simple step and inspection is possible. By putting the statement `debugger;`
-into the source code of your script, you will enable a breakpoint.
+El cliente depurador de Node no soporta toda una gama de comandos, pero
+para cosas sencillas y tareas de inspección es posible su uso. Al poner la declaración `debugger;`
+en el código fuente del script, permitirá un punto de interrupción.
 
-For example, suppose `myscript.js` looked like this:
+Por ejemplo, supongamos que `myscript.js` era así:
 
     // myscript.js
     x = 5;
     setTimeout(function () {
       debugger;
-      console.log("world");
+      console.log("mundo");
     }, 1000);
-    console.log("hello");
+    console.log("hola");
 
-Then once the debugger is run, it will break on line 4.
+Entonces una vez que el depurador se ejecute, esto generará un break en la línea 4
 
     % ./node debug myscript.js
     debug> run
     debugger listening on port 5858
     connecting...ok
-    hello
+    hola
     break in #<an Object>._onTimeout(), myscript.js:4
       debugger;
       ^
     debug> next
     break in #<an Object>._onTimeout(), myscript.js:5
-      console.log("world");
+      console.log("mundo");
       ^
     debug> print x
     5
@@ -59,15 +63,12 @@ Then once the debugger is run, it will break on line 4.
     %
 
 
-The `print` command allows you to evaluate variables. The `next` command steps
-over to the next line. There are a few other commands available and more to
-come type `help` to see others.
+El comando `print` permite evaluar las variables. El comando `next` continúa
+la siguiente línea. Hay otros comandos disponibles y algunos más por venir de
+tipo ayuda. Escriba `help` para ver otros comandos.
 
+### Uso avanzado
 
-### Advanced Usage
-
-The V8 debugger can be enabled and accessed either by starting Node with
-the `--debug` command-line flag or by signaling an existing Node process
-with `SIGUSR1`.
-
+El depurador V8 puede ser habilitado y accedido ya sea al iniciar Node con el 
+comando `--debug` o al señalar un proceso en Node existente con `SIGUSR1`.
 

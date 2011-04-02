@@ -1,15 +1,10 @@
 ## Módulos
 
-Node utiliza el sistema módulos de CommonJS.
-
-Node has a simple module loading system.  In Node, files and modules are in
-one-to-one correspondence.  As an example, `foo.js` loads the module
-`circle.js` in the same directory.
+Node utiliza el sistema de módulos de CommonJS.
 
 Node posee un secillo sistema de carga.  En Node, los ficheros y módulos son de
 correspondencia biunívoca.  A modo de ejemplo, `foo.js` carga el módulo
 `circle.js` en el mismo directorio.
-
 
 El contenido de `foo.js`:
 
@@ -34,7 +29,7 @@ El módulo `circle.js` ha exportado las functiones `area()` y
 `exports`.
 
 
-Las variables locales del módulo seran privadas. En este ejemplo la variable `PI` es
+Las variables locales del módulo serán privadas. En este ejemplo la variable `PI` es
 privada en `circle.js`.
 
 ### Módulos básicos
@@ -76,7 +71,7 @@ directorio principal del módulo actual, y añade `/node_modules`, e
 intenta cargar el módulo desde esa ubicación.
 
 Si no se encuentra, entonces se dirige al directorio principal, y así 
-sucesivamente, hasta que el módulo es encontrado, o la raíz del árbol es
+sucesivamente, hasta que el módulo es encontrado, hasta en la raíz del árbol es
 encontrado.
 
 Por ejemplo, si el fichero en `'/home/ry/projects/foo.js'` es llamado como
@@ -232,8 +227,8 @@ Los módulos globarles son de baja prioridad para las dependencias de los paquet
 #### **Nota:** Por favor evite la modificación de `require.paths`
 
 Por razones de compatibilidad, `require.paths` sigue siendo la primera prioridad
-en el proceso de búsquede de módulos. Sin embargo, puede desaparecer en una versión
-futura.
+en el proceso de búsqueda de módulos. Sin embargo, puede desaparecer en una próxima
+versión.
 
 Aunque parecía una buena idea en aquel tiempo, y ha permitido ser un 
 experimento muy útil, en la práctica la transformación de `require.paths` es una
@@ -245,7 +240,7 @@ Esto no hace nada de lo que se podría esperar:
 
     require.paths = [ '/usr/lib/node' ];
 
-TOdo lo que hacer aquí es perder la referencia *actual* de node en la búsqueda
+Todo lo que se hace aquí es perder la referencia *actual* de node en la búsqueda
 de rutas, y crea una nueva referencia a otra cosa que no sirve
 para nada.
 
@@ -257,9 +252,9 @@ Si hace esto:
 
 entonces *no* añada la ruta completa donde se resolvió `./lib`
 en este sistema de ficheros.  En cambio, esto añade literalmente `'./lib'`,
-lo que significa si hacer `require('y.js')` en  `/a/b/x.js`, entonces ser vería
+lo que significa si hace `require('y.js')` en  `/a/b/x.js`, entonces se ve
 en `/a/b/lib/y.js`.  Si a continuación se usa `require('y.js')` en
-`/l/m/n/o/p.js`, entonces se vería en `/l/m/n/o/lib/y.js`.
+`/l/m/n/o/p.js`, entonces se ve en `/l/m/n/o/lib/y.js`.
 
 En la práctica, las personas han usado esto de una manera ad hoc para la
 dependencia de paquetes, pero esta técnica es frágil.
@@ -275,24 +270,18 @@ escritos en node el mismo proceso. A media que el stack crece, y se reune más
 funcionalidades, ya que esto es un problema con las partes que interactúan en forma
 difíciles de predecir.
 
-## Addenda: Package Manager Tips
+## Addenda: Consejos para administrar paquetes
 
 La semántica de Node en la función `require()` fue diseñada para ser lo 
 suficientemente general para soportar una serie de esctructuras de directorios.
-enough to support a number of sane directory structures. Los paquetes de programas
-como `dpkg`, `rpm`, y `npm` se espera que sean construidos como paquetes nativos 
-desde los módulos de Node sin modificaciones.
+Los paquetes de programas como `dpkg`, `rpm`, y `npm` se esperan que sean construidos 
+como paquetes nativos desde los módulos de Node sin modificaciones.
 
 A continuación sugerimos una estructura en la que puede trabajar:
 
-Vamos a suponer que se desea tener en 
-`/usr/lib/node/<some-package>/<some-version>` que mantenga el contenido de una
+Supongamos que se desea tener en 
+`/usr/lib/node/<some-package>/<some-version>` se mantenga el contenido de una
 versión específica de un paquete.
-
-Packages can depend on one another. In order to install package `foo`, you
-may have to install a specific version of package `bar`.  The `bar` package
-may itself have dependencies, and in some cases, these dependencies may even
-collide or form cycles.
 
 Los paquetes pueden depender uno del otro. Con el fin de instalar el paquete `foo`, 
 puede que tenga que instalar una versión específica del paquete `bar`.  El paquete
@@ -325,12 +314,6 @@ Además, para hacer el proceso de búsqueda del módulo aún más óptima, en lu
 de poner los paquetes directamente en `/usr/lib/node`, se puede poner estos en
 `/usr/lib/node_modules/<name>/<version>`.  Entonces node no se molestará en
 buscar por dependencias no encontradas en `/usr/node_modules` o `/node_modules`.
-
-In order to make modules available to the node REPL, it might be useful to
-also add the `/usr/lib/node_modules` folder to the `$NODE_PATH` environment
-variable.  Since the module lookups using `node_modules` folders are all
-relative, and based on the real path of the files making the calls to
-`require()`, the packages themselves can be anywhere.
 
 A fin de que los módulos disponibles para node en REPL, puedan ser útiles,
 añade también la carpeta `/usr/lib/node_modules` a la variable de entorno `$NODE_PATH`.

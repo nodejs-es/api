@@ -1,33 +1,27 @@
-## Events
+## Eventos
 
-Many objects in Node emit events: a `net.Server` emits an event each time
-a peer connects to it, a `fs.readStream` emits an event when the file is
-opened. All objects which emit events are instances of `events.EventEmitter`.
-You can access this module by doing: `require("events");`
+Muchos objetos en Node emiten eventos: un `net.Server` emite un evento cada vez que se establece una conexión, un `fs.readStream` emite un evento cuando se abre un fichero. Todos los objectos que emiten eventos son instancias de `events.EventEmitter`.
+Puedes usar este módulo haciendo `require("events");`
 
-Typically, event names are represented by a camel-cased string, however,
-there aren't any strict restrictions on that, as any string will be accepted.
+Normalmente, los nombres de los eventos se representan mediante la notación camello, sin embargo, no hay ninguna restricción en este aspecto y cualquier cadena será aceptada.
 
-Functions can then be attached to objects, to be executed when an event
-is emitted. These functions are called _listeners_.
-
+Se pueden adjuntar funciones a objetos, para que sean ejecutadas cuando se emita un evento. Estas funciones reciben el nombre de _listeners_. 
 
 ### events.EventEmitter
+Para usar la clase EventEmitter, haz de importarla
+haciendo `require('events').EventEmiter`.
 
-To access the EventEmitter class, `require('events').EventEmitter`.
+Cuando una instancia de la clase EventEmitter se encuentra con un error, la acción típica
+es emitir un evento de error. Los eventos de error son tratados como un caso especial en node.
+Si no tiene un listener asociado la acción por defecto será imprimir la traza de la pila y salir
+del programa
 
-When an `EventEmitter` instance experiences an error, the typical action is
-to emit an `'error'` event.  Error events are treated as a special case in node.
-If there is no listener for it, then the default action is to print a stack
-trace and exit the program.
-
-All EventEmitters emit the event `'newListener'` when new listeners are
-added.
+Todos los EventEmitters emite el evento `'newListener'` cuando se añaden nuevos listeners.
 
 #### emitter.addListener(event, listener)
 #### emitter.on(event, listener)
 
-Adds a listener to the end of the listeners array for the specified event.
+Añade un listener al final del array de listeners para el evento espeficicado
 
     server.on('connection', function (stream) {
       console.log('someone connected!');
@@ -35,9 +29,8 @@ Adds a listener to the end of the listeners array for the specified event.
 
 #### emitter.once(event, listener)
 
-Adds a **one time** listener for the event. The listener is
-invoked only the first time the event is fired, after which
-it is removed.
+Añade un listener al evento. El listener se invocará sólo la primera vez que se dispara el evento.
+luego se elimina. 
 
     server.once('connection', function (stream) {
       console.log('Ah, we have our first user!');
@@ -45,8 +38,8 @@ it is removed.
 
 #### emitter.removeListener(event, listener)
 
-Remove a listener from the listener array for the specified event.
-**Caution**: changes array indices in the listener array behind the listener.
+Elimina un listener del array de listeners asociado al evento especificado
+**Ojo**: modifica el indice del array de listeners 
 
     var callback = function(stream) {
       console.log('someone connected!');
@@ -58,21 +51,18 @@ Remove a listener from the listener array for the specified event.
 
 #### emitter.removeAllListeners(event)
 
-Removes all listeners from the listener array for the specified event.
-
+Elimina todos los listeners del array de listeners asociado al evento especificado
 
 #### emitter.setMaxListeners(n)
 
-By default EventEmitters will print a warning if more than 10 listeners are
-added to it. This is a useful default which helps finding memory leaks.
-Obviously not all Emitters should be limited to 10. This function allows
-that to be increased. Set to zero for unlimited.
+Por defecto los EventEmitters imprimirán un warning si se le añaden más de 10 listeners.
+Este comportamiento por defecto ayuda a encontrar memory leaks. Obviamente no todos los EventEmitters
+deberían limitarse a 10. Esta función permite incrementar este valor. Use cero para establecer un valor ilimitado.
 
 
 #### emitter.listeners(event)
 
-Returns an array of listeners for the specified event. This array can be
-manipulated, e.g. to remove listeners.
+Devuelve un array de listeners asociado al evento especificado. Este array puede ser manipulado, por ejemplo, eliminando un listener.
 
     server.on('connection', function (stream) {
       console.log('someone connected!');
@@ -81,10 +71,10 @@ manipulated, e.g. to remove listeners.
 
 #### emitter.emit(event, [arg1], [arg2], [...])
 
-Execute each of the listeners in order with the supplied arguments.
+Llama a cada uno de los listeners en el orden en el que fueron pasados por parámetros
 
 #### Event: 'newListener'
 
 `function (event, listener) { }`
 
-This event is emitted any time someone adds a new listener.
+Este evento es emitido cada vez que alguien añade un nuevo listener.

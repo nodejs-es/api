@@ -52,7 +52,7 @@ Este código fuente necesita ser construido dentro de `hello.node`, el Addon bin
 
 Lanzando `node-waf configure build` crearemos un fichero `build/default/hello.node` el cual es nuestro Addon.
 
-`node-waf` es solo [WAF](http://code.google.com/p/waf), el sistema de construcción basado en python. `node-waf` is facilitado para la facilidad de los usuarios.
+`node-waf` es solo [WAF](http://code.google.com/p/waf), el sistema de construcción basado en python. `node-waf` is proporcionado para la facilidad de los usuarios.
 
 Todos los Addons de Node deben exportar un función llamada `init` con la siguiente constitución:
 

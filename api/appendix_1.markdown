@@ -1,6 +1,6 @@
 ## Apéndice 1 - Módulos de terceros
 
-Existen muchos módulos de terceros para Node. En el momento de ser escrito esto,
+Existen muchos módulos de terceros para Node. En el momento de escribir esto,
 Agosto 2010, el repositorio principal de módulos es 
 [esta página del wiki](http://github.com/joyent/node/wiki/modules).
 

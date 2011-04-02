@@ -1,12 +1,12 @@
 ## Objetos Globales
 
-Estos objectos estan disponibles en el espacio global y puedes ser accedidos desde cualquier parte.
+Estos objectos estan disponibles en el ambito global y puedes ser accedidos desde cualquier parte.
 
 ### global
 
 El namespace del objeto global.
 
-En los navegadores, el espacio top-level es el espacio global. Esto significa que en los navegadores si tu estas en el espacio global `var something` definirá una variable. In Node esto es diferente. El espacio top-level no es el espacio global; `var something` dentro de un módulo de node será local para este módulo.
+En los navegadores, el ambito del nivel superior es el ambito global. Esto significa que en los navegadores si tu estas en el ambito global `var something` definirá una variable. In Node esto es diferente. El ambito del nivel superior no es el ambito global; `var something` dentro de un módulo de node será local para este módulo.
 
 ### process
 

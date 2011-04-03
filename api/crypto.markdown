@@ -1,130 +1,120 @@
 ## Crypto
 
-Use `require('crypto')` to access this module.
+Usa `require('crypto')` para acceder a este módulo.
 
-The crypto module requires OpenSSL to be available on the underlying platform.
-It offers a way of encapsulating secure credentials to be used as part
-of a secure HTTPS net or http connection.
+El módulo crypto necesita que OpenSSL esté disponible en el sistema.
+Ofrece una forma de encapsular credenciales seguras para ser usadas como parte de una red HTTPS segura o una conexión http.
 
-It also offers a set of wrappers for OpenSSL's hash, hmac, cipher, decipher, sign and verify methods.
+Además ofrece un conjunto de envoltorios para los métodos hash, hmac, cipher, decipher, sign y verify de OpenSSL.
 
 ### crypto.createCredentials(details)
 
-Creates a credentials object, with the optional details being a dictionary with keys:
+Crea un objeto credenciales, con los detalles opcionales en forma de diccionario con las 
+siguientes claves:
 
-* `key` : a string holding the PEM encoded private key
-* `cert` : a string holding the PEM encoded certificate
-* `ca` : either a string or list of strings of PEM encoded CA certificates to trust.
+* `key` : cadena que contiene la clave privada codificada en PEM.
+* `cert` : cadena que contiene el certificado codificado en PEM.
+* `ca` : cadena o lista de cadenas de certificados de confianza codificados en PEM.
 
-If no 'ca' details are given, then node.js will use the default publicly trusted list of CAs as given in
+Si no se han dado ningún elemento en `ca`, node.js usará la lista de CAs de confianza publicadas como dice en
 <http://mxr.mozilla.org/mozilla/source/security/nss/lib/ckfw/builtins/certdata.txt>.
 
 
 ### crypto.createHash(algorithm)
 
-Creates and returns a hash object, a cryptographic hash with the given algorithm
-which can be used to generate hash digests.
+Crea y devuelve un nuevo objeto hash, un hash criptográfico con el algoritmo dado que puede ser usado para generar el hash digests.
 
-`algorithm` is dependent on the available algorithms supported by the version
-of OpenSSL on the platform. Examples are `'sha1'`, `'md5'`, `'sha256'`, `'sha512'`, etc.
-On recent releases, `openssl list-message-digest-algorithms` will display the available digest algorithms.
+`algorithm` depende de los algoritmos disponibles en la versión de OpenSSL en el sistema. Algunos ejemplos son `'sha1'`, `'md5'`, `'sha256'`, `'sha512'`, etc. 
+En versiones recientes, `openssl list-message-digest-algorithms` mostrará los algoritmos digest disponibles.
 
 ### hash.update(data)
 
-Updates the hash content with the given `data`.
-This can be called many times with new data as it is streamed.
+Actualiza el contenido del hash con el `data` dado.
+Esto puede ser invocado muchas veces con dato nuevo mientras estos van llegando.
 
 ### hash.digest(encoding='binary')
 
-Calculates the digest of all of the passed data to be hashed.
-The `encoding` can be `'hex'`, `'binary'` or `'base64'`.
-
+Calcula el digest todos los datos que van al hash.
+La codificación (`encoding`) puede ser `'hex'`, `'binary'` o `'base64'`.
 
 ### crypto.createHmac(algorithm, key)
 
-Creates and returns a hmac object, a cryptographic hmac with the given algorithm and key.
+Crea y devuelve un objeto hmac, un hmac criptográfico con el algoritmo y la clave dadas.
 
-`algorithm` is dependent on the available algorithms supported by OpenSSL - see createHash above.
-`key` is the hmac key to be used.
+`algorithm` depende de los algoritmos disponibles en la versión de OpenSSL en el sistema -  ver createHash arriba.
+`key` es la clave hmac a usar.
 
 ### hmac.update(data)
 
-Update the hmac content with the given `data`.
-This can be called many times with new data as it is streamed.
+Actualiza el contenido del hmac con el `data` dado.
+Esto puede ser invocado muchas veces con dato nuevo mientras estos van llegando.
 
 ### hmac.digest(encoding='binary')
 
-Calculates the digest of all of the passed data to the hmac.
-The `encoding` can be `'hex'`, `'binary'` or `'base64'`.
+Calcula el digest (resumen) de todos los datos que van al hmac.
+La codificación (`encoding`) puede ser `'hex'`, `'binary'` o `'base64'`.
 
 
 ### crypto.createCipher(algorithm, key)
 
-Creates and returns a cipher object, with the given algorithm and key.
+Crea y devuelve un objeto cipher (codificador), con el algoritmo y la clave dadas.
 
-`algorithm` is dependent on OpenSSL, examples are `'aes192'`, etc.
-On recent releases, `openssl list-cipher-algorithms` will display the available cipher algorithms.
+`algorithm` es dependiente de OpenSSL, por ejemplo `'aes192'`, etc.
+En versiones recientes, `openssl list-cipher-algorithms` mostrará los algoritmos cipher disponibles.
 
 ### cipher.update(data, input_encoding='binary', output_encoding='binary')
 
-Updates the cipher with `data`, the encoding of which is given in `input_encoding`
-and can be `'utf8'`, `'ascii'` or `'binary'`. The `output_encoding` specifies
-the output format of the enciphered data, and can be `'binary'`, `'base64'` or `'hex'`.
+Actualiza el cipher con `data`, la codificación viene dada en `input_encoding` y puede ser `'utf8'`, `'ascii'` o `'binary'`. El `output_encoding` especifica el formato de la salida del dato codificado, y puede ser `'binary'`, `'base64'` o `'hex'`.
 
-Returns the enciphered contents, and can be called many times with new data as it is streamed.
+Devuelve el contenido codificado, y puede ser llamado muchas veces a medida que nuevos datos van llegando.
 
 ### cipher.final(output_encoding='binary')
 
-Returns any remaining enciphered contents, with `output_encoding` being one of: `'binary'`, `'ascii'` or `'utf8'`.
+Devuelve cualquier contenido codificado restante, donde `output_encoding` puede ser `'binary'`, `'ascii'` o `'utf8'`.
 
 ### crypto.createDecipher(algorithm, key)
 
-Creates and returns a decipher object, with the given algorithm and key.
-This is the mirror of the cipher object above.
+Crea y devuelve un objeto decipher (decodificación), con el algoritmo y clave dado.
+Este es el simétrico del objeto cipher (codificación) de arriba.
 
 ### decipher.update(data, input_encoding='binary', output_encoding='binary')
 
-Updates the decipher with `data`, which is encoded in `'binary'`, `'base64'` or `'hex'`.
-The `output_decoding` specifies in what format to return the deciphered plaintext: `'binary'`, `'ascii'` or `'utf8'`.
+Actualiza el objeto decodificador con `data`, que puede estar codificado en `'binary'`, `'base64'` o `'hex'`.
+El `output_decoding` especifica en qué formato devolver el texto plano decodificdo: `'binary'`, `'ascii'` o `'utf8'`.
 
 ### decipher.final(output_encoding='binary')
 
-Returns any remaining plaintext which is deciphered,
-with `output_encoding' being one of: `'binary'`, `'ascii'` or `'utf8'`.
-
+Devuelve el texto plano decodificado restante, siendo `output_encoding` `'binary'`, `'ascii'` o `'utf8'`.
 
 ### crypto.createSign(algorithm)
 
-Creates and returns a signing object, with the given algorithm.
-On recent OpenSSL releases, `openssl list-public-key-algorithms` will display
-the available signing algorithms. Examples are `'RSA-SHA256'`.
+Crea y devuelve un objeto firma (signing) con el algoritmo dado.
+En versiones recientes, `openssl list-public-key-algorithms` mostrará los algoritmos de firmado disponibles. Por ejemplo: `'RSA-SHA256'`.
 
 ### signer.update(data)
 
-Updates the signer object with data.
-This can be called many times with new data as it is streamed.
+Actualiza el objeto firma con los datos dados.
+Puede ser llamado muchas veces a medida que nuevos datos van llegando.
 
 ### signer.sign(private_key, output_format='binary')
 
-Calculates the signature on all the updated data passed through the signer.
-`private_key` is a string containing the PEM encoded private key for signing.
+Calcula la firma en todos los datos actualizados pasados a través del objetvo firma.
+`private_key` es una cadena que contiene la clave privada para firmar codificada en PEM.
 
-Returns the signature in `output_format` which can be `'binary'`, `'hex'` or `'base64'`.
+Devuelve la firma en `output_format` que puede estar en `'binary'`, `'hex'` o `'base64'`.
 
 ### crypto.createVerify(algorithm)
 
-Creates and returns a verification object, with the given algorithm.
-This is the mirror of the signing object above.
+Crea y devuelve un objeto verificación con el algoritmo dado.
+Este es el simétrico del objeto firma de arriba.
 
 ### verifier.update(data)
 
-Updates the verifier object with data.
-This can be called many times with new data as it is streamed.
+Actualiza el objeto verificador con los datos dados.
+Puede ser llamado muchas veces a medida que nuevos datos van llegando.
 
 ### verifier.verify(cert, signature, signature_format='binary')
 
-Verifies the signed data by using the `cert` which is a string containing
-the PEM encoded public key, and `signature`, which is the previously calculates
-signature for the data, in the `signature_format` which can be `'binary'`, `'hex'` or `'base64'`.
+Verifica los datos firmados usando `cert`, que es una cadena que contiene la llave pública codificada en PEM; y `signature`, que es la firma del dato previamente calculada; `signature_format` puede ser `'binary'`, `'hex'` o `'base64'`.
 
-Returns true or false depending on the validity of the signature for the data and public key.
+Devuelve true o false dependiendo en la validez de la firma para el dato y la clave pública dadas.

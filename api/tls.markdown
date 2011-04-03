@@ -1,63 +1,45 @@
 ## TLS (SSL)
 
-Use `require('tls')` to access this module.
+Usa `require('tls')` para acceder a este módulo.
 
-The `tls` module uses OpenSSL to provide Transport Layer Security and/or
-Secure Socket Layer: encrypted stream communication.
+El módulo `tls` utiliza OpenSSL para proveer seguridad en la Transport Layer Security y/o Secure Socket Layer: encriptacion de flujo de comunicaciones.
 
-TLS/SSL is a public/private key infrastructure. Each client and each
-server must have a private key. A private key is created like this
+TLS/SSL es una infraestructura de clave publica/privada. Cada cliente y cada servidor deben tener una clave privada. Una clave privada se crea como sigue:
 
     openssl genrsa -out ryans-key.pem 1024
 
-All severs and some clients need to have a certificate. Certificates are public
-keys signed by a Certificate Authority or self-signed. The first step to
-getting a certificate is to create a "Certificate Signing Request" (CSR)
-file. This is done with:
+Todos los servidores y algunos clientes necesitan tener un certificado. Los certificados son claves públicas firmadas por una autoridad certificadora (CA) o por ellas mismas. El primer paso para obtener un certificado es crear un fichero de "Petición de firma de Certificado" (CSR). Esto se hace como sigue:
 
     openssl req -new -key ryans-key.pem -out ryans-csr.pem
 
-To create a self-signed certificate with the CSR, do this:
+Para crear un certificado auto firmado con el CSR, hay que hacer:
 
     openssl x509 -req -in ryans-csr.pem -signkey ryans-key.pem -out ryans-cert.pem
 
-Alternatively you can send the CSR to a Certificate Authority for signing.
+De forma alternativa puedes enviar el CSR a la autoridad certificadora para firmarlo.
 
-(TODO: docs on creating a CA, for now interested users should just look at
-`test/fixtures/keys/Makefile` in the Node source code)
-
+(TODO: documentos sobre la creación de una CA, por ahora los usuarios interesados deberían echar un vistazo a `test/fixtures/keys/Makefile` en el código fuente de Node)
 
 ### s = tls.connect(port, [host], [options], callback)
 
-Creates a new client connection to the given `port` and `host`. (If `host`
-defaults to `localhost`.) `options` should be an object which specifies
+Crea una nueva conexión cliente al `port` y al `host` dados. (`host` por defecto es `localhost`.) `options` debe ser un objeto que especifique:
 
-  - `key`: A string or `Buffer` containing the private key of the server in
-    PEM format. (Required)
+  - `key`: Una cadena o `Buffer` que contiene la llave privada del servidor en formato PEM. (Requerido)
 
-  - `cert`: A string or `Buffer` containing the certificate key of the server in
-    PEM format.
+  - `cert`: Una cadena o `Buffer` que contiene la clave del certificado del servidor en formato PEM.
 
-  - `ca`: An array of strings or `Buffer`s of trusted certificates. If this is
-    omitted several well known "root" CAs will be used, like VeriSign.
-    These are used to authorize connections.
+  - `ca`: Un array de cadenas o `Buffer`s de certificados de confianza. Si esto es omitido, varias CAs "root" bien conocidas serán usadas, como VeriSign. Estas son usadas para autorizar conexiones.
 
-`tls.connect()` returns a cleartext `CryptoStream` object.
+`tls.connect()` devuelve un objeto `CryptoStream` en texto plano.
 
-After the TLS/SSL handshake the `callback` is called. The `callback` will be
-called no matter if the server's certificate was authorized or not. It is up
-to the user to test `s.authorized` to see if the server certificate was
-signed by one of the specified CAs. If `s.authorized === false` then the error
-can be found in `s.authorizationError`.
-
+Después del TSL/SSL handshake el `callback` es invocado. El `callback` será invocado independientemente si el certificado del servidor fue autorizado o no. Es responsabilidad del usuario probar `s.authorized` para ver si el certificado del servidor estaba firmado por una de las CAs especificadas. Si `s.authorized === false` entonces el error puede encontrarse en `s.authorizationError`.
 
 ### tls.Server
 
-This class is a subclass of `net.Server` and has the same methods on it.
-Instead of accepting just raw TCP connections, this accepts encrypted
-connections using TLS or SSL.
+Esta clase es una subclase de `net.Server` y tiene los mismos métodos.
+En lugar de aceptar solo conexiones TCP en bruto, acepta conexiones encriptadas usando TLS o SSL.
 
-Here is a simple example echo server:
+Aquí hay un ejemplo simple de un servidor eco:
 
     var tls = require('tls');
     var fs = require('fs');
@@ -73,75 +55,49 @@ Here is a simple example echo server:
     }).listen(8000);
 
 
-You can test this server by connecting to it with `openssl s_client`:
-
+Puedes probar este servidor conectándose a él con `openssl s_client`:
 
     openssl s_client -connect 127.0.0.1:8000
 
 
 #### tls.createServer(options, secureConnectionListener)
 
-This is a constructor for the `tls.Server` class. The options object
-has these possibilities:
+Este es un constructor para la clase `tls.Server`. El objeto options puede contener:
 
-  - `key`: A string or `Buffer` containing the private key of the server in
-    PEM format. (Required)
+  - `key`: Una cadena o `Buffer` que contiene la clave privada del servidor en formato PEM. (Requerido)
 
-  - `cert`: A string or `Buffer` containing the certificate key of the server in
-    PEM format. (Required)
+  - `cert`: Una cadena o `Buffer` que contiene el certificado del servidor en formato PEM. (Requerido)
 
-  - `ca`: An array of strings or `Buffer`s of trusted certificates. If this is
-    omitted several well known "root" CAs will be used, like VeriSign.
-    These are used to authorize connections.
+  - `ca`: Un array de cadenas o `Buffer`s de certificados de confianza. Si esto es omitido, varias CAs "root" bien conocidas serán usadas, como VeriSign. Estas son usadas para autorizar conexiones.
 
-  - `requestCert`: If `true` the server will request a certificate from
-    clients that connect and attempt to verify that certificate. Default:
-    `false`.
+  - `requestCert`: Si es `true` el servidor solicitará un certificado de todos los clientes que se conecten e intenten verificar ese certificado. Por defecto: `false`
 
-  - `rejectUnauthorized`: If `true` the server will reject any connection
-    which is not authorized with the list of supplied CAs. This option only
-    has an effect if `requestCert` is `true`. Default: `false`.
-
+  - `rejectUnauthorized`: Si es `true` el servidor rechazará cualquier conexión no autorizada por la lista de CAs suministradas. Esta opción solo tiene efecto si `requestCert` es `true`. Por defecto: `false`.
 
 #### Event: 'secureConnection'
 
 `function (cleartextStream) {}`
 
-This event is emitted after a new connection has been successfully
-handshaked. The argument is a duplex instance of `stream.Stream`. It has all
-the common stream methods and events.
+Este evento es emitido después de que una nueva conexión haya realizado con éxito el handshake. El argumento es una instancia ¿duplex? de `stream.Stream`. Tiene todos los métodos y eventos de stream.
 
-`cleartextStream.authorized` is a boolean value which indicates if the
-client has verified by one of the supplied certificate authorities for the
-server. If `cleartextStream.authorized` is false, then
-`cleartextStream.authorizationError` is set to describe how authorization
-failed. Implied but worth mentioning: depending on the settings of the TLS
-server, you unauthorized connections may be accepted.
-
+`cleartextStream.authorized` es un valor buleano que indica si el cliente está verificado por una de las CA suministradas por el servidor. Si `cleartextStream.authorized` es false, entonces `cleartextStream.authorizationError` describle como falló la autorización. Relacionado pero merece mencionarse: dependiendo de la configuración del servidor TLS, tus autorizaciones de conexión pueden ser aceptadas.
 
 #### server.listen(port, [host], [callback])
 
-Begin accepting connections on the specified `port` and `host`.  If the
-`host` is omitted, the server will accept connections directed to any
-IPv4 address (`INADDR_ANY`).
+Empieza aceptando conexiones en el `port` y el `host` especificados. Si el `host` es omitido, el servidor aceptará conexiones dirigidas a cualquier dirección IPv4 (`INADDR_ANY`).
 
-This function is asynchronous. The last parameter `callback` will be called
-when the server has been bound.
+Esta función es asíncrona. El último parámetro `callback` se invocará cuando el servidor haya estado limitado¿?.
 
-See `net.Server` for more information.
-
+Mirar `net.Server` para más información.
 
 #### server.close()
 
-Stops the server from accepting new connections. This function is
-asynchronous, the server is finally closed when the server emits a `'close'`
-event.
-
+Para el servidor, dejando de aceptar conexiones. Esta función es asíncrona, el servidor finalmente se cierra cuando emite un evento `'close'`.
 
 #### server.maxConnections
 
-Set this property to reject connections when the server's connection count gets high.
+Establece esta propiedad para rechazar conexiones cuando el número de conexiones del servidor sea alta.
 
 #### server.connections
 
-The number of concurrent connections on the server.
+Número de conexiones concurrentes en el servidor.

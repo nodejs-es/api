@@ -1,55 +1,40 @@
 ## Buffers
 
-Pure Javascript is Unicode friendly but not nice to binary data.  When
-dealing with TCP streams or the file system, it's necessary to handle octet
-streams. Node has several strategies for manipulating, creating, and
-consuming octet streams.
+El puro Javascript es amigable con Unicode, pero no se lleva tan bien con los datos binarios. Cuando tratamos con streams TCP o ficheros del sistema, es necesario manejar streams de octets. Node tiene algunas estrategias para manipular, crear, y consumir streams de octets.
 
-Raw data is stored in instances of the `Buffer` class. A `Buffer` is similar
-to an array of integers but corresponds to a raw memory allocation outside
-the V8 heap. A `Buffer` cannot be resized.
+Los datos en Raw son almacenados en instancias de la clase `Buffer`. Un `Buffer` es similar a un array de integers pero correspondiendo a una localización en raw de la memeria fuera del heap de V8. Un `Buffer` no puede ser redimencionado.
 
-The `Buffer` object is global.
+El objeto `Buffer` es global.
 
-Converting between Buffers and JavaScript string objects requires an explicit encoding
-method.  Here are the different string encodings;
+Convertir entre Buffers y objectos String de Javascript requiere de un método de codificación explícito. Aquí están las diferentes cadenas de codificación;
 
-* `'ascii'` - for 7 bit ASCII data only.  This encoding method is very fast, and will
-strip the high bit if set.
+* `'ascii'` - solo para datos de 7 bit ASCII. Este método de codificación es muy rápido, y dejará el bit alto si está configurado.
 
-* `'utf8'` - Multi byte encoded Unicode characters.  Many web pages and other document formats use UTF-8.
+* `'utf-8'` - Multiples bytes de caracteres con codificación Unicode. Muchas páginas webs y otros formatos de documentos usan UTF-8.
 
-* `'ucs2'` - 2-bytes, little endian encoded Unicode characters. It can encode
-only BMP(Basic Multilingual Plane, U+0000 - U+FFFF).
+* `'usc2'` - 2-bytes, de caracteres con codificación `little endian` Unicode. Sólo pueden codificar BMP(Basic Multilingual Plane, U+0000 - U+FFFF).
 
-* `'base64'` - Base64 string encoding.
+* `'base64'` - Cadena codificada en Base64.
 
-* `'binary'` - A way of encoding raw binary data into strings by using only
-the first 8 bits of each character. This encoding method is deprecated and
-should be avoided in favor of `Buffer` objects where possible. This encoding
-will be removed in future versions of Node.
-
+* `'binary'` - Una forma de codificar datos binarios en Raw dentro de cadenas pero solo usando los primeros 8 bits de cada caracter. Este método de codificación es obsoleto y debe ser evitado en favor del objeto `Buffer` donde sea posible. Esta codificación será eliminada en futuras versiones de Node.
 
 ### new Buffer(size)
 
-Allocates a new buffer of `size` octets.
+Asigna un nuevo buffer de `size` octets.
 
 ### new Buffer(array)
 
-Allocates a new buffer using an `array` of octets.
+Asigna un nuevo buffer usando un `array` de octets.
 
 ### new Buffer(str, encoding='utf8')
 
-Allocates a new buffer containing the given `str`.
+Asigna un nuevo buffer conteniendo el `str` dado.
 
 ### buffer.write(string, offset=0, encoding='utf8')
 
-Writes `string` to the buffer at `offset` using the given encoding. Returns
-number of octets written.  If `buffer` did not contain enough space to fit
-the entire string, it will write a partial amount of the string. In the case
-of `'utf8'` encoding, the method will not write partial characters.
+Escribe `string` en el Buffer en `offset` usando el método dado. Devuelve el número de octets escritos. Si `Buffer` no contiene suficiente espacio para encajar la cadena entera, escribirá una cantidad parcial de la cadena. En caso de codificación `utf8`, el método no escribirá caracteres parciales.
 
-Example: write a utf8 string into a buffer, then print it
+Ejemplo: Escribe una cadena utf8 dentro de un buffer, y entonces lo imprime por pantalla:
 
     buf = new Buffer(256);
     len = buf.write('\u00bd + \u00bc = \u00be', 0);
@@ -60,18 +45,15 @@ Example: write a utf8 string into a buffer, then print it
 
 ### buffer.toString(encoding, start=0, end=buffer.length)
 
-Decodes and returns a string from buffer data encoded with `encoding`
-beginning at `start` and ending at `end`.
+Decodifica y devuelve un cadena con los datos de un buffer codificado con `encoding` comenzando en `start` y terminando en `end`.
 
-See `buffer.write()` example, above.
-
+Mira el ejemplo de`buffer.write()`, arriba.
 
 ### buffer[index]
 
-Get and set the octet at `index`. The values refer to individual bytes,
-so the legal range is between `0x00` and `0xFF` hex or `0` and `255`.
+Obtiene y configura el octet en `index`. Los valores se refieren a bytes individuales, por lo que el rango legal esta entre `0x00` and `0xFF` en hexadecimal o `0` y `255`.
 
-Example: copy an ASCII string into a buffer, one byte at a time:
+Ejemplo: Copiando un cadena ASCII dentro de un buffer, un byte cada vez:
 
     str = "node.js";
     buf = new Buffer(str.length);
@@ -86,15 +68,13 @@ Example: copy an ASCII string into a buffer, one byte at a time:
 
 ### Buffer.isBuffer(obj)
 
-Tests if `obj` is a `Buffer`.
+Comprueba si `obj` es un `Buffer`.
 
 ### Buffer.byteLength(string, encoding='utf8')
 
-Gives the actual byte length of a string.  This is not the same as
-`String.prototype.length` since that returns the number of *characters* in a
-string.
+Da la longitud de una cadena en bytes. Esto no es más que `string.prototype.length` puesto que devuelve el número de *caracteres* en la cadena.
 
-Example:
+Ejemplo:
 
     str = '\u00bd + \u00bc = \u00be';
 
@@ -106,9 +86,7 @@ Example:
 
 ### buffer.length
 
-The size of the buffer in bytes.  Note that this is not necessarily the size
-of the contents. `length` refers to the amount of memory allocated for the
-buffer object.  It does not change when the contents of the buffer are changed.
+El tamaño del buffer en bytes. Advierta que esto no es necesariamente el contenido. `length` se refiere a la cantidad de memoria asignada para el objeto buffer. No cambia cuando el contenido del buffer cambia.
 
     buf = new Buffer(1234);
 
@@ -121,10 +99,9 @@ buffer object.  It does not change when the contents of the buffer are changed.
 
 ### buffer.copy(targetBuffer, targetStart=0, sourceStart=0, sourceEnd=buffer.length)
 
-Does a memcpy() between buffers.
+Hace un memcpy() entre Buffers.
 
-Example: build two Buffers, then copy `buf1` from byte 16 through byte 19
-into `buf2`, starting at the 8th byte in `buf2`.
+Ejemplo: construye dos Buffers, entonces copia `buf1` desde el byte 16 hasta el byte 19 dentro de `buf2`, comenzando en el octavo byte de `buf2`.
 
     buf1 = new Buffer(26);
     buf2 = new Buffer(26);
@@ -142,14 +119,11 @@ into `buf2`, starting at the 8th byte in `buf2`.
 
 ### buffer.slice(start, end=buffer.length)
 
-Returns a new buffer which references the
-same memory as the old, but offset and cropped by the `start` and `end`
-indexes.
+Devuelve un nuevo buffer el cual hace referencia a la misma memoria que el antíguo, pero desplazado y cortado por los indices `start` y `end`.
 
-**Modifying the new buffer slice will modify memory in the original buffer!**
+**¡Al modificar el nuevo buffer, modificarás la memoria en el buffer original!**
 
-Example: build a Buffer with the ASCII alphabet, take a slice, then modify one byte
-from the original Buffer.
+Ejemplo: contruye un Buffer con el alfabeto ASCII, toma un fragmento, y entonces modifica un byte desde el Buffer original.
 
     var buf1 = new Buffer(26);
 

@@ -1,64 +1,46 @@
 ## util
 
-These functions are in the module `'util'`. Use `require('util')` to access
-them.
-
+Estas funciones estan en el módulo `'util'`. Usa `require('util')` para acceder a ellas.
 
 ### util.debug(string)
 
-A synchronous output function. Will block the process and
-output `string` immediately to `stderr`.
+Una función de salida síncrona. Bloquerá el proceso y pondrá `string` inmediatamente en `stderr`.
 
-    require('util').debug('message on stderr');
-
+    require('util').debug('mensaje en stderr');
 
 ### util.log(string)
 
-Output with timestamp on `stdout`.
+Salida con timestamp en `stdout`.
 
-    require('util').log('Timestmaped message.');
-
+    require('util').log('Mensaje con marca de tiempo.');
 
 ### util.inspect(object, showHidden=false, depth=2)
 
-Return a string representation of `object`, which is useful for debugging.
+Devuelve la cadena que representa a `object`, lo cual es útil para corregir fallos.
 
-If `showHidden` is `true`, then the object's non-enumerable properties will be
-shown too.
+Si `showHidden` es `true`, entonces las propiedades no-enumerables del objeto serán mostradas también.
 
-If `depth` is provided, it tells `inspect` how many times to recurse while
-formatting the object. This is useful for inspecting large complicated objects.
+Si `depth` es proporcionado, le dice a `inspect` cuantas veces tiene que recurrir mientras formatea el objeto. Esto es útil para objetos muy largos y complejos.
 
-The default is to only recurse twice.  To make it recurse indefinitely, pass
-in `null` for `depth`.
+Por defecto solo se recurre un par de veces. Para hacer que recurra indefinidamente pasa `null` a `depth`.
 
-Example of inspecting all properties of the `util` object:
+Ejemplo de inspeccionar todas las propiedades del objeto `util`:
 
     var util = require('util');
 
     console.log(util.inspect(util, true, null));
 
-
 ### util.pump(readableStream, writableStream, [callback])
 
 Experimental
 
-Read the data from `readableStream` and send it to the `writableStream`.
-When `writableStream.write(data)` returns `false` `readableStream` will be
-paused until the `drain` event occurs on the `writableStream`. `callback` gets
-an error as its only argument and is called when `writableStream` is closed or
-when an error occurs.
-
+Lee los datos desde `readableStream` y los envia al `writableStream`. Cuando `writableStream.write(data)` devuelve `false` `readableStream` será pausado hasta que ocurra el evento `drain` sobre `writableStream`. `callback` tiene un error como único argumento y es llamada cuando `writableStream` es cerrado o cuando ocurre un error.
 
 ### util.inherits(constructor, superConstructor)
 
-Inherit the prototype methods from one
-[constructor](https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/constructor)
-into another.  The prototype of `constructor` will be set to a new
-object created from `superConstructor`.
+Hereda los métodos del prototype desde un [constructor](https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/constructor) dentro de otro. El prototype del `constructor` será configurado a un nuevo objecto creado desde `superConstructor`.
 
-As an additional convenience, `superConstructor` will be accessible
-through the `constructor.super_` property.
+Como mejora adicional, `superConstructor`será accesible atravez de la propiedad `constructor.super_`
 
     var util = require("util");
     var events = require("events");

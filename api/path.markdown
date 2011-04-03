@@ -1,27 +1,27 @@
 ## Path
 
-This module contains utilities for dealing with file paths.  Use
-`require('path')` to use it.  It provides the following methods:
+Este módulo contiene utilidades para trabajar con rutas de fichero.  Usa 
+`require('path')` para utilizarlo.  Ofrece los siguientes métodos: 
 
 ### path.normalize(p)
 
-Normalize a string path, taking care of `'..'` and `'.'` parts.
+Normaliza la cadena de texto de una ruta, se encarga de las partes `'..'` y `'.'`.
 
-When multiple slashes are found, they're replaces by a single one;
-when the path contains a trailing slash, it is preserved.
-On windows backslashes are used. 
+Cuando se encuentra múltiples barras, se reemplazan por una sola;
+cuando la ruta acaba en barra, se conserva.
+En windows se utilizan contrabarras.
 
-Example:
+Ejemplo:
 
     path.normalize('/foo/bar//baz/asdf/quux/..')
-    // returns
+    // devuelve
     '/foo/bar/baz/asdf'
 
 ### path.join([path1], [path2], [...])
 
-Join all arguments together and normalize the resulting path.
+Junta todos los argumentos y normaliza la ruta resultante.
 
-Example:
+Ejemplo:
 
     node> require('path').join(
     ...   '/foo', 'bar', 'baz/asdf', 'quux', '..')
@@ -29,19 +29,19 @@ Example:
 
 ### path.resolve([from ...], to)
 
-Resolves `to` to an absolute path.
+Resuelve `to` a una ruta absoluta.
 
-If `to` isn't already absolute `from` arguments are prepended in right to left
-order, until an absolute path is found. If after using all `from` paths still
-no absolute path is found, the current working directory is used as well. The
-resulting path is normalized, and trailing slashes are removed unless the path 
-gets resolved to the root directory.
+Si `to` no es absoluta los argumentos `from` se anteponen ordenados de derecha a 
+izquierda, hasta que se encuentra una ruta absoluta. Si después de usar todas las rutas de `from` 
+aún no se encuentra una ruta absoluta, también se utiliza el directorio actual de trabajo. La 
+ruta resultante se normaliza, y se eliminan las barras finales a no ser que 
+se resuelva el directorio root.
 
-Another way to think of it is as a sequence of `cd` commands in a shell.
+Otra manera de verlo es como una secuencia de comandos `cd` en un shell.
 
     path.resolve('foo/bar', '/tmp/file/', '..', 'a/../subfile')
 
-Is similar to:
+Es como:
 
     cd foo/bar
     cd /tmp/file/
@@ -49,65 +49,65 @@ Is similar to:
     cd a/../subfile
     pwd
 
-The difference is that the different paths don't need to exist and may also be
-files.
+La diferencia es que las distintas rutas no necesitan existir e incluso pueden 
+ser ficheros.
 
-Examples:
+Ejemplos:
 
     path.resolve('/foo/bar', './baz')
-    // returns
+    // devuelve
     '/foo/bar/baz'
 
     path.resolve('/foo/bar', '/tmp/file/')
-    // returns
+    // devuelve
     '/tmp/file'
 
     path.resolve('wwwroot', 'static_files/png/', '../gif/image.gif')
-    // if currently in /home/myself/node, it returns
+    // si actualmente en /home/myself/node, devuelve
     '/home/myself/node/wwwroot/static_files/gif/image.gif'
 
 ### path.dirname(p)
 
-Return the directory name of a path.  Similar to the Unix `dirname` command.
+Devuelve el nombre de directorio de una ruta.  Semejante al comando de Unix `dirname`.
 
-Example:
+Ejemplo:
 
     path.dirname('/foo/bar/baz/asdf/quux')
-    // returns
+    // devuelve
     '/foo/bar/baz/asdf'
 
 ### path.basename(p, [ext])
 
-Return the last portion of a path.  Similar to the Unix `basename` command.
+Devuelve la última parte de una ruta.  Semejante al comando de Unix `basename`.
 
-Example:
+Ejemplo:
 
     path.basename('/foo/bar/baz/asdf/quux.html')
-    // returns
+    // devuelve
     'quux.html'
 
     path.basename('/foo/bar/baz/asdf/quux.html', '.html')
-    // returns
+    // devuelve
     'quux'
 
 ### path.extname(p)
 
-Return the extension of the path.  Everything after the last '.' in the last portion
-of the path.  If there is no '.' in the last portion of the path or the only '.' is
-the first character, then it returns an empty string.  Examples:
+Devuelve la extensión de la ruta.  Todo lo que hay después del último '.' 
+en la última parte de la ruta. Si no hay '.' en la última parte de la ruta o el único 
+'.' es el primer carácter, entonces devuelve un string vacío.  Ejemplos:
 
     path.extname('index.html')
-    // returns
+    // devuelve
     '.html'
 
     path.extname('index')
-    // returns
+    // devuelve
     ''
 
 ### path.exists(p, [callback])
 
-Test whether or not the given path exists.  Then, call the `callback` argument
-with either true or false. Example:
+Comprueba si existe o no la ruta.  Luego, llama al argumento `callback` 
+con true o false. Ejemplo:
 
     path.exists('/etc/passwd', function (exists) {
       util.debug(exists ? "it's there" : "no passwd!");
@@ -116,4 +116,4 @@ with either true or false. Example:
 
 ### path.existsSync(p)
 
-Synchronous version of `path.exists`.
+Versión síncrona de `path.exists`.

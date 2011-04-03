@@ -39,7 +39,7 @@ luego se elimina.
 #### emitter.removeListener(event, listener)
 
 Elimina un listener del array de listeners asociado al evento especificado
-**Ojo**: modifica el indice del array de listeners 
+**Atención**: modifica el indice del array de listeners 
 
     var callback = function(stream) {
       console.log('someone connected!');

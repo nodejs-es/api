@@ -3,7 +3,7 @@
 Muchos objetos en Node emiten eventos: un `net.Server` emite un evento cada vez que se establece una conexión, un `fs.readStream` emite un evento cuando se abre un fichero. Todos los objectos que emiten eventos son instancias de `events.EventEmitter`.
 Puedes usar este módulo haciendo `require("events");`
 
-Normalmente, los nombres de los eventos se representan mediante la notación camello, sin embargo, no hay ninguna restricción en este aspecto y cualquier cadena será aceptada.
+Normalmente, los nombres de los eventos siguen la notacion camel-case, sin embargo, no hay ninguna restricción en este aspecto y cualquier cadena será aceptada.
 
 Se pueden adjuntar funciones a objetos, para que sean ejecutadas cuando se emita un evento. Estas funciones reciben el nombre de _listeners_. 
 

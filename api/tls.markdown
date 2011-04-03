@@ -24,11 +24,11 @@ De forma alternativa puedes enviar el CSR a la autoridad certificadora para firm
 
 Crea una nueva conexión cliente al `port` y al `host` dados. (`host` por defecto es `localhost`.) `options` debe ser un objeto que especifique:
 
-  - `key`: Una cadena o `Buffer` que contiene la llave privada del servidor en formato PEM. (Requerido)
+  - `key`: Un string o `Buffer` que contiene la llave privada del servidor en formato PEM. (Requerido)
 
-  - `cert`: Una cadena o `Buffer` que contiene la clave del certificado del servidor en formato PEM.
+  - `cert`: Un string o `Buffer` que contiene la clave del certificado del servidor en formato PEM.
 
-  - `ca`: Un array de cadenas o `Buffer`s de certificados de confianza. Si esto es omitido, varias CAs "root" bien conocidas serán usadas, como VeriSign. Estas son usadas para autorizar conexiones.
+  - `ca`: Un array de strings o `Buffer`s de certificados de confianza. Si esto es omitido, varias CAs "root" bien conocidas serán usadas, como VeriSign. Estas son usadas para autorizar conexiones.
 
 `tls.connect()` devuelve un objeto `CryptoStream` en texto plano.
 
@@ -64,11 +64,11 @@ Puedes probar este servidor conectándose a él con `openssl s_client`:
 
 Este es un constructor para la clase `tls.Server`. El objeto options puede contener:
 
-  - `key`: Una cadena o `Buffer` que contiene la clave privada del servidor en formato PEM. (Requerido)
+  - `key`: Un string o `Buffer` que contiene la clave privada del servidor en formato PEM. (Requerido)
 
-  - `cert`: Una cadena o `Buffer` que contiene el certificado del servidor en formato PEM. (Requerido)
+  - `cert`: Un string o `Buffer` que contiene el certificado del servidor en formato PEM. (Requerido)
 
-  - `ca`: Un array de cadenas o `Buffer`s de certificados de confianza. Si esto es omitido, varias CAs "root" bien conocidas serán usadas, como VeriSign. Estas son usadas para autorizar conexiones.
+  - `ca`: Un array de strings o `Buffer`s de certificados de confianza. Si esto es omitido, varias CAs "root" bien conocidas serán usadas, como VeriSign. Estas son usadas para autorizar conexiones.
 
   - `requestCert`: Si es `true` el servidor solicitará un certificado de todos los clientes que se conecten e intenten verificar ese certificado. Por defecto: `false`
 
@@ -80,7 +80,7 @@ Este es un constructor para la clase `tls.Server`. El objeto options puede conte
 
 Este evento es emitido después de que una nueva conexión haya realizado con éxito el handshake. El argumento es una instancia ¿duplex? de `stream.Stream`. Tiene todos los métodos y eventos de stream.
 
-`cleartextStream.authorized` es un valor buleano que indica si el cliente está verificado por una de las CA suministradas por el servidor. Si `cleartextStream.authorized` es false, entonces `cleartextStream.authorizationError` describle como falló la autorización. Relacionado pero merece mencionarse: dependiendo de la configuración del servidor TLS, tus autorizaciones de conexión pueden ser aceptadas.
+`cleartextStream.authorized` es un valor boolean que indica si el cliente está verificado por una de las CA suministradas por el servidor. Si `cleartextStream.authorized` es false, entonces `cleartextStream.authorizationError` describe como falló la autorización. Relacionado pero merece mencionarse: dependiendo de la configuración del servidor TLS, tus autorizaciones de conexión pueden ser aceptadas.
 
 #### server.listen(port, [host], [callback])
 
@@ -92,7 +92,7 @@ Mirar `net.Server` para más información.
 
 #### server.close()
 
-Para el servidor, dejando de aceptar conexiones. Esta función es asíncrona, el servidor finalmente se cierra cuando emite un evento `'close'`.
+Detiene el servidor, dejando de aceptar conexiones. Esta función es asíncrona, el servidor finalmente se cierra cuando emite un evento `'close'`.
 
 #### server.maxConnections
 

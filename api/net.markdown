@@ -1,87 +1,90 @@
-## net
+﻿## net
 
-The `net` module provides you with an asynchronous network wrapper. It contains
-methods for creating both servers and clients (called streams). You can include
-this module with `require("net");`
+El módulo `net` te proporciona una envoltura asíncrona de la red. Contiene
+métodos para crear servidores y clientes (llamados streams). Puedes incluir 
+este módulo con `require("net");`
+
 
 ### net.createServer([options], [connectionListener])
 
-Creates a new TCP server. The `connectionListener` argument is
-automatically set as a listener for the `'connection'` event.
+Crea un nuevo servidor TCP. El argumento `connectionListener` se establece 
+automáticamente como listener del evento `'connection'`.
 
-`options` is an object with the following defaults:
+Por omisión `options` es un objeto como el siguiente:
 
     { allowHalfOpen: false
     }
 
-If `allowHalfOpen` is `true`, then the socket won't automatically send FIN
-packet when the other end of the socket sends a FIN packet. The socket becomes
-non-readable, but still writable. You should call the end() method explicitly.
-See `'end'` event for more information.
+Si `allowHalfOpen` es `true`, entonces el socket no enviará automáticamente el paquete FIN 
+cuando el otro extremo del socket envíe un paquete FIN. El socket se vuelve de no-lectura, pero 
+conserva la escritura. Deberías llamar el método end() explícitamente.
+Mirar el evento `'end'` para más información.
+
 
 ### net.createConnection(arguments...)
 
-Construct a new socket object and opens a socket to the given location. When
-the socket is established the `'connect'` event will be emitted.
+Construye un nuevo objeto socket y abre un socket al sitio seleccionado. Cuando 
+se establece el socket se emitirá el evento `'connect'`.
 
-The arguments for this method change the type of connection:
+Los argumentos de este método cambian el tipo de conexión:
 
 * `net.createConnection(port, [host])`
 
-  Creates a TCP connection to `port` on `host`. If `host` is omitted, `localhost`
-  will be assumed.
+  Crea una conexión TCP al `port` de `host`. Si se omite `host`, 
+  se asumirá `localhost`.
 
 * `net.createConnection(path)`
 
-  Creates unix socket connection to `path`
+  Crea una conexión socket de unix a `path`
 
 ---
 
 ### net.Server
 
-This class is used to create a TCP or UNIX server.
+Esta clase se usa para crear un servidor TCP o UNIX.
 
-Here is an example of a echo server which listens for connections
-on port 8124:
+A continuación hay un ejemplo de un servidor echo que espera conexiones
+por el puerto 8124:
 
     var net = require('net');
     var server = net.createServer(function (c) {
-      c.write('hello\r\n');
+      c.write('hola\r\n');
       c.pipe(c);
     });
     server.listen(8124, 'localhost');
 
-Test this by using `telnet`:
+Pruébalo usando `telnet`:
 
     telnet localhost 8124
 
-To listen on the socket `/tmp/echo.sock` the last line would just be
-changed to
+Para escuchar en el socket `/tmp/echo.sock` la última linea se tendría
+que cambiar por
 
     server.listen('/tmp/echo.sock');
 
-Use `nc` to connect to a UNIX domain socket server:
+Utiliza `nc` para conectar con un servidor socket del dominio UNIX:	
 
     nc -U /tmp/echo.sock
 
-`net.Server` is an `EventEmitter` with the following events:
+`net.Server` es un `EventEmitter` con los siguientes eventos:
+
 
 #### server.listen(port, [host], [callback])
 
-Begin accepting connections on the specified `port` and `host`.  If the
-`host` is omitted, the server will accept connections directed to any
-IPv4 address (`INADDR_ANY`).
+Empieza aceptando conexiones en el `port` y `host` especificados.  Si se 
+omite el `host`, el servidor aceptará conexiones dirigidas a cualquier
+dirección IPv4 (`INADDR_ANY`).
 
-This function is asynchronous. The last parameter `callback` will be called
-when the server has been bound.
+Esta función es asíncrona. Cuando el servidor haya sido enlazado se llamará 
+el último parámetro `callback`.
 
-One issue some users run into is getting `EADDRINUSE` errors. Meaning
-another server is already running on the requested port. One way of handling this
-would be to wait a second and the try again. This can be done with
+Un problema que se encuentran los usuarios es recibir el error `EADDRINUSE`. Significa
+que otro servidor ya se está ejecutando en el puerto seleccionado. Una de las maneras
+de tratar esto sería esperar un segundo y volverlo a intentar. Esto se puede hacer con
 
     server.on('error', function (e) {
       if (e.code == 'EADDRINUSE') {
-        console.log('Address in use, retrying...');
+        console.log('Dirección en uso, reintentándolo...');
         setTimeout(function () {
           server.close();
           server.listen(PORT, HOST);
@@ -89,280 +92,285 @@ would be to wait a second and the try again. This can be done with
       }
     });
 
-(Note: All sockets in Node are set SO_REUSEADDR already)
+(Nota: Todos los sockets en Node están configurados con SO_REUSEADDR)
 
 
 #### server.listen(path, [callback])
 
-Start a UNIX socket server listening for connections on the given `path`.
+Arranca un socket UNIX de servidor esperando conexiones a través de `path`
 
-This function is asynchronous. The last parameter `callback` will be called
-when the server has been bound.
+Esta función es asíncrona. Cuando el servidor haya sido enlazado se llamará 
+el último parámetro `callback`.
+
 
 #### server.listenFD(fd)
 
-Start a server listening for connections on the given file descriptor.
+Arranca un servidor esperando conexiones en el descriptor de fichero dado.
 
-This file descriptor must have already had the `bind(2)` and `listen(2)` system
-calls invoked on it.
+El descriptor de fichero ya tiene que haber invocado las llamadas de sistema 
+`bind(2)` y `listen(2)`.
+
 
 #### server.close()
 
-Stops the server from accepting new connections. This function is
-asynchronous, the server is finally closed when the server emits a `'close'`
-event.
+El servidor para de aceptar nuevas conexiones. Esta función es 
+asíncrona, el servidor se cerrará definitivamente cuando el servidor 
+emita el evento `'close'`.
 
 
 #### server.address()
 
-Returns the bound address of the server as seen by the operating system.
-Useful to find which port was assigned when giving getting an OS-assigned address
+Devuelve la dirección asociada al servidor según el sistema operativo.
+Útil para encontrar que puerto se ha asignado cuando se ha optado por obtener una dirección asignada por el SO.
 
-Example:
+Ejemplo:
 
     var server = net.createServer(function (socket) {
-      socket.end("goodbye\n");
+      socket.end("adiós\n");
     });
 
-    // grab a random port.
+    // obtener un puerto aleatorio.
     server.listen(function() {
       address = server.address();
-      console.log("opened server on %j", address);
+      console.log("servidor abierto en %j", address);
     });
 
 
 #### server.maxConnections
 
-Set this property to reject connections when the server's connection count gets high.
+Establecer esta propiedad para rechazar conexiones cuando el número de conexiones del servidor es elevado.
+
 
 #### server.connections
 
-The number of concurrent connections on the server.
+El número de conexiones concurrentes en el servidor.
 
-#### Event: 'connection'
+
+#### Evento: 'connection'
 
 `function (socket) {}`
 
-Emitted when a new connection is made. `socket` is an instance of
+Emitido cuando se crea una nueva conexión. `socket` es una instancia de 
 `net.Socket`.
 
-#### Event: 'close'
+
+#### Evento: 'close'
 
 `function () {}`
 
-Emitted when the server closes.
+Emitido cuando se cierra el servidor.
 
 ---
 
 ### net.Socket
 
-This object is an abstraction of of a TCP or UNIX socket.  `net.Socket`
-instances implement a duplex Stream interface.  They can be created by the
-user and used as a client (with `connect()`) or they can be created by Node
-and passed to the user through the `'connection'` event of a server.
+Este objeto es una abstracción de un socket TCP o UNIX. Las instancias 
+de `net.Socket` implementan una interfaz duplex Stream.  Las pueden crear
+los usuarios y pueden ser usadas como un cliente (con `connect()`) o pueden
+crearse con Node y pasarlas al usuario a través del evento `'connection'` de
+un servidor. 
 
-`net.Socket` instances are EventEmitters with the following events:
+Las instancias de `net.Socket` son EventEmitters con los siguientes eventos: 
 
 #### new net.Socket([options])
 
-Construct a new socket object.
+Construye un nuevo objeto socket.
 
-`options` is an object with the following defaults:
+`options` es un objeto que por defecto es:
 
     { fd: null
       type: null
       allowHalfOpen: false
     }
 
-`fd` allows you to specify the existing file descriptor of socket. `type`
-specified underlying protocol. It can be `'tcp4'`, `'tcp6'`, or `'unix'`.
-About `allowHalfOpen`, refer to `createServer()` and `'end'` event.
+`fd` te permite especificar el descriptor de fichero actual del socket. `type` 
+especifica el protocolo subyacente. Puede ser `'tcp4'`, `'tcp6'`, o `'unix'`.
+Respecto a `allowHalfOpen`, se refiere a `createServer()` y el evento `'end'`. 
 
 #### socket.connect(port, [host], [callback])
 #### socket.connect(path, [callback])
 
-Opens the connection for a given socket. If `port` and `host` are given,
-then the socket will be opened as a TCP socket, if `host` is omitted,
-`localhost` will be assumed. If a `path` is given, the socket will be
-opened as a unix socket to that path.
+Abre la conexión a un socket dado. Si se especifican `port` y `host`, 
+entonces el socket se abrirá como un socket TCP, si se omite el `host`, 
+se asume `localhost`. Si se expecifica un `path`, el socket se abrirá como
+un socket de unix a esa ruta.
 
-Normally this method is not needed, as `net.createConnection` opens the
-socket. Use this only if you are implementing a custom Socket or if a
-Socket is closed and you want to reuse it to connect to another server.
+Normalmente no se necesita este método, ya que `net.createConnection` abre 
+el socket. Úsalo sólo si estás implementando un Socket a medida o si un
+Socket está cerrado y quieres reutilizarlo para conectar con otro servidor.
 
-This function is asynchronous. When the `'connect'` event is emitted the
-socket is established. If there is a problem connecting, the `'connect'`
-event will not be emitted, the `'error'` event will be emitted with
-the exception.
+Esta función es asíncrona. Se establece el socket cuando se emite el 
+evento `'connect'`. Si hay algún problema conectando, no se emitirá el
+evento `'connect'`, se emitirá el evento `'error'` con la excepción. 
 
-The `callback` parameter will be added as an listener for the 'connect'
-event.
+El parámetro `callback` se añadirá como listener del evento 'connect'.
 
 
 #### socket.bufferSize
 
-`net.Socket` has the property that `socket.write()` always works. This is to
-help users get up an running quickly. The computer cannot necessarily keep up
-with the amount of data that is written to a socket - the network connection simply
-might be too slow. Node will internally queue up the data written to a socket and
-send it out over the wire when it is possible. (Internally it is polling on
-the socket's file descriptor for being writable).
+`net.Socket` tiene la propiedad de que `socket.write()` siempre funciona. Esto 
+es para ayudar a los usuarios a ejecutarlo lo antes posible. La computadora no tiene
+que mantener necesariamente todos los datos que se escriben en el socket - la conexión podría ser
+demasiado lenta. Internamente, Node, encolará los datos escritos en el socket y los 
+enviará por el cable cuando sea posible. (Internamente se va preguntando 
+al descriptor de fichero del socket si se puede escribir).
 
-The consequence of this internal buffering is that memory may grow. This
-property shows the number of characters currently buffered to be written.
-(Number of characters is approximately equal to the number of bytes to be
-written, but the buffer may contain strings, and the strings are lazily
-encoded, so the exact number of bytes is not known.)
+La consecuencia de este buffering interno es que la memoria puede crecer. 
+Esta propiedad muestra el número de carácteres almacenados esperando a ser escritos.
+(El número de carácteres es aproximadamente igual al número de bytes a escribir, 
+pero el buffer puede contener strings, y los strings se codifican perezosamente, 
+por lo tanto el número exacto de bytes no es conocido.)
 
-Users who experience large or growing `bufferSize` should attempt to
-"throttle" the data flows in their program with `pause()` and resume()`.
+Los usuarios que experimenten grandes o crecidas de `bufferSize` deberían 
+intentar "regular" el flujo de datos en sus programas con `pause()` y `resume()`.
 
 
 #### socket.setEncoding(encoding=null)
 
-Sets the encoding (either `'ascii'`, `'utf8'`, or `'base64'`) for data that is
-received.
+Establece la codificación (ya sea `'ascii'`, `'utf8'`, o `'base64'`) para 
+los datos que se reciben.
 
 #### socket.setSecure()
 
-This function has been removed in v0.3. It used to upgrade the connection to
-SSL/TLS. See the TLS for the new API.
+Esta función se ha eliminado en v0.3. Se usaba para actualizar la conexión a
+SSL/TLS. Mira TLS para la nueva API.
 
 
 #### socket.write(data, [encoding], [callback])
 
-Sends data on the socket. The second parameter specifies the encoding in the
-case of a string--it defaults to UTF8 encoding.
+Envía los datos al socket. El segundo parámetro especifica la codificación 
+si es un string--por defecto lo codifica a UTF8.
 
-Returns `true` if the entire data was flushed successfully to the kernel
-buffer. Returns `false` if all or part of the data was queued in user memory.
-`'drain'` will be emitted when the buffer is again free.
+Devuelve `true` si se han traspasado completamente todos los datos al búfer del 
+kernel. Devuelve `false` si todos o parte de los datos se ha encolado en la memoria
+de usuario. Se emitirá `'drain'` cuando el búfer vuelva a estar libre.
 
-The optional `callback` parameter will be executed when the data is finally
-written out - this may not be immediately.
+El parámetro opcional `callback` se ejecutará se acabe de escribir - puede 
+que no suceda inmediatamente.
 
 #### socket.write(data, [encoding], [fileDescriptor], [callback])
 
-For UNIX sockets, it is possible to send a file descriptor through the
-socket. Simply add the `fileDescriptor` argument and listen for the `'fd'`
-event on the other end.
+Para los sockets UNIX, es posible enviar descriptor de fichero a través 
+del socket. Basta con añadir el argumento `fileDescriptor` y escuchar el 
+evento `'fd'` en el otro extremo.
 
 
 #### socket.end([data], [encoding])
 
-Half-closes the socket. I.E., it sends a FIN packet. It is possible the
-server will still send some data.
+Cierra parcialmente el socket. I.E., envia un paquete FIN. Es posible 
+que el servidor continue enviando algunos datos.
 
-If `data` is specified, it is equivalent to calling `socket.write(data, encoding)`
-followed by `socket.end()`.
+Si se especifica `data`, es equivalente a llamar a `socket.write(data, encoding)` 
+seguido de `socket.end()`.
 
 #### socket.destroy()
 
-Ensures that no more I/O activity happens on this socket. Only necessary in
-case of errors (parse error or so).
+Se asegura que no habrá más actividad de E/S en el socket. Sólo se necesita 
+en caso de errores (errores de parse)
 
 #### socket.pause()
 
-Pauses the reading of data. That is, `'data'` events will not be emitted.
-Useful to throttle back an upload.
+Pausa la lectura de los datos. Eso es, no se emitirán eventos `'data'`. 
+Útil para moderar la velocidad de una subida.
 
 #### socket.resume()
 
-Resumes reading after a call to `pause()`.
+Continua leyendo después de llamar a `pause()`.
 
 #### socket.setTimeout(timeout, [callback])
 
-Sets the socket to timeout after `timeout` milliseconds of inactivity on
-the socket. By default `net.Socket` do not have a timeout.
+Pone el socket en timeout después de `timeout` milisegundos de inactividad en 
+el socket. Por defecto `net.Socket`no tiene timeout.
 
-When an idle timeout is triggered the socket will receive a `'timeout'`
-event but the connection will not be severed. The user must manually `end()`
-or `destroy()` the socket.
+Cuando se dispara un timeout en espera el socket recibirá un evento `'timeout'` 
+pero la conexión no se cortará. El usuario tiene que invocar manualmente `end()` o 
+`destroy()` en el socket.
 
-If `timeout` is 0, then the existing idle timeout is disabled.
+Si `timeout` es 0, entonces el actual timeout en espera se desactiva.
 
-The optional `callback` parameter will be added as a one time listener for the `'timeout'` event.
+El parametro opcional `callback` se añadirá como un listener de una sola vez del evento `'timeout'`.
 
 #### socket.setNoDelay(noDelay=true)
 
-Disables the Nagle algorithm. By default TCP connections use the Nagle
-algorithm, they buffer data before sending it off. Setting `noDelay` will
-immediately fire off data each time `socket.write()` is called.
+Deshabilita el algoritmo de Nagle. Por defecto las conexiones TCP utilizan 
+el algoritmo de Nagle, almacenan los datos antes de enviarlos fuera. Activando 
+`noDelay` enviará inmediatamente los datos cada vez que se llame a `socket.write()`.
 
 #### socket.setKeepAlive(enable=false, [initialDelay])
 
-Enable/disable keep-alive functionality, and optionally set the initial
-delay before the first keepalive probe is sent on an idle socket.
-Set `initialDelay` (in milliseconds) to set the delay between the last
-data packet received and the first keepalive probe. Setting 0 for
-initialDelay will leave the value unchanged from the default
-(or previous) setting.
+Activa/desactiva la funcionalidad keep-alive, y opcionalmente establece
+el retardo inicial antes de que la primera prueba de keep-alive se envíe 
+en un socket en espera. Establece `initialDelay` (en milisegundos) como el 
+retardo entre el último paquete recibido y la primera prueba de keep-alive. 
+Poniendo un 0 en initialDelay mantendrá el valor por defecto (o el previo).
 
 #### socket.remoteAddress
 
-The string representation of the remote IP address. For example,
-`'74.125.127.100'` or `'2001:4860:a005::68'`.
+La representación en string de la dirección IP remota. Por ejemplo 
+`'74.125.127.100'` o `'2001:4860:a005::68'`.
 
-This member is only present in server-side connections.
+Este miembro sólo está presente en las conexiones del lado servidor.
 
 
-#### Event: 'connect'
+#### Evento: 'connect'
 
 `function () { }`
 
-Emitted when a socket connection successfully is established.
-See `connect()`.
+Se emite cuando se establece con éxito una conexión socket.
+Mirar `connect()`.
 
-#### Event: 'data'
+#### Evento: 'data'
 
 `function (data) { }`
 
-Emitted when data is received.  The argument `data` will be a `Buffer` or
-`String`.  Encoding of data is set by `socket.setEncoding()`.
-(See the section on `Readable Socket` for more information.)
+Se emite cuando se reciben datos. El argumento `data` será un `Buffer` o un 
+`String`.  La codificación de los datos se establece con `socket.setEncoding()`. 
+(Mirar la sección de `Socket de Lectura` para más información.)
 
-#### Event: 'end'
-
-`function () { }`
-
-Emitted when the other end of the socket sends a FIN packet.
-
-By default (`allowHalfOpen == false`) the socket will destroy its file
-descriptor  once it has written out its pending write queue.  However, by
-setting `allowHalfOpen == true` the socket will not automatically `end()`
-its side allowing the user to write arbitrary amounts of data, with the
-caveat that the user is required to `end()` their side now.
-
-
-#### Event: 'timeout'
+#### Evento: 'end'
 
 `function () { }`
 
-Emitted if the socket times out from inactivity. This is only to notify that
-the socket has been idle. The user must manually close the connection.
+Se emite cuando el otro extremo del socket envía un paquete FIN.
 
-See also: `socket.setTimeout()`
+Por defecto (`allowHalfOpen == false`) el socket destruirá su propio descriptor 
+de fichero una vez haya escrito lo que tiene pendiente en la cola de escritura. 
+Sin embargo, si pones `allowHalfOpen == true` el socket no llamará a `end()` 
+automáticamente en su lado permitiendo al usuario escribir cantidades arbitrarias 
+de datos, con la advertencia de que el usuario debería llamar a `end()` en su 
+lado de inmediato.
 
 
-#### Event: 'drain'
+#### Evento: 'timeout'
 
 `function () { }`
 
-Emitted when the write buffer becomes empty. Can be used to throttle uploads.
+Se emite si el socket agota el timeout por inactividad. Solo sirve para 
+notificar que el socket estaba inactivo. El usuario tiene que cerrar la conexión 
+manualmente.
 
-#### Event: 'error'
+Mirar también: `socket.setTimeout()`
+
+
+#### Evento: 'drain'
+
+`function () { }`
+
+Emitido cuando el búfer de escritura se vacía. Sirve para regular las subidas.
+
+#### Evento: 'error'
 
 `function (exception) { }`
 
-Emitted when an error occurs.  The `'close'` event will be called directly
-following this event.
+Se emite cuando se produce un error.  Seguidamente se llamará directamente 
+al evento `'close'`.
 
-#### Event: 'close'
+#### Evento: 'close'
 
 `function (had_error) { }`
 
-Emitted once the socket is fully closed. The argument `had_error` is a boolean
-which says if the socket was closed due to a transmission error.
+Se emite cuando se cierra completamente el socket. El argumento `had_error` es un 
+boolean que advierte si el socket se ha cerrado debido a un error de transmisión.
 
 ---
 
@@ -370,16 +378,15 @@ which says if the socket was closed due to a transmission error.
 
 #### net.isIP(input)
 
-Tests if input is an IP address. Returns 0 for invalid strings,
-returns 4 for IP version 4 addresses, and returns 6 for IP version 6 addresses.
+Comprueba si input es una dirección IP. Devuelve 0 para strings inválidos, 
+devuelve 4 para direcciones IP de versión 4, y 6 para direcciones IP de versión 6.
 
 
 #### net.isIPv4(input)
 
-Returns true if input is a version 4 IP address, otherwise returns false.
+Devuelve true si input es una dirección de versión 4, si no devuleve false.
 
 
 #### net.isIPv6(input)
 
-Returns true if input is a version 6 IP address, otherwise returns false.
-
+Devuelve true si input es una dirección de versión 6, si no devuleve false.

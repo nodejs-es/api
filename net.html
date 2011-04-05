@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>net - Node.js Manual &amp; Documentación</title>
+  <link rel="stylesheet" href="assets/style.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="assets/sh.css" type="text/css" media="all"/>
+</head>
+<body>
+  <div id="container">
+    <header>
+      <h1>Node.js Manual &amp; Documentación</h1>
+      <div id="gtoc">
+        <p><a href="index.html">Inicio</a> | <a href="all.html">Ver en una página</a></p>
+      </div>
+      <hr />
+    </header>
+    <div id="toc"><h2>Tabla de contenidos</h2><ul><li><a href="#net.createServer_">net.createServer([options], [connectionListener])</a></li><li><a href="#net.createConnection_">net.createConnection(arguments...)</a></li><li><a href="#net.Server_">net.Server</a><ul><li><a href="#server.listen_">server.listen(port, [host], [callback])</a></li><li><a href="#server.listen_">server.listen(path, [callback])</a></li><li><a href="#server.listenFD_">server.listenFD(fd)</a></li><li><a href="#server.close_">server.close()</a></li><li><a href="#server.address_">server.address()</a></li><li><a href="#server.maxConnections_">server.maxConnections</a></li><li><a href="#server.connections_">server.connections</a></li><li><a href="#evento_connection_">Evento: 'connection'</a></li><li><a href="#evento_close_">Evento: 'close'</a></li></ul></li><li><a href="#net.Socket_">net.Socket</a><ul><li><a href="#new_net.Socket_">new net.Socket([options])</a></li><li><a href="#socket.connect_">socket.connect(port, [host], [callback])</a></li><li><a href="#socket.connect_">socket.connect(path, [callback])</a></li><li><a href="#socket.bufferSize_">socket.bufferSize</a></li><li><a href="#socket.setEncoding_">socket.setEncoding(encoding=null)</a></li><li><a href="#socket.setSecure_">socket.setSecure()</a></li><li><a href="#socket.write_">socket.write(data, [encoding], [callback])</a></li><li><a href="#socket.write_">socket.write(data, [encoding], [fileDescriptor], [callback])</a></li><li><a href="#socket.end_">socket.end([data], [encoding])</a></li><li><a href="#socket.destroy_">socket.destroy()</a></li><li><a href="#socket.pause_">socket.pause()</a></li><li><a href="#socket.resume_">socket.resume()</a></li><li><a href="#socket.setTimeout_">socket.setTimeout(timeout, [callback])</a></li><li><a href="#socket.setNoDelay_">socket.setNoDelay(noDelay=true)</a></li><li><a href="#socket.setKeepAlive_">socket.setKeepAlive(enable=false, [initialDelay])</a></li><li><a href="#socket.remoteAddress_">socket.remoteAddress</a></li><li><a href="#evento_connect_">Evento: 'connect'</a></li><li><a href="#evento_data_">Evento: 'data'</a></li><li><a href="#evento_end_">Evento: 'end'</a></li><li><a href="#evento_timeout_">Evento: 'timeout'</a></li><li><a href="#evento_drain_">Evento: 'drain'</a></li><li><a href="#evento_error_">Evento: 'error'</a></li><li><a href="#evento_close_">Evento: 'close'</a></li></ul></li><li><a href="#net.isIP_">net.isIP</a><ul><li><a href="#net.isIP_">net.isIP(input)</a></li><li><a href="#net.isIPv4_">net.isIPv4(input)</a></li><li><a href="#net.isIPv6_">net.isIPv6(input)</a></li></ul></li></ul><hr /></div>
+<p>﻿## net</p>
+
+<p>El módulo <code>net</code> te proporciona una envoltura asíncrona de la red. Contiene
+métodos para crear servidores y clientes (llamados streams). Puedes incluir 
+este módulo con <code>require("net");</code></p>
+
+<h3 id="net.createServer">net.createServer([options], [connectionListener])</h3>
+
+<p>Crea un nuevo servidor TCP. El argumento <code>connectionListener</code> se establece 
+automáticamente como listener del evento <code>'connection'</code>.</p>
+
+<p>Por omisión <code>options</code> es un objeto como el siguiente:</p>
+
+<pre><code>{ allowHalfOpen: false</code></pre>
+
+<p>
+    }</p>
+
+<p>Si <code>allowHalfOpen</code> es <code>true</code>, entonces el socket no enviará automáticamente el paquete FIN 
+cuando el otro extremo del socket envíe un paquete FIN. El socket se vuelve de no-lectura, pero 
+conserva la escritura. Deberías llamar el método end() explícitamente.
+Mirar el evento <code>'end'</code> para más información.</p>
+
+<h3 id="net.createConnection">net.createConnection(arguments...)</h3>
+
+<p>Construye un nuevo objeto socket y abre un socket al sitio seleccionado. Cuando 
+se establece el socket se emitirá el evento <code>'connect'</code>.</p>
+
+<p>Los argumentos de este método cambian el tipo de conexión:</p>
+
+<ul><li><p><code>net.createConnection(port, [host])</code></p><p>Crea una conexión TCP al <code>port</code> de <code>host</code>. Si se omite <code>host</code>, 
+se asumirá <code>localhost</code>.</p></li><li><p><code>net.createConnection(path)</code></p><p>Crea una conexión socket de unix a <code>path</code></p></li></ul>
+
+<p>---</p>
+
+<h3 id="net.Server">net.Server</h3>
+
+<p>Esta clase se usa para crear un servidor TCP o UNIX.</p>
+
+<p>A continuación hay un ejemplo de un servidor echo que espera conexiones
+por el puerto 8124:</p>
+
+<pre><code>var net = require('net');</code></pre>
+
+<p>
+    var server = net.createServer(function (c) {
+      c.write('hola\r\n');
+      c.pipe(c);
+    });
+    server.listen(8124, 'localhost');</p>
+
+<p>Pruébalo usando <code>telnet</code>:</p>
+
+<pre><code>telnet localhost 8124</code></pre>
+
+<p></p>
+
+<p>Para escuchar en el socket <code>/tmp/echo.sock</code> la última linea se tendría
+que cambiar por</p>
+
+<pre><code>server.listen('/tmp/echo.sock');</code></pre>
+
+<p></p>
+
+<p>Utiliza <code>nc</code> para conectar con un servidor socket del dominio UNIX:	</p>
+
+<pre><code>nc -U /tmp/echo.sock</code></pre>
+
+<p></p>
+
+<p><code>net.Server</code> es un <code>EventEmitter</code> con los siguientes eventos:</p>
+
+<h4 id="server.listen">server.listen(port, [host], [callback])</h4>
+
+<p>Empieza aceptando conexiones en el <code>port</code> y <code>host</code> especificados.  Si se 
+omite el <code>host</code>, el servidor aceptará conexiones dirigidas a cualquier
+dirección IPv4 (<code>INADDR_ANY</code>).</p>
+
+<p>Esta función es asíncrona. Cuando el servidor haya sido enlazado se llamará 
+el último parámetro <code>callback</code>.</p>
+
+<p>Un problema que se encuentran los usuarios es recibir el error <code>EADDRINUSE</code>. Significa
+que otro servidor ya se está ejecutando en el puerto seleccionado. Una de las maneras
+de tratar esto sería esperar un segundo y volverlo a intentar. Esto se puede hacer con</p>
+
+<pre><code>server.on('error', function (e) {</code></pre>
+
+<p>
+      if (e.code == 'EADDRINUSE') {
+        console.log('Dirección en uso, reintentándolo...');
+        setTimeout(function () {
+          server.close();
+          server.listen(PORT, HOST);
+        }, 1000);
+      }
+    });</p>
+
+<p>(Nota: Todos los sockets en Node están configurados con SO_REUSEADDR)</p>
+
+<h4 id="server.listen">server.listen(path, [callback])</h4>
+
+<p>Arranca un socket UNIX de servidor esperando conexiones a través de <code>path</code></p>
+
+<p>Esta función es asíncrona. Cuando el servidor haya sido enlazado se llamará 
+el último parámetro <code>callback</code>.</p>
+
+<h4 id="server.listenFD">server.listenFD(fd)</h4>
+
+<p>Arranca un servidor esperando conexiones en el descriptor de fichero dado.</p>
+
+<p>El descriptor de fichero ya tiene que haber invocado las llamadas de sistema 
+<code>bind(2)</code> y <code>listen(2)</code>.</p>
+
+<h4 id="server.close">server.close()</h4>
+
+<p>El servidor para de aceptar nuevas conexiones. Esta función es 
+asíncrona, el servidor se cerrará definitivamente cuando el servidor 
+emita el evento <code>'close'</code>.</p>
+
+<h4 id="server.address">server.address()</h4>
+
+<p>Devuelve la dirección asociada al servidor según el sistema operativo.
+Útil para encontrar que puerto se ha asignado cuando se ha optado por obtener una dirección asignada por el SO.</p>
+
+<p>Ejemplo:</p>
+
+<pre><code>var server = net.createServer(function (socket) {</code></pre>
+
+<p>
+      socket.end("adiós\n");
+    });</p>
+
+<pre><code>// obtener un puerto aleatorio.</code></pre>
+
+<p>
+    server.listen(function() {
+      address = server.address();
+      console.log("servidor abierto en %j", address);
+    });</p>
+
+<h4 id="server.maxConnections">server.maxConnections</h4>
+
+<p>Establecer esta propiedad para rechazar conexiones cuando el número de conexiones del servidor es elevado.</p>
+
+<h4 id="server.connections">server.connections</h4>
+
+<p>El número de conexiones concurrentes en el servidor.</p>
+
+<h4 id="evento_connection_">Evento: 'connection'</h4>
+
+<p><code>function (socket) {}</code></p>
+
+<p>Emitido cuando se crea una nueva conexión. <code>socket</code> es una instancia de 
+<code>net.Socket</code>.</p>
+
+<h4 id="evento_close_">Evento: 'close'</h4>
+
+<p><code>function () {}</code></p>
+
+<p>Emitido cuando se cierra el servidor.</p>
+
+<p>---</p>
+
+<h3 id="net.Socket">net.Socket</h3>
+
+<p>Este objeto es una abstracción de un socket TCP o UNIX. Las instancias 
+de <code>net.Socket</code> implementan una interfaz duplex Stream.  Las pueden crear
+los usuarios y pueden ser usadas como un cliente (con <code>connect()</code>) o pueden
+crearse con Node y pasarlas al usuario a través del evento <code>'connection'</code> de
+un servidor. </p>
+
+<p>Las instancias de <code>net.Socket</code> son EventEmitters con los siguientes eventos: </p>
+
+<h4 id="new_net.Socket">new net.Socket([options])</h4>
+
+<p>Construye un nuevo objeto socket.</p>
+
+<p><code>options</code> es un objeto que por defecto es:</p>
+
+<pre><code>{ fd: null</code></pre>
+
+<p>
+      type: null
+      allowHalfOpen: false
+    }</p>
+
+<p><code>fd</code> te permite especificar el descriptor de fichero actual del socket. <code>type</code> 
+especifica el protocolo subyacente. Puede ser <code>'tcp4'</code>, <code>'tcp6'</code>, o <code>'unix'</code>.
+Respecto a <code>allowHalfOpen</code>, se refiere a <code>createServer()</code> y el evento <code>'end'</code>. </p>
+
+<h4 id="socket.connect">socket.connect(port, [host], [callback])</h4>
+
+<h4 id="socket.connect">socket.connect(path, [callback])</h4>
+
+<p>Abre la conexión a un socket dado. Si se especifican <code>port</code> y <code>host</code>, 
+entonces el socket se abrirá como un socket TCP, si se omite el <code>host</code>, 
+se asume <code>localhost</code>. Si se expecifica un <code>path</code>, el socket se abrirá como
+un socket de unix a esa ruta.</p>
+
+<p>Normalmente no se necesita este método, ya que <code>net.createConnection</code> abre 
+el socket. Úsalo sólo si estás implementando un Socket a medida o si un
+Socket está cerrado y quieres reutilizarlo para conectar con otro servidor.</p>
+
+<p>Esta función es asíncrona. Se establece el socket cuando se emite el 
+evento <code>'connect'</code>. Si hay algún problema conectando, no se emitirá el
+evento <code>'connect'</code>, se emitirá el evento <code>'error'</code> con la excepción. </p>
+
+<p>El parámetro <code>callback</code> se añadirá como listener del evento 'connect'.</p>
+
+<h4 id="socket.bufferSize">socket.bufferSize</h4>
+
+<p><code>net.Socket</code> tiene la propiedad de que <code>socket.write()</code> siempre funciona. Esto 
+es para ayudar a los usuarios a ejecutarlo lo antes posible. La computadora no tiene
+que mantener necesariamente todos los datos que se escriben en el socket - la conexión podría ser
+demasiado lenta. Internamente, Node, encolará los datos escritos en el socket y los 
+enviará por el cable cuando sea posible. (Internamente se va preguntando 
+al descriptor de fichero del socket si se puede escribir).</p>
+
+<p>La consecuencia de este buffering interno es que la memoria puede crecer. 
+Esta propiedad muestra el número de carácteres almacenados esperando a ser escritos.
+(El número de carácteres es aproximadamente igual al número de bytes a escribir, 
+pero el buffer puede contener strings, y los strings se codifican perezosamente, 
+por lo tanto el número exacto de bytes no es conocido.)</p>
+
+<p>Los usuarios que experimenten grandes o crecidas de <code>bufferSize</code> deberían 
+intentar "regular" el flujo de datos en sus programas con <code>pause()</code> y <code>resume()</code>.</p>
+
+<h4 id="socket.setEncoding">socket.setEncoding(encoding=null)</h4>
+
+<p>Establece la codificación (ya sea <code>'ascii'</code>, <code>'utf8'</code>, o <code>'base64'</code>) para 
+los datos que se reciben.</p>
+
+<h4 id="socket.setSecure">socket.setSecure()</h4>
+
+<p>Esta función se ha eliminado en v0.3. Se usaba para actualizar la conexión a
+SSL/TLS. Mira TLS para la nueva API.</p>
+
+<h4 id="socket.write">socket.write(data, [encoding], [callback])</h4>
+
+<p>Envía los datos al socket. El segundo parámetro especifica la codificación 
+si es un string--por defecto lo codifica a UTF8.</p>
+
+<p>Devuelve <code>true</code> si se han traspasado completamente todos los datos al búfer del 
+kernel. Devuelve <code>false</code> si todos o parte de los datos se ha encolado en la memoria
+de usuario. Se emitirá <code>'drain'</code> cuando el búfer vuelva a estar libre.</p>
+
+<p>El parámetro opcional <code>callback</code> se ejecutará se acabe de escribir - puede 
+que no suceda inmediatamente.</p>
+
+<h4 id="socket.write">socket.write(data, [encoding], [fileDescriptor], [callback])</h4>
+
+<p>Para los sockets UNIX, es posible enviar descriptor de fichero a través 
+del socket. Basta con añadir el argumento <code>fileDescriptor</code> y escuchar el 
+evento <code>'fd'</code> en el otro extremo.</p>
+
+<h4 id="socket.end">socket.end([data], [encoding])</h4>
+
+<p>Cierra parcialmente el socket. I.E., envia un paquete FIN. Es posible 
+que el servidor continue enviando algunos datos.</p>
+
+<p>Si se especifica <code>data</code>, es equivalente a llamar a <code>socket.write(data, encoding)</code> 
+seguido de <code>socket.end()</code>.</p>
+
+<h4 id="socket.destroy">socket.destroy()</h4>
+
+<p>Se asegura que no habrá más actividad de E/S en el socket. Sólo se necesita 
+en caso de errores (errores de parse)</p>
+
+<h4 id="socket.pause">socket.pause()</h4>
+
+<p>Pausa la lectura de los datos. Eso es, no se emitirán eventos <code>'data'</code>. 
+Útil para moderar la velocidad de una subida.</p>
+
+<h4 id="socket.resume">socket.resume()</h4>
+
+<p>Continua leyendo después de llamar a <code>pause()</code>.</p>
+
+<h4 id="socket.setTimeout">socket.setTimeout(timeout, [callback])</h4>
+
+<p>Pone el socket en timeout después de <code>timeout</code> milisegundos de inactividad en 
+el socket. Por defecto <code>net.Socket</code>no tiene timeout.</p>
+
+<p>Cuando se dispara un timeout en espera el socket recibirá un evento <code>'timeout'</code> 
+pero la conexión no se cortará. El usuario tiene que invocar manualmente <code>end()</code> o 
+<code>destroy()</code> en el socket.</p>
+
+<p>Si <code>timeout</code> es 0, entonces el actual timeout en espera se desactiva.</p>
+
+<p>El parametro opcional <code>callback</code> se añadirá como un listener de una sola vez del evento <code>'timeout'</code>.</p>
+
+<h4 id="socket.setNoDelay">socket.setNoDelay(noDelay=true)</h4>
+
+<p>Deshabilita el algoritmo de Nagle. Por defecto las conexiones TCP utilizan 
+el algoritmo de Nagle, almacenan los datos antes de enviarlos fuera. Activando 
+<code>noDelay</code> enviará inmediatamente los datos cada vez que se llame a <code>socket.write()</code>.</p>
+
+<h4 id="socket.setKeepAlive">socket.setKeepAlive(enable=false, [initialDelay])</h4>
+
+<p>Activa/desactiva la funcionalidad keep-alive, y opcionalmente establece
+el retardo inicial antes de que la primera prueba de keep-alive se envíe 
+en un socket en espera. Establece <code>initialDelay</code> (en milisegundos) como el 
+retardo entre el último paquete recibido y la primera prueba de keep-alive. 
+Poniendo un 0 en initialDelay mantendrá el valor por defecto (o el previo).</p>
+
+<h4 id="socket.remoteAddress">socket.remoteAddress</h4>
+
+<p>La representación en string de la dirección IP remota. Por ejemplo 
+<code>'74.125.127.100'</code> o <code>'2001:4860:a005::68'</code>.</p>
+
+<p>Este miembro sólo está presente en las conexiones del lado servidor.</p>
+
+<h4 id="evento_connect_">Evento: 'connect'</h4>
+
+<p><code>function () { }</code></p>
+
+<p>Se emite cuando se establece con éxito una conexión socket.
+Mirar <code>connect()</code>.</p>
+
+<h4 id="evento_data_">Evento: 'data'</h4>
+
+<p><code>function (data) { }</code></p>
+
+<p>Se emite cuando se reciben datos. El argumento <code>data</code> será un <code>Buffer</code> o un 
+<code>String</code>.  La codificación de los datos se establece con <code>socket.setEncoding()</code>. 
+(Mirar la sección de <code>Socket de Lectura</code> para más información.)</p>
+
+<h4 id="evento_end_">Evento: 'end'</h4>
+
+<p><code>function () { }</code></p>
+
+<p>Se emite cuando el otro extremo del socket envía un paquete FIN.</p>
+
+<p>Por defecto (<code>allowHalfOpen == false</code>) el socket destruirá su propio descriptor 
+de fichero una vez haya escrito lo que tiene pendiente en la cola de escritura. 
+Sin embargo, si pones <code>allowHalfOpen == true</code> el socket no llamará a <code>end()</code> 
+automáticamente en su lado permitiendo al usuario escribir cantidades arbitrarias 
+de datos, con la advertencia de que el usuario debería llamar a <code>end()</code> en su 
+lado de inmediato.</p>
+
+<h4 id="evento_timeout_">Evento: 'timeout'</h4>
+
+<p><code>function () { }</code></p>
+
+<p>Se emite si el socket agota el timeout por inactividad. Solo sirve para 
+notificar que el socket estaba inactivo. El usuario tiene que cerrar la conexión 
+manualmente.</p>
+
+<p>Mirar también: <code>socket.setTimeout()</code></p>
+
+<h4 id="evento_drain_">Evento: 'drain'</h4>
+
+<p><code>function () { }</code></p>
+
+<p>Emitido cuando el búfer de escritura se vacía. Sirve para regular las subidas.</p>
+
+<h4 id="evento_error_">Evento: 'error'</h4>
+
+<p><code>function (exception) { }</code></p>
+
+<p>Se emite cuando se produce un error.  Seguidamente se llamará directamente 
+al evento <code>'close'</code>.</p>
+
+<h4 id="evento_close_">Evento: 'close'</h4>
+
+<p><code>function (had_error) { }</code></p>
+
+<p>Se emite cuando se cierra completamente el socket. El argumento <code>had_error</code> es un 
+boolean que advierte si el socket se ha cerrado debido a un error de transmisión.</p>
+
+<p>---</p>
+
+<h3 id="net.isIP">net.isIP</h3>
+
+<h4 id="net.isIP">net.isIP(input)</h4>
+
+<p>Comprueba si input es una dirección IP. Devuelve 0 para strings inválidos, 
+devuelve 4 para direcciones IP de versión 4, y 6 para direcciones IP de versión 6.</p>
+
+<h4 id="net.isIPv4">net.isIPv4(input)</h4>
+
+<p>Devuelve true si input es una dirección de versión 4, si no devuleve false.</p>
+
+<h4 id="net.isIPv6">net.isIPv6(input)</h4>
+
+<p>Devuelve true si input es una dirección de versión 6, si no devuleve false.</p>
+  </div>
+  <script type="text/javascript" src="assets/sh_main.js"></script>
+  <script type="text/javascript" src="assets/sh_javascript.min.js"></script>
+  <script type="text/javascript">highlight(undefined, undefined, 'pre');</script>
+</body>
+</html>

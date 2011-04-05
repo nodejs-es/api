@@ -1,29 +1,29 @@
-## Query String
+## Cadena de consulta
 
-This module provides utilities for dealing with query strings.
-It provides the following methods:
+Este módulo provee de utilidades para el tratamiento de cadenas de consultas.
+Se ofrece los siguientes métodos:
 
 ### querystring.stringify(obj, sep='&', eq='=')
 
-Serialize an object to a query string.
-Optionally override the default separator and assignment characters.
+Serializa un objeto a una cadena de consulta.
+Opcionalmente reemplaza el separador por omisión y la asignación de caracteres.
 
-Example:
+Ejemplo:
 
     querystring.stringify({foo: 'bar'})
-    // returns
+    // devuelve
     'foo=bar'
 
     querystring.stringify({foo: 'bar', baz: 'bob'}, ';', ':')
-    // returns
+    // devuelve
     'foo:bar;baz:bob'
 
 ### querystring.parse(str, sep='&', eq='=')
 
-Deserialize a query string to an object.
-Optionally override the default separator and assignment characters.
+Deserializa una cadena de consulta a un objeto.
+Opcionamente puede reemplazar el separador por omisión y asignar caracteres.
 
-Example:
+Ejemplo:
 
     querystring.parse('a=b&b=c')
     // returns
@@ -31,10 +31,10 @@ Example:
 
 ### querystring.escape
 
-The escape function used by `querystring.stringify`,
-provided so that it could be overridden if necessary.
+La función escape es usada por `querystring.stringify`,
+para proporcionar reemplazos si es necesario.
 
 ### querystring.unescape
 
-The unescape function used by `querystring.parse`,
-provided so that it could be overridden if necessary.
+La función unescape es usada por `querystring.parse`,
+para proporcionar reemplazos  si es necesario.

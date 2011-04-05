@@ -1,6 +1,6 @@
 ## Depurador
 
-V8 viene con con el complemento depurador (debugger), el cual puede ser accedido desde fuera 
+V8 viene con el complemento depurador (debugger), el cual puede ser accedido desde fuera 
 del proceso vía el [protocolo TCP](http://code.google.com/p/v8/wiki/DebuggerProtocol).
 Node posee un cliente incorporado para el depurador. Para usarlo, inicie Node con el argumento
 `debug`; y aparecerá:
@@ -8,10 +8,6 @@ Node posee un cliente incorporado para el depurador. Para usarlo, inicie Node co
 
     % node debug myscript.js
     debug>
-
-At this point `myscript.js` is not yet running. To start the script, enter
-the command `run`. If everything works okay, the output should look like
-this:
 
 En este punto `myscript.js` no está ejecutándose. Para iniciar el script, ingrese
 el comando `run`. Si todo funciona bien, la salida debe ser algo similar a:

@@ -1,56 +1,56 @@
 ## URL
 
-This module has utilities for URL resolution and parsing.
-Call `require('url')` to use it.
+Este módulo posee utilidades para la resolución y análisis de URL.
+Para usarlo utilice `require('url')`.
 
-Parsed URL objects have some or all of the following fields, depending on
-whether or not they exist in the URL string. Any parts that are not in the URL
-string will not be in the parsed object. Examples are shown for the URL
+Analizar objetos URL tiene algo o mucho de los siguientes campos, dependiendo de
+que exista o no en la cadena de URL. Las partes que no están en la cadena de URL
+no se analizarán y no estarán presente en el objeto. Un ejemplo para la siguiente URL
 
 `'http://user:pass@host.com:8080/p/a/t/h?query=string#hash'`
 
-* `href`: The full URL that was originally parsed.
+* `href`: La dirección URL ha sido analizada desde un principio.
 
-  Example: `'http://user:pass@host.com:8080/p/a/t/h?query=string#hash'`
-* `protocol`: The request protocol.
+  Ejemplo: `'http://user:pass@host.com:8080/p/a/t/h?query=string#hash'`
+* `protocol`: El protocolo de petición (request).
 
-  Example: `'http:'`
-* `host`: The full host portion of the URL, including port and authentication information.
+  Ejemplo: `'http:'`
+* `host`: Una parte del host de la URL completa, incluyendo la información del puerto y autentificación.
 
-  Example: `'user:pass@host.com:8080'`
-* `auth`: The authentication information portion of a URL.
+  Ejemplo: `'user:pass@host.com:8080'`
+* `auth`: Parte de la información de autentificación de la URL.
 
-  Example: `'user:pass'`
-* `hostname`: Just the hostname portion of the host.
+  Ejemplo: `'user:pass'`
+* `hostname`: Sólo la parte del nombre del host.
 
-  Example: `'host.com'`
-* `port`: The port number portion of the host.
+  Ejemplo: `'host.com'`
+* `port`: El número de puerto del host.
 
-  Example: `'8080'`
-* `pathname`: The path section of the URL, that comes after the host and before the query, including the initial slash if present.
+  Ejemplo: `'8080'`
+* `pathname`: La sección de la ruta de la URL, que viene después del host y antes de la consulta, incluyendo la barra inicial si está presente.
 
-  Example: `'/p/a/t/h'`
-* `search`: The 'query string' portion of the URL, including the leading question mark.
+  Ejemplo: `'/p/a/t/h'`
+* `search`: La parte de 'cadena de consulta' de la URL, incluyendo el signo de interrogación principal.
 
-  Example: `'?query=string'`
-* `query`: Either the 'params' portion of the query string, or a querystring-parsed object.
+  Ejemplo: `'?query=string'`
+* `query`: La parte de cualquier 'parámetro' de la cadena de consulta, o un parser de un objeto de cadena de consulta.
 
-  Example: `'query=string'` or `{'query':'string'}`
-* `hash`: The 'fragment' portion of the URL including the pound-sign.
+  Ejemplo: `'query=string'` o `{'query':'string'}`
+* `hash`: La parte del 'fragmento' de la  URL incluyendo el símbolo de la libra.
 
-  Example: `'#hash'`
+  Ejemplo: `'#hash'`
 
-The following methods are provided by the URL module:
+Los siguientes métodos son proporcionados por el módulo URL:
 
 ### url.parse(urlStr, parseQueryString=false)
 
-Take a URL string, and return an object.  Pass `true` as the second argument to also parse
-the query string using the `querystring` module.
+Toma una cadena de la URL, y la devuelve como un objeto.  Devuelve `true` como el segundo argumento  a
+la cadena de consulta usando el módulo `querystring`.
 
 ### url.format(urlObj)
 
-Take a parsed URL object, and return a formatted URL string.
+Toma un parser de un objeto URL, y devuelve una cadena de URL.
 
 ### url.resolve(from, to)
 
-Take a base URL, and a href URL, and resolve them as a browser would for an anchor tag.
+Toma una URL base, y el atributo href de la URL, y lo determina como un navegador sería la etiqueta anchor (enlace).

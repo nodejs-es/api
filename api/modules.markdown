@@ -43,7 +43,7 @@ devolverá lo construido en el módulo HTTP, incluso si hay un fichero con ese n
 
 ### Módulo File
 
-Si el nombre exacto del fichero no es encontrado, entonces node intentará cargar el
+Si el nombre exacto del fichero no es encontrado, entonces node intentará cargar 
 el nombre del fichero seguido de la extensión `.js`, y a continuación con `.node`.
 
 Los ficheros `.js` son interpretados como ficheros de texto en JavaScript, y los ficheros `.node`

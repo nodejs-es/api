@@ -78,7 +78,7 @@ Este es un constructor para la clase `tls.Server`. El objeto options puede conte
 
 `function (cleartextStream) {}`
 
-Este evento es emitido después de que una nueva conexión haya realizado con éxito el handshake. El argumento es una instancia ¿duplex? de `stream.Stream`. Tiene todos los métodos y eventos de stream.
+Este evento es emitido después de que una nueva conexión haya realizado con éxito el handshake. El argumento es una instancia de `stream.Stream`. Tiene todos los métodos y eventos de stream.
 
 `cleartextStream.authorized` es un valor boolean que indica si el cliente está verificado por una de las CA suministradas por el servidor. Si `cleartextStream.authorized` es false, entonces `cleartextStream.authorizationError` describe como falló la autorización. Relacionado pero merece mencionarse: dependiendo de la configuración del servidor TLS, tus autorizaciones de conexión pueden ser aceptadas.
 
@@ -86,7 +86,7 @@ Este evento es emitido después de que una nueva conexión haya realizado con é
 
 Empieza aceptando conexiones en el `port` y el `host` especificados. Si el `host` es omitido, el servidor aceptará conexiones dirigidas a cualquier dirección IPv4 (`INADDR_ANY`).
 
-Esta función es asíncrona. El último parámetro `callback` se invocará cuando el servidor haya estado limitado¿?.
+Esta función es asíncrona. El último parámetro `callback` se invocará cuando el servidor esté saturado.
 
 Mirar `net.Server` para más información.
 

@@ -18,9 +18,7 @@
     <div id="toc"><h2>Tabla de contenidos</h2><ul><li><a href="#streams">Streams</a></li><li><a href="#readable_Stream">Readable Stream</a><ul><li><a href="#event_data_">Event: 'data'</a></li><li><a href="#event_end_">Event: 'end'</a></li><li><a href="#event_error_">Event: 'error'</a></li><li><a href="#event_close_">Event: 'close'</a></li><li><a href="#event_fd_">Event: 'fd'</a></li><li><a href="#stream.readable">stream.readable</a></li><li><a href="#stream.setEncoding">stream.setEncoding(encoding)</a></li><li><a href="#stream.pause">stream.pause()</a></li><li><a href="#stream.resume">stream.resume()</a></li><li><a href="#stream.destroy">stream.destroy()</a></li><li><a href="#stream.destroySoon">stream.destroySoon()</a></li><li><a href="#stream.pipe">stream.pipe(destination, [options])</a></li></ul></li><li><a href="#writable_Stream">Writable Stream</a><ul><li><a href="#event_drain_">Event: 'drain'</a></li><li><a href="#event_error_">Event: 'error'</a></li><li><a href="#event_close_">Event: 'close'</a></li><li><a href="#event_pipe_">Event: 'pipe'</a></li><li><a href="#stream.writable">stream.writable</a></li><li><a href="#stream.write">stream.write(string, encoding='utf8', [fd])</a></li><li><a href="#stream.write">stream.write(buffer)</a></li><li><a href="#stream.end">stream.end()</a></li><li><a href="#stream.end">stream.end(string, encoding)</a></li><li><a href="#stream.end">stream.end(buffer)</a></li><li><a href="#stream.destroy">stream.destroy()</a></li><li><a href="#stream.destroySoon">stream.destroySoon()</a></li></ul></li></ul><hr /></div>
 <h2 id="streams">Streams</h2>
 
-<p>A stream is an abstract interface implemented by various objects in Node.
-For example a request to an HTTP server is a stream, as is stdout. Streams
-are readable, writable, or both. All streams are instances of <code>EventEmitter</code>.</p>
+<p>Un Stream es un interfaz abstracto implementado por varios objetos en Node. Por ejemplo una petición a un servidor HTTP es un Stream, como un stdout. Los Streams son legibles, escribibles o ambos. Todos los stream son instancias de <code>EventEmitter</code>.</p>
 
 <h2 id="readable_Stream">Readable Stream</h2>
 

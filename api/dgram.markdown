@@ -124,7 +124,6 @@ Ejemplo de un servidor UDP escuchando en el puerto 41234:
     var dgram = require("dgram");
 
     var server = dgram.createSocket("udp4");
-    var messageToSend = new Buffer("Un mensaje a enviar");
 
     server.on("message", function (msg, rinfo) {
       console.log("el servidor ha recibido: " + msg + " de " +

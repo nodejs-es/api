@@ -34,6 +34,20 @@ Crea una nueva conexión cliente al `port` y al `host` dados. (`host` por defect
 
 Después del TSL/SSL handshake el `callback` es invocado. El `callback` será invocado independientemente si el certificado del servidor fue autorizado o no. Es responsabilidad del usuario probar `s.authorized` para ver si el certificado del servidor estaba firmado por una de las CAs especificadas. Si `s.authorized === false` entonces el error puede encontrarse en `s.authorizationError`.
 
+
+### STARTTLS
+
+In the v0.4 branch no function exists for starting a TLS session on an
+already existing TCP connection.  This is possible it just requires a bit of
+work. The technique is to use `tls.createSecurePair()` which returns two
+streams: an encrypted stream and a plaintext stream. The encrypted stream is then
+piped to the socket, the plaintext stream is what the user interacts with thereafter.
+
+[Here is some code that does it.](http://gist.github.com/848444)
+
+
+
+
 ### tls.Server
 
 Esta clase es una subclase de `net.Server` y tiene los mismos métodos.

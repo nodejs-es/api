@@ -12,9 +12,14 @@ En los navegadores, el ambito del nivel superior es el ambito global. Esto signi
 
 El objeto process. Mira la sección 'objeto process'.
 
+### console
+
+Usado para la salida de pantalla de stdout y stderr. Mira la sección
+'[stdio](stdio.html).
+
 ### require()
 
-Para requerir módulos. Mira la sección 'Modulos'.
+Para requerir módulos. Mira la sección 'Módulos'.
 
 ### require.resolve()
 

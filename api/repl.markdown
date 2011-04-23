@@ -79,9 +79,9 @@ La variable especial `_` (underscore) contiene el resultado de la última expres
     > _ += 1
     4
 
-REPL proporciona acceso a cualquier variable en el ámbito global. Puede exponer una variable
-a REPL explícitamente y asignarl a un contexto de un objeto asociado con cada
-`REPLServer`.  Por ejemplo:
+REPL proporciona acceso a cualquier variable en el ámbito global.
+Puede exponer una variable a REPL explícitamente y asignarle a un contexto de objeto asociado 
+con cada `REPLServer`.  Por ejemplo:
 
     // repl_test.js
     var repl = require("repl"),
@@ -99,7 +99,13 @@ Hay algunos comandos especiales de REPL:
 
   - `.break` - Si  bien ingresar expresiones en varias líneas, a veces, pueden perderse
     o simplemente no son tomados en cuenta. `.break` comenzará de nuevo.
-  - `.clear` - Restablece el objeto `context` a un objeto vacío y borra cualquier expresión de varias líneas.
+  - `.clear` - Restablece el objeto `context` a un objeto vacío y borra cualquier
+    expresión de varias líneas.
   - `.exit` - Cierra los stream de I/O, que hará que REPL termine.
   - `.help` - Muestra la lista de comandos especiales.
 
+Lo siguinete son cominaciones del teclado para el uso especial de REPL:
+
+  - `<ctrl>C` - Similar a la tecla `break`. Termina el comando
+    actual. Presione dos veces en la línea para forzar la salida.
+  - `<ctrl>D` - Similar a la tecla `.exit`.

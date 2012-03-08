@@ -1,4 +1,4 @@
-## Apéndice 1 - Módulos de terceros
+# Apéndice 1 - Módulos de terceros
 
 Existen muchos módulos de terceros para Node. En el momento de escribir esto,
 Agosto 2010, el repositorio principal de módulos es 
@@ -15,30 +15,30 @@ donde sea.
 
 - Web Framework: [Express](http://github.com/visionmedia/express)
 
-- Web Sockets: [Socket.IO](http://github.com/LearnBoost/Socket.IO-node)
+- Web Sockets: [Socket.IO](https://github.com/learnboost/socket.io)
 
 - HTML Parsing: [HTML5](http://github.com/aredridel/html5)
 
 - [mDNS/Zeroconf/Bonjour](http://github.com/agnat/node_mdns)
 
-- [RabbitMQ, AMQP](https://github.com/ry/node-amqp)
+- [RabbitMQ, AMQP](https://github.com/postwait/node-amqp)
 
-- [mysql](http://github.com/felixge/node-mysql)
+- [mysql](https://github.com/felixge/node-mysql)
 
-- Serialization: [msgpack](http://github.com/pgriess/node-msgpack)
+- Serialization: [msgpack](https://github.com/pgriess/node-msgpack)
 
-- Scraping: [Apricot](http://github.com/silentrob/Apricot)
+- Scraping: [Apricot](https://github.com/silentrob/Apricot)
 
-- Debugger: [ndb](http://github.com/smtlaissezfaire/ndb) is a CLI debugger
-  [inspector](http://github.com/dannycoates/node-inspector) is a web based
+- Debugger: [ndb](https://github.com/smtlaissezfaire/ndb) is a CLI debugger
+  [inspector](https://github.com/dannycoates/node-inspector) is a web based
   tool.
 
-- [pcap binding](http://github.com/mranney/node_pcap)
+- [pcap binding](https://github.com/mranney/node_pcap)
 
-- [ncurses](http://github.com/mscdex/node-ncurses)
+- [ncurses](https://github.com/mscdex/node-ncurses)
 
 - Testing/TDD/BDD: [vows](http://vowsjs.org/),
-  [expresso](http://github.com/visionmedia/expresso),
-  [mjsunit.runner](http://github.com/tmpvar/mjsunit.runner)
+  [mocha](https://github.com/visionmedia/mocha),
+  [mjsunit.runner](https://github.com/tmpvar/mjsunit.runner)
 
 Parches a esta lista son bienvenidos.

@@ -1,7 +1,7 @@
-## REPL
+# REPL
 
 Read-Eval-Print-Loop (REPL) está disponible como un programa independiente y fácilmente
-puede incluirse en otros programas.  REPL proporciona una forma de ejecutar interactiva de ejecutar
+puede incluirse en otros programas.  REPL proporciona una forma interactiva de ejecutar
 JavaScript y ver los resultados.  Puede ser utilizado para la depuración, pruebas, o
 simplemente para probar cosas.
 
@@ -20,25 +20,36 @@ dentro de REPL. Posee la edición simple de líneas de emacs.
     3
 
 Para editores avanzados, inice node con la variable de entorno `NODE_NO_READLINE=1`.
-Esto iniciará la configuración de REPL en la terminal y que le permitirá utilizarlo como `rlwrap`.
+Se iniciará la configuración de REPL en la terminal y l permite utilizarlo con `rlwrap`.
 
-Por ejemplo, puede añadir a continuación a su fichero bashrc:
+Por ejemplo, puede añadir lo siguiente al fichero bashrc:
 
     alias node="env NODE_NO_READLINE=1 rlwrap node"
 
 
-### repl.start(prompt='> ', stream=process.stdin)
+## repl.start([prompt], [stream], [eval], [useGlobal], [ignoreUndefined])
 
 Inicia REPL con el `prompt` como el prompt y  el `stream` para todo los procesos de I/O (Entrada/Salida). 
 `prompt` es opcional y por omisión es `> `.  `stream` es opcional y por omisión es 
-`process.stdin`.
+`process.stdin`. `eval` is optional too and defaults to async wrapper for
+`eval()`.
 
+If `useGlobal` is set to true, then the repl will use the global object,
+instead of running scripts in a separate context. Defaults to `false`.
+
+If `ignoreUndefined` is set to true, then the repl will not output return value
+of command if it's `undefined`. Defaults to `false`.
+
+You can use your own `eval` function if it has following signature:
+
+    function eval(cmd, callback) {
+      callback(null, result);
+    }
 
 Multiples REPLs pueden iniciar con una misma instancia de node.  Cada
-uno de ellos comparten el objeto global, perotendrán un único proceso de I/O.
+uno de ellos comparten el objeto global, pero tendrán un único proceso de I/O.
 
-Here is an example that starts a REPL on stdin, a Unix socket, and a TCP socket:
-Aquí está un ejemplo que inicia REPL en stdin, un socket en Unix, y un socket en TCP:
+Acontinuación un ejemplo que inicia REPL en stdin, un socket en Unix, y un socket en TCP:
 
     var net = require("net"),
         repl = require("repl");
@@ -65,7 +76,10 @@ TCP.
 Al iniciar REPL desde un socket Unix basado en una instancia de stdin, puede 
 conectarse a un  proceso en ejecución de node sin reiniciar el mismo.
 
-### Características de REPL
+
+## Características de REPL
+
+<!-- type=misc -->
 
 Dentro de REPL, presione Control+D para salir.  Expresiones de varias líneas pueden ser
 ingresadas.
@@ -79,8 +93,8 @@ La variable especial `_` (underscore) contiene el resultado de la última expres
     > _ += 1
     4
 
-REPL proporciona acceso a cualquier variable en el ámbito global.
-Puede exponer una variable a REPL explícitamente y asignarle a un contexto de objeto asociado 
+REPL proporciona acceso a cualquier variable de ámbito global. Puede exponer 
+una variable a REPL explícitamente y asignarle a un contexto de objeto asociado 
 con cada `REPLServer`.  Por ejemplo:
 
     // repl_test.js
@@ -89,7 +103,7 @@ con cada `REPLServer`.  Por ejemplo:
 
     repl.start().context.m = msg;
 
-Las cosas en el objeto `context` aparecen como local en REPL:
+Los sucesos en el objeto `context` aparecen como local en REPL:
 
     mjr:~$ node repl_test.js
     > m
@@ -103,8 +117,12 @@ Hay algunos comandos especiales de REPL:
     expresión de varias líneas.
   - `.exit` - Cierra los stream de I/O, que hará que REPL termine.
   - `.help` - Muestra la lista de comandos especiales.
+  - `.save` - Guarda la sesión actual de REPL en un fichero
+    >.save ./file/to/save.js
+  - `.load` - Carga un fichero en la sesión actual de REPL.
+    >.load ./file/to/load.js  
 
-Lo siguinete son cominaciones del teclado para el uso especial de REPL:
+Lo siguiente son combinaciones del teclado para el uso especial de REPL:
 
   - `<ctrl>C` - Similar a la tecla `break`. Termina el comando
     actual. Presione dos veces en la línea para forzar la salida.

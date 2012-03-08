@@ -1,36 +1,36 @@
-## Módulo os
+# Módulo os
 
 Utilice `require('os')` para acceder al módulo.
 
-### os.hostname()
+## os.hostname()
 
 Devuelve el hostname del sistema operativo.
 
-### os.type()
+## os.type()
 
 Devuelve el nombre del sistema operativo.
 
-### os.release()
+## os.release()
 
 Devuelve la versión del sistema operativo.
 
-### os.uptime()
+## os.uptime()
 
 Devuelve el uptime en segundos del sistema.
 
-### os.loadavg()
+## os.loadavg()
 
 Devuelve un array conteniendo los promedios en 1, 5, y 15 minutos de carga.
 
-### os.totalmem()
+## os.totalmem()
 
 Devuelve la cantidad total en memoria del sistema en bytes
 
-### os.freemem()
+## os.freemem()
 
 Devuelve la cantidad de memoria libre del sistema en bytes.
 
-### os.cpus()
+## os.cpus()
 
 Devuelve un array de objetos que contiene información acerca de cada CPU/core instalado: modelo, velocidad (en MHz), y los tiempos (un objeto que contiene el número de CPU usado por: usuario, nice, sys, idle, e irq).
 

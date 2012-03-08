@@ -1,4 +1,4 @@
-## HTTP
+# HTTP
 
 To use the HTTP server and client one must `require('http')`.
 

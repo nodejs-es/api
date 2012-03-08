@@ -1,4 +1,4 @@
-## Addons
+# Addons
 
 Addons son objetos enlazados dinamicamente. Ellos pueden ser el pegamento entre las librerias C y C++ con NodeJS. La API (en estos momentos) es algo compleja, siendo necesario el conocimiento de varias librerias.
 

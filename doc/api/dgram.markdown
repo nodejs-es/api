@@ -1,9 +1,13 @@
-## UDP / Sockets de Datagrama
+# UDP / Sockets de Datagrama
+
+    Stability: 3 - Stable
+
+<!-- name=dgram -->
 
 Los sockets de datagrama están disponibles a través de `require('dgram')`.  Normalmente los datagramas 
 se manejan como mensajes IP/UDP pero también se pueden usar a través de sockets de dominio Unix.
 
-### Evento: 'message'
+## Evento: 'message'
 
 `function (msg, rinfo) { }`
 
@@ -18,7 +22,7 @@ Emitido cuando un socket empieza a escuchar la llegada de datagramas.  Esto ocur
 son creados los sockets UDP.  Los sockets de dominio Unix no empiezan a escuchar hasta que se llama 
 implícitamente a `bind()`.
 
-### Evento: 'close'
+## Evento: 'close'
 
 `function () { }`
 
@@ -53,7 +57,7 @@ Ejemplo de envío de un mensaje al syslogd en OSX via un socket de dominio Unix 
         console.log("Se han escrito " + bytes + " bytes en el socket.");
     });
 
-### dgram.send(buf, offset, length, port, address, [callback])
+## dgram.send(buf, offset, length, port, address, [callback])
 
 Para los sockets UDP, el puerto y la dirección IP de destino tienen que especificarse.  Se 
 puede pasar un string al parámetro `address`, y se podrá resolver por DNS.  Se puede especificar 
@@ -70,7 +74,7 @@ Ejemplo de enviar un paquete UDP a un puerto aleatorio de `localhost`;
     client.close();
 
 
-### dgram.bind(path)
+## dgram.bind(path)
 
 Para los sockets de datagrama de dominio Unix, empezar a escuchar datagramas entrantes en 
 el socket especificado por `path`. Notar que los clientes pueden hacer `send()` sin haber hecho `bind()`, 
@@ -140,7 +144,7 @@ Ejemplo de un servidor UDP escuchando en el puerto 41234:
     // server listening 0.0.0.0:41234
 
 
-### dgram.close()
+## dgram.close()
 
 Cierra el socket subyacente y para de escuchar datos en él.  Los sockets UDP 
 automáticamente se ponen a escuchar mensjaes, incluso si no han llamado a `bind()`.
@@ -156,7 +160,7 @@ la `address`.
 Establece o borra la opción del socket `SO_BROADCAST`.  Cuando se activa esta opción, los 
 paquetes UDP se pueden enviar una dirección de broadcast de un interfaz local.
 
-### dgram.setTTL(ttl)
+## dgram.setTTL(ttl)
 
 Establece la opción de socket `IP_TTL`.  TTL significa "Time to Live", pero en este contexto 
 especifica el número de saltos IP que se permite hacer al paquete.  Cada router o gateway que 
@@ -180,13 +184,13 @@ en la mayoría de sistemas es 64.
 Establece o borra la opción de socket `IP_MULTICAST_LOOP`.  Cuand esta opción está activa,  
 también se recibirán paquetes multicast en el interfaz local. 
 
-### dgram.addMembership(multicastAddress, [multicastInterface])
+## dgram.addMembership(multicastAddress, [multicastInterface])
 
 Comunica al kernel la suscripción a un grupo multicast con la opción de socket `IP_ADD_MEMBERSHIP`. 
 
 Si no se especifica `multicastAddress`, el SO intentará suscribir todos los interfaces válidos.
 
-### dgram.dropMembership(multicastAddress, [multicastInterface])
+## dgram.dropMembership(multicastAddress, [multicastInterface])
 
 El contrario de `addMembership` - comunica al kernel el abandono de un grupo multicast con 
 la opción de socket `IP_DROP_MEMBERSHIP`. Este método se llama automáticamente por el kernel 

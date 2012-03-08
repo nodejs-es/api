@@ -1,4 +1,4 @@
-## TLS (SSL)
+# TLS (SSL)
 
 Usa `require('tls')` para acceder a este módulo.
 
@@ -20,7 +20,7 @@ De forma alternativa puedes enviar el CSR a la autoridad certificadora para firm
 
 (TODO: documentos sobre la creación de una CA, por ahora los usuarios interesados deberían echar un vistazo a `test/fixtures/keys/Makefile` en el código fuente de Node)
 
-### s = tls.connect(port, [host], [options], callback)
+## s = tls.connect(port, [host], [options], callback)
 
 Crea una nueva conexión cliente al `port` y al `host` dados. (`host` por defecto es `localhost`.) `options` debe ser un objeto que especifique:
 
@@ -35,7 +35,7 @@ Crea una nueva conexión cliente al `port` y al `host` dados. (`host` por defect
 Después del TSL/SSL handshake el `callback` es invocado. El `callback` será invocado independientemente si el certificado del servidor fue autorizado o no. Es responsabilidad del usuario probar `s.authorized` para ver si el certificado del servidor estaba firmado por una de las CAs especificadas. Si `s.authorized === false` entonces el error puede encontrarse en `s.authorizationError`.
 
 
-### STARTTLS
+## STARTTLS
 
 In the v0.4 branch no function exists for starting a TLS session on an
 already existing TCP connection.  This is possible it just requires a bit of
@@ -48,7 +48,7 @@ piped to the socket, the plaintext stream is what the user interacts with therea
 
 
 
-### tls.Server
+## tls.Server
 
 Esta clase es una subclase de `net.Server` y tiene los mismos métodos.
 En lugar de aceptar solo conexiones TCP en bruto, acepta conexiones encriptadas usando TLS o SSL.
@@ -74,7 +74,7 @@ Puedes probar este servidor conectándose a él con `openssl s_client`:
     openssl s_client -connect 127.0.0.1:8000
 
 
-#### tls.createServer(options, secureConnectionListener)
+### tls.createServer(options, secureConnectionListener)
 
 Este es un constructor para la clase `tls.Server`. El objeto options puede contener:
 
@@ -88,7 +88,7 @@ Este es un constructor para la clase `tls.Server`. El objeto options puede conte
 
   - `rejectUnauthorized`: Si es `true` el servidor rechazará cualquier conexión no autorizada por la lista de CAs suministradas. Esta opción solo tiene efecto si `requestCert` es `true`. Por defecto: `false`.
 
-#### Event: 'secureConnection'
+### Event: 'secureConnection'
 
 `function (cleartextStream) {}`
 
@@ -96,7 +96,7 @@ Este evento es emitido después de que una nueva conexión haya realizado con é
 
 `cleartextStream.authorized` es un valor boolean que indica si el cliente está verificado por una de las CA suministradas por el servidor. Si `cleartextStream.authorized` es false, entonces `cleartextStream.authorizationError` describe como falló la autorización. Relacionado pero merece mencionarse: dependiendo de la configuración del servidor TLS, tus autorizaciones de conexión pueden ser aceptadas.
 
-#### server.listen(port, [host], [callback])
+### server.listen(port, [host], [callback])
 
 Empieza aceptando conexiones en el `port` y el `host` especificados. Si el `host` es omitido, el servidor aceptará conexiones dirigidas a cualquier dirección IPv4 (`INADDR_ANY`).
 
@@ -104,14 +104,14 @@ Esta función es asíncrona. El último parámetro `callback` se invocará cuand
 
 Mirar `net.Server` para más información.
 
-#### server.close()
+### server.close()
 
 Detiene el servidor, dejando de aceptar conexiones. Esta función es asíncrona, el servidor finalmente se cierra cuando emite un evento `'close'`.
 
-#### server.maxConnections
+### server.maxConnections
 
 Establece esta propiedad para rechazar conexiones cuando el número de conexiones del servidor sea alta.
 
-#### server.connections
+### server.connections
 
 Número de conexiones concurrentes en el servidor.

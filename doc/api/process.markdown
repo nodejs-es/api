@@ -1,10 +1,10 @@
-## process
+# process
 
 El objeto `process` es un objeto global y puede ser accedido desde cualquier parte.
 Es una instancia de `EventEmitter`.
 
 
-### Evento: 'exit'
+## Evento: 'exit'
 
 `function () {}`
 
@@ -23,7 +23,7 @@ Ejemplo escuchando a `exit`:
     });
 
 
-### Evento: 'uncaughtException'
+## Evento: 'uncaughtException'
 
 `function (err) { }`
 
@@ -51,7 +51,7 @@ el flujo de tu programa. Especialmente para aplicaciones de servidor que están 
 ejecutarse eternamente, `uncaughtException` puede ser un mecanismo muy útil de seguridad.
 
 
-### Eventos de señal
+## Eventos de señal
 
 `function () {}`
 
@@ -71,7 +71,7 @@ Una manera sencilla de enviar la señal `SIGINT` es con `Control-C` en la mayori
 de aplicaciones de terminal.
 
 
-### process.stdout
+## process.stdout
 
 Un `Stream de Escritura` para `stdout`.
 
@@ -136,7 +136,7 @@ Ejemplo:
     /usr/local/bin/node
 
 
-### process.chdir(directory)
+## process.chdir(directory)
 
 Cambia el directorio actual de trabajo del proceso o lanza una excepción si falla.
 
@@ -151,7 +151,7 @@ Cambia el directorio actual de trabajo del proceso o lanza una excepción si fal
 
 
 
-### process.cwd()
+## process.cwd()
 
 Devuelve el directorio actual de trabajo del proceso.
 
@@ -175,7 +175,7 @@ Para salir con un código de 'fallo':
 El shell que ha ejecutado node debería ver 1 como código de salida.
 
 
-### process.getgid()
+## process.getgid()
 
 Obtiene la identidad de grupo del proceso.  (Mirar getgid(2).)
 Es el id de grupo numérico, no el nombre del grupo.
@@ -200,7 +200,7 @@ resuelve a un ID numérico.
     }
 
 
-### process.getuid()
+## process.getuid()
 
 Obtiene la identidad de usuario del proceso. (Mirar getuid(2).)
 Es la id de usuario númerica, no el nombre de usuario.
@@ -224,21 +224,21 @@ el nombre de usuario, el método se bloquea mientras lo resuelve a un ID numéri
     }
 
 
-### process.version
+## process.version
 
 Una propiedad dentro del compilado que expone `NODE_VERSION`.
 
     console.log('Versión: ' + process.version);
 
 
-### process.installPrefix
+## process.installPrefix
 
 Una propiedad dentro del compilado que expone `NODE_PREFIX`.
 
     console.log('Prefijo: ' + process.installPrefix);
 
 
-### process.kill(pid, signal='SIGTERM')
+## process.kill(pid, signal='SIGTERM')
 
 Envia una señal a un proceso. `pid` es la id de proceso y `signal` es la cadena de 
 texto que describe la señal a enviar.  Los nombres de señales son cadenas de texto
@@ -263,7 +263,7 @@ Ejemplo de como enviarse una señal a uno mismo:
     process.kill(process.pid, 'SIGHUP');
 
 
-### process.pid
+## process.pid
 
 El PID del proceso.
 
@@ -274,7 +274,7 @@ El PID del proceso.
 Getter/setter para establecer lo que mostrará 'ps'.
 
 
-### process.platform
+## process.platform
 
 En que plataforma se está ejecutando. `'linux2'`, `'darwin'`, etc.
 

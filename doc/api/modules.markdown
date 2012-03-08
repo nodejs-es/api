@@ -1,4 +1,4 @@
-## Módulos
+# Módulos
 
 Node posee un secillo sistema de carga.  En Node, los ficheros y módulos son de
 correspondencia biunívoca.  A modo de ejemplo, `foo.js` carga el módulo
@@ -30,7 +30,7 @@ El módulo `circle.js` ha exportado las functiones `area()` y
 Las variables locales del módulo serán privadas. En este ejemplo la variable `PI` es
 privada en `circle.js`.
 
-### Módulos básicos
+## Módulos básicos
 
 Node posee varios módulos compilados en binario.  Estos módulos son
 descritos con más detalle en las siguientes secciones del documento.
@@ -41,7 +41,7 @@ Los módulos básicos tienen la preferencia de cargarse primero si su indentific
 pasado desde `require()`. Por ejemplo, `require('http')` siempre
 devolverá lo construido en el módulo HTTP, incluso si hay un fichero con ese nombre.
 
-### Módulo File
+## Módulo File
 
 Si el nombre exacto del fichero no es encontrado, entonces node intentará cargar 
 el nombre del fichero seguido de la extensión `.js`, y a continuación con `.node`.
@@ -61,7 +61,7 @@ Si se omite el uso de '/' o './' en el fichero, el módulo puede ser un
 "módulo básico" o se cargará desde la carpeta `node_modules`.
 
 
-### Cargando desde la carpeta `node_modules`
+## Cargando desde la carpeta `node_modules`
 
 Si el identificador del módulo pasa a `require()` no es un módulo nativo,
 y no comienza con `'/'`, `'../'`, o `'./'`, entonces node inicia en el 
@@ -85,7 +85,7 @@ Esto permite que los programas encuentren sus dependencias, de modo que no
 entren en conflicto.
 
 
-#### Optimización de proceso de búsqueda en `node_modules`
+### Optimización de proceso de búsqueda en `node_modules`
 
 Cuando existen muchos niveles de dependencias anidadas, es posible que los
 árboles de directorios tomen bastante tiempo. Las siguientes optimizaciones se
@@ -112,7 +112,7 @@ ubicaciones:
 * `/home/ry/projects/foo/node_modules/bar/node_modules/asdf.js`
 * `/home/ry/projects/foo/node_modules/asdf.js`
 
-### Carpetas como módulos
+## Carpetas como módulos
 
 Es conveniente organizar los programas y librerías en los mismos directorios,
 y proporcionar un único punto de entrar a la biblioteca.
@@ -141,13 +141,13 @@ entonces `require('./some-library')` intentará cargar:
 * `./some-library/index.js`
 * `./some-library/index.node`
 
-### Almacenamiento en la caché
+## Almacenamiento en la caché
 
 Los módulos se alamacenan en la caché después que fueron cargados por primera vez.
 Esto significa (entre otras cosas) que todas las llamadas a `require('foo')` devuelve
 el mismo ojecto exacto, si se resolvería en el mismo fichero
 
-### Todos juntos...
+## Todos juntos...
 
 Para obtener el nombre exacto del fichero que se cargará cuando se llame con `require()`, use
 la función `require.resolve()`.
@@ -194,7 +194,7 @@ en pseudocódigo de lo que haría require.resolve :
        b. DIRS = DIRS + DIR
     6. return DIRS
 
-### Cargar desde las carpetas de `require.paths`
+## Cargar desde las carpetas de `require.paths`
 
 En node, `require.paths` es un array de strings que representa las rutas de
 acceso a los módulos cuando estos no tienen el prefijo `'/'`, `'./'`, o
@@ -222,7 +222,7 @@ Cargar las ubicaciones desde `require.paths` sólo se realiza si el
 módulon no se ha encontrado desde el algoritmo `node_modules`.
 Los módulos globarles son de baja prioridad para las dependencias de los paquetes.
 
-#### **Nota:** Por favor evite la modificación de `require.paths`
+### **Nota:** Por favor evite la modificación de `require.paths`
 
 Por razones de compatibilidad, `require.paths` sigue siendo la primera prioridad
 en el proceso de búsqueda de módulos. Sin embargo, puede desaparecer en una próxima
@@ -232,7 +232,7 @@ Aunque parecía una buena idea en aquel tiempo, y ha permitido ser un
 experimento muy útil, en la práctica la transformación de `require.paths` es una
 lista a menudo con problemas y dolores de cabeza.
 
-##### Establecer `require.paths` a algún otro valor para nada.
+#### Establecer `require.paths` a algún otro valor para nada.
 
 Esto no hace nada de lo que se podría esperar:
 
@@ -242,7 +242,7 @@ Todo lo que se hace aquí es perder la referencia *actual* de node en la búsque
 de rutas, y crea una nueva referencia a otra cosa que no sirve
 para nada.
 
-##### Poner rutas relativas en `require.paths` es... raro.
+#### Poner rutas relativas en `require.paths` es... raro.
 
 Si hace esto:
 
@@ -257,7 +257,7 @@ en `/a/b/lib/y.js`.  Si a continuación se usa `require('y.js')` en
 En la práctica, las personas han usado esto de una manera ad hoc para la
 dependencia de paquetes, pero esta técnica es frágil.
 
-##### Cero aislamiento
+#### Cero aislamiento
 
 Existe (debido a un diseño lamentable), sólo un array `require.paths` utilizado para
 todos los módulos.

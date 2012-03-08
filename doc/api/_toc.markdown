@@ -1,5 +1,4 @@
-## Tabla de contenidos
-
+* [Acerca de la documentación](documentation.html)
 * [Synopsis](synopsis.html)
 * [Globals](globals.html)
 * [STDIO](stdio.html)
@@ -9,8 +8,8 @@
 * [Process](process.html)
 * [Utilities](util.html)
 * [Events](events.html)
-* [Buffers](buffers.html)
-* [Streams](streams.html)
+* [Buffer](buffer.html)
+* [Stream](stream.html)
 * [Crypto](crypto.html)
 * [TLS/SSL](tls.html)
 * [String Decoder](string_decoder.html)
@@ -29,8 +28,8 @@
 * [Child Processes](child_processes.html)
 * [Assertion Testing](assert.html)
 * [TTY](tty.html)
+* [ZLIB](zlib.html)
 * [OS](os.html)
 * [Debugger](debugger.html)
 * Appendixes
   * [Appendix 1: Recommended Third-party Modules](appendix_1.html)
-  * [Appendix 2: Deprecated API's](appendix_2.html)

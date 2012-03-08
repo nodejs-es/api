@@ -1,4 +1,4 @@
-## File System
+# File System
 
 File I/O is provided by simple wrappers around standard POSIX functions.  To
 use this module do `require('fs')`. All the methods have asynchronous and
@@ -52,34 +52,34 @@ In busy processes, the programmer is _strongly encouraged_ to use the
 asynchronous versions of these calls. The synchronous versions will block
 the entire process until they complete--halting all connections.
 
-### fs.rename(path1, path2, [callback])
+## fs.rename(path1, path2, [callback])
 
 Asynchronous rename(2). No arguments other than a possible exception are given
 to the completion callback.
 
-### fs.renameSync(path1, path2)
+## fs.renameSync(path1, path2)
 
 Synchronous rename(2).
 
-### fs.truncate(fd, len, [callback])
+## fs.truncate(fd, len, [callback])
 
 Asynchronous ftruncate(2). No arguments other than a possible exception are
 given to the completion callback.
 
-### fs.truncateSync(fd, len)
+## fs.truncateSync(fd, len)
 
 Synchronous ftruncate(2).
 
-### fs.chmod(path, mode, [callback])
+## fs.chmod(path, mode, [callback])
 
 Asynchronous chmod(2). No arguments other than a possible exception are given
 to the completion callback.
 
-### fs.chmodSync(path, mode)
+## fs.chmodSync(path, mode)
 
 Synchronous chmod(2).
 
-### fs.stat(path, [callback])
+## fs.stat(path, [callback])
 
 Asynchronous stat(2). The callback gets two arguments `(err, stats)` where
 `stats` is a `fs.Stats` object. It looks like this:
@@ -100,123 +100,123 @@ Asynchronous stat(2). The callback gets two arguments `(err, stats)` where
 
 See the `fs.Stats` section below for more information.
 
-### fs.lstat(path, [callback])
+## fs.lstat(path, [callback])
 
 Asynchronous lstat(2). The callback gets two arguments `(err, stats)` where
 `stats` is a `fs.Stats` object. lstat() is identical to stat(), except that if
 path is a symbolic link, then the link itself is stat-ed, not the file that it
 refers to.
 
-### fs.fstat(fd, [callback])
+## fs.fstat(fd, [callback])
 
 Asynchronous fstat(2). The callback gets two arguments `(err, stats)` where
 `stats` is a `fs.Stats` object.
 
-### fs.statSync(path)
+## fs.statSync(path)
 
 Synchronous stat(2). Returns an instance of `fs.Stats`.
 
-### fs.lstatSync(path)
+## fs.lstatSync(path)
 
 Synchronous lstat(2). Returns an instance of `fs.Stats`.
 
-### fs.fstatSync(fd)
+## fs.fstatSync(fd)
 
 Synchronous fstat(2). Returns an instance of `fs.Stats`.
 
-### fs.link(srcpath, dstpath, [callback])
+## fs.link(srcpath, dstpath, [callback])
 
 Asynchronous link(2). No arguments other than a possible exception are given to
 the completion callback.
 
-### fs.linkSync(srcpath, dstpath)
+## fs.linkSync(srcpath, dstpath)
 
 Synchronous link(2).
 
-### fs.symlink(linkdata, path, [callback])
+## fs.symlink(linkdata, path, [callback])
 
 Asynchronous symlink(2). No arguments other than a possible exception are given
 to the completion callback.
 
-### fs.symlinkSync(linkdata, path)
+## fs.symlinkSync(linkdata, path)
 
 Synchronous symlink(2).
 
-### fs.readlink(path, [callback])
+## fs.readlink(path, [callback])
 
 Asynchronous readlink(2). The callback gets two arguments `(err,
 resolvedPath)`.
 
-### fs.readlinkSync(path)
+## fs.readlinkSync(path)
 
 Synchronous readlink(2). Returns the resolved path.
 
-### fs.realpath(path, [callback])
+## fs.realpath(path, [callback])
 
 Asynchronous realpath(2).  The callback gets two arguments `(err,
 resolvedPath)`.
 
-### fs.realpathSync(path)
+## fs.realpathSync(path)
 
 Synchronous realpath(2). Returns the resolved path.
 
-### fs.unlink(path, [callback])
+## fs.unlink(path, [callback])
 
 Asynchronous unlink(2). No arguments other than a possible exception are given
 to the completion callback.
 
-### fs.unlinkSync(path)
+## fs.unlinkSync(path)
 
 Synchronous unlink(2).
 
-### fs.rmdir(path, [callback])
+## fs.rmdir(path, [callback])
 
 Asynchronous rmdir(2). No arguments other than a possible exception are given
 to the completion callback.
 
-### fs.rmdirSync(path)
+## fs.rmdirSync(path)
 
 Synchronous rmdir(2).
 
-### fs.mkdir(path, mode, [callback])
+## fs.mkdir(path, mode, [callback])
 
 Asynchronous mkdir(2). No arguments other than a possible exception are given
 to the completion callback.
 
-### fs.mkdirSync(path, mode)
+## fs.mkdirSync(path, mode)
 
 Synchronous mkdir(2).
 
-### fs.readdir(path, [callback])
+## fs.readdir(path, [callback])
 
 Asynchronous readdir(3).  Reads the contents of a directory.
 The callback gets two arguments `(err, files)` where `files` is an array of
 the names of the files in the directory excluding `'.'` and `'..'`.
 
-### fs.readdirSync(path)
+## fs.readdirSync(path)
 
 Synchronous readdir(3). Returns an array of filenames excluding `'.'` and
 `'..'`.
 
-### fs.close(fd, [callback])
+## fs.close(fd, [callback])
 
 Asynchronous close(2).  No arguments other than a possible exception are given
 to the completion callback.
 
-### fs.closeSync(fd)
+## fs.closeSync(fd)
 
 Synchronous close(2).
 
-### fs.open(path, flags, [mode], [callback])
+## fs.open(path, flags, [mode], [callback])
 
 Asynchronous file open. See open(2). Flags can be 'r', 'r+', 'w', 'w+', 'a',
 or 'a+'. `mode` defaults to 0666. The callback gets two arguments `(err, fd)`.
 
-### fs.openSync(path, flags, [mode])
+## fs.openSync(path, flags, [mode])
 
 Synchronous open(2).
 
-### fs.write(fd, buffer, offset, length, position, [callback])
+## fs.write(fd, buffer, offset, length, position, [callback])
 
 Write `buffer` to the file specified by `fd`.
 
@@ -234,17 +234,17 @@ Note that it is unsafe to use `fs.write` multiple times on the same file
 without waiting for the callback. For this scenario,
 `fs.createWriteStream` is strongly recommended.
 
-### fs.writeSync(fd, buffer, offset, length, position)
+## fs.writeSync(fd, buffer, offset, length, position)
 
 Synchronous version of buffer-based `fs.write()`. Returns the number of bytes
 written.
 
-### fs.writeSync(fd, str, position, encoding='utf8')
+## fs.writeSync(fd, str, position, encoding='utf8')
 
 Synchronous version of string-based `fs.write()`. Returns the number of bytes
 written.
 
-### fs.read(fd, buffer, offset, length, position, [callback])
+## fs.read(fd, buffer, offset, length, position, [callback])
 
 Read data from the file specified by `fd`.
 
@@ -259,17 +259,17 @@ If `position` is `null`, data will be read from the current file position.
 
 The callback is given the two arguments, `(err, bytesRead)`.
 
-### fs.readSync(fd, buffer, offset, length, position)
+## fs.readSync(fd, buffer, offset, length, position)
 
 Synchronous version of buffer-based `fs.read`. Returns the number of
 `bytesRead`.
 
-### fs.readSync(fd, length, position, encoding)
+## fs.readSync(fd, length, position, encoding)
 
 Synchronous version of string-based `fs.read`. Returns the number of
 `bytesRead`.
 
-### fs.readFile(filename, [encoding], [callback])
+## fs.readFile(filename, [encoding], [callback])
 
 Asynchronously reads the entire contents of a file. Example:
 
@@ -284,7 +284,7 @@ contents of the file.
 If no encoding is specified, then the raw buffer is returned.
 
 
-### fs.readFileSync(filename, [encoding])
+## fs.readFileSync(filename, [encoding])
 
 Synchronous version of `fs.readFile`. Returns the contents of the `filename`.
 
@@ -292,7 +292,7 @@ If `encoding` is specified then this function returns a string. Otherwise it
 returns a buffer.
 
 
-### fs.writeFile(filename, data, encoding='utf8', [callback])
+## fs.writeFile(filename, data, encoding='utf8', [callback])
 
 Asynchronously writes data to a file, replacing the file if it already exists.
 `data` can be a string or a buffer.
@@ -304,11 +304,11 @@ Example:
       console.log('It\'s saved!');
     });
 
-### fs.writeFileSync(filename, data, encoding='utf8')
+## fs.writeFileSync(filename, data, encoding='utf8')
 
 The synchronous version of `fs.writeFile`.
 
-### fs.watchFile(filename, [options], listener)
+## fs.watchFile(filename, [options], listener)
 
 Watch for changes on `filename`. The callback `listener` will be called each
 time the file is accessed.
@@ -331,7 +331,7 @@ If you want to be notified when the file was modified, not just accessed
 you need to compare `curr.mtime` and `prev.mtime.
 
 
-### fs.unwatchFile(filename)
+## fs.unwatchFile(filename)
 
 Stop watching for changes on `filename`.
 
@@ -352,7 +352,7 @@ Objects returned from `fs.stat()` and `fs.lstat()` are of this type.
 
 `ReadStream` is a `Readable Stream`.
 
-### fs.createReadStream(path, [options])
+## fs.createReadStream(path, [options])
 
 Returns a new ReadStream object (See `Readable Stream`).
 
@@ -378,13 +378,13 @@ An example to read the last 10 bytes of a file which is 100 bytes long:
 
 `WriteStream` is a `Writable Stream`.
 
-### Event: 'open'
+## Event: 'open'
 
 `function (fd) { }`
 
  `fd` is the file descriptor used by the WriteStream.
 
-### fs.createWriteStream(path, [options])
+## fs.createWriteStream(path, [options])
 
 Returns a new WriteStream object (See `Writable Stream`).
 

@@ -1,4 +1,4 @@
-## URL
+# URL
 
 Este módulo posee utilidades para la resolución y análisis de URL.
 Para usarlo utilice `require('url')`.
@@ -42,7 +42,7 @@ no se analizarán y no estarán presente en el objeto. Un ejemplo para la siguie
 
 Los siguientes métodos son proporcionados por el módulo URL:
 
-### url.parse(urlStr, parseQueryString=false)
+## url.parse(urlStr, [parseQueryString], [slashesDenoteHost])
 
 Toma una cadena de la URL, y la devuelve como un objeto.  Devuelve `true` como el segundo argumento  a
 la cadena de consulta usando el módulo `querystring`.
@@ -51,6 +51,6 @@ la cadena de consulta usando el módulo `querystring`.
 
 Toma un parser de un objeto URL, y devuelve una cadena de URL.
 
-### url.resolve(from, to)
+## url.resolve(from, to)
 
 Toma una URL base, y el atributo href de la URL, y lo determina como un navegador sería la etiqueta anchor (enlace).

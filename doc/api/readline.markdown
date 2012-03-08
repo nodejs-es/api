@@ -1,4 +1,6 @@
-## Readline
+# Readline
+
+    Stability: 3 - Stable
 
 This module allows reading of a stream (such as STDIN) on a line-by-line basis.
 
@@ -18,20 +20,20 @@ i.question("What do you think of node.js?", function(answer) {
 });
 </pre>
 
-### createInterface(input, output, completer)
+## createInterface(input, output, completer)
 
 Returns an interface object, which reads from input, and writes to output.
 TODO: I think "completer" is used for tab-completion, but not sure.
 
-### interface.setPrompt(prompt, length)
+## interface.setPrompt(prompt, length)
 
 TODO
 
-### interface.prompt()
+## interface.prompt()
 
 TODO: Appears to trigger showing the prompt.
 
-### interface.question(query, cb)
+## interface.question(query, cb)
 
 Displays the query to the user, and then calls the callback after the user
 has typed in their response.
@@ -48,14 +50,14 @@ interface.question("What is your favorite food?", function(answer) {
 
 TODO
 
-### interface.pause()
+## interface.pause()
 
 TODO
 
-### interface.resume()
+## interface.resume()
 
 TODO
 
-### interface.write()
+## interface.write()
 
 TODO

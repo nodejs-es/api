@@ -1,4 +1,4 @@
-## Streams
+# Streams
 
 Un Stream es un interfaz abstracto implementado por varios objetos en Node. Por ejemplo una petición a un servidor HTTP es un Stream, como un stdout. Los Streams son legibles, escribibles o ambos. Todos los stream son instancias de `EventEmitter`.
 

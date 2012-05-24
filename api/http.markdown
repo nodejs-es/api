@@ -1,104 +1,103 @@
 ## HTTP
 
-To use the HTTP server and client one must `require('http')`.
+Para usar el servidor y el cliente HTTP se debe añadir `require('http')`.
 
-The HTTP interfaces in Node are designed to support many features
-of the protocol which have been traditionally difficult to use.
-In particular, large, possibly chunk-encoded, messages. The interface is
-careful to never buffer entire requests or responses--the
-user is able to stream data.
+Las interfaces HTTP en Node están diseñadas para soportar muchas de las características
+del protocolo que tradicionalmente han sido difíciles de usar.
+En particular, los mensajes grandes, seguramente fragmentado. La interfaz
+se asegura de que las peticiones o respuestas nunca se almacenen completamente en un búfer--se permite al 
+usuario hacer stream de datos.
 
-HTTP message headers are represented by an object like this:
-
+Las cabeceras de los mensajes HTTP se representan por un objeto como este:
     { 'content-length': '123',
       'content-type': 'text/plain',
       'connection': 'keep-alive',
       'accept': '*/*' }
 
-Keys are lowercased. Values are not modified.
+Las claves se convierten a minúsculas. Los valores no se modifican.
 
-In order to support the full spectrum of possible HTTP applications, Node's
-HTTP API is very low-level. It deals with stream handling and message
-parsing only. It parses a message into headers and body but it does not
-parse the actual headers or the body.
+Para soportar el espectro completo de las posibles aplicaciones HTTP, la API 
+HTTP de Node es de muy bajo nivel. Se encarga únicamente de manejar el stream y 
+del parsing del mensaje. Parsea el mensaje en sus cabeceras y body pero no parsea 
+las cabeceras o el body.
 
 
 ## http.Server
 
-This is an `EventEmitter` with the following events:
+Es un `EventEmitter` con los siguientes eventos:
 
-### Event: 'request'
+### Evento: 'request'
 
 `function (request, response) { }`
 
- `request` is an instance of `http.ServerRequest` and `response` is
- an instance of `http.ServerResponse`
+ `request` es una instancia de `http.ServerRequest` y `response` es una
+ instancia de `http.ServerResponse`
 
-### Event: 'connection'
+### Evento: 'connection'
 
 `function (stream) { }`
 
- When a new TCP stream is established. `stream` is an object of type
- `net.Stream`. Usually users will not want to access this event. The
- `stream` can also be accessed at `request.connection`.
+ Cuando se establece un nuevo stream TCP. `stream` es un objeto de tipo
+`net.Stream`. Generalmente los usuarios no querrán acceder a este evento. 
+También se puede acceder el `stream` desde  `request.connection`.
 
-### Event: 'close'
+### Evento: 'close'
 
 `function (errno) { }`
 
- Emitted when the server closes.
+ Emitido cuando se cierra el servidor.
 
-### Event: 'request'
-
-`function (request, response) {}`
-
-Emitted each time there is request. Note that there may be multiple requests
-per connection (in the case of keep-alive connections).
-
-### Event: 'checkContinue'
+### Evento: 'request'
 
 `function (request, response) {}`
 
-Emitted each time a request with an http Expect: 100-continue is received.
-If this event isn't listened for, the server will automatically respond
-with a 100 Continue as appropriate.
+Emitido cada vez que se produce una petición. Nótese que pueden producirse múltiples peticiones
+para cada conexión (en el caso de las conexiones keep-alive).
 
-Handling this event involves calling `response.writeContinue` if the client
-should continue to send the request body, or generating an appropriate HTTP
-response (e.g., 400 Bad Request) if the client should not continue to send the
-request body.
+### Evento: 'checkContinue'
 
-Note that when this event is emitted and handled, the `request` event will
-not be emitted.
+`function (request, response) {}`
 
-### Event: 'upgrade'
+Emitido cada vez que se recibe una petición con un http Expect: 100-continue.
+Si no se está escuchando a este evento, el servidor responderá automáticamente 
+con un 100 Continue.
+
+Para tratar este evento se tiene que llamar a `response.writeContinue` si el cliente 
+quisiera seguir con el envío la petición de body, o generar una respuesta HTTP adecuada 
+(ej. 400 Bad Request) si el cliente no quisiera continuar con el envío de la petición 
+del body.
+
+Tener en cuenta que cuando se emite y se trata este evento, el evento `request` no se 
+emitirá.
+
+### Evento: 'upgrade'
 
 `function (request, socket, head)`
 
-Emitted each time a client requests a http upgrade. If this event isn't
-listened for, then clients requesting an upgrade will have their connections
-closed.
+Se emite cada vez que un cliente pide una actualización http. Si este evento no 
+se está escuchando, entonces se cerrarán las conexiones de los clientes que esten 
+pidiendo una actualización.
 
-* `request` is the arguments for the http request, as it is in the request event.
-* `socket` is the network socket between the server and client.
-* `head` is an instance of Buffer, the first packet of the upgraded stream, this may be empty.
+* `request` es el argumento para la petición http, como en el evento request.
+* `socket` es el socket de red entre el servidor y el cliente.
+* `head` es una instancia de Buffer, el primer paquete del stream actualizado, puede estar vacío.
 
-After this event is emitted, the request's socket will not have a `data`
-event listener, meaning you will need to bind to it in order to handle data
-sent to the server on that socket.
+Después de emitir este evento, el socket de la petición no tendrá un listener del 
+evento `data`, esto significa que necesitarás asociarlo para tratar los datos 
+enviados al servidor en ese socket.
 
-### Event: 'clientError'
+### Evento: 'clientError'
 
 `function (exception) {}`
 
-If a client connection emits an 'error' event - it will forwarded here.
+Si la conexión de un cliente emite un evento de 'error' - será tratado aquí.
 
 ### http.createServer(requestListener)
 
-Returns a new web server object.
+Devuelve un nuevo objeto de servidor web.
 
-The `requestListener` is a function which is automatically
-added to the `'request'` event.
+`requestListener` es una función que se añade automáticamente 
+al evento `'request'`. 
 
 ### server.listen(port, [hostname], [callback])
 

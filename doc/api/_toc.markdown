@@ -32,4 +32,4 @@
 * [OS](os.html)
 * [Debugger](debugger.html)
 * Appendixes
-  * [Appendix 1: Modulos Third-party recomendados](appendix_1.html)
+  * [Appendix 1: Módulos Third-party recomendados](appendix_1.html)

@@ -3,3 +3,4 @@ esp.*
 en.*
 *.swp
 *.log
+out/

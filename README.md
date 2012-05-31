@@ -1,4 +1,4 @@
-=== NodeJS API DOC ES ===
+### NodeJS API DOC ES 
 
 Proyecto para traducir la API de NodeJS.
 
@@ -6,14 +6,14 @@ Este repositorio tiene como objetivo traducir la documentación oficial de Node 
 
 Se puede acceder a la documentación desde el sitio de github http://nodejs-es.github.com/api/ o desde el sitio en español http://api.nodejs.es
 
-=== Colaboradores ===
+### Colaboradores ###
 
 Contar con la documentación traducida y actualizada de Node es realmente una tarea bastante complicada ya que los cambios en la API son continuos. Es por este motivo que tu colaboración es realmente importante y sumamente valorable. Si deseas hacerlo revisa la información de la [wiki](https://github.com/nodejs-es/api/wiki).
 
   * [Colaboradores](https://github.com/nodejs-es/api/contributors)
 
 
-=== Flujo de trabajo (workflow) ===
+### Flujo de trabajo (workflow) ###
 
 Node también se caracteriza por contar con muchas versiones por lo que el
 seguimiento de la traducción es una complicación adicional. Si a esto le sumamos que la organización de la documentación es como mínimo un poco rígida debemos proponer algunas reglas de trabajo para coordinar los esfuerzos en forma grupal.

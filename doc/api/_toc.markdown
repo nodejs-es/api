@@ -1,5 +1,5 @@
 * [Acerca de la documentación](documentation.html)
-* [Sinpsis](synopsis.html)
+* [Sinopsis](synopsis.html)
 * [Globals](globals.html)
 * [STDIO](stdio.html)
 * [Timers](timers.html)

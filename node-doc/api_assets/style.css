@@ -318,6 +318,15 @@ p tt, p code {
     font-size:18px;
 }
 
+#column2 h2 {
+  color: #686;
+  font-size: 14px;
+}
+
+#column2 .menu-block {
+  margin-top: 110px;
+}
+
 #column2.interior {
     width: 140px;
     float: left;

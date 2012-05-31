@@ -1,5 +1,5 @@
 * [Acerca de la documentación](documentation.html)
-* [Synopsis](synopsis.html)
+* [Sinpsis](synopsis.html)
 * [Globals](globals.html)
 * [STDIO](stdio.html)
 * [Timers](timers.html)
@@ -32,4 +32,4 @@
 * [OS](os.html)
 * [Debugger](debugger.html)
 * Appendixes
-  * [Appendix 1: Recommended Third-party Modules](appendix_1.html)
+  * [Appendix 1: Modulos Third-party recomendados](appendix_1.html)

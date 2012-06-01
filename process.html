@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>process - Node.js Manual &amp; Documentación</title>
+  <link rel="stylesheet" href="assets/style.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="assets/sh.css" type="text/css" media="all"/>
+</head>
+<body>
+  <div id="container">
+    <header>
+      <h1>Node.js Manual &amp; Documentación</h1>
+      <div id="gtoc">
+        <p><a href="index.html">Inicio</a> | <a href="all.html">Ver en una página</a></p>
+      </div>
+      <hr />
+    </header>
+    <div id="toc"><h2>Tabla de contenidos</h2><ul><li><a href="#process">process</a><ul><li><a href="#evento_exit_">Evento: 'exit'</a></li><li><a href="#evento_uncaughtException_">Evento: 'uncaughtException'</a></li><li><a href="#eventos_de_se_al">Eventos de señal</a></li><li><a href="#process.stdout">process.stdout</a></li><li><a href="#process.stderr">process.stderr</a></li><li><a href="#process.stdin">process.stdin</a></li><li><a href="#process.argv">process.argv</a></li><li><a href="#process.execPath">process.execPath</a></li><li><a href="#process.chdir">process.chdir(directory)</a></li><li><a href="#process.cwd">process.cwd()</a></li><li><a href="#process.env">process.env</a></li><li><a href="#process.exit">process.exit(code=0)</a></li><li><a href="#process.getgid">process.getgid()</a></li><li><a href="#process.setgid">process.setgid(id)</a></li><li><a href="#process.getuid">process.getuid()</a></li><li><a href="#process.setuid">process.setuid(id)</a></li><li><a href="#process.version">process.version</a></li><li><a href="#process.installPrefix">process.installPrefix</a></li><li><a href="#process.kill">process.kill(pid, signal='SIGTERM')</a></li><li><a href="#process.pid">process.pid</a></li><li><a href="#process.title">process.title</a></li><li><a href="#process.platform">process.platform</a></li><li><a href="#process.memoryUsage">process.memoryUsage()</a></li><li><a href="#process.nextTick">process.nextTick(callback)</a></li><li><a href="#process.umask">process.umask([mask])</a></li></ul></li></ul><hr /></div>
+<h2 id="process">process</h2>
+
+<p>El objeto <code>process</code> es un objeto global y puede ser accedido desde cualquier parte.
+Es una instancia de <code>EventEmitter</code>.</p>
+
+<h3 id="evento_exit_">Evento: 'exit'</h3>
+
+<p><code>function () {}</code></p>
+
+<p>Emitido cuando el proceso está apunto de salir. Es un buen hook para realizar 
+un control del tiempo constante del estado del módulo (por ejemplo para tests unitarios).<br></br>El bucle del evento principal no seguirá ejecutándose después de finalizar el callback 'exit', 
+por lo tanto los timers no pueden ser programados.</p>
+
+<p>Ejemplo escuchando a <code>exit</code>:</p>
+
+<pre><code>process.on('exit', function () {
+  process.nextTick(function () {
+   console.log('Esto no se ejecutará');
+  });
+  console.log('Apunto de salir.');
+});</code></pre>
+
+<h3 id="evento_uncaughtException_">Evento: 'uncaughtException'</h3>
+
+<p><code>function (err) { }</code></p>
+
+<p>Emitido cuando una excepción es devuelta hacia el bucle de evento. Si se
+ha añadido un listener a esta excepción, no se producirá la acción por defecto 
+(imprimir una traza del stack y salir).</p>
+
+<p>Ejemplo escuchando a <code>uncaughtException</code>:</p>
+
+<pre><code>process.on('uncaughtException', function (err) {
+  console.log('Excepción recogida: ' + err);
+});
+
+setTimeout(function () {
+  console.log('Esto seguirá ejecutándose.');
+}, 500);
+
+// Se fuerza una excepción, pero no se recoge.
+nonexistentFunc();
+console.log('Esto no se ejecutará.');</code></pre>
+
+<p>Nótese que <code>uncaughtException</code> es un mecanismo muy básico para 
+manejar excepciones.  Usando try / catch en tu programa te dará más control sobre
+el flujo de tu programa. Especialmente para aplicaciones de servidor que están diseñados para
+ejecutarse eternamente, <code>uncaughtException</code> puede ser un mecanismo muy útil de seguridad.</p>
+
+<h3 id="eventos_de_se_al">Eventos de señal</h3>
+
+<p><code>function () {}</code></p>
+
+<p>Emitido cuando los procesos reciben una señal. Mirar sigaction(2) para una lista de 
+nombres de señal estándard POSIX como SIGINT, SIGUSR1, etc.</p>
+
+<p>Ejemplo escuchando a <code>SIGINT</code>:</p>
+
+<pre><code>// Empieza leyendo de stdin para evitar salir.
+process.stdin.resume();
+
+process.on('SIGINT', function () {
+  console.log('Recibido SIGINT.  Haz Control-D para salir.');
+});</code></pre>
+
+<p>Una manera sencilla de enviar la señal <code>SIGINT</code> es con <code>Control-C</code> en la mayoria 
+de aplicaciones de terminal.</p>
+
+<h3 id="process.stdout">process.stdout</h3>
+
+<p>Un <code>Stream de Escritura</code> para <code>stdout</code>.</p>
+
+<p>Ejemplo: la definición de <code>console.log</code></p>
+
+<pre><code>console.log = function (d) {
+  process.stdout.write(d + '\n');
+};</code></pre>
+
+<h3 id="process.stderr">process.stderr</h3>
+
+<p>Un stream de escritura para stderr. Las escrituras en este stream son bloqueantes.</p>
+
+<h3 id="process.stdin">process.stdin</h3>
+
+<p>Un <code>Stream de Lectura</code> para stdin. El stream stdin se detiene por defecto, así que 
+se tiene que llamar a <code>process.stdin.resume()</code> para leer de él.</p>
+
+<p>Ejemplo de como abir la entrada estándard (stdin) y escuchar a ambos eventos:</p>
+
+<pre><code>process.stdin.resume();
+process.stdin.setEncoding('utf8');
+
+process.stdin.on('data', function (chunk) {
+  process.stdout.write('data: ' + chunk);
+});
+
+process.stdin.on('end', function () {
+  process.stdout.write('end');
+});</code></pre>
+
+<h3 id="process.argv">process.argv</h3>
+
+<p>Un array que contiene los argumentos de la línea de comandos. El primer elemento será
+'node', el segundo elemento será el nombre del fichero JavaScript. Los
+siguientes elementos serán argumentos adicionales de la línea de comandos.</p>
+
+<pre><code>// imprimir process.argv
+process.argv.forEach(function (val, index, array) {
+  console.log(index + ': ' + val);
+});</code></pre>
+
+<p>Generará:</p>
+
+<pre><code>$ node process-2.js one two=three four
+0: node
+1: /Users/mjr/work/node/process-2.js
+2: one
+3: two=three
+4: four</code></pre>
+
+<h3 id="process.execPath">process.execPath</h3>
+
+<p>Es la ruta absoluta del ejecutable que inició el proceso.</p>
+
+<p>Ejemplo:</p>
+
+<pre><code>/usr/local/bin/node</code></pre>
+
+<h3 id="process.chdir">process.chdir(directory)</h3>
+
+<p>Cambia el directorio actual de trabajo del proceso o lanza una excepción si falla.</p>
+
+<pre><code>console.log('Directorio inicial: ' + process.cwd());
+try {
+  process.chdir('/tmp');
+  console.log('Directorio nuevo: ' + process.cwd());
+}
+catch (err) {
+  console.log('chdir: ' + err);
+}</code></pre>
+
+<h3 id="process.cwd">process.cwd()</h3>
+
+<p>Devuelve el directorio actual de trabajo del proceso.</p>
+
+<pre><code>console.log('Directorio actual: ' + process.cwd());</code></pre>
+
+<h3 id="process.env">process.env</h3>
+
+<p>Un objeto que contiene el entorno del usuario. Mirar environ(7).</p>
+
+<h3 id="process.exit">process.exit(code=0)</h3>
+
+<p>Termina el proceso con el <code>code</code> especificado.  Si se omite, <code>exit</code> usa el código 
+de 'éxito' <code>0</code>.</p>
+
+<p>Para salir con un código de 'fallo':</p>
+
+<pre><code>process.exit(1);</code></pre>
+
+<p>El shell que ha ejecutado node debería ver 1 como código de salida.</p>
+
+<h3 id="process.getgid">process.getgid()</h3>
+
+<p>Obtiene la identidad de grupo del proceso.  (Mirar getgid(2).)
+Es el id de grupo numérico, no el nombre del grupo.</p>
+
+<pre><code>console.log('Actual gid: ' + process.getgid());</code></pre>
+
+<h3 id="process.setgid">process.setgid(id)</h3>
+
+<p>Establece la identidad de grupo del proceso. (Mirar setgid(2).)  Acepta tanto 
+un ID numérico como una cadena de texto con el nombre del grupo. 
+Si se especifica el nombre del grupo, el método se bloquea mientras lo 
+resuelve a un ID numérico.</p>
+
+<pre><code>console.log('Actual gid: ' + process.getgid());
+try {
+  process.setgid(501);
+  console.log('Nuevo gid: ' + process.getgid());
+}
+catch (err) {
+  console.log('Fallo al cambiar el gid: ' + err);
+}</code></pre>
+
+<h3 id="process.getuid">process.getuid()</h3>
+
+<p>Obtiene la identidad de usuario del proceso. (Mirar getuid(2).)
+Es la id de usuario númerica, no el nombre de usuario.</p>
+
+<pre><code>console.log('Actual uid: ' + process.getuid());</code></pre>
+
+<h3 id="process.setuid">process.setuid(id)</h3>
+
+<p>Establece la identidad de usuario del proceso. (Mirar setuid(2).)  Acepta tanto 
+un ID numérico como una cadena de texto con el nombre de usuario.  Si se especifica 
+el nombre de usuario, el método se bloquea mientras lo resuelve a un ID numérico.</p>
+
+<pre><code>console.log('Actual uid: ' + process.getuid());
+try {
+  process.setuid(501);
+  console.log('Nuevo uid: ' + process.getuid());
+}
+catch (err) {
+  console.log('Fallo al establecer uid: ' + err);
+}</code></pre>
+
+<h3 id="process.version">process.version</h3>
+
+<p>Una propiedad dentro del compilado que expone <code>NODE_VERSION</code>.</p>
+
+<pre><code>console.log('Versión: ' + process.version);</code></pre>
+
+<h3 id="process.installPrefix">process.installPrefix</h3>
+
+<p>Una propiedad dentro del compilado que expone <code>NODE_PREFIX</code>.</p>
+
+<pre><code>console.log('Prefijo: ' + process.installPrefix);</code></pre>
+
+<h3 id="process.kill">process.kill(pid, signal='SIGTERM')</h3>
+
+<p>Envia una señal a un proceso. <code>pid</code> es la id de proceso y <code>signal</code> es la cadena de 
+texto que describe la señal a enviar.  Los nombres de señales son cadenas de texto
+ como 'SIGINT' o 'SIGUSR1'.  Si se omite, la señal será 'SIGTERM'.
+Mirar kill(2) para más información.</p>
+
+<p>Notar que ya que el nombre de la función es <code>process.kill</code>, se trata solo de 
+un emisor de señales, como la llamada a sistema <code>kill</code>. La señal enviada
+puede hacer algo más que matar el proceso escogido.</p>
+
+<p>Ejemplo de como enviarse una señal a uno mismo:</p>
+
+<pre><code>process.on('SIGHUP', function () {
+  console.log('Recibida señal SIGHUP.');
+});
+
+setTimeout(function () {
+  console.log('Saliendo.');
+  process.exit(0);
+}, 100);
+
+process.kill(process.pid, 'SIGHUP');</code></pre>
+
+<h3 id="process.pid">process.pid</h3>
+
+<p>El PID del proceso.</p>
+
+<pre><code>console.log('El pid de este proceso es  ' + process.pid);</code></pre>
+
+<h3 id="process.title">process.title</h3>
+
+<p>Getter/setter para establecer lo que mostrará 'ps'.</p>
+
+<h3 id="process.platform">process.platform</h3>
+
+<p>En que plataforma se está ejecutando. <code>'linux2'</code>, <code>'darwin'</code>, etc.</p>
+
+<pre><code>console.log('La plataforma es ' + process.platform);</code></pre>
+
+<h3 id="process.memoryUsage">process.memoryUsage()</h3>
+
+<p>Devuelve un objeto describiendo el uso de la memoria del proceso Node.</p>
+
+<pre><code>var util = require('util');
+
+console.log(util.inspect(process.memoryUsage()));</code></pre>
+
+<p>Generará:</p>
+
+<pre><code>{ rss: 4935680,
+  vsize: 41893888,
+  heapTotal: 1826816,
+  heapUsed: 650472 }</code></pre>
+
+<p><code>heapTotal</code> y <code>heapUsed</code> se refieren al uso de la memoria de V8.</p>
+
+<h3 id="process.nextTick">process.nextTick(callback)</h3>
+
+<p>En la siguiente iteración del bucle del evento se llama a callback.
+No es simplemente un alias para <code>setTimeout(fn, 0)</code> , es mucho
+más eficiente.</p>
+
+<pre><code>process.nextTick(function () {
+  console.log('nextTick callback');
+});</code></pre>
+
+<h3 id="process.umask">process.umask([mask])</h3>
+
+<p>Establece o lee la máscara del modo de creación del fichero del proceso. Los procesos 
+hijos heredan la máscara del proceso padre. Devuelve la antigua máscara si se pasa el argumento 
+<code>mask</code>, si no devuelve la máscara actual. </p>
+
+<pre><code>var oldmask, newmask = 0644;
+
+oldmask = process.umask(newmask);
+console.log('Cambiada umask de: ' + oldmask.toString(8) +
+            ' a ' + newmask.toString(8));</code></pre>
+  </div>
+  <script type="text/javascript" src="assets/sh_main.js"></script>
+  <script type="text/javascript" src="assets/sh_javascript.min.js"></script>
+  <script type="text/javascript">highlight(undefined, undefined, 'pre');</script>
+</body>
+</html>

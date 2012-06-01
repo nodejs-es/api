@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>events - Node.js Manual &amp; Documentación</title>
+  <link rel="stylesheet" href="assets/style.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="assets/sh.css" type="text/css" media="all"/>
+</head>
+<body>
+  <div id="container">
+    <header>
+      <h1>Node.js Manual &amp; Documentación</h1>
+      <div id="gtoc">
+        <p><a href="index.html">Inicio</a> | <a href="all.html">Ver en una página</a></p>
+      </div>
+      <hr />
+    </header>
+    <div id="toc"><h2>Tabla de contenidos</h2><ul><li><a href="#eventos">Eventos</a><ul><li><a href="#events.EventEmitter">events.EventEmitter</a><ul><li><a href="#emitter.addListener">emitter.addListener(event, listener)</a></li><li><a href="#emitter.on">emitter.on(event, listener)</a></li><li><a href="#emitter.once">emitter.once(event, listener)</a></li><li><a href="#emitter.removeListener">emitter.removeListener(event, listener)</a></li><li><a href="#emitter.removeAllListeners">emitter.removeAllListeners(event)</a></li><li><a href="#emitter.setMaxListeners">emitter.setMaxListeners(n)</a></li><li><a href="#emitter.listeners">emitter.listeners(event)</a></li><li><a href="#emitter.emit">emitter.emit(event, [arg1], [arg2], [...])</a></li><li><a href="#event_newListener_">Event: 'newListener'</a></li></ul></li></ul></li></ul><hr /></div>
+<h2 id="eventos">Eventos</h2>
+
+<p>Muchos objetos en Node emiten eventos: un <code>net.Server</code> emite un evento cada vez que se establece una conexión, un <code>fs.readStream</code> emite un evento cuando se abre un fichero. Todos los objectos que emiten eventos son instancias de <code>events.EventEmitter</code>.
+Puedes usar este módulo haciendo <code>require("events");</code></p>
+
+<p>Normalmente, los nombres de los eventos siguen la notacion camel-case, sin embargo, no hay ninguna restricción en este aspecto y cualquier cadena será aceptada.</p>
+
+<p>Se pueden adjuntar funciones a objetos, para que sean ejecutadas cuando se emita un evento. Estas funciones reciben el nombre de <em>listeners</em>. </p>
+
+<h3 id="events.EventEmitter">events.EventEmitter</h3>
+
+<p>Para usar la clase EventEmitter, haz de importarla
+haciendo <code>require('events').EventEmiter</code>.</p>
+
+<p>Cuando una instancia de la clase EventEmitter se encuentra con un error, la acción típica
+es emitir un evento de error. Los eventos de error son tratados como un caso especial en node.
+Si no tiene un listener asociado la acción por defecto será imprimir la traza de la pila y salir
+del programa</p>
+
+<p>Todos los EventEmitters emite el evento <code>'newListener'</code> cuando se añaden nuevos listeners.</p>
+
+<h4 id="emitter.addListener">emitter.addListener(event, listener)</h4>
+
+<h4 id="emitter.on">emitter.on(event, listener)</h4>
+
+<p>Añade un listener al final del array de listeners para el evento espeficicado</p>
+
+<pre><code>server.on('connection', function (stream) {
+  console.log('someone connected!');
+});</code></pre>
+
+<h4 id="emitter.once">emitter.once(event, listener)</h4>
+
+<p>Añade un listener al evento. El listener se invocará sólo la primera vez que se dispara el evento.
+luego se elimina. </p>
+
+<pre><code>server.once('connection', function (stream) {
+  console.log('Ah, we have our first user!');
+});</code></pre>
+
+<h4 id="emitter.removeListener">emitter.removeListener(event, listener)</h4>
+
+<p>Elimina un listener del array de listeners asociado al evento especificado
+<strong>Atención</strong>: modifica el indice del array de listeners </p>
+
+<pre><code>var callback = function(stream) {
+  console.log('someone connected!');
+};
+server.on('connection', callback);
+// ...
+server.removeListener('connection', callback);</code></pre>
+
+<h4 id="emitter.removeAllListeners">emitter.removeAllListeners(event)</h4>
+
+<p>Elimina todos los listeners del array de listeners asociado al evento especificado</p>
+
+<h4 id="emitter.setMaxListeners">emitter.setMaxListeners(n)</h4>
+
+<p>Por defecto los EventEmitters imprimirán un warning si se le añaden más de 10 listeners.
+Este comportamiento por defecto ayuda a encontrar memory leaks. Obviamente no todos los EventEmitters
+deberían limitarse a 10. Esta función permite incrementar este valor. Use cero para establecer un valor ilimitado.</p>
+
+<h4 id="emitter.listeners">emitter.listeners(event)</h4>
+
+<p>Devuelve un array de listeners asociado al evento especificado. Este array puede ser manipulado, por ejemplo, eliminando un listener.</p>
+
+<pre><code>server.on('connection', function (stream) {
+  console.log('someone connected!');
+});
+console.log(util.inspect(server.listeners('connection')); // [ [Function] ]</code></pre>
+
+<h4 id="emitter.emit">emitter.emit(event, [arg1], [arg2], [...])</h4>
+
+<p>Llama a cada uno de los listeners en el orden en el que fueron pasados por parámetros</p>
+
+<h4 id="event_newListener_">Event: 'newListener'</h4>
+
+<p><code>function (event, listener) { }</code></p>
+
+<p>Este evento es emitido cada vez que se añade un nuevo listener.</p>
+  </div>
+  <script type="text/javascript" src="assets/sh_main.js"></script>
+  <script type="text/javascript" src="assets/sh_javascript.min.js"></script>
+  <script type="text/javascript">highlight(undefined, undefined, 'pre');</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+{
+  "source": "doc/api/debugger.markdown",
+  "stability": 3,
+  "stabilityText": "Stable",
+  "miscs": [
+    {
+      "textRaw": "Depurador",
+      "name": "Depurador",
+      "stability": 3,
+      "stabilityText": "Stable",
+      "type": "misc",
+      "desc": "<p>V8 viene con el complemento depurador (debugger), el cual puede ser accedido desde fuera \ndel proceso vía el <a href=\"http://code.google.com/p/v8/wiki/DebuggerProtocol\">protocolo TCP</a>.\nNode posee un cliente incorporado para el depurador. Para usarlo, inicie Node con el argumento\n<code>debug</code>; y aparecerá:\n\n</p>\n<pre><code>% node debug myscript.js\n&lt; debugger listening on port 5858\nconnecting... ok\nbreak in /home/indutny/Code/git/indutny/myscript.js:1\n  1 x = 5;\n  2 setTimeout(function () {\n  3   debugger;\ndebug&gt;</code></pre>\n<p>El cliente depurador de Node no soporta toda una gama de comandos, pero\npara cosas sencillas y tareas de inspección es posible su uso. Al poner la declaración <code>debugger;</code>\nen el código fuente del script, permitirá un punto de interrupción.\n\n</p>\n<p>Por ejemplo, supongamos que <code>myscript.js</code> era así:\n\n</p>\n<pre><code>// myscript.js\nx = 5;\nsetTimeout(function () {\n  debugger;\n  console.log(&quot;mundo&quot;);\n}, 1000);\nconsole.log(&quot;hola&quot;);</code></pre>\n<p>Entonces una vez que el depurador se ejecute, se generará un break en la línea 4.\n\n</p>\n<pre><code>% node debug myscript.js\n&lt; debugger listening on port 5858\nconnecting... ok\nbreak in /home/indutny/Code/git/indutny/myscript.js:1\n  1 x = 5;\n  2 setTimeout(function () {\n  3   debugger;\ndebug&gt; cont\n&lt; hello\nbreak in /home/indutny/Code/git/indutny/myscript.js:3\n  1 x = 5;\n  2 setTimeout(function () {\n  3   debugger;\n  4   console.log(&quot;world&quot;);\n  5 }, 1000);\ndebug&gt; next\nbreak in /home/indutny/Code/git/indutny/myscript.js:4\n  2 setTimeout(function () {\n  3   debugger;\n  4   console.log(&quot;world&quot;);\n  5 }, 1000);\n  6 console.log(&quot;hello&quot;);\ndebug&gt; repl\nPress Ctrl + C to leave debug repl\n&gt; x\n5\n&gt; 2+2\n4\ndebug&gt; next\n&lt; world\nbreak in /home/indutny/Code/git/indutny/myscript.js:5\n  3   debugger;\n  4   console.log(&quot;world&quot;);\n  5 }, 1000);\n  6 console.log(&quot;hello&quot;);\n  7\ndebug&gt; quit\n%</code></pre>\n<p>El comando <code>repl</code> te permite evaluar el código remotamente. El comando <code>next</code> \ncontinúa la siguiente línea. Hay otros comandos disponibles y algunos más por venir de\ntipo ayuda. Escriba <code>help</code> para ver otros comandos.\n\n</p>\n",
+      "miscs": [
+        {
+          "textRaw": "Watchers",
+          "name": "watchers",
+          "desc": "<p>You can watch expression and variable values while debugging your code.\nOn every breakpoint each expression from the watchers list will be evaluated\nin the current context and displayed just before the breakpoint&apos;s source code\nlisting.\n\n</p>\n<p>To start watching an expression, type <code>watch(&quot;my_expression&quot;)</code>. <code>watchers</code>\nprints the active watchers. To remove a watcher, type\n<code>unwatch(&quot;my_expression&quot;)</code>.\n\n</p>\n",
+          "type": "misc",
+          "displayName": "Watchers"
+        },
+        {
+          "textRaw": "Commands reference",
+          "name": "commands_reference",
+          "modules": [
+            {
+              "textRaw": "Execution control",
+              "name": "Execution control",
+              "type": "module",
+              "displayName": "Various"
+            },
+            {
+              "textRaw": "Various",
+              "name": "various",
+              "type": "module",
+              "displayName": "Various"
+            }
+          ],
+          "type": "misc",
+          "displayName": "Commands reference"
+        },
+        {
+          "textRaw": "Uso avanzado",
+          "name": "uso_avanzado",
+          "desc": "<p>El depurador V8 puede ser habilitado y accedido ya sea al iniciar Node con el \ncomando <code>--debug</code> o al señalar un proceso en Node existente \ncon <code>SIGUSR1</code>.</p>\n",
+          "type": "misc",
+          "displayName": "Uso avanzado"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,281 @@
+{
+  "source": "doc/api/dgram.markdown",
+  "modules": [
+    {
+      "textRaw": "UDP / Sockets de Datagrama",
+      "name": "dgram",
+      "stability": 3,
+      "stabilityText": "Stable",
+      "desc": "<p>Los sockets de datagrama están disponibles a través de <code>require(&apos;dgram&apos;)</code>.  Normalmente los datagramas \nse manejan como mensajes IP/UDP pero también se pueden usar a través de sockets de dominio Unix.\n\n</p>\n",
+      "modules": [
+        {
+          "textRaw": "Evento: 'message'",
+          "name": "evento:_'message'",
+          "desc": "<p><code>function (msg, rinfo) { }</code>\n\n</p>\n<p>Emitido cuando está disponible un nuevo datagrama en el socket.  <code>msg es un </code>Buffer<code> y </code>rinfo` es \nun objeto con la dirección de quien lo envía y el número de bytes que contiene el datagrama.\n\n</p>\n",
+          "modules": [
+            {
+              "textRaw": "Evento: 'listening'",
+              "name": "evento:_'listening'",
+              "desc": "<p><code>function () { }</code>\n\n</p>\n<p>Emitido cuando un socket empieza a escuchar la llegada de datagramas.  Esto ocurre tan pronto como \nson creados los sockets UDP.  Los sockets de dominio Unix no empiezan a escuchar hasta que se llama \nimplícitamente a <code>bind()</code>.\n\n</p>\n",
+              "type": "module",
+              "displayName": "Evento: 'listening'"
+            }
+          ],
+          "type": "module",
+          "displayName": "Evento: 'message'"
+        },
+        {
+          "textRaw": "Evento: 'close'",
+          "name": "evento:_'close'",
+          "desc": "<p><code>function () { }</code>\n\n</p>\n<p>Emitido cuando se cierra un socket con <code>close()</code>. No se emitirán nuevos <code>message</code>en este \nsocket.\n\n</p>\n",
+          "methods": [
+            {
+              "textRaw": "dgram.createSocket(type, [callback])",
+              "type": "method",
+              "name": "createSocket",
+              "desc": "<p>Crea un socket de datagrama del tipo especificado.  Los tipos válidos son:\n<code>udp4</code>, <code>udp6</code> y <code>unix_dgram</code>.\n\n</p>\n<p>Recibe un callback opcional que se añade como listener de los eventos <code>message</code>.\n\n</p>\n",
+              "signatures": [
+                {
+                  "params": [
+                    {
+                      "name": "type"
+                    },
+                    {
+                      "name": "callback",
+                      "optional": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "textRaw": "dgram.send(buf, offset, length, path, [callback])",
+              "type": "method",
+              "name": "send",
+              "desc": "<p>Para los sockets de datagrama del dominio Unix, la dirección de destion es un nombre de ruta \nen sistema de ficheros. Se puede pasar un callback opcional que se invoca cuando se completa la llamada \na <code>sendto</code> por parte del SO. No es seguro reutilizar <code>buf</code> hasta que se ha invocado el callback. Hay \nque tener en cuenta que a no ser que el socket este asociado a un nombre de ruta con <code>bind()</code> no hay manera \nde recibir mensajes en el socket.\n\n</p>\n<p>Ejemplo de envío de un mensaje al syslogd en OSX via un socket de dominio Unix <code>/var/run/syslog</code>:\n\n</p>\n<pre><code>var dgram = require(&apos;dgram&apos;);\nvar message = new Buffer(&quot;Un mensaje de log.&quot;);\nvar client = dgram.createSocket(&quot;unix_dgram&quot;);\nclient.send(message, 0, message.length, &quot;/var/run/syslog&quot;,\n  function (err, bytes) {\n    if (err) {\n      throw err;\n    }\n    console.log(&quot;Se han escrito &quot; + bytes + &quot; bytes en el socket.&quot;);\n});</code></pre>\n",
+              "signatures": [
+                {
+                  "params": [
+                    {
+                      "name": "buf"
+                    },
+                    {
+                      "name": "offset"
+                    },
+                    {
+                      "name": "length"
+                    },
+                    {
+                      "name": "path"
+                    },
+                    {
+                      "name": "callback",
+                      "optional": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "type": "module",
+          "displayName": "Evento: 'close'"
+        }
+      ],
+      "methods": [
+        {
+          "textRaw": "dgram.send(buf, offset, length, port, address, [callback])",
+          "type": "method",
+          "name": "send",
+          "desc": "<p>Para los sockets UDP, el puerto y la dirección IP de destino tienen que especificarse.  Se \npuede pasar un string al parámetro <code>address</code>, y se podrá resolver por DNS.  Se puede especificar \nun callback opcional para detectar cualquier error de DNS y cuando puede volverse a usar <code>buf</code>.<br>Tener en cuenta que las búsquedas de DNS retrasarán el tiempo del envío, al menos hasta el siguiente \ntick.  La única manera de asegurarse de que se ha realizado un envío es mediante el callback.\n\n</p>\n<p>Ejemplo de enviar un paquete UDP a un puerto aleatorio de <code>localhost</code>;\n\n</p>\n<pre><code>var dgram = require(&apos;dgram&apos;);\nvar message = new Buffer(&quot;Algunos bytes&quot;);\nvar client = dgram.createSocket(&quot;udp4&quot;);\nclient.send(message, 0, message.length, 41234, &quot;localhost&quot;);\nclient.close();</code></pre>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "buf"
+                },
+                {
+                  "name": "offset"
+                },
+                {
+                  "name": "length"
+                },
+                {
+                  "name": "port"
+                },
+                {
+                  "name": "address"
+                },
+                {
+                  "name": "callback",
+                  "optional": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "dgram.bind(path)",
+          "type": "method",
+          "name": "bind",
+          "desc": "<p>Para los sockets de datagrama de dominio Unix, empezar a escuchar datagramas entrantes en \nel socket especificado por <code>path</code>. Notar que los clientes pueden hacer <code>send()</code> sin haber hecho <code>bind()</code>, \npero no se recibirá ningún datagrama sin haber hecho un <code>bind()</code>.\n\n</p>\n<p>Ejemplo de un servidor de datagramas de dominio Unix, que devuelve el eco de los mensajes que recibe:\n\n</p>\n<pre><code>var dgram = require(&quot;dgram&quot;);\nvar serverPath = &quot;/tmp/dgram_server_sock&quot;;\nvar server = dgram.createSocket(&quot;unix_dgram&quot;);\n\nserver.on(&quot;message&quot;, function (msg, rinfo) {\n  console.log(&quot;recibido: &quot; + msg + &quot; de &quot; + rinfo.address);\n  server.send(msg, 0, msg.length, rinfo.address);\n});\n\nserver.on(&quot;listening&quot;, function () {\n  console.log(&quot;servidor escuchando &quot; + server.address().address);\n})\n\nserver.bind(serverPath);</code></pre>\n<p>Ejemplo de un cliente de datagramas de dominio Unix que habla con el servidor:\n\n</p>\n<pre><code>var dgram = require(&quot;dgram&quot;);\nvar serverPath = &quot;/tmp/dgram_server_sock&quot;;\nvar clientPath = &quot;/tmp/dgram_client_sock&quot;;\n\nvar message = new Buffer(&quot;Un mensaje el &quot; + (new Date()));\n\nvar client = dgram.createSocket(&quot;unix_dgram&quot;);\n\nclient.on(&quot;message&quot;, function (msg, rinfo) {\n  console.log(&quot;recibido: &quot; + msg + &quot; de &quot; + rinfo.address);\n});\n\nclient.on(&quot;listening&quot;, function () {\n  console.log(&quot;cliente escuchando &quot; + client.address().address);\n  client.send(message, 0, message.length, serverPath);\n});\n\nclient.bind(clientPath);</code></pre>\n",
+          "methods": [
+            {
+              "textRaw": "dgram.bind(port, [address])",
+              "type": "method",
+              "name": "bind",
+              "desc": "<p>Para los sockets UDP, hay que escuhar los datagramas en un <code>port</code> específico y en el <code>address</code> opcional.  Si \nno se especifica <code>address</code>, el SO intentará escuchar en todas las direcciones.\n\n</p>\n<p>Ejemplo de un servidor UDP escuchando en el puerto 41234:\n\n</p>\n<pre><code>var dgram = require(&quot;dgram&quot;);\n\nvar server = dgram.createSocket(&quot;udp4&quot;);\n\nserver.on(&quot;message&quot;, function (msg, rinfo) {\n  console.log(&quot;el servidor ha recibido: &quot; + msg + &quot; de &quot; +\n    rinfo.address + &quot;:&quot; + rinfo.port);\n});\n\nserver.on(&quot;listening&quot;, function () {\n  var address = server.address();\n  console.log(&quot;servidor escuchando &quot; +\n      address.address + &quot;:&quot; + address.port);\n});\n\nserver.bind(41234);\n// server listening 0.0.0.0:41234</code></pre>\n",
+              "signatures": [
+                {
+                  "params": [
+                    {
+                      "name": "port"
+                    },
+                    {
+                      "name": "address",
+                      "optional": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "path"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "dgram.close()",
+          "type": "method",
+          "name": "close",
+          "desc": "<p>Cierra el socket subyacente y para de escuchar datos en él.  Los sockets UDP \nautomáticamente se ponen a escuchar mensjaes, incluso si no han llamado a <code>bind()</code>.\n\n</p>\n",
+          "methods": [
+            {
+              "textRaw": "dgram.address()",
+              "type": "method",
+              "name": "address",
+              "desc": "<p>Devuelve un objeto que contiene la información de la dirección de un socket.  Para los sockets \nUDP, este objeto contendrá la <code>address</code> y el <code>port</code>.  Para los sockets de dominio Unix, solo contendrá \nla <code>address</code>.\n\n</p>\n",
+              "signatures": [
+                {
+                  "params": []
+                }
+              ]
+            },
+            {
+              "textRaw": "dgram.setBroadcast(flag)",
+              "type": "method",
+              "name": "setBroadcast",
+              "desc": "<p>Establece o borra la opción del socket <code>SO_BROADCAST</code>.  Cuando se activa esta opción, los \npaquetes UDP se pueden enviar una dirección de broadcast de un interfaz local.\n\n</p>\n",
+              "signatures": [
+                {
+                  "params": [
+                    {
+                      "name": "flag"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "signatures": [
+            {
+              "params": []
+            }
+          ]
+        },
+        {
+          "textRaw": "dgram.setTTL(ttl)",
+          "type": "method",
+          "name": "setTTL",
+          "desc": "<p>Establece la opción de socket <code>IP_TTL</code>.  TTL significa &quot;Time to Live&quot;, pero en este contexto \nespecifica el número de saltos IP que se permite hacer al paquete.  Cada router o gateway que \nreenvíe un paquete decrementa el TTL.  Si un router decrementa el TTL a 0, no se reenviará.<br>El cambio de los valores del TTL es un uso típico para probar la red o con multicasting.\n\n</p>\n<p>El argumento que se le pasa a <code>setTTL()</code>es el número de saltos entre 1 y 255.  Por defecto \nen la mayoría de sistemas es 64.\n\n</p>\n",
+          "methods": [
+            {
+              "textRaw": "dgram.setMulticastTTL(ttl)",
+              "type": "method",
+              "name": "setMulticastTTL",
+              "desc": "<p>Establece la opción de socket <code>IP_MULTICAST_TTL</code>. TTL significa &quot;Time to Live&quot;, pero en este contexto \nespecifica el número de saltos IP que se permite hacer al paquete.  Cada router o gateway que \nreenvíe un paquete decrementa el TTL.  Si un router decrementa el TTL a 0, no se reenviará.  \n\n</p>\n<p>El argumento que se le pasa a <code>setMulticastTTL()</code> es el número de saltos entre 0 y 255.  Por defecto \nen la mayoría de sistemas es 64.\n\n</p>\n",
+              "signatures": [
+                {
+                  "params": [
+                    {
+                      "name": "ttl"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "textRaw": "dgram.setMulticastLoopback(flag)",
+              "type": "method",
+              "name": "setMulticastLoopback",
+              "desc": "<p>Establece o borra la opción de socket <code>IP_MULTICAST_LOOP</code>.  Cuand esta opción está activa,<br>también se recibirán paquetes multicast en el interfaz local. \n\n</p>\n",
+              "signatures": [
+                {
+                  "params": [
+                    {
+                      "name": "flag"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "ttl"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "dgram.addMembership(multicastAddress, [multicastInterface])",
+          "type": "method",
+          "name": "addMembership",
+          "desc": "<p>Comunica al kernel la suscripción a un grupo multicast con la opción de socket <code>IP_ADD_MEMBERSHIP</code>. \n\n</p>\n<p>Si no se especifica <code>multicastAddress</code>, el SO intentará suscribir todos los interfaces válidos.\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "multicastAddress"
+                },
+                {
+                  "name": "multicastInterface",
+                  "optional": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "dgram.dropMembership(multicastAddress, [multicastInterface])",
+          "type": "method",
+          "name": "dropMembership",
+          "desc": "<p>El contrario de <code>addMembership</code> - comunica al kernel el abandono de un grupo multicast con \nla opción de socket <code>IP_DROP_MEMBERSHIP</code>. Este método se llama automáticamente por el kernel \ncuando se cierra el socket o el proceso termina, así que la mayoría de aplicaciones nunca tendrán \nque llamarlo. \n\n</p>\n<p>Si no se especifica <code>multicastAddress</code>, el SO intentará suscribir todos los interfaces válidos.\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "multicastAddress"
+                },
+                {
+                  "name": "multicastInterface",
+                  "optional": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "type": "module",
+      "displayName": "dgram"
+    }
+  ]
+}

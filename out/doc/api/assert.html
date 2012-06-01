@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Assert Node.js v0.6.10 Manual &amp; Documentation</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/sh.css">
+  <link rel="canonical" href="http://nodejs.org/api/assert.html">
+</head>
+<body class="alt apidoc" id="api-section-assert">
+    <div id="intro" class="interior">
+        <a href="/" title="Go back to the home page">
+            <img id="logo" src="images/logo-light.png" alt="node.js">
+        </a>
+    </div>
+    <div id="content" class="clearfix">
+        <div id="column2" class="interior">
+            <ul>
+                <li><a href="/" class="home">Home</a></li>
+                <li><a href="/#download" class="download">Download</a></li>
+                <li><a href="/about/" class="about">About</a></li>
+                <li><a href="http://search.npmjs.org/" class="npm">npm Registry</a></li>
+                <li><a href="http://nodejs.org/docs/latest/api/index.html" class="docs current">Docs</a></li>
+                <li><a href="http://blog.nodejs.org" class="blog">Blog</a></li>
+                <li><a href="/community/" class="community">Community</a></li>
+                <li><a href="/logos/" class="logos">Logos</a></li>
+                <li><a href="http://jobs.nodejs.org/" class="jobs">Jobs</a></li>
+            </ul>
+            <p class="twitter"><a href="http://twitter.com/nodejs">@nodejs</a></p>
+        </div>
+
+        <div id="column1" class="interior">
+          <header>
+            <h1>Node.js v0.6.10 Manual &amp; Documentation</h1>
+            <div id="gtoc">
+              <p><a href="index.html" name="toc">Index</a> | <a href="all.html">View on single page</a></p>
+            </div>
+            <hr>
+          </header>
+
+          <div id="toc">
+            <h2>Table of Contents</h2>
+            <ul>
+<li><a href="#assert_assert">Assert</a><ul>
+<li><a href="#assert_assert_fail_actual_expected_message_operator">assert.fail(actual, expected, message, operator)</a></li>
+<li><a href="#assert_assert_ok_value_message">assert.ok(value, [message])</a></li>
+<li><a href="#assert_assert_equal_actual_expected_message">assert.equal(actual, expected, [message])</a></li>
+<li><a href="#assert_assert_notequal_actual_expected_message">assert.notEqual(actual, expected, [message])</a></li>
+<li><a href="#assert_assert_deepequal_actual_expected_message">assert.deepEqual(actual, expected, [message])</a></li>
+<li><a href="#assert_assert_notdeepequal_actual_expected_message">assert.notDeepEqual(actual, expected, [message])</a></li>
+<li><a href="#assert_assert_strictequal_actual_expected_message">assert.strictEqual(actual, expected, [message])</a></li>
+<li><a href="#assert_assert_notstrictequal_actual_expected_message">assert.notStrictEqual(actual, expected, [message])</a></li>
+<li><a href="#assert_assert_throws_block_error_message">assert.throws(block, [error], [message])</a></li>
+<li><a href="#assert_assert_doesnotthrow_block_error_message">assert.doesNotThrow(block, [error], [message])</a></li>
+<li><a href="#assert_assert_iferror_value">assert.ifError(value)</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+
+          <div id="apicontent">
+            <h1>Assert<span><a class="mark" href="#assert_assert" id="assert_assert">#</a></span></h1>
+<p>Este módulo es usado para escribir pruebas unitarias de sus aplicaciones, puede
+acceder con <code>require(&apos;assert&apos;)</code>.
+
+</p>
+<h2>assert.fail(actual, expected, message, operator)<span><a class="mark" href="#assert_assert_fail_actual_expected_message_operator" id="assert_assert_fail_actual_expected_message_operator">#</a></span></h2>
+<p>Evalua si <code>actual</code> es igual a <code>expected</code> usando el operador provisto.
+
+</p>
+<h2>assert.ok(value, [message])<span><a class="mark" href="#assert_assert_ok_value_message" id="assert_assert_ok_value_message">#</a></span></h2>
+<p>Evalua si el valor es <code>true</code>, si es equivalente a <code>assert.equal(true, value, message);</code>
+
+</p>
+<h2>assert.equal(actual, expected, [message])<span><a class="mark" href="#assert_assert_equal_actual_expected_message" id="assert_assert_equal_actual_expected_message">#</a></span></h2>
+<p>Evalua la igualdad con el operador de comparación ( <code>==</code> ).
+
+</p>
+<h2>assert.notEqual(actual, expected, [message])<span><a class="mark" href="#assert_assert_notequal_actual_expected_message" id="assert_assert_notequal_actual_expected_message">#</a></span></h2>
+<p>Evalua la no igualdad con el operador de comparación en negación ( <code>!=</code> ).
+
+</p>
+<h2>assert.deepEqual(actual, expected, [message])<span><a class="mark" href="#assert_assert_deepequal_actual_expected_message" id="assert_assert_deepequal_actual_expected_message">#</a></span></h2>
+<p>Pruebas para las pruebas de afirmación de desigualdad profunda.
+
+</p>
+<h2>assert.notDeepEqual(actual, expected, [message])<span><a class="mark" href="#assert_assert_notdeepequal_actual_expected_message" id="assert_assert_notdeepequal_actual_expected_message">#</a></span></h2>
+<p>Pruebas para cualquier desigualdad profunda.
+
+</p>
+<h2>assert.strictEqual(actual, expected, [message])<span><a class="mark" href="#assert_assert_strictequal_actual_expected_message" id="assert_assert_strictequal_actual_expected_message">#</a></span></h2>
+<p>Pruebas de igualdad estrictas, según lo determinado por el operador de igualdad estricto ( <code>===</code> )
+
+</p>
+<h2>assert.notStrictEqual(actual, expected, [message])<span><a class="mark" href="#assert_assert_notstrictequal_actual_expected_message" id="assert_assert_notstrictequal_actual_expected_message">#</a></span></h2>
+<p>Pruebas de no igualdad estrictas, según lo determinado por el operador de no igualdad estricto ( <code>!==</code> )
+
+</p>
+<h2>assert.throws(block, [error], [message])<span><a class="mark" href="#assert_assert_throws_block_error_message" id="assert_assert_throws_block_error_message">#</a></span></h2>
+<p>Se espera lanzar un <code>bloque</code>(block) de error. El <code>error</code> puede ser un constructor, expresión regular (regexp) o 
+una función de validación.
+
+</p>
+<p>Validar instanceof usando el constructor:
+
+</p>
+<pre><code>assert.throws(
+  function() {
+    throw new Error(&quot;Wrong value&quot;);
+  },
+  Error
+);</code></pre>
+<p>Validar un mensaje de error usando RegExp:
+
+</p>
+<pre><code>assert.throws(
+  function() {
+    throw new Error(&quot;Wrong value&quot;);
+  },
+  /value/
+);</code></pre>
+<p>Error de validación personalizado:
+
+</p>
+<pre><code>assert.throws(
+  function() {
+    throw new Error(&quot;Wrong value&quot;);
+  },
+  function(err) {
+    if ( (err instanceof Error) &amp;&amp; /value/.test(err) ) {
+      return true;
+    }
+  },
+  &quot;unexpected error&quot;
+);</code></pre>
+<h2>assert.doesNotThrow(block, [error], [message])<span><a class="mark" href="#assert_assert_doesnotthrow_block_error_message" id="assert_assert_doesnotthrow_block_error_message">#</a></span></h2>
+<p>Se espera un <code>bloque</code> (block) y no produzca un error, vea assert.throws para más detalles.
+
+</p>
+<h2>assert.ifError(value)<span><a class="mark" href="#assert_assert_iferror_value" id="assert_assert_iferror_value">#</a></span></h2>
+<p>Comprueba si el valor no es falso, se produce un lanzamiento si el valor es verdadero. Muy útil
+cuando se prueba el primer argumento, <code>error</code> en los callbacks.
+</p>
+
+          </div>
+        </div>
+    </div>
+    <div id="footer">
+        <ul class="clearfix">
+            <li><a href="/">Node.js</a></li>
+            <li><a href="/#download">Download</a></li>
+            <li><a href="/about/">About</a></li>
+            <li><a href="http://search.npmjs.org/">npm Registry</a></li>
+            <li><a href="http://nodejs.org/docs/latest/api/index.html">Docs</a></li>
+            <li><a href="http://blog.nodejs.org">Blog</a></li>
+            <li><a href="/community/">Community</a></li>
+            <li><a href="/logos/">Logos</a></li>
+            <li><a href="http://jobs.nodejs.org/">Jobs</a></li>
+            <li><a href="http://twitter.com/nodejs" class="twitter">@nodejs</a></li>
+        </ul>
+
+        <p>Copyright 2010 <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.10/LICENSE">license</a>.</p>
+    </div>
+
+  <script src="assets/sh_main.js"></script>
+  <script src="assets/sh_javascript.min.js"></script>
+  <script>highlight(undefined, undefined, 'pre');</script>
+</body>
+</html>
+

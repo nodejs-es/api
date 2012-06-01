@@ -1,0 +1,131 @@
+{
+  "source": "doc/api/tls.markdown",
+  "modules": [
+    {
+      "textRaw": "TLS (SSL)",
+      "name": "tls_(ssl)",
+      "desc": "<p>Usa <code>require(&apos;tls&apos;)</code> para acceder a este módulo.\n\n</p>\n<p>El módulo <code>tls</code> utiliza OpenSSL para proveer seguridad en la Transport Layer Security y/o Secure Socket Layer: encriptacion de flujo de comunicaciones.\n\n</p>\n<p>TLS/SSL es una infraestructura de clave publica/privada. Cada cliente y cada servidor deben tener una clave privada. Una clave privada se crea como sigue:\n\n</p>\n<pre><code>openssl genrsa -out ryans-key.pem 1024</code></pre>\n<p>Todos los servidores y algunos clientes necesitan tener un certificado. Los certificados son claves públicas firmadas por una autoridad certificadora (CA) o por ellas mismas. El primer paso para obtener un certificado es crear un fichero de &quot;Petición de firma de Certificado&quot; (CSR). Esto se hace como sigue:\n\n</p>\n<pre><code>openssl req -new -key ryans-key.pem -out ryans-csr.pem</code></pre>\n<p>Para crear un certificado auto firmado con el CSR, hay que hacer:\n\n</p>\n<pre><code>openssl x509 -req -in ryans-csr.pem -signkey ryans-key.pem -out ryans-cert.pem</code></pre>\n<p>De forma alternativa puedes enviar el CSR a la autoridad certificadora para firmarlo.\n\n</p>\n<p>(TODO: documentos sobre la creación de una CA, por ahora los usuarios interesados deberían echar un vistazo a <code>test/fixtures/keys/Makefile</code> en el código fuente de Node)\n\n</p>\n",
+      "methods": [
+        {
+          "textRaw": "s = tls.connect(port, [host], [options], callback)",
+          "type": "method",
+          "name": "connect",
+          "desc": "<p>Crea una nueva conexión cliente al <code>port</code> y al <code>host</code> dados. (<code>host</code> por defecto es <code>localhost</code>.) <code>options</code> debe ser un objeto que especifique:\n\n</p>\n<ul>\n<li><p><code>key</code>: Un string o <code>Buffer</code> que contiene la llave privada del servidor en formato PEM. (Requerido)</p>\n</li>\n<li><p><code>cert</code>: Un string o <code>Buffer</code> que contiene la clave del certificado del servidor en formato PEM.</p>\n</li>\n<li><p><code>ca</code>: Un array de strings o <code>Buffer</code>s de certificados de confianza. Si esto es omitido, varias CAs &quot;root&quot; bien conocidas serán usadas, como VeriSign. Estas son usadas para autorizar conexiones.</p>\n</li>\n</ul>\n<p><code>tls.connect()</code> devuelve un objeto <code>CryptoStream</code> en texto plano.\n\n</p>\n<p>Después del TSL/SSL handshake el <code>callback</code> es invocado. El <code>callback</code> será invocado independientemente si el certificado del servidor fue autorizado o no. Es responsabilidad del usuario probar <code>s.authorized</code> para ver si el certificado del servidor estaba firmado por una de las CAs especificadas. Si <code>s.authorized === false</code> entonces el error puede encontrarse en <code>s.authorizationError</code>.\n\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "port"
+                },
+                {
+                  "name": "host",
+                  "optional": true
+                },
+                {
+                  "name": "options",
+                  "optional": true
+                },
+                {
+                  "name": "callback"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "modules": [
+        {
+          "textRaw": "STARTTLS",
+          "name": "starttls",
+          "desc": "<p>In the v0.4 branch no function exists for starting a TLS session on an\nalready existing TCP connection.  This is possible it just requires a bit of\nwork. The technique is to use <code>tls.createSecurePair()</code> which returns two\nstreams: an encrypted stream and a plaintext stream. The encrypted stream is then\npiped to the socket, the plaintext stream is what the user interacts with thereafter.\n\n</p>\n<p><a href=\"http://gist.github.com/848444\">Here is some code that does it.</a>\n\n\n\n\n</p>\n",
+          "type": "module",
+          "displayName": "STARTTLS"
+        }
+      ],
+      "properties": [
+        {
+          "textRaw": "tls.Server",
+          "name": "Server",
+          "desc": "<p>Esta clase es una subclase de <code>net.Server</code> y tiene los mismos métodos.\nEn lugar de aceptar solo conexiones TCP en bruto, acepta conexiones encriptadas usando TLS o SSL.\n\n</p>\n<p>Aquí hay un ejemplo simple de un servidor eco:\n\n</p>\n<pre><code>var tls = require(&apos;tls&apos;);\nvar fs = require(&apos;fs&apos;);\n\nvar options = {\n  key: fs.readFileSync(&apos;server-key.pem&apos;),\n  cert: fs.readFileSync(&apos;server-cert.pem&apos;)\n};\n\ntls.createServer(options, function (s) {\n  s.write(&quot;welcome!\\n&quot;);\n  s.pipe(s);\n}).listen(8000);</code></pre>\n<p>Puedes probar este servidor conectándose a él con <code>openssl s_client</code>:\n\n</p>\n<pre><code>openssl s_client -connect 127.0.0.1:8000</code></pre>\n",
+          "methods": [
+            {
+              "textRaw": "tls.createServer(options, secureConnectionListener)",
+              "type": "method",
+              "name": "createServer",
+              "desc": "<p>Este es un constructor para la clase <code>tls.Server</code>. El objeto options puede contener:\n\n</p>\n<ul>\n<li><p><code>key</code>: Un string o <code>Buffer</code> que contiene la clave privada del servidor en formato PEM. (Requerido)</p>\n</li>\n<li><p><code>cert</code>: Un string o <code>Buffer</code> que contiene el certificado del servidor en formato PEM. (Requerido)</p>\n</li>\n<li><p><code>ca</code>: Un array de strings o <code>Buffer</code>s de certificados de confianza. Si esto es omitido, varias CAs &quot;root&quot; bien conocidas serán usadas, como VeriSign. Estas son usadas para autorizar conexiones.</p>\n</li>\n<li><p><code>requestCert</code>: Si es <code>true</code> el servidor solicitará un certificado de todos los clientes que se conecten e intenten verificar ese certificado. Por defecto: <code>false</code></p>\n</li>\n<li><p><code>rejectUnauthorized</code>: Si es <code>true</code> el servidor rechazará cualquier conexión no autorizada por la lista de CAs suministradas. Esta opción solo tiene efecto si <code>requestCert</code> es <code>true</code>. Por defecto: <code>false</code>.</p>\n</li>\n</ul>\n",
+              "signatures": [
+                {
+                  "params": [
+                    {
+                      "name": "options"
+                    },
+                    {
+                      "name": "secureConnectionListener"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "textRaw": "server.listen(port, [host], [callback])",
+              "type": "method",
+              "name": "listen",
+              "desc": "<p>Empieza aceptando conexiones en el <code>port</code> y el <code>host</code> especificados. Si el <code>host</code> es omitido, el servidor aceptará conexiones dirigidas a cualquier dirección IPv4 (<code>INADDR_ANY</code>).\n\n</p>\n<p>Esta función es asíncrona. El último parámetro <code>callback</code> se invocará cuando el servidor esté saturado.\n\n</p>\n<p>Mirar <code>net.Server</code> para más información.\n\n</p>\n",
+              "signatures": [
+                {
+                  "params": [
+                    {
+                      "name": "port"
+                    },
+                    {
+                      "name": "host",
+                      "optional": true
+                    },
+                    {
+                      "name": "callback",
+                      "optional": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "textRaw": "server.close()",
+              "type": "method",
+              "name": "close",
+              "desc": "<p>Detiene el servidor, dejando de aceptar conexiones. Esta función es asíncrona, el servidor finalmente se cierra cuando emite un evento <code>&apos;close&apos;</code>.\n\n</p>\n",
+              "signatures": [
+                {
+                  "params": []
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "textRaw": "Event: 'secureConnection'",
+              "type": "event",
+              "name": "secureConnection",
+              "desc": "<p><code>function (cleartextStream) {}</code>\n\n</p>\n<p>Este evento es emitido después de que una nueva conexión haya realizado con éxito el handshake. El argumento es una instancia de <code>stream.Stream</code>. Tiene todos los métodos y eventos de stream.\n\n</p>\n<p><code>cleartextStream.authorized</code> es un valor boolean que indica si el cliente está verificado por una de las CA suministradas por el servidor. Si <code>cleartextStream.authorized</code> es false, entonces <code>cleartextStream.authorizationError</code> describe como falló la autorización. Relacionado pero merece mencionarse: dependiendo de la configuración del servidor TLS, tus autorizaciones de conexión pueden ser aceptadas.\n\n</p>\n",
+              "params": []
+            }
+          ],
+          "properties": [
+            {
+              "textRaw": "server.maxConnections",
+              "name": "maxConnections",
+              "desc": "<p>Establece esta propiedad para rechazar conexiones cuando el número de conexiones del servidor sea alta.\n\n</p>\n"
+            },
+            {
+              "textRaw": "server.connections",
+              "name": "connections",
+              "desc": "<p>Número de conexiones concurrentes en el servidor.\n</p>\n"
+            }
+          ]
+        }
+      ],
+      "type": "module",
+      "displayName": "TLS (SSL)"
+    }
+  ]
+}

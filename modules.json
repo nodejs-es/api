@@ -1,0 +1,109 @@
+{
+  "source": "doc/api/modules.markdown",
+  "modules": [
+    {
+      "textRaw": "Módulos",
+      "name": "módulos",
+      "desc": "<p>Node posee un secillo sistema de carga.  En Node, los ficheros y módulos son de\ncorrespondencia biunívoca.  A modo de ejemplo, <code>foo.js</code> carga el módulo\n<code>circle.js</code> en el mismo directorio.\n\n</p>\n<p>El contenido de <code>foo.js</code>:\n\n</p>\n<pre><code>var circle = require(&apos;./circle.js&apos;);\nconsole.log( &apos;El área de un círculo con radio 4 es &apos;\n           + circle.area(4));</code></pre>\n<p>El contenido de <code>circle.js</code>:\n\n</p>\n<pre><code>var PI = Math.PI;\n\nexports.area = function (r) {\n  return PI * r * r;\n};\n\nexports.circumference = function (r) {\n  return 2 * PI * r;\n};</code></pre>\n<p>El módulo <code>circle.js</code> ha exportado las functiones <code>area()</code> y\n<code>circumference()</code>.  Para exportar a un objeto, debe añadir el objeto especial\n<code>exports</code>.\n\n\n</p>\n<p>Las variables locales del módulo serán privadas. En este ejemplo la variable <code>PI</code> es\nprivada en <code>circle.js</code>.\n\n</p>\n",
+      "modules": [
+        {
+          "textRaw": "Módulos básicos",
+          "name": "módulos_básicos",
+          "desc": "<p>Node posee varios módulos compilados en binario.  Estos módulos son\ndescritos con más detalle en las siguientes secciones del documento.\n\n</p>\n<p>Los módulos básicos son definidos en el código fuente de node en la carpeta <code>lib/</code>.\n\n</p>\n<p>Los módulos básicos tienen la preferencia de cargarse primero si su indentificador es\npasado desde <code>require()</code>. Por ejemplo, <code>require(&apos;http&apos;)</code> siempre\ndevolverá lo construido en el módulo HTTP, incluso si hay un fichero con ese nombre.\n\n</p>\n",
+          "type": "module",
+          "displayName": "Módulos básicos"
+        },
+        {
+          "textRaw": "Módulo File",
+          "name": "módulo_file",
+          "desc": "<p>Si el nombre exacto del fichero no es encontrado, entonces node intentará cargar \nel nombre del fichero seguido de la extensión <code>.js</code>, y a continuación con <code>.node</code>.\n\n</p>\n<p>Los ficheros <code>.js</code> son interpretados como ficheros de texto en JavaScript, y los ficheros <code>.node</code>\nson interpretados como extensiones de módulos compilados cargados con <code>dlopen</code>.\n\n</p>\n<p>Un módulo con el prefijo <code>&apos;/&apos;</code> indica la ruta absoluta al fichero.  Por\nejemplo, <code>require(&apos;/home/marco/foo.js&apos;)</code> cargará el fichero en\n<code>/home/marco/foo.js</code>.\n\n</p>\n<p>Un módulo con el prefijo <code>&apos;./&apos;</code> es relativo al fichero llamado con <code>require()</code>.\nEs decir, <code>circle.js</code> debe estar en el mismo directorio que <code>foo.js</code> para que \n<code>require(&apos;./circle&apos;)</code> lo encuentre.\n\n</p>\n<p>Si se omite el uso de &apos;/&apos; o &apos;./&apos; en el fichero, el módulo puede ser un\n&quot;módulo básico&quot; o se cargará desde la carpeta <code>node_modules</code>.\n\n\n</p>\n",
+          "type": "module",
+          "displayName": "Módulo File"
+        },
+        {
+          "textRaw": "Cargando desde la carpeta `node_modules`",
+          "name": "cargando_desde_la_carpeta_`node_modules`",
+          "desc": "<p>Si el identificador del módulo pasa a <code>require()</code> no es un módulo nativo,\ny no comienza con <code>&apos;/&apos;</code>, <code>&apos;../&apos;</code>, o <code>&apos;./&apos;</code>, entonces node inicia en el \ndirectorio principal del módulo actual, y añade <code>/node_modules</code>, e\nintenta cargar el módulo desde esa ubicación.\n\n</p>\n<p>Si no se encuentra, entonces se dirige al directorio principal, y así \nsucesivamente, hasta que el módulo es encontrado, hasta en la raíz del árbol es\nencontrado.\n\n</p>\n<p>Por ejemplo, si el fichero en <code>&apos;/home/ry/projects/foo.js&apos;</code> es llamado como\n<code>require(&apos;bar.js&apos;)</code>, entonces node buscaría en las siguientes ubicaciones, en\neste orden:\n\n</p>\n<ul>\n<li><code>/home/ry/projects/node_modules/bar.js</code></li>\n<li><code>/home/ry/node_modules/bar.js</code></li>\n<li><code>/home/node_modules/bar.js</code></li>\n<li><code>/node_modules/bar.js</code></li>\n</ul>\n<p>Esto permite que los programas encuentren sus dependencias, de modo que no\nentren en conflicto.\n\n\n</p>\n",
+          "modules": [
+            {
+              "textRaw": "Optimización de proceso de búsqueda en `node_modules`",
+              "name": "optimización_de_proceso_de_búsqueda_en_`node_modules`",
+              "desc": "<p>Cuando existen muchos niveles de dependencias anidadas, es posible que los\nárboles de directorios tomen bastante tiempo. Las siguientes optimizaciones se\nrealizan para este proceso.\n\n</p>\n<p>Primero, <code>/node_modules</code> no debe ser anexado a una carpeta ya que termina en\n<code>/node_modules</code>.\n\n</p>\n<p>Segundo, si el fichero es llamado con  <code>require()</code> ya esta en la jerarquía de\n<code>node_modules</code>, entonces el nivel superior de la carpeta <code>node_modules</code> es tratada como\nla raíz del árbol de búsqueda.\n\n</p>\n<p>For example, if the file at\n<code>&apos;/home/ry/projects/foo/node_modules/bar/node_modules/baz/quux.js&apos;</code>\ncalled <code>require(&apos;asdf.js&apos;)</code>, then node would search the following\nlocations:\n\n</p>\n<p>Por ejemplo, si el fichero en\n<code>&apos;/home/ry/projects/foo/node_modules/bar/node_modules/baz/quux.js&apos;</code>\nllama como <code>require(&apos;asdf.js&apos;)</code>, entonces node buscaría en las siguientes\nubicaciones:\n\n</p>\n<ul>\n<li><code>/home/ry/projects/foo/node_modules/bar/node_modules/baz/node_modules/asdf.js</code></li>\n<li><code>/home/ry/projects/foo/node_modules/bar/node_modules/asdf.js</code></li>\n<li><code>/home/ry/projects/foo/node_modules/asdf.js</code></li>\n</ul>\n",
+              "type": "module",
+              "displayName": "Optimización de proceso de búsqueda en `node_modules`"
+            }
+          ],
+          "type": "module",
+          "displayName": "Cargando desde la carpeta `node_modules`"
+        },
+        {
+          "textRaw": "Carpetas como módulos",
+          "name": "carpetas_como_módulos",
+          "desc": "<p>Es conveniente organizar los programas y librerías en los mismos directorios,\ny proporcionar un único punto de entrar a la biblioteca.\nExiste tres formas en donde una carpeta pueda usar <code>require()</code> como\nun argumento.\n\n</p>\n<p>Lo primero es crear el fichero <code>package.json</code>en la raíz de la carpeta,\nque especifique el módulo <code>main</code>. Un ejemplo de package.json podría verse\ncomo esto:\n\n\n</p>\n<pre><code>{ &quot;name&quot; : &quot;some-library&quot;,\n  &quot;main&quot; : &quot;./lib/some-library.js&quot; }</code></pre>\n<p>Si fuera una carpeta en <code>./some-library</code>, entonces\n<code>require(&apos;./some-library&apos;)</code> trataría de cargar\n<code>./some-library/lib/some-library.js</code>.\n\n</p>\n<p>Este es el mayor grado de conciencia de Node con el fichero package.json .\n\n</p>\n<p>Si no hay ningún fichero package.json presente en el directorio, entonces node\nintentará cargar el fichero <code>index.js</code> o <code>index.node</code> de ese directorio.\nPor ejemplo, si no hay ninguín fichero package.json en el ejemplo anterior,\nentonces <code>require(&apos;./some-library&apos;)</code> intentará cargar:\n\n</p>\n<ul>\n<li><code>./some-library/index.js</code></li>\n<li><code>./some-library/index.node</code></li>\n</ul>\n",
+          "type": "module",
+          "displayName": "Carpetas como módulos"
+        },
+        {
+          "textRaw": "Almacenamiento en la caché",
+          "name": "almacenamiento_en_la_caché",
+          "desc": "<p>Los módulos se alamacenan en la caché después que fueron cargados por primera vez.\nEsto significa (entre otras cosas) que todas las llamadas a <code>require(&apos;foo&apos;)</code> devuelve\nel mismo ojecto exacto, si se resolvería en el mismo fichero\n\n</p>\n",
+          "type": "module",
+          "displayName": "Almacenamiento en la caché"
+        },
+        {
+          "textRaw": "Todos juntos...",
+          "name": "todos_juntos...",
+          "desc": "<p>Para obtener el nombre exacto del fichero que se cargará cuando se llame con <code>require()</code>, use\nla función <code>require.resolve()</code>.\n\n</p>\n<p>Uniendo todo lo anterior, aquí se muestra un algoritmo de alto nievel\nen pseudocódigo de lo que haría require.resolve :\n\n</p>\n<pre><code>require(X)\n1. Si X es módulo básico,\n   a. devolver el módulo básico\n   b. STOP\n2. Si X inicia con con `./` or `/`,\n   a. LOAD_AS_FILE(Y + X)\n   b. LOAD_AS_DIRECTORY(Y + X)\n3. LOAD_NODE_MODULES(X, dirname(Y))\n4. THROW &quot;not found&quot;\n\nLOAD_AS_FILE(X)\n1. Si X es un fichero, cargar X como texto JavaScript.  STOP\n2. Si X.js es un fichero, cargar X.js como texto JavaScript.  STOP\n3. Si X.node es un fichero, cargar X.node como extensión binaria.  STOP\n\nLOAD_AS_DIRECTORY(X)\n1. Si X/package.json es un fichero,\n   a. Parsear X/package.json, y buscar el campo &quot;main&quot;.\n   b. let M = X + (json main field)\n   c. LOAD_AS_FILE(M)\n2. LOAD_AS_FILE(X/index)\n\nLOAD_NODE_MODULES(X, START)\n1. let DIRS=NODE_MODULES_PATHS(START)\n2. for each DIR in DIRS:\n   a. LOAD_AS_FILE(DIR/X)\n   b. LOAD_AS_DIRECTORY(DIR/X)\n\nNODE_MODULES_PATHS(START)\n1. let PARTS = path split(START)\n2. let ROOT = index es una instancia de &quot;node_modules&quot; en PARTS, o 0\n3. let I = count of PARTS - 1\n4. let DIRS = []\n5. while I &gt; ROOT,\n   a. if PARTS[I] = &quot;node_modules&quot; CONTINUE\n   c. DIR = path join(PARTS[0 .. I] + &quot;node_modules&quot;)\n   b. DIRS = DIRS + DIR\n6. return DIRS</code></pre>\n",
+          "type": "module",
+          "displayName": "Todos juntos..."
+        },
+        {
+          "textRaw": "Addenda: Consejos para administrar paquetes",
+          "name": "addenda:_consejos_para_administrar_paquetes",
+          "desc": "<p>La semántica de Node en la función <code>require()</code> fue diseñada para ser lo \nsuficientemente general para soportar una serie de esctructuras de directorios.\nLos paquetes de programas como <code>dpkg</code>, <code>rpm</code>, y <code>npm</code> se esperan que sean construidos \ncomo paquetes nativos desde los módulos de Node sin modificaciones.\n\n</p>\n<p>A continuación sugerimos una estructura en la que puede trabajar:\n\n</p>\n<p>Supongamos que se desea tener en \n<code>/usr/lib/node/&lt;some-package&gt;/&lt;some-version&gt;</code> se mantenga el contenido de una\nversión específica de un paquete.\n\n</p>\n<p>Los paquetes pueden depender uno del otro. Con el fin de instalar el paquete <code>foo</code>, \npuede que tenga que instalar una versión específica del paquete <code>bar</code>.  El paquete\n <code>bar</code> puede tener dependencias, y en algunos casos, estas dependencias, incluso pueden \nentrar en conflicto o crear ciclos.\n\n</p>\n<p>Desde la búsqueda con Node de la <code>ruta</code> de cualquier módulo cargado (es decir,\nresueltos los enlaces simbólicos), y luego de buscar sus dependencias en la\ncarpeta <code>node_modules</code> como se describió anteriormente, esta situación es muy simple de \nresolver con la siguiente arquitectura:\n\n</p>\n<ul>\n<li><code>/usr/lib/node/foo/1.2.3/</code> - Contenido del paquete <code>foo</code>, versión 1.2.3.</li>\n<li><code>/usr/lib/node/bar/4.3.2/</code> - Contenido del paquete <code>bar</code> que es\ndependencia de <code>foo</code>.</li>\n<li><code>/usr/lib/node/foo/1.2.3/node_modules/bar</code> - Enlace simbólico a\n<code>/usr/lib/node/bar/4.3.2/</code>.</li>\n<li><code>/usr/lib/node/bar/4.3.2/node_modules/*</code> - Enlaces simbólicos a los paquetes\nque <code>bar</code> depende.</li>\n</ul>\n<p>Por lo tanto, incluso si se encuentra, o si hay problemas de dependencias,\ncada módulo será capza de obtener una versión de su dependencia para ser\nutilizada.\n\n</p>\n<p>Cuando el código en el paquete <code>foo</code> utiliza <code>require(&apos;bar&apos;)</code>, se obtendrá la\nversión al enlace simbólico en <code>/usr/lib/node/foo/1.2.3/node_modules/bar</code>.\nLuego, cuando el código del paquete <code>bar</code> llame a <code>require(&apos;quux&apos;)</code>, obtendrá\nla versión simbólica en <code>/usr/lib/node/bar/4.3.2/node_modules/quux</code>.\n\n</p>\n<p>Además, para hacer el proceso de búsqueda del módulo aún más óptima, en lugar\nde poner los paquetes directamente en <code>/usr/lib/node</code>, se puede poner estos en\n<code>/usr/lib/node_modules/&lt;name&gt;/&lt;version&gt;</code>.  Entonces node no se molestará en\nbuscar por dependencias no encontradas en <code>/usr/node_modules</code> o <code>/node_modules</code>.\n\n</p>\n<p>A fin de que los módulos disponibles para node en REPL, puedan ser útiles,\nañade también la carpeta <code>/usr/lib/node_modules</code> a la variable de entorno <code>$NODE_PATH</code>.\nDesde el módulo de búsquedas usando la carpeta <code>node_modules</code> donde todo es\nrelativo, y basado en la ruta real de los ficheros llamados por <code>require()</code>, \nlos paquetes pueden ser llamado desde cualquier lugar.\n</p>\n",
+          "type": "module",
+          "displayName": "Addenda: Consejos para administrar paquetes"
+        }
+      ],
+      "properties": [
+        {
+          "textRaw": "Cargar desde las carpetas de `require.paths`",
+          "name": "paths`",
+          "desc": "<p>En node, <code>require.paths</code> es un array de strings que representa las rutas de\nacceso a los módulos cuando estos no tienen el prefijo <code>&apos;/&apos;</code>, <code>&apos;./&apos;</code>, o\n<code>&apos;../&apos;</code>.  Por ejemplo, si establece require.paths como:\n\n</p>\n<pre><code>[ &apos;/home/micheil/.node_modules&apos;,\n  &apos;/usr/local/lib/node_modules&apos; ]</code></pre>\n<p>A continuación se llama a <code>require(&apos;bar/baz.js&apos;)</code> y buscará en las siguientes\nubicaciones:\n\n</p>\n<ul>\n<li>1: <code>&apos;/home/micheil/.node_modules/bar/baz.js&apos;</code></li>\n<li>2: <code>&apos;/usr/local/lib/node_modules/bar/baz.js&apos;</code></li>\n</ul>\n<p>El array en <code>require.paths</code> puede ser transformado en tiempo de ejecución para modificar\neste comportamiento.\n\n</p>\n<p>Se establece inicialmente la variable de entorno <code>NODE_PATH</code>, que contiene \nuna lista delimitada por dos puntos de rutas exactas.  En el anterior ejemplo,\nla variable de entorno <code>NODE_PATH</code> puedo haber sido establecido como:\n\n</p>\n<pre><code>/home/micheil/.node_modules:/usr/local/lib/node_modules</code></pre>\n<p>Cargar las ubicaciones desde <code>require.paths</code> sólo se realiza si el\nmódulon no se ha encontrado desde el algoritmo <code>node_modules</code>.\nLos módulos globarles son de baja prioridad para las dependencias de los paquetes.\n\n</p>\n",
+          "properties": [
+            {
+              "textRaw": "**Nota:** Por favor evite la modificación de `require.paths`",
+              "name": "paths`",
+              "desc": "<p>Por razones de compatibilidad, <code>require.paths</code> sigue siendo la primera prioridad\nen el proceso de búsqueda de módulos. Sin embargo, puede desaparecer en una próxima\nversión.\n\n</p>\n<p>Aunque parecía una buena idea en aquel tiempo, y ha permitido ser un \nexperimento muy útil, en la práctica la transformación de <code>require.paths</code> es una\nlista a menudo con problemas y dolores de cabeza.\n\n</p>\n",
+              "modules": [
+                {
+                  "textRaw": "Establecer `require.paths` a algún otro valor para nada.",
+                  "name": "establecer_`require.paths`_a_algún_otro_valor_para_nada.",
+                  "desc": "<p>Esto no hace nada de lo que se podría esperar:\n\n</p>\n<pre><code>require.paths = [ &apos;/usr/lib/node&apos; ];</code></pre>\n<p>Todo lo que se hace aquí es perder la referencia <em>actual</em> de node en la búsqueda\nde rutas, y crea una nueva referencia a otra cosa que no sirve\npara nada.\n\n</p>\n",
+                  "type": "module",
+                  "displayName": "Establecer `require.paths` a algún otro valor para nada."
+                },
+                {
+                  "textRaw": "Poner rutas relativas en `require.paths` es... raro.",
+                  "name": "poner_rutas_relativas_en_`require.paths`_es..._raro.",
+                  "desc": "<p>Si hace esto:\n\n</p>\n<pre><code>require.paths.push(&apos;./lib&apos;);</code></pre>\n<p>entonces <em>no</em> añada la ruta completa donde se resolvió <code>./lib</code>\nen este sistema de ficheros.  En cambio, esto añade literalmente <code>&apos;./lib&apos;</code>,\nlo que significa si hace <code>require(&apos;y.js&apos;)</code> en  <code>/a/b/x.js</code>, entonces se ve\nen <code>/a/b/lib/y.js</code>.  Si a continuación se usa <code>require(&apos;y.js&apos;)</code> en\n<code>/l/m/n/o/p.js</code>, entonces se ve en <code>/l/m/n/o/lib/y.js</code>.\n\n</p>\n<p>En la práctica, las personas han usado esto de una manera ad hoc para la\ndependencia de paquetes, pero esta técnica es frágil.\n\n</p>\n",
+                  "type": "module",
+                  "displayName": "Poner rutas relativas en `require.paths` es... raro."
+                },
+                {
+                  "textRaw": "Cero aislamiento",
+                  "name": "cero_aislamiento",
+                  "desc": "<p>Existe (debido a un diseño lamentable), sólo un array <code>require.paths</code> utilizado para\ntodos los módulos.\n\n</p>\n<p>Como resultado, si un programa en node trata de confiar de este comportamiento, es posible\nque de manera permanente y sutilmente altere el comportamiento de todos los programas \nescritos en node el mismo proceso. A media que el stack crece, y se reune más\nfuncionalidades, ya que esto es un problema con las partes que interactúan en forma\ndifíciles de predecir.\n\n</p>\n",
+                  "type": "module",
+                  "displayName": "Cero aislamiento"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "type": "module",
+      "displayName": "Módulos"
+    }
+  ]
+}

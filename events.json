@@ -1,0 +1,184 @@
+{
+  "source": "doc/api/events.markdown",
+  "modules": [
+    {
+      "textRaw": "Eventos",
+      "name": "eventos",
+      "desc": "<p>Muchos objetos en Node emiten eventos: un <code>net.Server</code> emite un evento cada vez que se establece una conexión, un <code>fs.readStream</code> emite un evento cuando se abre un fichero. Todos los objectos que emiten eventos son instancias de <code>events.EventEmitter</code>.\nPuedes usar este módulo haciendo <code>require(&quot;events&quot;);</code>\n\n</p>\n<p>Normalmente, los nombres de los eventos siguen la notacion camel-case, sin embargo, no hay ninguna restricción en este aspecto y cualquier cadena será aceptada.\n\n</p>\n<p>Se pueden adjuntar funciones a objetos, para que sean ejecutadas cuando se emita un evento. Estas funciones reciben el nombre de <em>listeners</em>. \n\n</p>\n",
+      "properties": [
+        {
+          "textRaw": "events.EventEmitter",
+          "name": "EventEmitter",
+          "desc": "<p>Para usar la clase EventEmitter, haz de importarla\nhaciendo <code>require(&apos;events&apos;).EventEmiter</code>.\n\n</p>\n<p>Cuando una instancia de la clase EventEmitter se encuentra con un error, la acción típica\nes emitir un evento de error. Los eventos de error son tratados como un caso especial en node.\nSi no tiene un listener asociado la acción por defecto será imprimir la traza de la pila y salir\ndel programa\n\n</p>\n<p>Todos los EventEmitters emite el evento <code>&apos;newListener&apos;</code> cuando se añaden nuevos listeners.\n\n</p>\n"
+        }
+      ],
+      "methods": [
+        {
+          "textRaw": "emitter.addListener(event, listener)",
+          "type": "method",
+          "name": "addListener",
+          "desc": "<p>Añade un listener al final del array de listeners para el evento espeficicado\n\n</p>\n<pre><code>server.on(&apos;connection&apos;, function (stream) {\n  console.log(&apos;someone connected!&apos;);\n});</code></pre>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "event"
+                },
+                {
+                  "name": "listener"
+                }
+              ]
+            },
+            {
+              "params": [
+                {
+                  "name": "event"
+                },
+                {
+                  "name": "listener"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "emitter.on(event, listener)",
+          "type": "method",
+          "name": "on",
+          "desc": "<p>Añade un listener al final del array de listeners para el evento espeficicado\n\n</p>\n<pre><code>server.on(&apos;connection&apos;, function (stream) {\n  console.log(&apos;someone connected!&apos;);\n});</code></pre>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "event"
+                },
+                {
+                  "name": "listener"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "emitter.once(event, listener)",
+          "type": "method",
+          "name": "once",
+          "desc": "<p>Añade un listener al evento. El listener se invocará sólo la primera vez que se dispara el evento.\nluego se elimina. \n\n</p>\n<pre><code>server.once(&apos;connection&apos;, function (stream) {\n  console.log(&apos;Ah, we have our first user!&apos;);\n});</code></pre>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "event"
+                },
+                {
+                  "name": "listener"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "emitter.removeListener(event, listener)",
+          "type": "method",
+          "name": "removeListener",
+          "desc": "<p>Elimina un listener del array de listeners asociado al evento especificado\n<strong>Atención</strong>: modifica el indice del array de listeners \n\n</p>\n<pre><code>var callback = function(stream) {\n  console.log(&apos;someone connected!&apos;);\n};\nserver.on(&apos;connection&apos;, callback);\n// ...\nserver.removeListener(&apos;connection&apos;, callback);</code></pre>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "event"
+                },
+                {
+                  "name": "listener"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "emitter.removeAllListeners(event)",
+          "type": "method",
+          "name": "removeAllListeners",
+          "desc": "<p>Elimina todos los listeners del array de listeners asociado al evento especificado\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "event"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "emitter.setMaxListeners(n)",
+          "type": "method",
+          "name": "setMaxListeners",
+          "desc": "<p>Por defecto los EventEmitters imprimirán un warning si se le añaden más de 10 listeners.\nEste comportamiento por defecto ayuda a encontrar memory leaks. Obviamente no todos los EventEmitters\ndeberían limitarse a 10. Esta función permite incrementar este valor. Use cero para establecer un valor ilimitado.\n\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "n"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "emitter.listeners(event)",
+          "type": "method",
+          "name": "listeners",
+          "desc": "<p>Devuelve un array de listeners asociado al evento especificado. Este array puede ser manipulado, por ejemplo, eliminando un listener.\n\n</p>\n<pre><code>server.on(&apos;connection&apos;, function (stream) {\n  console.log(&apos;someone connected!&apos;);\n});\nconsole.log(util.inspect(server.listeners(&apos;connection&apos;)); // [ [Function] ]</code></pre>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "event"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "emitter.emit(event, [arg1], [arg2], [...])",
+          "type": "method",
+          "name": "emit",
+          "desc": "<p>Llama a cada uno de los listeners en el orden en el que fueron pasados por parámetros\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "event"
+                },
+                {
+                  "name": "arg1",
+                  "optional": true
+                },
+                {
+                  "name": "arg2",
+                  "optional": true
+                },
+                {
+                  "name": "...",
+                  "optional": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "events": [
+        {
+          "textRaw": "Event: 'newListener'",
+          "type": "event",
+          "name": "newListener",
+          "desc": "<p><code>function (event, listener) { }</code>\n\n</p>\n<p>Este evento es emitido cada vez que se añade un nuevo listener.\n</p>\n",
+          "params": []
+        }
+      ],
+      "type": "module",
+      "displayName": "Eventos"
+    }
+  ]
+}

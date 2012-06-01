@@ -1,0 +1,964 @@
+{
+  "source": "doc/api/fs.markdown",
+  "modules": [
+    {
+      "textRaw": "File System",
+      "name": "file_system",
+      "desc": "<p>File I/O is provided by simple wrappers around standard POSIX functions.  To\nuse this module do <code>require(&apos;fs&apos;)</code>. All the methods have asynchronous and\nsynchronous forms.\n\n</p>\n<p>The asynchronous form always take a completion callback as its last argument.\nThe arguments passed to the completion callback depend on the method, but the\nfirst argument is always reserved for an exception. If the operation was\ncompleted successfully, then the first argument will be <code>null</code> or <code>undefined</code>.\n\n</p>\n<p>Here is an example of the asynchronous version:\n\n</p>\n<pre><code>var fs = require(&apos;fs&apos;);\n\nfs.unlink(&apos;/tmp/hello&apos;, function (err) {\n  if (err) throw err;\n  console.log(&apos;successfully deleted /tmp/hello&apos;);\n});</code></pre>\n<p>Here is the synchronous version:\n\n</p>\n<pre><code>var fs = require(&apos;fs&apos;);\n\nfs.unlinkSync(&apos;/tmp/hello&apos;)\nconsole.log(&apos;successfully deleted /tmp/hello&apos;);</code></pre>\n<p>With the asynchronous methods there is no guaranteed ordering. So the\nfollowing is prone to error:\n\n</p>\n<pre><code>fs.rename(&apos;/tmp/hello&apos;, &apos;/tmp/world&apos;, function (err) {\n  if (err) throw err;\n  console.log(&apos;renamed complete&apos;);\n});\nfs.stat(&apos;/tmp/world&apos;, function (err, stats) {\n  if (err) throw err;\n  console.log(&apos;stats: &apos; + JSON.stringify(stats));\n});</code></pre>\n<p>It could be that <code>fs.stat</code> is executed before <code>fs.rename</code>.\nThe correct way to do this is to chain the callbacks.\n\n</p>\n<pre><code>fs.rename(&apos;/tmp/hello&apos;, &apos;/tmp/world&apos;, function (err) {\n  if (err) throw err;\n  fs.stat(&apos;/tmp/world&apos;, function (err, stats) {\n    if (err) throw err;\n    console.log(&apos;stats: &apos; + JSON.stringify(stats));\n  });\n});</code></pre>\n<p>In busy processes, the programmer is <em>strongly encouraged</em> to use the\nasynchronous versions of these calls. The synchronous versions will block\nthe entire process until they complete--halting all connections.\n\n</p>\n",
+      "methods": [
+        {
+          "textRaw": "fs.rename(path1, path2, [callback])",
+          "type": "method",
+          "name": "rename",
+          "desc": "<p>Asynchronous rename(2). No arguments other than a possible exception are given\nto the completion callback.\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "path1"
+                },
+                {
+                  "name": "path2"
+                },
+                {
+                  "name": "callback",
+                  "optional": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.renameSync(path1, path2)",
+          "type": "method",
+          "name": "renameSync",
+          "desc": "<p>Synchronous rename(2).\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "path1"
+                },
+                {
+                  "name": "path2"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.truncate(fd, len, [callback])",
+          "type": "method",
+          "name": "truncate",
+          "desc": "<p>Asynchronous ftruncate(2). No arguments other than a possible exception are\ngiven to the completion callback.\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "fd"
+                },
+                {
+                  "name": "len"
+                },
+                {
+                  "name": "callback",
+                  "optional": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.truncateSync(fd, len)",
+          "type": "method",
+          "name": "truncateSync",
+          "desc": "<p>Synchronous ftruncate(2).\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "fd"
+                },
+                {
+                  "name": "len"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.chmod(path, mode, [callback])",
+          "type": "method",
+          "name": "chmod",
+          "desc": "<p>Asynchronous chmod(2). No arguments other than a possible exception are given\nto the completion callback.\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "path"
+                },
+                {
+                  "name": "mode"
+                },
+                {
+                  "name": "callback",
+                  "optional": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.chmodSync(path, mode)",
+          "type": "method",
+          "name": "chmodSync",
+          "desc": "<p>Synchronous chmod(2).\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "path"
+                },
+                {
+                  "name": "mode"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.stat(path, [callback])",
+          "type": "method",
+          "name": "stat",
+          "desc": "<p>Asynchronous stat(2). The callback gets two arguments <code>(err, stats)</code> where\n<code>stats</code> is a <code>fs.Stats</code> object. It looks like this:\n\n</p>\n<pre><code>{ dev: 2049,\n  ino: 305352,\n  mode: 16877,\n  nlink: 12,\n  uid: 1000,\n  gid: 1000,\n  rdev: 0,\n  size: 4096,\n  blksize: 4096,\n  blocks: 8,\n  atime: &apos;2009-06-29T11:11:55Z&apos;,\n  mtime: &apos;2009-06-29T11:11:40Z&apos;,\n  ctime: &apos;2009-06-29T11:11:40Z&apos; }</code></pre>\n<p>See the <code>fs.Stats</code> section below for more information.\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "path"
+                },
+                {
+                  "name": "callback",
+                  "optional": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.lstat(path, [callback])",
+          "type": "method",
+          "name": "lstat",
+          "desc": "<p>Asynchronous lstat(2). The callback gets two arguments <code>(err, stats)</code> where\n<code>stats</code> is a <code>fs.Stats</code> object. lstat() is identical to stat(), except that if\npath is a symbolic link, then the link itself is stat-ed, not the file that it\nrefers to.\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "path"
+                },
+                {
+                  "name": "callback",
+                  "optional": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.fstat(fd, [callback])",
+          "type": "method",
+          "name": "fstat",
+          "desc": "<p>Asynchronous fstat(2). The callback gets two arguments <code>(err, stats)</code> where\n<code>stats</code> is a <code>fs.Stats</code> object.\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "fd"
+                },
+                {
+                  "name": "callback",
+                  "optional": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.statSync(path)",
+          "type": "method",
+          "name": "statSync",
+          "desc": "<p>Synchronous stat(2). Returns an instance of <code>fs.Stats</code>.\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "path"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.lstatSync(path)",
+          "type": "method",
+          "name": "lstatSync",
+          "desc": "<p>Synchronous lstat(2). Returns an instance of <code>fs.Stats</code>.\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "path"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.fstatSync(fd)",
+          "type": "method",
+          "name": "fstatSync",
+          "desc": "<p>Synchronous fstat(2). Returns an instance of <code>fs.Stats</code>.\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "fd"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.link(srcpath, dstpath, [callback])",
+          "type": "method",
+          "name": "link",
+          "desc": "<p>Asynchronous link(2). No arguments other than a possible exception are given to\nthe completion callback.\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "srcpath"
+                },
+                {
+                  "name": "dstpath"
+                },
+                {
+                  "name": "callback",
+                  "optional": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.linkSync(srcpath, dstpath)",
+          "type": "method",
+          "name": "linkSync",
+          "desc": "<p>Synchronous link(2).\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "srcpath"
+                },
+                {
+                  "name": "dstpath"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.symlink(linkdata, path, [callback])",
+          "type": "method",
+          "name": "symlink",
+          "desc": "<p>Asynchronous symlink(2). No arguments other than a possible exception are given\nto the completion callback.\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "linkdata"
+                },
+                {
+                  "name": "path"
+                },
+                {
+                  "name": "callback",
+                  "optional": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.symlinkSync(linkdata, path)",
+          "type": "method",
+          "name": "symlinkSync",
+          "desc": "<p>Synchronous symlink(2).\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "linkdata"
+                },
+                {
+                  "name": "path"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.readlink(path, [callback])",
+          "type": "method",
+          "name": "readlink",
+          "desc": "<p>Asynchronous readlink(2). The callback gets two arguments <code>(err,\nresolvedPath)</code>.\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "path"
+                },
+                {
+                  "name": "callback",
+                  "optional": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.readlinkSync(path)",
+          "type": "method",
+          "name": "readlinkSync",
+          "desc": "<p>Synchronous readlink(2). Returns the resolved path.\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "path"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.realpath(path, [callback])",
+          "type": "method",
+          "name": "realpath",
+          "desc": "<p>Asynchronous realpath(2).  The callback gets two arguments <code>(err,\nresolvedPath)</code>.\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "path"
+                },
+                {
+                  "name": "callback",
+                  "optional": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.realpathSync(path)",
+          "type": "method",
+          "name": "realpathSync",
+          "desc": "<p>Synchronous realpath(2). Returns the resolved path.\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "path"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.unlink(path, [callback])",
+          "type": "method",
+          "name": "unlink",
+          "desc": "<p>Asynchronous unlink(2). No arguments other than a possible exception are given\nto the completion callback.\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "path"
+                },
+                {
+                  "name": "callback",
+                  "optional": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.unlinkSync(path)",
+          "type": "method",
+          "name": "unlinkSync",
+          "desc": "<p>Synchronous unlink(2).\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "path"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.rmdir(path, [callback])",
+          "type": "method",
+          "name": "rmdir",
+          "desc": "<p>Asynchronous rmdir(2). No arguments other than a possible exception are given\nto the completion callback.\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "path"
+                },
+                {
+                  "name": "callback",
+                  "optional": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.rmdirSync(path)",
+          "type": "method",
+          "name": "rmdirSync",
+          "desc": "<p>Synchronous rmdir(2).\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "path"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.mkdir(path, mode, [callback])",
+          "type": "method",
+          "name": "mkdir",
+          "desc": "<p>Asynchronous mkdir(2). No arguments other than a possible exception are given\nto the completion callback.\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "path"
+                },
+                {
+                  "name": "mode"
+                },
+                {
+                  "name": "callback",
+                  "optional": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.mkdirSync(path, mode)",
+          "type": "method",
+          "name": "mkdirSync",
+          "desc": "<p>Synchronous mkdir(2).\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "path"
+                },
+                {
+                  "name": "mode"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.readdir(path, [callback])",
+          "type": "method",
+          "name": "readdir",
+          "desc": "<p>Asynchronous readdir(3).  Reads the contents of a directory.\nThe callback gets two arguments <code>(err, files)</code> where <code>files</code> is an array of\nthe names of the files in the directory excluding <code>&apos;.&apos;</code> and <code>&apos;..&apos;</code>.\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "path"
+                },
+                {
+                  "name": "callback",
+                  "optional": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.readdirSync(path)",
+          "type": "method",
+          "name": "readdirSync",
+          "desc": "<p>Synchronous readdir(3). Returns an array of filenames excluding <code>&apos;.&apos;</code> and\n<code>&apos;..&apos;</code>.\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "path"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.close(fd, [callback])",
+          "type": "method",
+          "name": "close",
+          "desc": "<p>Asynchronous close(2).  No arguments other than a possible exception are given\nto the completion callback.\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "fd"
+                },
+                {
+                  "name": "callback",
+                  "optional": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.closeSync(fd)",
+          "type": "method",
+          "name": "closeSync",
+          "desc": "<p>Synchronous close(2).\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "fd"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.open(path, flags, [mode], [callback])",
+          "type": "method",
+          "name": "open",
+          "desc": "<p>Asynchronous file open. See open(2). Flags can be &apos;r&apos;, &apos;r+&apos;, &apos;w&apos;, &apos;w+&apos;, &apos;a&apos;,\nor &apos;a+&apos;. <code>mode</code> defaults to 0666. The callback gets two arguments <code>(err, fd)</code>.\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "path"
+                },
+                {
+                  "name": "flags"
+                },
+                {
+                  "name": "mode",
+                  "optional": true
+                },
+                {
+                  "name": "callback",
+                  "optional": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.openSync(path, flags, [mode])",
+          "type": "method",
+          "name": "openSync",
+          "desc": "<p>Synchronous open(2).\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "path"
+                },
+                {
+                  "name": "flags"
+                },
+                {
+                  "name": "mode",
+                  "optional": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.write(fd, buffer, offset, length, position, [callback])",
+          "type": "method",
+          "name": "write",
+          "desc": "<p>Write <code>buffer</code> to the file specified by <code>fd</code>.\n\n</p>\n<p><code>offset</code> and <code>length</code> determine the part of the buffer to be written.\n\n</p>\n<p><code>position</code> refers to the offset from the beginning of the file where this data\nshould be written. If <code>position</code> is <code>null</code>, the data will be written at the\ncurrent position.\nSee pwrite(2).\n\n</p>\n<p>The callback will be given two arguments <code>(err, written)</code> where <code>written</code>\nspecifies how many <em>bytes</em> were written.\n\n</p>\n<p>Note that it is unsafe to use <code>fs.write</code> multiple times on the same file\nwithout waiting for the callback. For this scenario,\n<code>fs.createWriteStream</code> is strongly recommended.\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "fd"
+                },
+                {
+                  "name": "buffer"
+                },
+                {
+                  "name": "offset"
+                },
+                {
+                  "name": "length"
+                },
+                {
+                  "name": "position"
+                },
+                {
+                  "name": "callback",
+                  "optional": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.writeSync(fd, buffer, offset, length, position)",
+          "type": "method",
+          "name": "writeSync",
+          "desc": "<p>Synchronous version of buffer-based <code>fs.write()</code>. Returns the number of bytes\nwritten.\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "fd"
+                },
+                {
+                  "name": "buffer"
+                },
+                {
+                  "name": "offset"
+                },
+                {
+                  "name": "length"
+                },
+                {
+                  "name": "position"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.writeSync(fd, str, position, encoding='utf8')",
+          "type": "method",
+          "name": "writeSync",
+          "desc": "<p>Synchronous version of string-based <code>fs.write()</code>. Returns the number of bytes\nwritten.\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "fd"
+                },
+                {
+                  "name": "str"
+                },
+                {
+                  "name": "position"
+                },
+                {
+                  "name": "encoding",
+                  "default": "'utf8'"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.read(fd, buffer, offset, length, position, [callback])",
+          "type": "method",
+          "name": "read",
+          "desc": "<p>Read data from the file specified by <code>fd</code>.\n\n</p>\n<p><code>buffer</code> is the buffer that the data will be written to.\n\n</p>\n<p><code>offset</code> is offset within the buffer where writing will start.\n\n</p>\n<p><code>length</code> is an integer specifying the number of bytes to read.\n\n</p>\n<p><code>position</code> is an integer specifying where to begin reading from in the file.\nIf <code>position</code> is <code>null</code>, data will be read from the current file position.\n\n</p>\n<p>The callback is given the two arguments, <code>(err, bytesRead)</code>.\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "fd"
+                },
+                {
+                  "name": "buffer"
+                },
+                {
+                  "name": "offset"
+                },
+                {
+                  "name": "length"
+                },
+                {
+                  "name": "position"
+                },
+                {
+                  "name": "callback",
+                  "optional": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.readSync(fd, buffer, offset, length, position)",
+          "type": "method",
+          "name": "readSync",
+          "desc": "<p>Synchronous version of buffer-based <code>fs.read</code>. Returns the number of\n<code>bytesRead</code>.\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "fd"
+                },
+                {
+                  "name": "buffer"
+                },
+                {
+                  "name": "offset"
+                },
+                {
+                  "name": "length"
+                },
+                {
+                  "name": "position"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.readSync(fd, length, position, encoding)",
+          "type": "method",
+          "name": "readSync",
+          "desc": "<p>Synchronous version of string-based <code>fs.read</code>. Returns the number of\n<code>bytesRead</code>.\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "fd"
+                },
+                {
+                  "name": "length"
+                },
+                {
+                  "name": "position"
+                },
+                {
+                  "name": "encoding"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.readFile(filename, [encoding], [callback])",
+          "type": "method",
+          "name": "readFile",
+          "desc": "<p>Asynchronously reads the entire contents of a file. Example:\n\n</p>\n<pre><code>fs.readFile(&apos;/etc/passwd&apos;, function (err, data) {\n  if (err) throw err;\n  console.log(data);\n});</code></pre>\n<p>The callback is passed two arguments <code>(err, data)</code>, where <code>data</code> is the\ncontents of the file.\n\n</p>\n<p>If no encoding is specified, then the raw buffer is returned.\n\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "filename"
+                },
+                {
+                  "name": "encoding",
+                  "optional": true
+                },
+                {
+                  "name": "callback",
+                  "optional": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.readFileSync(filename, [encoding])",
+          "type": "method",
+          "name": "readFileSync",
+          "desc": "<p>Synchronous version of <code>fs.readFile</code>. Returns the contents of the <code>filename</code>.\n\n</p>\n<p>If <code>encoding</code> is specified then this function returns a string. Otherwise it\nreturns a buffer.\n\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "filename"
+                },
+                {
+                  "name": "encoding",
+                  "optional": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.writeFile(filename, data, encoding='utf8', [callback])",
+          "type": "method",
+          "name": "writeFile",
+          "desc": "<p>Asynchronously writes data to a file, replacing the file if it already exists.\n<code>data</code> can be a string or a buffer.\n\n</p>\n<p>Example:\n\n</p>\n<pre><code>fs.writeFile(&apos;message.txt&apos;, &apos;Hello Node&apos;, function (err) {\n  if (err) throw err;\n  console.log(&apos;It\\&apos;s saved!&apos;);\n});</code></pre>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "filename"
+                },
+                {
+                  "name": "data"
+                },
+                {
+                  "name": "encoding",
+                  "default": "'utf8'"
+                },
+                {
+                  "name": "callback",
+                  "optional": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.writeFileSync(filename, data, encoding='utf8')",
+          "type": "method",
+          "name": "writeFileSync",
+          "desc": "<p>The synchronous version of <code>fs.writeFile</code>.\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "filename"
+                },
+                {
+                  "name": "data"
+                },
+                {
+                  "name": "encoding",
+                  "default": "'utf8'"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.watchFile(filename, [options], listener)",
+          "type": "method",
+          "name": "watchFile",
+          "desc": "<p>Watch for changes on <code>filename</code>. The callback <code>listener</code> will be called each\ntime the file is accessed.\n\n</p>\n<p>The second argument is optional. The <code>options</code> if provided should be an object\ncontaining two members a boolean, <code>persistent</code>, and <code>interval</code>, a polling\nvalue in milliseconds. The default is <code>{ persistent: true, interval: 0 }</code>.\n\n</p>\n<p>The <code>listener</code> gets two arguments the current stat object and the previous\nstat object:\n\n</p>\n<pre><code>fs.watchFile(f, function (curr, prev) {\n  console.log(&apos;the current mtime is: &apos; + curr.mtime);\n  console.log(&apos;the previous mtime was: &apos; + prev.mtime);\n});</code></pre>\n<p>These stat objects are instances of <code>fs.Stat</code>.\n\n</p>\n<p>If you want to be notified when the file was modified, not just accessed\nyou need to compare <code>curr.mtime</code> and `prev.mtime.\n\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "filename"
+                },
+                {
+                  "name": "options",
+                  "optional": true
+                },
+                {
+                  "name": "listener"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.unwatchFile(filename)",
+          "type": "method",
+          "name": "unwatchFile",
+          "desc": "<p>Stop watching for changes on <code>filename</code>.\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "filename"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.createReadStream(path, [options])",
+          "type": "method",
+          "name": "createReadStream",
+          "desc": "<p>Returns a new ReadStream object (See <code>Readable Stream</code>).\n\n</p>\n<p><code>options</code> is an object with the following defaults:\n\n</p>\n<pre><code>{ flags: &apos;r&apos;,\n  encoding: null,\n  fd: null,\n  mode: 0666,\n  bufferSize: 64 * 1024\n}</code></pre>\n<p><code>options</code> can include <code>start</code> and <code>end</code> values to read a range of bytes from\nthe file instead of the entire file.  Both <code>start</code> and <code>end</code> are inclusive and\nstart at 0.  When used, both the limits must be specified always.\n\n</p>\n<p>An example to read the last 10 bytes of a file which is 100 bytes long:\n\n</p>\n<pre><code>fs.createReadStream(&apos;sample.txt&apos;, {start: 90, end: 99});</code></pre>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "path"
+                },
+                {
+                  "name": "options",
+                  "optional": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "fs.createWriteStream(path, [options])",
+          "type": "method",
+          "name": "createWriteStream",
+          "desc": "<p>Returns a new WriteStream object (See <code>Writable Stream</code>).\n\n</p>\n<p><code>options</code> is an object with the following defaults:\n\n</p>\n<pre><code>{ flags: &apos;w&apos;,\n  encoding: null,\n  mode: 0666 }</code></pre>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "path"
+                },
+                {
+                  "name": "options",
+                  "optional": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "properties": [
+        {
+          "textRaw": "fs.Stats",
+          "name": "Stats",
+          "desc": "<p>Objects returned from <code>fs.stat()</code> and <code>fs.lstat()</code> are of this type.\n\n</p>\n<ul>\n<li><code>stats.isFile()</code></li>\n<li><code>stats.isDirectory()</code></li>\n<li><code>stats.isBlockDevice()</code></li>\n<li><code>stats.isCharacterDevice()</code></li>\n<li><code>stats.isSymbolicLink()</code> (only valid with  <code>fs.lstat()</code>)</li>\n<li><code>stats.isFIFO()</code></li>\n<li><code>stats.isSocket()</code></li>\n</ul>\n"
+        },
+        {
+          "textRaw": "fs.ReadStream",
+          "name": "ReadStream",
+          "desc": "<p><code>ReadStream</code> is a <code>Readable Stream</code>.\n\n</p>\n"
+        },
+        {
+          "textRaw": "fs.WriteStream",
+          "name": "WriteStream",
+          "desc": "<p><code>WriteStream</code> is a <code>Writable Stream</code>.\n\n</p>\n"
+        }
+      ],
+      "events": [
+        {
+          "textRaw": "Event: 'open'",
+          "type": "event",
+          "name": "open",
+          "desc": "<p><code>function (fd) { }</code>\n\n</p>\n<p> <code>fd</code> is the file descriptor used by the WriteStream.\n\n</p>\n",
+          "params": []
+        }
+      ],
+      "type": "module",
+      "displayName": "File System"
+    }
+  ]
+}

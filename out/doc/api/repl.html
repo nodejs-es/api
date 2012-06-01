@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>REPL Node.js v0.6.10 Manual &amp; Documentation</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/sh.css">
+  <link rel="canonical" href="http://nodejs.org/api/repl.html">
+</head>
+<body class="alt apidoc" id="api-section-repl">
+    <div id="intro" class="interior">
+        <a href="/" title="Go back to the home page">
+            <img id="logo" src="images/logo-light.png" alt="node.js">
+        </a>
+    </div>
+    <div id="content" class="clearfix">
+        <div id="column2" class="interior">
+            <ul>
+                <li><a href="/" class="home">Home</a></li>
+                <li><a href="/#download" class="download">Download</a></li>
+                <li><a href="/about/" class="about">About</a></li>
+                <li><a href="http://search.npmjs.org/" class="npm">npm Registry</a></li>
+                <li><a href="http://nodejs.org/docs/latest/api/index.html" class="docs current">Docs</a></li>
+                <li><a href="http://blog.nodejs.org" class="blog">Blog</a></li>
+                <li><a href="/community/" class="community">Community</a></li>
+                <li><a href="/logos/" class="logos">Logos</a></li>
+                <li><a href="http://jobs.nodejs.org/" class="jobs">Jobs</a></li>
+            </ul>
+            <p class="twitter"><a href="http://twitter.com/nodejs">@nodejs</a></p>
+        </div>
+
+        <div id="column1" class="interior">
+          <header>
+            <h1>Node.js v0.6.10 Manual &amp; Documentation</h1>
+            <div id="gtoc">
+              <p><a href="index.html" name="toc">Index</a> | <a href="all.html">View on single page</a></p>
+            </div>
+            <hr>
+          </header>
+
+          <div id="toc">
+            <h2>Table of Contents</h2>
+            <ul>
+<li><a href="#repl_repl">REPL</a><ul>
+<li><a href="#repl_repl_start_prompt_stream_eval_useglobal_ignoreundefined">repl.start([prompt], [stream], [eval], [useGlobal], [ignoreUndefined])</a></li>
+<li><a href="#repl_caracter_sticas_de_repl">Características de REPL</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+
+          <div id="apicontent">
+            <h1>REPL<span><a class="mark" href="#repl_repl" id="repl_repl">#</a></span></h1>
+<p>Read-Eval-Print-Loop (REPL) está disponible como un programa independiente y fácilmente
+puede incluirse en otros programas.  REPL proporciona una forma interactiva de ejecutar
+JavaScript y ver los resultados.  Puede ser utilizado para la depuración, pruebas, o
+simplemente para probar cosas.
+
+</p>
+<p>Debe ejectuarlo en <code>node</code> sin singún argumento desde la línea de comandos, debe posicionarse 
+dentro de REPL. Posee la edición simple de líneas de emacs.
+
+</p>
+<pre><code>mjr:~$ node
+Type &apos;.help&apos; for options.
+&gt; a = [ 1, 2, 3];
+[ 1, 2, 3 ]
+&gt; a.forEach(function (v) {
+...   console.log(v);
+...   });
+1
+2
+3</code></pre>
+<p>Para editores avanzados, inice node con la variable de entorno <code>NODE_NO_READLINE=1</code>.
+Se iniciará la configuración de REPL en la terminal y l permite utilizarlo con <code>rlwrap</code>.
+
+</p>
+<p>Por ejemplo, puede añadir lo siguiente al fichero bashrc:
+
+</p>
+<pre><code>alias node=&quot;env NODE_NO_READLINE=1 rlwrap node&quot;</code></pre>
+<h2>repl.start([prompt], [stream], [eval], [useGlobal], [ignoreUndefined])<span><a class="mark" href="#repl_repl_start_prompt_stream_eval_useglobal_ignoreundefined" id="repl_repl_start_prompt_stream_eval_useglobal_ignoreundefined">#</a></span></h2>
+<p>Inicia REPL con el <code>prompt</code> como el prompt y  el <code>stream</code> para todo los procesos de I/O (Entrada/Salida). 
+<code>prompt</code> es opcional y por omisión es <code>&gt; </code>.  <code>stream</code> es opcional y por omisión es 
+<code>process.stdin</code>. <code>eval</code> is optional too and defaults to async wrapper for
+<code>eval()</code>.
+
+</p>
+<p>If <code>useGlobal</code> is set to true, then the repl will use the global object,
+instead of running scripts in a separate context. Defaults to <code>false</code>.
+
+</p>
+<p>If <code>ignoreUndefined</code> is set to true, then the repl will not output return value
+of command if it&apos;s <code>undefined</code>. Defaults to <code>false</code>.
+
+</p>
+<p>You can use your own <code>eval</code> function if it has following signature:
+
+</p>
+<pre><code>function eval(cmd, callback) {
+  callback(null, result);
+}</code></pre>
+<p>Multiples REPLs pueden iniciar con una misma instancia de node.  Cada
+uno de ellos comparten el objeto global, pero tendrán un único proceso de I/O.
+
+</p>
+<p>Acontinuación un ejemplo que inicia REPL en stdin, un socket en Unix, y un socket en TCP:
+
+</p>
+<pre><code>var net = require(&quot;net&quot;),
+    repl = require(&quot;repl&quot;);
+
+connections = 0;
+
+repl.start(&quot;node via stdin&gt; &quot;);
+
+net.createServer(function (socket) {
+  connections += 1;
+  repl.start(&quot;node via Unix socket&gt; &quot;, socket);
+}).listen(&quot;/tmp/node-repl-sock&quot;);
+
+net.createServer(function (socket) {
+  connections += 1;
+  repl.start(&quot;node via TCP socket&gt; &quot;, socket);
+}).listen(5001);</code></pre>
+<p>Ejecutando el programa desde la línea de comando iniciará REPL en stdin.  Otros
+clientes REPL pueden conectarse a través de un socket Unix o TCP. <code>telnet</code> es útil
+para la conexión de sockets TCP, y <code>socat</code> puede ser conectar ambos sockets Unix y
+TCP.
+
+</p>
+<p>Al iniciar REPL desde un socket Unix basado en una instancia de stdin, puede 
+conectarse a un  proceso en ejecución de node sin reiniciar el mismo.
+
+
+</p>
+<h2>Características de REPL<span><a class="mark" href="#repl_caracter_sticas_de_repl" id="repl_caracter_sticas_de_repl">#</a></span></h2>
+<!-- type=misc -->
+
+<p>Dentro de REPL, presione Control+D para salir.  Expresiones de varias líneas pueden ser
+ingresadas.
+
+</p>
+<p>La variable especial <code>_</code> (underscore) contiene el resultado de la última expresión.
+
+</p>
+<pre><code>&gt; [ &quot;a&quot;, &quot;b&quot;, &quot;c&quot; ]
+[ &apos;a&apos;, &apos;b&apos;, &apos;c&apos; ]
+&gt; _.length
+3
+&gt; _ += 1
+4</code></pre>
+<p>REPL proporciona acceso a cualquier variable de ámbito global. Puede exponer 
+una variable a REPL explícitamente y asignarle a un contexto de objeto asociado 
+con cada <code>REPLServer</code>.  Por ejemplo:
+
+</p>
+<pre><code>// repl_test.js
+var repl = require(&quot;repl&quot;),
+    msg = &quot;message&quot;;
+
+repl.start().context.m = msg;</code></pre>
+<p>Los sucesos en el objeto <code>context</code> aparecen como local en REPL:
+
+</p>
+<pre><code>mjr:~$ node repl_test.js
+&gt; m
+&apos;message&apos;</code></pre>
+<p>Hay algunos comandos especiales de REPL:
+
+</p>
+<ul>
+<li><code>.break</code> - Si  bien ingresar expresiones en varias líneas, a veces, pueden perderse
+o simplemente no son tomados en cuenta. <code>.break</code> comenzará de nuevo.</li>
+<li><code>.clear</code> - Restablece el objeto <code>context</code> a un objeto vacío y borra cualquier
+expresión de varias líneas.</li>
+<li><code>.exit</code> - Cierra los stream de I/O, que hará que REPL termine.</li>
+<li><code>.help</code> - Muestra la lista de comandos especiales.</li>
+<li><code>.save</code> - Guarda la sesión actual de REPL en un fichero<blockquote>
+<p>.save ./file/to/save.js</p>
+</blockquote>
+</li>
+<li><code>.load</code> - Carga un fichero en la sesión actual de REPL.<blockquote>
+<p>.load ./file/to/load.js  </p>
+</blockquote>
+</li>
+</ul>
+<p>Lo siguiente son combinaciones del teclado para el uso especial de REPL:
+
+</p>
+<ul>
+<li><code>&lt;ctrl&gt;C</code> - Similar a la tecla <code>break</code>. Termina el comando
+actual. Presione dos veces en la línea para forzar la salida.</li>
+<li><code>&lt;ctrl&gt;D</code> - Similar a la tecla <code>.exit</code>.</li>
+</ul>
+
+          </div>
+        </div>
+    </div>
+    <div id="footer">
+        <ul class="clearfix">
+            <li><a href="/">Node.js</a></li>
+            <li><a href="/#download">Download</a></li>
+            <li><a href="/about/">About</a></li>
+            <li><a href="http://search.npmjs.org/">npm Registry</a></li>
+            <li><a href="http://nodejs.org/docs/latest/api/index.html">Docs</a></li>
+            <li><a href="http://blog.nodejs.org">Blog</a></li>
+            <li><a href="/community/">Community</a></li>
+            <li><a href="/logos/">Logos</a></li>
+            <li><a href="http://jobs.nodejs.org/">Jobs</a></li>
+            <li><a href="http://twitter.com/nodejs" class="twitter">@nodejs</a></li>
+        </ul>
+
+        <p>Copyright 2010 <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.10/LICENSE">license</a>.</p>
+    </div>
+
+  <script src="assets/sh_main.js"></script>
+  <script src="assets/sh_javascript.min.js"></script>
+  <script>highlight(undefined, undefined, 'pre');</script>
+</body>
+</html>
+

@@ -1,0 +1,99 @@
+{
+  "source": "doc/api/tty.markdown",
+  "modules": [
+    {
+      "textRaw": "TTY (Terminal)",
+      "name": "tty_(terminal)",
+      "desc": "<p>Utilice <code>require(&apos;tty&apos;)</code> para acceder al módulo.\n\n</p>\n<p>Ejemplo:\n\n</p>\n<pre><code>var tty = require(&apos;tty&apos;);\ntty.setRawMode(true);\nprocess.stdin.resume();\nprocess.stdin.on(&apos;keypress&apos;, function(char, key) {\n  if (key &amp;&amp; key.ctrl &amp;&amp; key.name == &apos;c&apos;) {\n    console.log(&apos;salida airosa&apos;);\n    process.exit()\n  }\n});</code></pre>\n",
+      "methods": [
+        {
+          "textRaw": "tty.open(path, args=[])",
+          "type": "method",
+          "name": "open",
+          "desc": "<p>Genera un nuevo proceso con el fichero ejecutable en la <code>ruta</code> como la sesión\nactual a una nueva pseudo terminal.\n\n</p>\n<p>Devuelve un array <code>[slaveFD, childProcess]</code>. <code>slaveFD</code> es el descriptor de fichero\nesclavo de la pseudo terminal. <code>childProcess</code> es un proceso hijo de un \nobjeto.\n\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "path"
+                },
+                {
+                  "name": "args",
+                  "default": "["
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "tty.isatty(fd)",
+          "type": "method",
+          "name": "isatty",
+          "desc": "<p>Devuelve <code>true</code> o <code>false</code> dependiendo si el <code>fd</code> es asociado con el\nterminal.\n\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "fd"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "tty.setRawMode(mode)",
+          "type": "method",
+          "name": "setRawMode",
+          "desc": "<p><code>mode</code> debe ser <code>true</code> o <code>false</code>. Se establece las propiedades al proceso actual\nde stdin fd para actuar ya sea como un dispositivo de modo sin formato o por omisión.\n\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "mode"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "tty.setWindowSize(fd, row, col)",
+          "type": "method",
+          "name": "setWindowSize",
+          "desc": "<p><code>ioctl</code> ajusta la configuración de la ventana del descriptor de fichero.\n\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "fd"
+                },
+                {
+                  "name": "row"
+                },
+                {
+                  "name": "col"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "tty.getWindowSize(fd)",
+          "type": "method",
+          "name": "getWindowSize",
+          "desc": "<p>Devuelve <code>[row, col]</code> associado a la TTY con el descriptor de fichero.\n\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "fd"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "type": "module",
+      "displayName": "TTY (Terminal)"
+    }
+  ]
+}

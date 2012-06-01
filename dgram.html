@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>UDP / Sockets de Datagrama Node.js v0.6.18 Manual &amp; Documentación</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/sh.css">
+  <link rel="canonical" href="http://nodejs.org/api/dgram.html">
+</head>
+<body class="alt apidoc" id="api-section-dgram">
+    <div id="intro" class="interior">
+        <a href="/" title="Go back to the home page">
+            <img id="logo" src="images/logo-light-es.png" alt="node.js">
+        </a>
+    </div>
+    <div id="content" class="clearfix">
+      <div id="column2" class="interior">
+        <div class="official-nodejs-es menu-block">
+          <h2>Nodejs.es</h2>
+            <ul>
+                <li><a href="http://www.nodejs.es/" class="home">Home</a></li>
+                <li><a href="http://api.nodejs.es" class="docs current">Docs</a></li>
+                <li><a href="http://trabajos.nodejs.es/" class="jobs">Trabajos</a></li>
+            </ul>
+            <p class="twitter"><a href="http://twitter.com/nodejs_es">@nodejs_es</a></p>
+        </div>
+
+        <div class="official-site menu-block">
+          <h2>Sitio Oficial</h2>
+            <ul>
+                <li><a href="http://www.nodejs.org/" class="home">Home</a></li>
+                <li><a href="http://www.nodejs.org/#download" class="download">Descargar</a></li>
+                <li><a href="http://www.nodejs.org/about/" class="about">Acerca</a></li>
+                <li><a href="http://search.npmjs.org/" class="npm">Registo npm</a></li>
+                <li><a href="http://nodejs.org/api/" class="docs">Docs</a></li>
+                <li><a href="http://blog.nodejs.org" class="blog">Blog</a></li>
+                <li><a href="http://www.nodejs.org/community/" class="community">Comunidad</a></li>
+                <li><a href="http://www.nodejs.org/logos/" class="logos">Logos</a></li>
+                <li><a href="http://jobs.nodejs.org/" class="jobs">Trabajos</a></li>
+            </ul>
+            <p class="twitter"><a href="http://twitter.com/nodejs">@nodejs</a></p>
+        </div>
+      </div>
+
+        <div id="column1" class="interior">
+          <header>
+            <h1>Node.js v0.6.18 Manual &amp; Documentación</h1>
+            <div id="gtoc">
+              <p>
+                <a href="index.html" name="toc">Indice</a> |
+                <a href="all.html">Ver todo en una misma página</a> |
+                <a href="dgram.json">Ver como JSON</a>
+              </p>
+            </div>
+            <hr>
+          </header>
+
+          <div id="toc">
+            <h2>Tabla de Contenidos</h2>
+            <ul>
+<li><a href="#dgram_udp_sockets_de_datagrama">UDP / Sockets de Datagrama</a><ul>
+<li><a href="#dgram_evento_message">Evento: &apos;message&apos;</a><ul>
+<li><a href="#dgram_evento_listening">Evento: &apos;listening&apos;</a></li>
+</ul>
+</li>
+<li><a href="#dgram_evento_close">Evento: &apos;close&apos;</a><ul>
+<li><a href="#dgram_dgram_createsocket_type_callback">dgram.createSocket(type, [callback])</a></li>
+<li><a href="#dgram_dgram_send_buf_offset_length_path_callback">dgram.send(buf, offset, length, path, [callback])</a></li>
+</ul>
+</li>
+<li><a href="#dgram_dgram_send_buf_offset_length_port_address_callback">dgram.send(buf, offset, length, port, address, [callback])</a></li>
+<li><a href="#dgram_dgram_bind_path">dgram.bind(path)</a><ul>
+<li><a href="#dgram_dgram_bind_port_address">dgram.bind(port, [address])</a></li>
+</ul>
+</li>
+<li><a href="#dgram_dgram_close">dgram.close()</a><ul>
+<li><a href="#dgram_dgram_address">dgram.address()</a></li>
+<li><a href="#dgram_dgram_setbroadcast_flag">dgram.setBroadcast(flag)</a></li>
+</ul>
+</li>
+<li><a href="#dgram_dgram_setttl_ttl">dgram.setTTL(ttl)</a><ul>
+<li><a href="#dgram_dgram_setmulticastttl_ttl">dgram.setMulticastTTL(ttl)</a></li>
+<li><a href="#dgram_dgram_setmulticastloopback_flag">dgram.setMulticastLoopback(flag)</a></li>
+</ul>
+</li>
+<li><a href="#dgram_dgram_addmembership_multicastaddress_multicastinterface">dgram.addMembership(multicastAddress, [multicastInterface])</a></li>
+<li><a href="#dgram_dgram_dropmembership_multicastaddress_multicastinterface">dgram.dropMembership(multicastAddress, [multicastInterface])</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+
+          <div id="apicontent">
+            <h1>UDP / Sockets de Datagrama<span><a class="mark" href="#dgram_udp_sockets_de_datagrama" id="dgram_udp_sockets_de_datagrama">#</a></span></h1>
+<pre><code>Stability: 3 - Stable</code></pre>
+<!-- name=dgram -->
+
+<p>Los sockets de datagrama están disponibles a través de <code>require(&apos;dgram&apos;)</code>.  Normalmente los datagramas 
+se manejan como mensajes IP/UDP pero también se pueden usar a través de sockets de dominio Unix.
+
+</p>
+<h2>Evento: &apos;message&apos;<span><a class="mark" href="#dgram_evento_message" id="dgram_evento_message">#</a></span></h2>
+<p><code>function (msg, rinfo) { }</code>
+
+</p>
+<p>Emitido cuando está disponible un nuevo datagrama en el socket.  <code>msg es un </code>Buffer<code> y </code>rinfo` es 
+un objeto con la dirección de quien lo envía y el número de bytes que contiene el datagrama.
+
+</p>
+<h3>Evento: &apos;listening&apos;<span><a class="mark" href="#dgram_evento_listening" id="dgram_evento_listening">#</a></span></h3>
+<p><code>function () { }</code>
+
+</p>
+<p>Emitido cuando un socket empieza a escuchar la llegada de datagramas.  Esto ocurre tan pronto como 
+son creados los sockets UDP.  Los sockets de dominio Unix no empiezan a escuchar hasta que se llama 
+implícitamente a <code>bind()</code>.
+
+</p>
+<h2>Evento: &apos;close&apos;<span><a class="mark" href="#dgram_evento_close" id="dgram_evento_close">#</a></span></h2>
+<p><code>function () { }</code>
+
+</p>
+<p>Emitido cuando se cierra un socket con <code>close()</code>. No se emitirán nuevos <code>message</code>en este 
+socket.
+
+</p>
+<h3>dgram.createSocket(type, [callback])<span><a class="mark" href="#dgram_dgram_createsocket_type_callback" id="dgram_dgram_createsocket_type_callback">#</a></span></h3>
+<p>Crea un socket de datagrama del tipo especificado.  Los tipos válidos son:
+<code>udp4</code>, <code>udp6</code> y <code>unix_dgram</code>.
+
+</p>
+<p>Recibe un callback opcional que se añade como listener de los eventos <code>message</code>.
+
+</p>
+<h3>dgram.send(buf, offset, length, path, [callback])<span><a class="mark" href="#dgram_dgram_send_buf_offset_length_path_callback" id="dgram_dgram_send_buf_offset_length_path_callback">#</a></span></h3>
+<p>Para los sockets de datagrama del dominio Unix, la dirección de destion es un nombre de ruta 
+en sistema de ficheros. Se puede pasar un callback opcional que se invoca cuando se completa la llamada 
+a <code>sendto</code> por parte del SO. No es seguro reutilizar <code>buf</code> hasta que se ha invocado el callback. Hay 
+que tener en cuenta que a no ser que el socket este asociado a un nombre de ruta con <code>bind()</code> no hay manera 
+de recibir mensajes en el socket.
+
+</p>
+<p>Ejemplo de envío de un mensaje al syslogd en OSX via un socket de dominio Unix <code>/var/run/syslog</code>:
+
+</p>
+<pre><code>var dgram = require(&apos;dgram&apos;);
+var message = new Buffer(&quot;Un mensaje de log.&quot;);
+var client = dgram.createSocket(&quot;unix_dgram&quot;);
+client.send(message, 0, message.length, &quot;/var/run/syslog&quot;,
+  function (err, bytes) {
+    if (err) {
+      throw err;
+    }
+    console.log(&quot;Se han escrito &quot; + bytes + &quot; bytes en el socket.&quot;);
+});</code></pre>
+<h2>dgram.send(buf, offset, length, port, address, [callback])<span><a class="mark" href="#dgram_dgram_send_buf_offset_length_port_address_callback" id="dgram_dgram_send_buf_offset_length_port_address_callback">#</a></span></h2>
+<p>Para los sockets UDP, el puerto y la dirección IP de destino tienen que especificarse.  Se 
+puede pasar un string al parámetro <code>address</code>, y se podrá resolver por DNS.  Se puede especificar 
+un callback opcional para detectar cualquier error de DNS y cuando puede volverse a usar <code>buf</code>.<br>Tener en cuenta que las búsquedas de DNS retrasarán el tiempo del envío, al menos hasta el siguiente 
+tick.  La única manera de asegurarse de que se ha realizado un envío es mediante el callback.
+
+</p>
+<p>Ejemplo de enviar un paquete UDP a un puerto aleatorio de <code>localhost</code>;
+
+</p>
+<pre><code>var dgram = require(&apos;dgram&apos;);
+var message = new Buffer(&quot;Algunos bytes&quot;);
+var client = dgram.createSocket(&quot;udp4&quot;);
+client.send(message, 0, message.length, 41234, &quot;localhost&quot;);
+client.close();</code></pre>
+<h2>dgram.bind(path)<span><a class="mark" href="#dgram_dgram_bind_path" id="dgram_dgram_bind_path">#</a></span></h2>
+<p>Para los sockets de datagrama de dominio Unix, empezar a escuchar datagramas entrantes en 
+el socket especificado por <code>path</code>. Notar que los clientes pueden hacer <code>send()</code> sin haber hecho <code>bind()</code>, 
+pero no se recibirá ningún datagrama sin haber hecho un <code>bind()</code>.
+
+</p>
+<p>Ejemplo de un servidor de datagramas de dominio Unix, que devuelve el eco de los mensajes que recibe:
+
+</p>
+<pre><code>var dgram = require(&quot;dgram&quot;);
+var serverPath = &quot;/tmp/dgram_server_sock&quot;;
+var server = dgram.createSocket(&quot;unix_dgram&quot;);
+
+server.on(&quot;message&quot;, function (msg, rinfo) {
+  console.log(&quot;recibido: &quot; + msg + &quot; de &quot; + rinfo.address);
+  server.send(msg, 0, msg.length, rinfo.address);
+});
+
+server.on(&quot;listening&quot;, function () {
+  console.log(&quot;servidor escuchando &quot; + server.address().address);
+})
+
+server.bind(serverPath);</code></pre>
+<p>Ejemplo de un cliente de datagramas de dominio Unix que habla con el servidor:
+
+</p>
+<pre><code>var dgram = require(&quot;dgram&quot;);
+var serverPath = &quot;/tmp/dgram_server_sock&quot;;
+var clientPath = &quot;/tmp/dgram_client_sock&quot;;
+
+var message = new Buffer(&quot;Un mensaje el &quot; + (new Date()));
+
+var client = dgram.createSocket(&quot;unix_dgram&quot;);
+
+client.on(&quot;message&quot;, function (msg, rinfo) {
+  console.log(&quot;recibido: &quot; + msg + &quot; de &quot; + rinfo.address);
+});
+
+client.on(&quot;listening&quot;, function () {
+  console.log(&quot;cliente escuchando &quot; + client.address().address);
+  client.send(message, 0, message.length, serverPath);
+});
+
+client.bind(clientPath);</code></pre>
+<h3>dgram.bind(port, [address])<span><a class="mark" href="#dgram_dgram_bind_port_address" id="dgram_dgram_bind_port_address">#</a></span></h3>
+<p>Para los sockets UDP, hay que escuhar los datagramas en un <code>port</code> específico y en el <code>address</code> opcional.  Si 
+no se especifica <code>address</code>, el SO intentará escuchar en todas las direcciones.
+
+</p>
+<p>Ejemplo de un servidor UDP escuchando en el puerto 41234:
+
+</p>
+<pre><code>var dgram = require(&quot;dgram&quot;);
+
+var server = dgram.createSocket(&quot;udp4&quot;);
+
+server.on(&quot;message&quot;, function (msg, rinfo) {
+  console.log(&quot;el servidor ha recibido: &quot; + msg + &quot; de &quot; +
+    rinfo.address + &quot;:&quot; + rinfo.port);
+});
+
+server.on(&quot;listening&quot;, function () {
+  var address = server.address();
+  console.log(&quot;servidor escuchando &quot; +
+      address.address + &quot;:&quot; + address.port);
+});
+
+server.bind(41234);
+// server listening 0.0.0.0:41234</code></pre>
+<h2>dgram.close()<span><a class="mark" href="#dgram_dgram_close" id="dgram_dgram_close">#</a></span></h2>
+<p>Cierra el socket subyacente y para de escuchar datos en él.  Los sockets UDP 
+automáticamente se ponen a escuchar mensjaes, incluso si no han llamado a <code>bind()</code>.
+
+</p>
+<h3>dgram.address()<span><a class="mark" href="#dgram_dgram_address" id="dgram_dgram_address">#</a></span></h3>
+<p>Devuelve un objeto que contiene la información de la dirección de un socket.  Para los sockets 
+UDP, este objeto contendrá la <code>address</code> y el <code>port</code>.  Para los sockets de dominio Unix, solo contendrá 
+la <code>address</code>.
+
+</p>
+<h3>dgram.setBroadcast(flag)<span><a class="mark" href="#dgram_dgram_setbroadcast_flag" id="dgram_dgram_setbroadcast_flag">#</a></span></h3>
+<p>Establece o borra la opción del socket <code>SO_BROADCAST</code>.  Cuando se activa esta opción, los 
+paquetes UDP se pueden enviar una dirección de broadcast de un interfaz local.
+
+</p>
+<h2>dgram.setTTL(ttl)<span><a class="mark" href="#dgram_dgram_setttl_ttl" id="dgram_dgram_setttl_ttl">#</a></span></h2>
+<p>Establece la opción de socket <code>IP_TTL</code>.  TTL significa &quot;Time to Live&quot;, pero en este contexto 
+especifica el número de saltos IP que se permite hacer al paquete.  Cada router o gateway que 
+reenvíe un paquete decrementa el TTL.  Si un router decrementa el TTL a 0, no se reenviará.<br>El cambio de los valores del TTL es un uso típico para probar la red o con multicasting.
+
+</p>
+<p>El argumento que se le pasa a <code>setTTL()</code>es el número de saltos entre 1 y 255.  Por defecto 
+en la mayoría de sistemas es 64.
+
+</p>
+<h3>dgram.setMulticastTTL(ttl)<span><a class="mark" href="#dgram_dgram_setmulticastttl_ttl" id="dgram_dgram_setmulticastttl_ttl">#</a></span></h3>
+<p>Establece la opción de socket <code>IP_MULTICAST_TTL</code>. TTL significa &quot;Time to Live&quot;, pero en este contexto 
+especifica el número de saltos IP que se permite hacer al paquete.  Cada router o gateway que 
+reenvíe un paquete decrementa el TTL.  Si un router decrementa el TTL a 0, no se reenviará.  
+
+</p>
+<p>El argumento que se le pasa a <code>setMulticastTTL()</code> es el número de saltos entre 0 y 255.  Por defecto 
+en la mayoría de sistemas es 64.
+
+</p>
+<h3>dgram.setMulticastLoopback(flag)<span><a class="mark" href="#dgram_dgram_setmulticastloopback_flag" id="dgram_dgram_setmulticastloopback_flag">#</a></span></h3>
+<p>Establece o borra la opción de socket <code>IP_MULTICAST_LOOP</code>.  Cuand esta opción está activa,<br>también se recibirán paquetes multicast en el interfaz local. 
+
+</p>
+<h2>dgram.addMembership(multicastAddress, [multicastInterface])<span><a class="mark" href="#dgram_dgram_addmembership_multicastaddress_multicastinterface" id="dgram_dgram_addmembership_multicastaddress_multicastinterface">#</a></span></h2>
+<p>Comunica al kernel la suscripción a un grupo multicast con la opción de socket <code>IP_ADD_MEMBERSHIP</code>. 
+
+</p>
+<p>Si no se especifica <code>multicastAddress</code>, el SO intentará suscribir todos los interfaces válidos.
+
+</p>
+<h2>dgram.dropMembership(multicastAddress, [multicastInterface])<span><a class="mark" href="#dgram_dgram_dropmembership_multicastaddress_multicastinterface" id="dgram_dgram_dropmembership_multicastaddress_multicastinterface">#</a></span></h2>
+<p>El contrario de <code>addMembership</code> - comunica al kernel el abandono de un grupo multicast con 
+la opción de socket <code>IP_DROP_MEMBERSHIP</code>. Este método se llama automáticamente por el kernel 
+cuando se cierra el socket o el proceso termina, así que la mayoría de aplicaciones nunca tendrán 
+que llamarlo. 
+
+</p>
+<p>Si no se especifica <code>multicastAddress</code>, el SO intentará suscribir todos los interfaces válidos.
+
+</p>
+
+          </div>
+        </div>
+    </div>
+    <div id="footer">
+        <ul class="clearfix">
+            <li><a href="http://www.nodejs.org/">Node.js</a></li>
+            <li><a href="http://www.nodejs.es/">Node.js en español</a></li>
+            <li><a href="http://twitter.com/nodejs_es" class="twitter">@nodejs_es</a></li>
+        </ul>
+
+        <p>Copyright <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.18/LICENSE">license</a>.</p>
+    </div>
+</body>
+</html>
+

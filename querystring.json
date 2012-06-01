@@ -1,0 +1,72 @@
+{
+  "source": "doc/api/querystring.markdown",
+  "modules": [
+    {
+      "textRaw": "Cadena de consulta",
+      "name": "cadena_de_consulta",
+      "desc": "<p>Este módulo provee de utilidades para el tratamiento de cadenas de consultas.\nSe ofrece los siguientes métodos:\n\n</p>\n",
+      "methods": [
+        {
+          "textRaw": "querystring.stringify(obj, sep='&', eq='=')",
+          "type": "method",
+          "name": "stringify",
+          "desc": "<p>Serializa un objeto a una cadena de consulta.\nOpcionalmente reemplaza el separador por omisión y la asignación de caracteres.\n\n</p>\n<p>Ejemplo:\n\n</p>\n<pre><code>querystring.stringify({foo: &apos;bar&apos;})\n// devuelve\n&apos;foo=bar&apos;\n\nquerystring.stringify({foo: &apos;bar&apos;, baz: &apos;bob&apos;}, &apos;;&apos;, &apos;:&apos;)\n// devuelve\n&apos;foo:bar;baz:bob&apos;</code></pre>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "obj"
+                },
+                {
+                  "name": "sep",
+                  "default": "'&'"
+                },
+                {
+                  "name": "eq",
+                  "default": "'='"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "querystring.parse(str, sep='&', eq='=')",
+          "type": "method",
+          "name": "parse",
+          "desc": "<p>Deserializa una cadena de consulta a un objeto.\nOpcionamente puede reemplazar el separador por omisión y asignar caracteres.\n\n</p>\n<p>Ejemplo:\n\n</p>\n<pre><code>querystring.parse(&apos;a=b&amp;b=c&apos;)\n// returns\n{ a: &apos;b&apos;, b: &apos;c&apos; }</code></pre>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "str"
+                },
+                {
+                  "name": "sep",
+                  "default": "'&'"
+                },
+                {
+                  "name": "eq",
+                  "default": "'='"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "properties": [
+        {
+          "textRaw": "querystring.escape",
+          "name": "escape",
+          "desc": "<p>La función escape es usada por <code>querystring.stringify</code>,\npara proporcionar reemplazos si es necesario.\n\n</p>\n"
+        },
+        {
+          "textRaw": "querystring.unescape",
+          "name": "unescape",
+          "desc": "<p>La función unescape es usada por <code>querystring.parse</code>,\npara proporcionar reemplazos  si es necesario.\n</p>\n"
+        }
+      ],
+      "type": "module",
+      "displayName": "Cadena de consulta"
+    }
+  ]
+}

@@ -1,0 +1,227 @@
+{
+  "source": "doc/api/globals.markdown",
+  "globals": [
+    {
+      "textRaw": "global",
+      "name": "global",
+      "type": "global",
+      "desc": "<p>En los navegadores, el ambito del nivel superior es el ambito global. Esto significa\nque en los navegadores si tu estas en el ambito global <code>var something</code> definirá una variable.\nEn Node esto es diferente. El ambito del nivel superior no es el ambito global; \n<code>var something</code> dentro de un módulo de node será local para este módulo.\n\n</p>\n",
+      "globals": [
+        {
+          "textRaw": "process",
+          "name": "process",
+          "type": "global",
+          "desc": "<p>El objeto process. Véase la sección <a href=\"process.html#process\">objeto process</a>.\n\n</p>\n"
+        },
+        {
+          "textRaw": "console",
+          "name": "console",
+          "type": "global",
+          "desc": "<p>Usado para la salida de pantalla de stdout y stderr. Véase la sección <a href=\"stdio.html\">stdio</a>\n\n</p>\n"
+        }
+      ]
+    },
+    {
+      "textRaw": "Class: Buffer",
+      "type": "global",
+      "name": "Buffer",
+      "desc": "<p>Used to handle binary data. See the <a href=\"buffer.html\">buffer section</a>.\n\n</p>\n"
+    },
+    {
+      "textRaw": "clearInterval(t)",
+      "type": "global",
+      "name": "clearInterval",
+      "desc": "<p>The timer functions are global variables. See the <a href=\"timers.html\">timers</a> section.</p>\n"
+    }
+  ],
+  "vars": [
+    {
+      "textRaw": "require()",
+      "type": "var",
+      "name": "require",
+      "desc": "<p>Para requerir módulos. Véase la sección <a href=\"modules.html#modules\">Módules</a>.\n<code>require</code> no es global sino más bien local para cada módulo.\n\n</p>\n",
+      "methods": [
+        {
+          "textRaw": "require.resolve()",
+          "type": "method",
+          "name": "resolve",
+          "desc": "<p>Usa el mecanismo interno de <code>require()</code> para buscar la localización de un módulo,\npero en lugar de cargar el módulo, solo devuelve el nombre del fichero que lo contine.\n\n</p>\n",
+          "signatures": [
+            {
+              "params": []
+            }
+          ]
+        }
+      ],
+      "properties": [
+        {
+          "textRaw": "`cache` {Object} ",
+          "name": "cache",
+          "desc": "<p>Modules are cached in this object when they are required. By deleting a key\nvalue from this object, the next <code>require</code> will reload the module.\n\n</p>\n"
+        }
+      ],
+      "vars": [
+        {
+          "textRaw": "__filename",
+          "name": "__filename",
+          "type": "var",
+          "desc": "<p>El nombre del fichero que contiene al script que esta siendo ejecutado. \nEste esta definido como ruta absoluta, y no es necesariamente el mismo nombre\ndel fichero pasado como argumento en la linea de comando. El valor dentro\ndel módulo es la ruta al mismo.\n\n</p>\n<p>Ejemplo: Ejecutando <code>node example.js</code> desde <code>/User/mjr</code>\n\n</p>\n<pre><code>console.log(__filename);\n// /Users/mjr/example.js</code></pre>\n<p><code>__filename</code> isn&apos;t actually a global but rather local to each module.\n\n</p>\n"
+        }
+      ]
+    },
+    {
+      "textRaw": "__dirname",
+      "name": "__dirname",
+      "type": "var",
+      "desc": "<p>El nombre del directorio del script que esta siendo ejecutado.\n\n</p>\n<p>Ejemplo:Ejecutando <code>node example.js</code> desde <code>/User/mjr</code>\n\n</p>\n<pre><code>console.log(__dirname);\n// /Users/mjr</code></pre>\n<p><code>__dirname</code> isn&apos;t actually a global but rather local to each module.\n\n\n</p>\n"
+    },
+    {
+      "textRaw": "module",
+      "name": "module",
+      "type": "var",
+      "desc": "<p>Una referencia al actual módulo. En particular \n<code>module.exports</code> es igual al objeto <code>exports</code>.\n<code>module</code> isn&apos;t actually a global but rather local to each module.\n\n</p>\n<p>Véase <a href=\"modules.html\">la documentación del sistema de módulos</a> para más\ninformación.\n\n</p>\n"
+    },
+    {
+      "textRaw": "exports",
+      "name": "exports",
+      "type": "var",
+      "desc": "<p>An object which is shared between all instances of the current module and\nmade accessible through <code>require()</code>.\n<code>exports</code> is the same as the <code>module.exports</code> object.\n<code>exports</code> isn&apos;t actually a global but rather local to each module.\n\n</p>\n<p>See the <a href=\"modules.html\">module system documentation</a> for more\ninformation.\n\n</p>\n<p>See the <a href=\"modules.html\">module section</a> for more information.\n\n</p>\n"
+    }
+  ],
+  "methods": [
+    {
+      "textRaw": "setInterval(cb, ms)",
+      "type": "method",
+      "name": "setInterval",
+      "desc": "<p>The timer functions are global variables. See the <a href=\"timers.html\">timers</a> section.</p>\n",
+      "signatures": [
+        {
+          "params": [
+            {
+              "name": "cb"
+            },
+            {
+              "name": "ms"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "miscs": [
+    {
+      "textRaw": "Objetos Globales",
+      "name": "Objetos Globales",
+      "type": "misc",
+      "desc": "<p>Estos objectos estan disponibles en todos los módulos. Algunos de estos\nobjetos no están en el ámbito global pero si a nivel módulo - Tómelo en cuenta.\n\n</p>\n",
+      "globals": [
+        {
+          "textRaw": "global",
+          "name": "global",
+          "type": "global",
+          "desc": "<p>En los navegadores, el ambito del nivel superior es el ambito global. Esto significa\nque en los navegadores si tu estas en el ambito global <code>var something</code> definirá una variable.\nEn Node esto es diferente. El ambito del nivel superior no es el ambito global; \n<code>var something</code> dentro de un módulo de node será local para este módulo.\n\n</p>\n",
+          "globals": [
+            {
+              "textRaw": "process",
+              "name": "process",
+              "type": "global",
+              "desc": "<p>El objeto process. Véase la sección <a href=\"process.html#process\">objeto process</a>.\n\n</p>\n"
+            },
+            {
+              "textRaw": "console",
+              "name": "console",
+              "type": "global",
+              "desc": "<p>Usado para la salida de pantalla de stdout y stderr. Véase la sección <a href=\"stdio.html\">stdio</a>\n\n</p>\n"
+            }
+          ]
+        },
+        {
+          "textRaw": "Class: Buffer",
+          "type": "global",
+          "name": "Buffer",
+          "desc": "<p>Used to handle binary data. See the <a href=\"buffer.html\">buffer section</a>.\n\n</p>\n"
+        },
+        {
+          "textRaw": "clearInterval(t)",
+          "type": "global",
+          "name": "clearInterval",
+          "desc": "<p>The timer functions are global variables. See the <a href=\"timers.html\">timers</a> section.</p>\n"
+        }
+      ],
+      "vars": [
+        {
+          "textRaw": "require()",
+          "type": "var",
+          "name": "require",
+          "desc": "<p>Para requerir módulos. Véase la sección <a href=\"modules.html#modules\">Módules</a>.\n<code>require</code> no es global sino más bien local para cada módulo.\n\n</p>\n",
+          "methods": [
+            {
+              "textRaw": "require.resolve()",
+              "type": "method",
+              "name": "resolve",
+              "desc": "<p>Usa el mecanismo interno de <code>require()</code> para buscar la localización de un módulo,\npero en lugar de cargar el módulo, solo devuelve el nombre del fichero que lo contine.\n\n</p>\n",
+              "signatures": [
+                {
+                  "params": []
+                }
+              ]
+            }
+          ],
+          "properties": [
+            {
+              "textRaw": "`cache` {Object} ",
+              "name": "cache",
+              "desc": "<p>Modules are cached in this object when they are required. By deleting a key\nvalue from this object, the next <code>require</code> will reload the module.\n\n</p>\n"
+            }
+          ],
+          "vars": [
+            {
+              "textRaw": "__filename",
+              "name": "__filename",
+              "type": "var",
+              "desc": "<p>El nombre del fichero que contiene al script que esta siendo ejecutado. \nEste esta definido como ruta absoluta, y no es necesariamente el mismo nombre\ndel fichero pasado como argumento en la linea de comando. El valor dentro\ndel módulo es la ruta al mismo.\n\n</p>\n<p>Ejemplo: Ejecutando <code>node example.js</code> desde <code>/User/mjr</code>\n\n</p>\n<pre><code>console.log(__filename);\n// /Users/mjr/example.js</code></pre>\n<p><code>__filename</code> isn&apos;t actually a global but rather local to each module.\n\n</p>\n"
+            }
+          ]
+        },
+        {
+          "textRaw": "__dirname",
+          "name": "__dirname",
+          "type": "var",
+          "desc": "<p>El nombre del directorio del script que esta siendo ejecutado.\n\n</p>\n<p>Ejemplo:Ejecutando <code>node example.js</code> desde <code>/User/mjr</code>\n\n</p>\n<pre><code>console.log(__dirname);\n// /Users/mjr</code></pre>\n<p><code>__dirname</code> isn&apos;t actually a global but rather local to each module.\n\n\n</p>\n"
+        },
+        {
+          "textRaw": "module",
+          "name": "module",
+          "type": "var",
+          "desc": "<p>Una referencia al actual módulo. En particular \n<code>module.exports</code> es igual al objeto <code>exports</code>.\n<code>module</code> isn&apos;t actually a global but rather local to each module.\n\n</p>\n<p>Véase <a href=\"modules.html\">la documentación del sistema de módulos</a> para más\ninformación.\n\n</p>\n"
+        },
+        {
+          "textRaw": "exports",
+          "name": "exports",
+          "type": "var",
+          "desc": "<p>An object which is shared between all instances of the current module and\nmade accessible through <code>require()</code>.\n<code>exports</code> is the same as the <code>module.exports</code> object.\n<code>exports</code> isn&apos;t actually a global but rather local to each module.\n\n</p>\n<p>See the <a href=\"modules.html\">module system documentation</a> for more\ninformation.\n\n</p>\n<p>See the <a href=\"modules.html\">module section</a> for more information.\n\n</p>\n"
+        }
+      ],
+      "methods": [
+        {
+          "textRaw": "setInterval(cb, ms)",
+          "type": "method",
+          "name": "setInterval",
+          "desc": "<p>The timer functions are global variables. See the <a href=\"timers.html\">timers</a> section.</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "cb"
+                },
+                {
+                  "name": "ms"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

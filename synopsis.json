@@ -1,0 +1,11 @@
+{
+  "source": "doc/api/synopsis.markdown",
+  "miscs": [
+    {
+      "textRaw": "Sinopsis",
+      "name": "Sinopsis",
+      "type": "misc",
+      "desc": "<p>Un ejemplo de un <a href=\"http.html\">servidor web</a> escrito en Node que responde con &apos;Hola\nmundo&apos;:\n\n</p>\n<pre><code>var http = require(&apos;http&apos;);\n\nhttp.createServer(function (request, response) {\n  response.writeHead(200, {&apos;Content-Type&apos;: &apos;text/plain&apos;});\n  response.end(&apos;Hola mundo\\n&apos;);\n}).listen(8124);\n\nconsole.log(&apos;Servidor ejecutándose en http://127.0.0.1:8124/&apos;);</code></pre>\n<p>Para ejecutar el servidor, copie el código en un fichero llamado <code>example.js</code> y ejecútelo\ncon el programa node\n\n</p>\n<pre><code>&gt; node example.js\nServidor ejecutándose en http://127.0.0.1:8124/</code></pre>\n<p>Todos los ejemplos en está documentación son ejecutados de manera similar.</p>\n"
+    }
+  ]
+}

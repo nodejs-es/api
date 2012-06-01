@@ -1,0 +1,95 @@
+{
+  "source": "doc/api/timers.markdown",
+  "modules": [
+    {
+      "textRaw": "Timer",
+      "name": "timer",
+      "methods": [
+        {
+          "textRaw": "setTimeout(callback, delay, [arg], [...])",
+          "type": "method",
+          "name": "setTimeout",
+          "desc": "<p>Para programar la ejecución de <code>callback</code> después de <code>delay</code> milisegundos. Devuelve un <code>timeoutId</code> para un posible uso con <code>clearTimeout()</code>. Opcionalmente, tu puedes también pasar argumentos al callback.\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "callback"
+                },
+                {
+                  "name": "delay"
+                },
+                {
+                  "name": "arg",
+                  "optional": true
+                },
+                {
+                  "name": "...",
+                  "optional": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "clearTimeout(timeoutId)",
+          "type": "method",
+          "name": "clearTimeout",
+          "desc": "<p>Evita la ejecución de un callback por uno de sus disparadores.\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "timeoutId"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "setInterval(callback, delay, [arg], [...])",
+          "type": "method",
+          "name": "setInterval",
+          "desc": "<p>Para programar la repetición repetitiva de un <code>callback</code> cada <code>delay</code> milisegundos. Devuelve un <code>intervalId</code> para un posible uso con <code>clearInterval()</code>. Opcionalmente, tu puedes también pasar argumentos al callback.\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "callback"
+                },
+                {
+                  "name": "delay"
+                },
+                {
+                  "name": "arg",
+                  "optional": true
+                },
+                {
+                  "name": "...",
+                  "optional": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "clearInterval(intervalId)",
+          "type": "method",
+          "name": "clearInterval",
+          "desc": "<p>Evita la ejecución de un callback por uno de sus disparadores.\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "intervalId"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "type": "module",
+      "displayName": "Timer"
+    }
+  ]
+}

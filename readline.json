@@ -1,0 +1,130 @@
+{
+  "source": "doc/api/readline.markdown",
+  "modules": [
+    {
+      "textRaw": "Readline",
+      "name": "readline",
+      "stability": 3,
+      "stabilityText": "Stable",
+      "desc": "<p>This module allows reading of a stream (such as STDIN) on a line-by-line basis.\n\n</p>\n<p>Note that once you&apos;ve invoked this module, your node program will not terminate\nuntil you&apos;ve closed the interface, and the STDIN stream. Here&apos;s how to allow\nyour program to gracefully terminate:\n\n</p>\n<pre>\nvar readline = require(&apos;readline&apos;);\n\nvar i = readline.createInterface(process.sdtin, process.stdout, null);\ni.question(&quot;What do you think of node.js?&quot;, function(answer) {\n  //TODO: Log the answer in a database\n  console.log(&quot;Thank you for your valuable feedback.&quot;);\n  i.close();                //These two lines together allow the program to\n  process.stdin.destroy();  //terminate. Without them, it would run forever.\n});\n</pre>\n\n",
+      "methods": [
+        {
+          "textRaw": "createInterface(input, output, completer)",
+          "type": "method",
+          "name": "createInterface",
+          "desc": "<p>Returns an interface object, which reads from input, and writes to output.\nTODO: I think &quot;completer&quot; is used for tab-completion, but not sure.\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "input"
+                },
+                {
+                  "name": "output"
+                },
+                {
+                  "name": "completer"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "interface.setPrompt(prompt, length)",
+          "type": "method",
+          "name": "setPrompt",
+          "desc": "<p>TODO\n\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "prompt"
+                },
+                {
+                  "name": "length"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "interface.prompt()",
+          "type": "method",
+          "name": "prompt",
+          "desc": "<p>TODO: Appears to trigger showing the prompt.\n\n</p>\n",
+          "signatures": [
+            {
+              "params": []
+            }
+          ]
+        },
+        {
+          "textRaw": "interface.question(query, cb)",
+          "type": "method",
+          "name": "question",
+          "desc": "<p>Displays the query to the user, and then calls the callback after the user\nhas typed in their response.\n\n</p>\n<p>Example usage:\n\n</p>\n<pre>\ninterface.question(&quot;What is your favorite food?&quot;, function(answer) {\n  console.log(&quot;Oh, so your favorite food is &quot; + answer);\n});\n</pre>\n\n",
+          "methods": [
+            {
+              "textRaw": "interface.close()",
+              "type": "method",
+              "name": "close",
+              "desc": "<p>TODO\n\n</p>\n",
+              "signatures": [
+                {
+                  "params": []
+                }
+              ]
+            }
+          ],
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "query"
+                },
+                {
+                  "name": "cb"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "interface.pause()",
+          "type": "method",
+          "name": "pause",
+          "desc": "<p>TODO\n\n</p>\n",
+          "signatures": [
+            {
+              "params": []
+            }
+          ]
+        },
+        {
+          "textRaw": "interface.resume()",
+          "type": "method",
+          "name": "resume",
+          "desc": "<p>TODO\n\n</p>\n",
+          "signatures": [
+            {
+              "params": []
+            }
+          ]
+        },
+        {
+          "textRaw": "interface.write()",
+          "type": "method",
+          "name": "write",
+          "desc": "<p>TODO\n</p>\n",
+          "signatures": [
+            {
+              "params": []
+            }
+          ]
+        }
+      ],
+      "type": "module",
+      "displayName": "Readline"
+    }
+  ]
+}

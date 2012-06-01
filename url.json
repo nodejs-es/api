@@ -1,0 +1,72 @@
+{
+  "source": "doc/api/url.markdown",
+  "modules": [
+    {
+      "textRaw": "URL",
+      "name": "url",
+      "desc": "<p>Este módulo posee utilidades para la resolución y análisis de URL.\nPara usarlo utilice <code>require(&apos;url&apos;)</code>.\n\n</p>\n<p>Analizar objetos URL tiene algo o mucho de los siguientes campos, dependiendo de\nque exista o no en la cadena de URL. Las partes que no están en la cadena de URL\nno se analizarán y no estarán presente en el objeto. Un ejemplo para la siguiente URL\n\n</p>\n<p><code>&apos;http://user:pass@host.com:8080/p/a/t/h?query=string#hash&apos;</code>\n\n</p>\n<ul>\n<li><p><code>href</code>: La dirección URL ha sido analizada desde un principio.</p>\n<p>Ejemplo: <code>&apos;http://user:pass@host.com:8080/p/a/t/h?query=string#hash&apos;</code></p>\n</li>\n<li><p><code>protocol</code>: El protocolo de petición (request).</p>\n<p>Ejemplo: <code>&apos;http:&apos;</code></p>\n</li>\n<li><p><code>host</code>: Una parte del host de la URL completa, incluyendo la información del puerto y autentificación.</p>\n<p>Ejemplo: <code>&apos;user:pass@host.com:8080&apos;</code></p>\n</li>\n<li><p><code>auth</code>: Parte de la información de autentificación de la URL.</p>\n<p>Ejemplo: <code>&apos;user:pass&apos;</code></p>\n</li>\n<li><p><code>hostname</code>: Sólo la parte del nombre del host.</p>\n<p>Ejemplo: <code>&apos;host.com&apos;</code></p>\n</li>\n<li><p><code>port</code>: El número de puerto del host.</p>\n<p>Ejemplo: <code>&apos;8080&apos;</code></p>\n</li>\n<li><p><code>pathname</code>: La sección de la ruta de la URL, que viene después del host y antes de la consulta, incluyendo la barra inicial si está presente.</p>\n<p>Ejemplo: <code>&apos;/p/a/t/h&apos;</code></p>\n</li>\n<li><p><code>search</code>: La parte de &apos;cadena de consulta&apos; de la URL, incluyendo el signo de interrogación principal.</p>\n<p>Ejemplo: <code>&apos;?query=string&apos;</code></p>\n</li>\n<li><p><code>query</code>: La parte de cualquier &apos;parámetro&apos; de la cadena de consulta, o un parser de un objeto de cadena de consulta.</p>\n<p>Ejemplo: <code>&apos;query=string&apos;</code> o <code>{&apos;query&apos;:&apos;string&apos;}</code></p>\n</li>\n<li><p><code>hash</code>: La parte del &apos;fragmento&apos; de la  URL incluyendo el símbolo de la libra.</p>\n<p>Ejemplo: <code>&apos;#hash&apos;</code></p>\n</li>\n</ul>\n<p>Los siguientes métodos son proporcionados por el módulo URL:\n\n</p>\n",
+      "methods": [
+        {
+          "textRaw": "url.parse(urlStr, [parseQueryString], [slashesDenoteHost])",
+          "type": "method",
+          "name": "parse",
+          "desc": "<p>Toma una cadena de la URL, y la devuelve como un objeto.  Devuelve <code>true</code> como el segundo argumento  a\nla cadena de consulta usando el módulo <code>querystring</code>.\n\n</p>\n",
+          "methods": [
+            {
+              "textRaw": "url.format(urlObj)",
+              "type": "method",
+              "name": "format",
+              "desc": "<p>Toma un parser de un objeto URL, y devuelve una cadena de URL.\n\n</p>\n",
+              "signatures": [
+                {
+                  "params": [
+                    {
+                      "name": "urlObj"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "urlStr"
+                },
+                {
+                  "name": "parseQueryString",
+                  "optional": true
+                },
+                {
+                  "name": "slashesDenoteHost",
+                  "optional": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "url.resolve(from, to)",
+          "type": "method",
+          "name": "resolve",
+          "desc": "<p>Toma una URL base, y el atributo href de la URL, y lo determina como un navegador sería la etiqueta anchor (enlace).\n</p>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "from"
+                },
+                {
+                  "name": "to"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "type": "module",
+      "displayName": "URL"
+    }
+  ]
+}

@@ -1,0 +1,263 @@
+{
+  "source": "doc/api/process.markdown",
+  "modules": [
+    {
+      "textRaw": "process",
+      "name": "process",
+      "desc": "<p>El objeto <code>process</code> es un objeto global y puede ser accedido desde cualquier parte.\nEs una instancia de <code>EventEmitter</code>.\n\n\n</p>\n",
+      "modules": [
+        {
+          "textRaw": "Evento: 'exit'",
+          "name": "evento:_'exit'",
+          "desc": "<p><code>function () {}</code>\n\n</p>\n<p>Emitido cuando el proceso está apunto de salir. Es un buen hook para realizar \nun control del tiempo constante del estado del módulo (por ejemplo para tests unitarios).<br>El bucle del evento principal no seguirá ejecutándose después de finalizar el callback &apos;exit&apos;, \npor lo tanto los timers no pueden ser programados.\n\n</p>\n<p>Ejemplo escuchando a <code>exit</code>:\n\n</p>\n<pre><code>process.on(&apos;exit&apos;, function () {\n  process.nextTick(function () {\n   console.log(&apos;Esto no se ejecutará&apos;);\n  });\n  console.log(&apos;Apunto de salir.&apos;);\n});</code></pre>\n",
+          "type": "module",
+          "displayName": "Evento: 'exit'"
+        },
+        {
+          "textRaw": "Evento: 'uncaughtException'",
+          "name": "evento:_'uncaughtexception'",
+          "desc": "<p><code>function (err) { }</code>\n\n</p>\n<p>Emitido cuando una excepción es devuelta hacia el bucle de evento. Si se\nha añadido un listener a esta excepción, no se producirá la acción por defecto \n(imprimir una traza del stack y salir).\n\n</p>\n<p>Ejemplo escuchando a <code>uncaughtException</code>:\n\n</p>\n<pre><code>process.on(&apos;uncaughtException&apos;, function (err) {\n  console.log(&apos;Excepción recogida: &apos; + err);\n});\n\nsetTimeout(function () {\n  console.log(&apos;Esto seguirá ejecutándose.&apos;);\n}, 500);\n\n// Se fuerza una excepción, pero no se recoge.\nnonexistentFunc();\nconsole.log(&apos;Esto no se ejecutará.&apos;);</code></pre>\n<p>Nótese que <code>uncaughtException</code> es un mecanismo muy básico para \nmanejar excepciones.  Usando try / catch en tu programa te dará más control sobre\nel flujo de tu programa. Especialmente para aplicaciones de servidor que están diseñados para\nejecutarse eternamente, <code>uncaughtException</code> puede ser un mecanismo muy útil de seguridad.\n\n\n</p>\n",
+          "type": "module",
+          "displayName": "Evento: 'uncaughtException'"
+        },
+        {
+          "textRaw": "Eventos de señal",
+          "name": "eventos_de_señal",
+          "desc": "<p><code>function () {}</code>\n\n</p>\n<p>Emitido cuando los procesos reciben una señal. Mirar sigaction(2) para una lista de \nnombres de señal estándard POSIX como SIGINT, SIGUSR1, etc.\n\n</p>\n<p>Ejemplo escuchando a <code>SIGINT</code>:\n\n</p>\n<pre><code>// Empieza leyendo de stdin para evitar salir.\nprocess.stdin.resume();\n\nprocess.on(&apos;SIGINT&apos;, function () {\n  console.log(&apos;Recibido SIGINT.  Haz Control-D para salir.&apos;);\n});</code></pre>\n<p>Una manera sencilla de enviar la señal <code>SIGINT</code> es con <code>Control-C</code> en la mayoria \nde aplicaciones de terminal.\n\n\n</p>\n",
+          "type": "module",
+          "displayName": "Eventos de señal"
+        }
+      ],
+      "properties": [
+        {
+          "textRaw": "process.stdout",
+          "name": "stdout",
+          "desc": "<p>Un <code>Stream de Escritura</code> para <code>stdout</code>.\n\n</p>\n<p>Ejemplo: la definición de <code>console.log</code>\n\n</p>\n<pre><code>console.log = function (d) {\n  process.stdout.write(d + &apos;\\n&apos;);\n};</code></pre>\n",
+          "properties": [
+            {
+              "textRaw": "process.stderr",
+              "name": "stderr",
+              "desc": "<p>Un stream de escritura para stderr. Las escrituras en este stream son bloqueantes.\n\n\n</p>\n"
+            },
+            {
+              "textRaw": "process.stdin",
+              "name": "stdin",
+              "desc": "<p>Un <code>Stream de Lectura</code> para stdin. El stream stdin se detiene por defecto, así que \nse tiene que llamar a <code>process.stdin.resume()</code> para leer de él.\n\n</p>\n<p>Ejemplo de como abir la entrada estándard (stdin) y escuchar a ambos eventos:\n\n</p>\n<pre><code>process.stdin.resume();\nprocess.stdin.setEncoding(&apos;utf8&apos;);\n\nprocess.stdin.on(&apos;data&apos;, function (chunk) {\n  process.stdout.write(&apos;data: &apos; + chunk);\n});\n\nprocess.stdin.on(&apos;end&apos;, function () {\n  process.stdout.write(&apos;end&apos;);\n});</code></pre>\n"
+            },
+            {
+              "textRaw": "process.argv",
+              "name": "argv",
+              "desc": "<p>Un array que contiene los argumentos de la línea de comandos. El primer elemento será\n&apos;node&apos;, el segundo elemento será el nombre del fichero JavaScript. Los\nsiguientes elementos serán argumentos adicionales de la línea de comandos.\n\n</p>\n<pre><code>// imprimir process.argv\nprocess.argv.forEach(function (val, index, array) {\n  console.log(index + &apos;: &apos; + val);\n});</code></pre>\n<p>Generará:\n\n</p>\n<pre><code>$ node process-2.js one two=three four\n0: node\n1: /Users/mjr/work/node/process-2.js\n2: one\n3: two=three\n4: four</code></pre>\n"
+            },
+            {
+              "textRaw": "process.execPath",
+              "name": "execPath",
+              "desc": "<p>Es la ruta absoluta del ejecutable que inició el proceso.\n\n</p>\n<p>Ejemplo:\n\n</p>\n<pre><code>/usr/local/bin/node</code></pre>\n"
+            }
+          ]
+        },
+        {
+          "textRaw": "process.version",
+          "name": "version",
+          "desc": "<p>Una propiedad dentro del compilado que expone <code>NODE_VERSION</code>.\n\n</p>\n<pre><code>console.log(&apos;Versión: &apos; + process.version);</code></pre>\n"
+        },
+        {
+          "textRaw": "process.installPrefix",
+          "name": "installPrefix",
+          "desc": "<p>Una propiedad dentro del compilado que expone <code>NODE_PREFIX</code>.\n\n</p>\n<pre><code>console.log(&apos;Prefijo: &apos; + process.installPrefix);</code></pre>\n"
+        },
+        {
+          "textRaw": "process.pid",
+          "name": "pid",
+          "desc": "<p>El PID del proceso.\n\n</p>\n<pre><code>console.log(&apos;El pid de este proceso es  &apos; + process.pid);</code></pre>\n",
+          "properties": [
+            {
+              "textRaw": "process.title",
+              "name": "title",
+              "desc": "<p>Getter/setter para establecer lo que mostrará &apos;ps&apos;.\n\n\n</p>\n"
+            }
+          ]
+        },
+        {
+          "textRaw": "process.platform",
+          "name": "platform",
+          "desc": "<p>En que plataforma se está ejecutando. <code>&apos;linux2&apos;</code>, <code>&apos;darwin&apos;</code>, etc.\n\n</p>\n<pre><code>console.log(&apos;La plataforma es &apos; + process.platform);</code></pre>\n",
+          "methods": [
+            {
+              "textRaw": "process.memoryUsage()",
+              "type": "method",
+              "name": "memoryUsage",
+              "desc": "<p>Devuelve un objeto describiendo el uso de la memoria del proceso Node.\n\n</p>\n<pre><code>var util = require(&apos;util&apos;);\n\nconsole.log(util.inspect(process.memoryUsage()));</code></pre>\n<p>Generará:\n\n</p>\n<pre><code>{ rss: 4935680,\n  vsize: 41893888,\n  heapTotal: 1826816,\n  heapUsed: 650472 }</code></pre>\n<p><code>heapTotal</code> y <code>heapUsed</code> se refieren al uso de la memoria de V8.\n\n\n</p>\n",
+              "signatures": [
+                {
+                  "params": []
+                }
+              ]
+            },
+            {
+              "textRaw": "process.nextTick(callback)",
+              "type": "method",
+              "name": "nextTick",
+              "desc": "<p>En la siguiente iteración del bucle del evento se llama a callback.\nNo es simplemente un alias para <code>setTimeout(fn, 0)</code> , es mucho\nmás eficiente.\n\n</p>\n<pre><code>process.nextTick(function () {\n  console.log(&apos;nextTick callback&apos;);\n});</code></pre>\n",
+              "signatures": [
+                {
+                  "params": [
+                    {
+                      "name": "callback"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "textRaw": "process.umask([mask])",
+              "type": "method",
+              "name": "umask",
+              "desc": "<p>Establece o lee la máscara del modo de creación del fichero del proceso. Los procesos \nhijos heredan la máscara del proceso padre. Devuelve la antigua máscara si se pasa el argumento \n<code>mask</code>, si no devuelve la máscara actual. \n\n</p>\n<pre><code>var oldmask, newmask = 0644;\n\noldmask = process.umask(newmask);\nconsole.log(&apos;Cambiada umask de: &apos; + oldmask.toString(8) +\n            &apos; a &apos; + newmask.toString(8));</code></pre>\n",
+              "signatures": [
+                {
+                  "params": [
+                    {
+                      "name": "mask",
+                      "optional": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "methods": [
+        {
+          "textRaw": "process.chdir(directory)",
+          "type": "method",
+          "name": "chdir",
+          "desc": "<p>Cambia el directorio actual de trabajo del proceso o lanza una excepción si falla.\n\n</p>\n<pre><code>console.log(&apos;Directorio inicial: &apos; + process.cwd());\ntry {\n  process.chdir(&apos;/tmp&apos;);\n  console.log(&apos;Directorio nuevo: &apos; + process.cwd());\n}\ncatch (err) {\n  console.log(&apos;chdir: &apos; + err);\n}</code></pre>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "directory"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "textRaw": "process.cwd()",
+          "type": "method",
+          "name": "cwd",
+          "desc": "<p>Devuelve el directorio actual de trabajo del proceso.\n\n</p>\n<pre><code>console.log(&apos;Directorio actual: &apos; + process.cwd());</code></pre>\n",
+          "properties": [
+            {
+              "textRaw": "process.env",
+              "name": "env",
+              "desc": "<p>Un objeto que contiene el entorno del usuario. Mirar environ(7).\n\n\n</p>\n"
+            }
+          ],
+          "methods": [
+            {
+              "textRaw": "process.exit(code=0)",
+              "type": "method",
+              "name": "exit",
+              "desc": "<p>Termina el proceso con el <code>code</code> especificado.  Si se omite, <code>exit</code> usa el código \nde &apos;éxito&apos; <code>0</code>.\n\n</p>\n<p>Para salir con un código de &apos;fallo&apos;:\n\n</p>\n<pre><code>process.exit(1);</code></pre>\n<p>El shell que ha ejecutado node debería ver 1 como código de salida.\n\n\n</p>\n",
+              "signatures": [
+                {
+                  "params": [
+                    {
+                      "name": "code",
+                      "default": "0"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "signatures": [
+            {
+              "params": []
+            }
+          ]
+        },
+        {
+          "textRaw": "process.getgid()",
+          "type": "method",
+          "name": "getgid",
+          "desc": "<p>Obtiene la identidad de grupo del proceso.  (Mirar getgid(2).)\nEs el id de grupo numérico, no el nombre del grupo.\n\n</p>\n<pre><code>console.log(&apos;Actual gid: &apos; + process.getgid());</code></pre>\n",
+          "methods": [
+            {
+              "textRaw": "process.setgid(id)",
+              "type": "method",
+              "name": "setgid",
+              "desc": "<p>Establece la identidad de grupo del proceso. (Mirar setgid(2).)  Acepta tanto \nun ID numérico como una cadena de texto con el nombre del grupo. \nSi se especifica el nombre del grupo, el método se bloquea mientras lo \nresuelve a un ID numérico.\n\n</p>\n<pre><code>console.log(&apos;Actual gid: &apos; + process.getgid());\ntry {\n  process.setgid(501);\n  console.log(&apos;Nuevo gid: &apos; + process.getgid());\n}\ncatch (err) {\n  console.log(&apos;Fallo al cambiar el gid: &apos; + err);\n}</code></pre>\n",
+              "signatures": [
+                {
+                  "params": [
+                    {
+                      "name": "id"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "signatures": [
+            {
+              "params": []
+            }
+          ]
+        },
+        {
+          "textRaw": "process.getuid()",
+          "type": "method",
+          "name": "getuid",
+          "desc": "<p>Obtiene la identidad de usuario del proceso. (Mirar getuid(2).)\nEs la id de usuario númerica, no el nombre de usuario.\n\n</p>\n<pre><code>console.log(&apos;Actual uid: &apos; + process.getuid());</code></pre>\n",
+          "methods": [
+            {
+              "textRaw": "process.setuid(id)",
+              "type": "method",
+              "name": "setuid",
+              "desc": "<p>Establece la identidad de usuario del proceso. (Mirar setuid(2).)  Acepta tanto \nun ID numérico como una cadena de texto con el nombre de usuario.  Si se especifica \nel nombre de usuario, el método se bloquea mientras lo resuelve a un ID numérico.\n\n</p>\n<pre><code>console.log(&apos;Actual uid: &apos; + process.getuid());\ntry {\n  process.setuid(501);\n  console.log(&apos;Nuevo uid: &apos; + process.getuid());\n}\ncatch (err) {\n  console.log(&apos;Fallo al establecer uid: &apos; + err);\n}</code></pre>\n",
+              "signatures": [
+                {
+                  "params": [
+                    {
+                      "name": "id"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "signatures": [
+            {
+              "params": []
+            }
+          ]
+        },
+        {
+          "textRaw": "process.kill(pid, signal='SIGTERM')",
+          "type": "method",
+          "name": "kill",
+          "desc": "<p>Envia una señal a un proceso. <code>pid</code> es la id de proceso y <code>signal</code> es la cadena de \ntexto que describe la señal a enviar.  Los nombres de señales son cadenas de texto\n como &apos;SIGINT&apos; o &apos;SIGUSR1&apos;.  Si se omite, la señal será &apos;SIGTERM&apos;.\nMirar kill(2) para más información.\n\n</p>\n<p>Notar que ya que el nombre de la función es <code>process.kill</code>, se trata solo de \nun emisor de señales, como la llamada a sistema <code>kill</code>. La señal enviada\npuede hacer algo más que matar el proceso escogido.\n\n</p>\n<p>Ejemplo de como enviarse una señal a uno mismo:\n\n</p>\n<pre><code>process.on(&apos;SIGHUP&apos;, function () {\n  console.log(&apos;Recibida señal SIGHUP.&apos;);\n});\n\nsetTimeout(function () {\n  console.log(&apos;Saliendo.&apos;);\n  process.exit(0);\n}, 100);\n\nprocess.kill(process.pid, &apos;SIGHUP&apos;);</code></pre>\n",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "pid"
+                },
+                {
+                  "name": "signal",
+                  "default": "'SIGTERM'"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "type": "module",
+      "displayName": "process"
+    }
+  ]
+}

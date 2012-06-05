@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>buffers - Node.js Manual &amp; Documentación</title>
+  <link rel="stylesheet" href="assets/style.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="assets/sh.css" type="text/css" media="all"/>
+</head>
+<body>
+  <div id="container">
+    <header>
+      <h1>Node.js Manual &amp; Documentación</h1>
+      <div id="gtoc">
+        <p><a href="index.html">Inicio</a> | <a href="all.html">Ver en una página</a></p>
+      </div>
+      <hr />
+    </header>
+    <div id="toc"><h2>Tabla de contenidos</h2><ul><li><a href="#buffers">Buffers</a><ul><li><a href="#new_Buffer">new Buffer(size)</a></li><li><a href="#new_Buffer">new Buffer(array)</a></li><li><a href="#new_Buffer">new Buffer(str, encoding='utf8')</a></li><li><a href="#buffer.write">buffer.write(string, offset=0, encoding='utf8')</a></li><li><a href="#buffer.toString">buffer.toString(encoding, start=0, end=buffer.length)</a></li><li><a href="#buffer_index_">buffer[index]</a></li><li><a href="#buffer.isBuffer">Buffer.isBuffer(obj)</a></li><li><a href="#buffer.byteLength">Buffer.byteLength(string, encoding='utf8')</a></li><li><a href="#buffer.length">buffer.length</a></li><li><a href="#buffer.copy">buffer.copy(targetBuffer, targetStart=0, sourceStart=0, sourceEnd=buffer.length)</a></li><li><a href="#buffer.slice">buffer.slice(start, end=buffer.length)</a></li></ul></li></ul><hr /></div>
+<h2 id="buffers">Buffers</h2>
+
+<p>El puro Javascript es amigable con Unicode, pero no se lleva tan bien con los datos binarios. Cuando tratamos con streams TCP o ficheros del sistema, es necesario manejar streams de octets. Node tiene algunas estrategias para manipular, crear, y consumir streams de octets.</p>
+
+<p>Los datos en Raw son almacenados en instancias de la clase <code>Buffer</code>. Un <code>Buffer</code> es similar a un array de integers pero correspondiendo a una localización en raw de la memeria fuera del heap de V8. Un <code>Buffer</code> no puede ser redimencionado.</p>
+
+<p>El objeto <code>Buffer</code> es global.</p>
+
+<p>Convertir entre Buffers y objectos String de Javascript requiere de un método de codificación explícito. Aquí están las diferentes cadenas de codificación;</p>
+
+<ul><li><p><code>'ascii'</code> - solo para datos de 7 bit ASCII. Este método de codificación es muy rápido, y dejará el bit alto si está configurado.</p></li><li><p><code>'utf-8'</code> - Multiples bytes de caracteres con codificación Unicode. Muchas páginas webs y otros formatos de documentos usan UTF-8.</p></li><li><p><code>'usc2'</code> - 2-bytes, de caracteres con codificación <code>little endian</code> Unicode. Sólo pueden codificar BMP(Basic Multilingual Plane, U+0000 - U+FFFF).</p></li><li><p><code>'base64'</code> - Cadena codificada en Base64.</p></li><li><p><code>'binary'</code> - Una forma de codificar datos binarios en Raw dentro de cadenas pero solo usando los primeros 8 bits de cada caracter. Este método de codificación es obsoleto y debe ser evitado en favor del objeto <code>Buffer</code> donde sea posible. Esta codificación será eliminada en futuras versiones de Node.</p></li></ul>
+
+<h3 id="new_Buffer">new Buffer(size)</h3>
+
+<p>Asigna un nuevo buffer de <code>size</code> octets.</p>
+
+<h3 id="new_Buffer">new Buffer(array)</h3>
+
+<p>Asigna un nuevo buffer usando un <code>array</code> de octets.</p>
+
+<h3 id="new_Buffer">new Buffer(str, encoding='utf8')</h3>
+
+<p>Asigna un nuevo buffer conteniendo el <code>str</code> dado.</p>
+
+<h3 id="buffer.write">buffer.write(string, offset=0, encoding='utf8')</h3>
+
+<p>Escribe <code>string</code> en el Buffer en <code>offset</code> usando el método dado. Devuelve el número de octets escritos. Si <code>Buffer</code> no contiene suficiente espacio para encajar la cadena entera, escribirá una cantidad parcial de la cadena. En caso de codificación <code>utf8</code>, el método no escribirá caracteres parciales.</p>
+
+<p>Ejemplo: Escribe una cadena utf8 dentro de un buffer, y entonces lo imprime por pantalla:</p>
+
+<pre><code>buf = new Buffer(256);
+len = buf.write('\u00bd + \u00bc = \u00be', 0);
+console.log(len + " bytes: " + buf.toString('utf8', 0, len));
+
+// 12 bytes: ½ + ¼ = ¾</code></pre>
+
+<h3 id="buffer.toString">buffer.toString(encoding, start=0, end=buffer.length)</h3>
+
+<p>Decodifica y devuelve un cadena con los datos de un buffer codificado con <code>encoding</code> comenzando en <code>start</code> y terminando en <code>end</code>.</p>
+
+<p>Mira el ejemplo de<code>buffer.write()</code>, arriba.</p>
+
+<h3 id="buffer_index_">buffer[index]</h3>
+
+<p>Obtiene y configura el octet en <code>index</code>. Los valores se refieren a bytes individuales, por lo que el rango legal esta entre <code>0x00</code> and <code>0xFF</code> en hexadecimal o <code>0</code> y <code>255</code>.</p>
+
+<p>Ejemplo: Copiando un cadena ASCII dentro de un buffer, un byte cada vez:</p>
+
+<pre><code>str = "node.js";
+buf = new Buffer(str.length);
+
+for (var i = 0; i &lt; str.length ; i++) {
+  buf[i] = str.charCodeAt(i);
+}
+
+console.log(buf);
+
+// node.js</code></pre>
+
+<h3 id="buffer.isBuffer">Buffer.isBuffer(obj)</h3>
+
+<p>Comprueba si <code>obj</code> es un <code>Buffer</code>.</p>
+
+<h3 id="buffer.byteLength">Buffer.byteLength(string, encoding='utf8')</h3>
+
+<p>Da la longitud de una cadena en bytes. Esto no es más que <code>string.prototype.length</code> puesto que devuelve el número de <em>caracteres</em> en la cadena.</p>
+
+<p>Ejemplo:</p>
+
+<pre><code>str = '\u00bd + \u00bc = \u00be';
+
+console.log(str + ": " + str.length + " characters, " +
+  Buffer.byteLength(str, 'utf8') + " bytes");
+
+// ½ + ¼ = ¾: 9 characters, 12 bytes</code></pre>
+
+<h3 id="buffer.length">buffer.length</h3>
+
+<p>El tamaño del buffer en bytes. Advierta que esto no es necesariamente el contenido. <code>length</code> se refiere a la cantidad de memoria asignada para el objeto buffer. No cambia cuando el contenido del buffer cambia.</p>
+
+<pre><code>buf = new Buffer(1234);
+
+console.log(buf.length);
+buf.write("some string", "ascii", 0);
+console.log(buf.length);
+
+// 1234
+// 1234</code></pre>
+
+<h3 id="buffer.copy">buffer.copy(targetBuffer, targetStart=0, sourceStart=0, sourceEnd=buffer.length)</h3>
+
+<p>Hace un memcpy() entre Buffers.</p>
+
+<p>Ejemplo: construye dos Buffers, entonces copia <code>buf1</code> desde el byte 16 hasta el byte 19 dentro de <code>buf2</code>, comenzando en el octavo byte de <code>buf2</code>.</p>
+
+<pre><code>buf1 = new Buffer(26);
+buf2 = new Buffer(26);
+
+for (var i = 0 ; i &lt; 26 ; i++) {
+  buf1[i] = i + 97; // 97 is ASCII a
+  buf2[i] = 33; // ASCII !
+}
+
+buf1.copy(buf2, 8, 16, 20);
+console.log(buf2.toString('ascii', 0, 25));
+
+// !!!!!!!!qrst!!!!!!!!!!!!!</code></pre>
+
+<h3 id="buffer.slice">buffer.slice(start, end=buffer.length)</h3>
+
+<p>Devuelve un nuevo buffer el cual hace referencia a la misma memoria que el antíguo, pero desplazado y cortado por los indices <code>start</code> y <code>end</code>.</p>
+
+<p><strong>¡Al modificar el nuevo buffer, modificarás la memoria en el buffer original!</strong></p>
+
+<p>Ejemplo: contruye un Buffer con el alfabeto ASCII, toma un fragmento, y entonces modifica un byte desde el Buffer original.</p>
+
+<pre><code>var buf1 = new Buffer(26);
+
+for (var i = 0 ; i &lt; 26 ; i++) {
+  buf1[i] = i + 97; // 97 is ASCII a
+}
+
+var buf2 = buf1.slice(0, 3);
+console.log(buf2.toString('ascii', 0, buf2.length));
+buf1[0] = 33;
+console.log(buf2.toString('ascii', 0, buf2.length));
+
+// abc
+// !bc</code></pre>
+  </div>
+  <script type="text/javascript" src="assets/sh_main.js"></script>
+  <script type="text/javascript" src="assets/sh_javascript.min.js"></script>
+  <script type="text/javascript">highlight(undefined, undefined, 'pre');</script>
+</body>
+</html>

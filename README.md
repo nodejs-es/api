@@ -18,7 +18,7 @@ Contar con la documentación traducida y actualizada de Node es realmente una ta
 Node también se caracteriza por contar con muchas versiones por lo que el
 seguimiento de la traducción es una complicación adicional. Si a esto le sumamos que la organización de la documentación es como mínimo un poco rígida debemos proponer algunas reglas de trabajo para coordinar los esfuerzos en forma grupal.
 
-  * Cada versión de la API tiene su propia rama de trabajo. Por ejemplo, en este momento contamos con la versión de node estable 0.6.18 por lo que tenemos en nuestro repositorio una rama llamada v0.6.86-release.
+  * Cada versión de la API tiene su propia rama de trabajo. Por ejemplo, en este momento contamos con la versión de node estable v0.6.18 por lo que tenemos en nuestro repositorio una rama llamada v0.6.86-release.
   * Nunca se trabaja sobre la rama master. Siempre es mejor, y altamente recomendado, crear ramas para cada modificación que se hace. Por ejemplo ... si se está trabajando en la traducción Events un nombre de rama correto podría ser v0.6.18-release_events
 
   * Una vez que consideres que la traducción está lista puedes crear un pull-request para que sea visto y analizado por los colaboradores (todos nosotros) y si todo está bien mezclalro con master para luego actualizar los sitios web.

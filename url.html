@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>url - Node.js Manual &amp; Documentación</title>
+  <link rel="stylesheet" href="assets/style.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="assets/sh.css" type="text/css" media="all"/>
+</head>
+<body>
+  <div id="container">
+    <header>
+      <h1>Node.js Manual &amp; Documentación</h1>
+      <div id="gtoc">
+        <p><a href="index.html">Inicio</a> | <a href="all.html">Ver en una página</a></p>
+      </div>
+      <hr />
+    </header>
+    <div id="toc"><h2>Tabla de contenidos</h2><ul><li><a href="#uRL">URL</a><ul><li><a href="#url.parse">url.parse(urlStr, parseQueryString=false)</a></li><li><a href="#url.format">url.format(urlObj)</a></li><li><a href="#url.resolve">url.resolve(from, to)</a></li></ul></li></ul><hr /></div>
+<h2 id="uRL">URL</h2>
+
+<p>Este módulo posee utilidades para la resolución y análisis de URL.
+Para usarlo utilice <code>require('url')</code>.</p>
+
+<p>Analizar objetos URL tiene algo o mucho de los siguientes campos, dependiendo de
+que exista o no en la cadena de URL. Las partes que no están en la cadena de URL
+no se analizarán y no estarán presente en el objeto. Un ejemplo para la siguiente URL</p>
+
+<p><code>'http://user:pass@host.com:8080/p/a/t/h?query=string#hash'</code></p>
+
+<ul><li><p><code>href</code>: La dirección URL ha sido analizada desde un principio.</p><p>Ejemplo: <code>'http://user:pass@host.com:8080/p/a/t/h?query=string#hash'</code></p></li><li><p><code>protocol</code>: El protocolo de petición (request).</p><p>Ejemplo: <code>'http:'</code></p></li><li><p><code>host</code>: Una parte del host de la URL completa, incluyendo la información del puerto y autentificación.</p><p>Ejemplo: <code>'user:pass@host.com:8080'</code></p></li><li><p><code>auth</code>: Parte de la información de autentificación de la URL.</p><p>Ejemplo: <code>'user:pass'</code></p></li><li><p><code>hostname</code>: Sólo la parte del nombre del host.</p><p>Ejemplo: <code>'host.com'</code></p></li><li><p><code>port</code>: El número de puerto del host.</p><p>Ejemplo: <code>'8080'</code></p></li><li><p><code>pathname</code>: La sección de la ruta de la URL, que viene después del host y antes de la consulta, incluyendo la barra inicial si está presente.</p><p>Ejemplo: <code>'/p/a/t/h'</code></p></li><li><p><code>search</code>: La parte de 'cadena de consulta' de la URL, incluyendo el signo de interrogación principal.</p><p>Ejemplo: <code>'?query=string'</code></p></li><li><p><code>query</code>: La parte de cualquier 'parámetro' de la cadena de consulta, o un parser de un objeto de cadena de consulta.</p><p>Ejemplo: <code>'query=string'</code> o <code>{'query':'string'}</code></p></li><li><p><code>hash</code>: La parte del 'fragmento' de la  URL incluyendo el símbolo de la libra.</p><p>Ejemplo: <code>'#hash'</code></p></li></ul>
+
+<p>Los siguientes métodos son proporcionados por el módulo URL:</p>
+
+<h3 id="url.parse">url.parse(urlStr, parseQueryString=false)</h3>
+
+<p>Toma una cadena de la URL, y la devuelve como un objeto.  Devuelve <code>true</code> como el segundo argumento  a
+la cadena de consulta usando el módulo <code>querystring</code>.</p>
+
+<h3 id="url.format">url.format(urlObj)</h3>
+
+<p>Toma un parser de un objeto URL, y devuelve una cadena de URL.</p>
+
+<h3 id="url.resolve">url.resolve(from, to)</h3>
+
+<p>Toma una URL base, y el atributo href de la URL, y lo determina como un navegador sería la etiqueta anchor (enlace).</p>
+  </div>
+  <script type="text/javascript" src="assets/sh_main.js"></script>
+  <script type="text/javascript" src="assets/sh_javascript.min.js"></script>
+  <script type="text/javascript">highlight(undefined, undefined, 'pre');</script>
+</body>
+</html>

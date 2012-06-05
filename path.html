@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>path - Node.js Manual &amp; Documentación</title>
+  <link rel="stylesheet" href="assets/style.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="assets/sh.css" type="text/css" media="all"/>
+</head>
+<body>
+  <div id="container">
+    <header>
+      <h1>Node.js Manual &amp; Documentación</h1>
+      <div id="gtoc">
+        <p><a href="index.html">Inicio</a> | <a href="all.html">Ver en una página</a></p>
+      </div>
+      <hr />
+    </header>
+    <div id="toc"><h2>Tabla de contenidos</h2><ul><li><a href="#path">Path</a><ul><li><a href="#path.normalize">path.normalize(p)</a></li><li><a href="#path.join">path.join([path1], [path2], [...])</a></li><li><a href="#path.resolve">path.resolve([from ...], to)</a></li><li><a href="#path.dirname">path.dirname(p)</a></li><li><a href="#path.basename">path.basename(p, [ext])</a></li><li><a href="#path.extname">path.extname(p)</a></li><li><a href="#path.exists">path.exists(p, [callback])</a></li><li><a href="#path.existsSync">path.existsSync(p)</a></li></ul></li></ul><hr /></div>
+<h2 id="path">Path</h2>
+
+<p>Este módulo contiene utilidades para trabajar con rutas de fichero.  Usa 
+<code>require('path')</code> para utilizarlo.  Ofrece los siguientes métodos: </p>
+
+<h3 id="path.normalize">path.normalize(p)</h3>
+
+<p>Normaliza la cadena de texto de una ruta, se encarga de las partes <code>'..'</code> y <code>'.'</code>.</p>
+
+<p>Cuando se encuentra múltiples barras, se reemplazan por una sola;
+cuando la ruta acaba en barra, se conserva.
+En windows se utilizan contrabarras.</p>
+
+<p>Ejemplo:</p>
+
+<pre><code>path.normalize('/foo/bar//baz/asdf/quux/..')
+// devuelve
+'/foo/bar/baz/asdf'</code></pre>
+
+<h3 id="path.join">path.join([path1], [path2], [...])</h3>
+
+<p>Junta todos los argumentos y normaliza la ruta resultante.</p>
+
+<p>Ejemplo:</p>
+
+<pre><code>node&gt; require('path').join(
+...   '/foo', 'bar', 'baz/asdf', 'quux', '..')
+'/foo/bar/baz/asdf'</code></pre>
+
+<h3 id="path.resolve">path.resolve([from ...], to)</h3>
+
+<p>Resuelve <code>to</code> a una ruta absoluta.</p>
+
+<p>Si <code>to</code> no es absoluta los argumentos <code>from</code> se anteponen ordenados de derecha a 
+izquierda, hasta que se encuentra una ruta absoluta. Si después de usar todas las rutas de <code>from</code> 
+aún no se encuentra una ruta absoluta, también se utiliza el directorio actual de trabajo. La 
+ruta resultante se normaliza, y se eliminan las barras finales a no ser que 
+se resuelva el directorio root.</p>
+
+<p>Otra manera de verlo es como una secuencia de comandos <code>cd</code> en un shell.</p>
+
+<pre><code>path.resolve('foo/bar', '/tmp/file/', '..', 'a/../subfile')</code></pre>
+
+<p>Es como:</p>
+
+<pre><code>cd foo/bar
+cd /tmp/file/
+cd ..
+cd a/../subfile
+pwd</code></pre>
+
+<p>La diferencia es que las distintas rutas no necesitan existir e incluso pueden 
+ser ficheros.</p>
+
+<p>Ejemplos:</p>
+
+<pre><code>path.resolve('/foo/bar', './baz')
+// devuelve
+'/foo/bar/baz'
+
+path.resolve('/foo/bar', '/tmp/file/')
+// devuelve
+'/tmp/file'
+
+path.resolve('wwwroot', 'static_files/png/', '../gif/image.gif')
+// si actualmente en /home/myself/node, devuelve
+'/home/myself/node/wwwroot/static_files/gif/image.gif'</code></pre>
+
+<h3 id="path.dirname">path.dirname(p)</h3>
+
+<p>Devuelve el nombre de directorio de una ruta.  Semejante al comando de Unix <code>dirname</code>.</p>
+
+<p>Ejemplo:</p>
+
+<pre><code>path.dirname('/foo/bar/baz/asdf/quux')
+// devuelve
+'/foo/bar/baz/asdf'</code></pre>
+
+<h3 id="path.basename">path.basename(p, [ext])</h3>
+
+<p>Devuelve la última parte de una ruta.  Semejante al comando de Unix <code>basename</code>.</p>
+
+<p>Ejemplo:</p>
+
+<pre><code>path.basename('/foo/bar/baz/asdf/quux.html')
+// devuelve
+'quux.html'
+
+path.basename('/foo/bar/baz/asdf/quux.html', '.html')
+// devuelve
+'quux'</code></pre>
+
+<h3 id="path.extname">path.extname(p)</h3>
+
+<p>Devuelve la extensión de la ruta.  Todo lo que hay después del último '.' 
+en la última parte de la ruta. Si no hay '.' en la última parte de la ruta o el único 
+'.' es el primer carácter, entonces devuelve un string vacío.  Ejemplos:</p>
+
+<pre><code>path.extname('index.html')
+// devuelve
+'.html'
+
+path.extname('index')
+// devuelve
+''</code></pre>
+
+<h3 id="path.exists">path.exists(p, [callback])</h3>
+
+<p>Comprueba si existe o no la ruta.  Luego, llama al argumento <code>callback</code> 
+con true o false. Ejemplo:</p>
+
+<pre><code>path.exists('/etc/passwd', function (exists) {
+  util.debug(exists ? "it's there" : "no passwd!");
+});</code></pre>
+
+<h3 id="path.existsSync">path.existsSync(p)</h3>
+
+<p>Versión síncrona de <code>path.exists</code>.</p>
+  </div>
+  <script type="text/javascript" src="assets/sh_main.js"></script>
+  <script type="text/javascript" src="assets/sh_javascript.min.js"></script>
+  <script type="text/javascript">highlight(undefined, undefined, 'pre');</script>
+</body>
+</html>

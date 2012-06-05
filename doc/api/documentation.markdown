@@ -1,68 +1,70 @@
-# About this Documentation
+# Acerca de esta documentación
 
 <!-- type=misc -->
 
-The goal of this documentation is to comprehensively explain the Node.js
-API, both from a reference as well as a conceptual point of view.  Each
-section describes a built-in module or high-level concept.
+El objetivo de este documento es explicar integralmente la API Node.js, tanto
+como una referencia, como así también un punto de vista conceptual. Cada
+sección describe un módulo integrado (built-in module) o un concepto de alto nivel
+(high-level concept).
 
-Where appropriate, property types, method arguments, and the arguments
-provided to event handlers are detailed in a list underneath the topic
-heading.
+En su caso, los tipos de propiedades, los argumentos de métodos, y los argumentos
+proporcionados a los controladores de eventos se detallan en una lista debajo
+de la cabecera del topic.
 
-Every `.html` document has a corresponding `.json` document presenting
-the same information in a structured manner.  This feature is
-experimental, and added for the benefit of IDEs and other utilities that
-wish to do programmatic things with the documentation.
+Cada documento `.html` tiene un documento correspondiente `.json` presentando
+la misma información de una manera estructurada. Esta característica es
+experimental, y se agrega para el beneficio de las IDEs y otras utilidades que
+desean hacer cosas programáticas con la documentación.
 
-Every `.html` and `.json` file is generated based on the corresponding
-`.markdown` file in the `doc/api/` folder in node's source tree.  The
-documentation is generated using the `tools/doc/generate.js` program.
-The HTML template is located at `doc/template.html`.
+Cada archivo `.html` y `.json` es generado en base al correspondiente archivo
+`.markdown` en la carpeta `doc/api` en el árbol del código fuente de node. La
+documentación es generada utilizando el programa `tools/doc/generate.js`. La
+plantilla html esta ubicada en `doc/template.html`.
 
-## Stability Index
+## Índice de estabilidad
 
 <!--type=misc-->
 
-Throughout the documentation, you will see indications of a section's
-stability.  The Node.js API is still somewhat changing, and as it
-matures, certain parts are more reliable than others.  Some are so
-proven, and so relied upon, that they are unlikely to ever change at
-all.  Others are brand new and experimental, or known to be hazardous
-and in the process of being redesigned.
+A lo largo de la documentación verá las indicaciones de estabilidad de cada
+sección. La API Node.js es algo cambiante, y a medida que madura, ciertas
+partes son más confiables que otras. Algunas están tan probados, y son tan
+confiables que es poco probable que cambie en absoluto. Otros son completamente
+nuevos y experimentales, o se considera peligroso y en proceso de ser rediseñado.
 
-The notices look like this:
+Los avisos se parecen a esto:
 
     Stability: 1 Experimental
 
-The stability indices are as follows:
+Los índices de estabilidad son los siguientes:
 
-* **0 - Deprecated**  This feature is known to be problematic, and changes are
-planned.  Do not rely on it.  Use of the feature may cause warnings.  Backwards
-compatibility should not be expected.
+* **0 - Deprecated**  Esta característica es conocida como problemática, y se han 
+previsto cambios. No confíe en esto. El uso de esta característica puede causar
+advertencias.
 
-* **1 - Experimental**  This feature was introduced recently, and may change
-or be removed in future versions.  Please try it out and provide feedback.
-If it addresses a use-case that is important to you, tell the node core team.
+* **1 - Experimental**  Esta característica se ha incluído recientemente y puede 
+cambiar o ser removida en futuras versiones. Por favor, pruébela y de feedback.
+Si esta dirige a un caso de uso importante para usted, hágalo saber al equipo
+principal de node.
 
-* **2 - Unstable**  The API is in the process of settling, but has not yet had
-sufficient real-world testing to be considered stable. Backwards-compatibility
-will be maintained if reasonable.
+* **2 - Unstable** La API está en el proceso de resolución, pero todavia no ha 
+sido suficientemente testeada en el mundo real para ser considerada estable.
+Si es razonable se mantendrá compatiblidad con versiones anteriores 
 
-* **3 - Stable**  The API has proven satisfactory, but cleanup in the underlying
-code may cause minor changes.  Backwards-compatibility is guaranteed.
+* **3 - Stable**  La API ha resultado satisfactoria, pero limpiar en el código 
+subyacente puede causar pequeños cambios. La compatibilidad con versiones 
+anteriores está garantizada. 
 
-* **4 - API Frozen**  This API has been tested extensively in production and is
-unlikely to ever have to change.
+* **4 - API Frozen**  La API ha sido testeada ampliamente en producción y es 
+poco provable que alguna vez tenga cambias.
 
-* **5 - Locked**  Unless serious bugs are found, this code will not ever
-change.  Please do not suggest changes in this area; they will be refused.
+* **5 - Locked** Al menos que bugs serios sean encontrados este código nunca 
+cambiará. Por favor no sugiera cambios en esta parte, serán rechazados.
 
-## JSON Output
+## salida JSON
 
     Stability: 1 - Experimental
 
-Every HTML file in the markdown has a corresponding JSON file with the
-same data.
+Cada archivo HTML en el markdown tiene un correspondiente archivo JSON con los
+mismos datos.
 
-This feature is new as of node v0.6.12.  It is experimental.
+Esta característica se agregó a partir de node v0.6.12. Es experimental.

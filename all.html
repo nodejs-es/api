@@ -1,0 +1,3955 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>all - Node.js Manual &amp; Documentación</title>
+  <link rel="stylesheet" href="assets/style.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="assets/sh.css" type="text/css" media="all"/>
+</head>
+<body>
+  <div id="container">
+    <header>
+      <h1>Node.js Manual &amp; Documentación</h1>
+      <div id="gtoc">
+        <p><a href="index.html">Inicio</a> | <a href="all.html">Ver en una página</a></p>
+      </div>
+      <hr />
+    </header>
+    <div id="toc"><h2>Tabla de contenidos</h2><ul><li><a href="#sinopsis">Sinopsis</a></li><li><a href="#objetos_Globales">Objetos Globales</a><ul><li><a href="#global">global</a></li><li><a href="#process">process</a></li><li><a href="#require">require()</a></li><li><a href="#require.resolve">require.resolve()</a></li><li><a href="#require.paths">require.paths</a></li><li><a href="#__filename">__filename</a></li><li><a href="#__dirname">__dirname</a></li><li><a href="#module">module</a></li></ul></li><li><a href="#timer">Timer</a><ul><li><a href="#setTimeout">setTimeout(callback, delay, [arg], [...])</a></li><li><a href="#clearTimeout">clearTimeout(timeoutId)</a></li><li><a href="#setInterval">setInterval(callback, delay, [arg], [...])</a></li><li><a href="#clearInterval">clearInterval(intervalId)</a></li></ul></li><li><a href="#m_dulos">Módulos</a><ul><li><a href="#m_dulos_b_sicos">Módulos básicos</a></li><li><a href="#m_dulo_File">Módulo File</a></li><li><a href="#cargando_desde_la_carpeta_node_modules_">Cargando desde la carpeta `node_modules`</a><ul><li><a href="#optimizaci_n_de_proceso_de_b_squeda_en_node_modules_">Optimización de proceso de búsqueda en `node_modules`</a></li></ul></li><li><a href="#carpetas_como_m_dulos">Carpetas como módulos</a></li><li><a href="#almacenamiento_en_la_cach_">Almacenamiento en la caché</a></li><li><a href="#todos_juntos...">Todos juntos...</a></li><li><a href="#cargar_desde_las_carpetas_de_require.paths_">Cargar desde las carpetas de `require.paths`</a><ul><li><a href="#nota_Por_favor_evite_la_modificaci_n_de_require.paths_">Nota:** Por favor evite la modificación de `require.paths`</a><ul><li><a href="#establecer_require.paths_a_alg_n_otro_valor_para_nada.">Establecer `require.paths` a algún otro valor para nada.</a></li><li><a href="#poner_rutas_relativas_en_require.paths_es..._raro.">Poner rutas relativas en `require.paths` es... raro.</a></li><li><a href="#cero_aislamiento">Cero aislamiento</a></li></ul></li></ul></li></ul></li><li><a href="#addenda_Consejos_para_administrar_paquetes">Addenda: Consejos para administrar paquetes</a></li><li><a href="#addons">Addons</a></li><li><a href="#process">process</a><ul><li><a href="#evento_exit_">Evento: 'exit'</a></li><li><a href="#evento_uncaughtException_">Evento: 'uncaughtException'</a></li><li><a href="#eventos_de_se_al">Eventos de señal</a></li><li><a href="#process.stdout">process.stdout</a></li><li><a href="#process.stderr">process.stderr</a></li><li><a href="#process.stdin">process.stdin</a></li><li><a href="#process.argv">process.argv</a></li><li><a href="#process.execPath">process.execPath</a></li><li><a href="#process.chdir">process.chdir(directory)</a></li><li><a href="#process.cwd">process.cwd()</a></li><li><a href="#process.env">process.env</a></li><li><a href="#process.exit">process.exit(code=0)</a></li><li><a href="#process.getgid">process.getgid()</a></li><li><a href="#process.setgid">process.setgid(id)</a></li><li><a href="#process.getuid">process.getuid()</a></li><li><a href="#process.setuid">process.setuid(id)</a></li><li><a href="#process.version">process.version</a></li><li><a href="#process.installPrefix">process.installPrefix</a></li><li><a href="#process.kill">process.kill(pid, signal='SIGTERM')</a></li><li><a href="#process.pid">process.pid</a></li><li><a href="#process.title">process.title</a></li><li><a href="#process.platform">process.platform</a></li><li><a href="#process.memoryUsage">process.memoryUsage()</a></li><li><a href="#process.nextTick">process.nextTick(callback)</a></li><li><a href="#process.umask">process.umask([mask])</a></li></ul></li><li><a href="#util">util</a><ul><li><a href="#util.debug">util.debug(string)</a></li><li><a href="#util.log">util.log(string)</a></li><li><a href="#util.inspect">util.inspect(object, showHidden=false, depth=2)</a></li><li><a href="#util.pump">util.pump(readableStream, writableStream, [callback])</a></li><li><a href="#util.inherits">util.inherits(constructor, superConstructor)</a></li></ul></li><li><a href="#eventos">Eventos</a><ul><li><a href="#events.EventEmitter">events.EventEmitter</a><ul><li><a href="#emitter.addListener">emitter.addListener(event, listener)</a></li><li><a href="#emitter.on">emitter.on(event, listener)</a></li><li><a href="#emitter.once">emitter.once(event, listener)</a></li><li><a href="#emitter.removeListener">emitter.removeListener(event, listener)</a></li><li><a href="#emitter.removeAllListeners">emitter.removeAllListeners(event)</a></li><li><a href="#emitter.setMaxListeners">emitter.setMaxListeners(n)</a></li><li><a href="#emitter.listeners">emitter.listeners(event)</a></li><li><a href="#emitter.emit">emitter.emit(event, [arg1], [arg2], [...])</a></li><li><a href="#event_newListener_">Event: 'newListener'</a></li></ul></li></ul></li><li><a href="#buffers">Buffers</a><ul><li><a href="#new_Buffer">new Buffer(size)</a></li><li><a href="#new_Buffer">new Buffer(array)</a></li><li><a href="#new_Buffer">new Buffer(str, encoding='utf8')</a></li><li><a href="#buffer.write">buffer.write(string, offset=0, encoding='utf8')</a></li><li><a href="#buffer.toString">buffer.toString(encoding, start=0, end=buffer.length)</a></li><li><a href="#buffer_index_">buffer[index]</a></li><li><a href="#buffer.isBuffer">Buffer.isBuffer(obj)</a></li><li><a href="#buffer.byteLength">Buffer.byteLength(string, encoding='utf8')</a></li><li><a href="#buffer.length">buffer.length</a></li><li><a href="#buffer.copy">buffer.copy(targetBuffer, targetStart=0, sourceStart=0, sourceEnd=buffer.length)</a></li><li><a href="#buffer.slice">buffer.slice(start, end=buffer.length)</a></li></ul></li><li><a href="#streams">Streams</a></li><li><a href="#readable_Stream">Readable Stream</a><ul><li><a href="#event_data_">Event: 'data'</a></li><li><a href="#event_end_">Event: 'end'</a></li><li><a href="#event_error_">Event: 'error'</a></li><li><a href="#event_close_">Event: 'close'</a></li><li><a href="#event_fd_">Event: 'fd'</a></li><li><a href="#stream.readable">stream.readable</a></li><li><a href="#stream.setEncoding">stream.setEncoding(encoding)</a></li><li><a href="#stream.pause">stream.pause()</a></li><li><a href="#stream.resume">stream.resume()</a></li><li><a href="#stream.destroy">stream.destroy()</a></li><li><a href="#stream.destroySoon">stream.destroySoon()</a></li><li><a href="#stream.pipe">stream.pipe(destination, [options])</a></li></ul></li><li><a href="#writable_Stream">Writable Stream</a><ul><li><a href="#event_drain_">Event: 'drain'</a></li><li><a href="#event_error_">Event: 'error'</a></li><li><a href="#event_close_">Event: 'close'</a></li><li><a href="#event_pipe_">Event: 'pipe'</a></li><li><a href="#stream.writable">stream.writable</a></li><li><a href="#stream.write">stream.write(string, encoding='utf8', [fd])</a></li><li><a href="#stream.write">stream.write(buffer)</a></li><li><a href="#stream.end">stream.end()</a></li><li><a href="#stream.end">stream.end(string, encoding)</a></li><li><a href="#stream.end">stream.end(buffer)</a></li><li><a href="#stream.destroy">stream.destroy()</a></li><li><a href="#stream.destroySoon">stream.destroySoon()</a></li></ul></li><li><a href="#crypto">Crypto</a><ul><li><a href="#crypto.createCredentials">crypto.createCredentials(details)</a></li><li><a href="#crypto.createHash">crypto.createHash(algorithm)</a></li><li><a href="#hash.update">hash.update(data)</a></li><li><a href="#hash.digest">hash.digest(encoding='binary')</a></li><li><a href="#crypto.createHmac">crypto.createHmac(algorithm, key)</a></li><li><a href="#hmac.update">hmac.update(data)</a></li><li><a href="#hmac.digest">hmac.digest(encoding='binary')</a></li><li><a href="#crypto.createCipher">crypto.createCipher(algorithm, key)</a></li><li><a href="#cipher.update">cipher.update(data, input_encoding='binary', output_encoding='binary')</a></li><li><a href="#cipher.final">cipher.final(output_encoding='binary')</a></li><li><a href="#crypto.createDecipher">crypto.createDecipher(algorithm, key)</a></li><li><a href="#decipher.update">decipher.update(data, input_encoding='binary', output_encoding='binary')</a></li><li><a href="#decipher.final">decipher.final(output_encoding='binary')</a></li><li><a href="#crypto.createSign">crypto.createSign(algorithm)</a></li><li><a href="#signer.update">signer.update(data)</a></li><li><a href="#signer.sign">signer.sign(private_key, output_format='binary')</a></li><li><a href="#crypto.createVerify">crypto.createVerify(algorithm)</a></li><li><a href="#verifier.update">verifier.update(data)</a></li><li><a href="#verifier.verify">verifier.verify(cert, signature, signature_format='binary')</a></li></ul></li><li><a href="#tLS_">TLS (SSL)</a><ul><li><a href="#s_tls.connect">s = tls.connect(port, [host], [options], callback)</a></li><li><a href="#tls.Server">tls.Server</a><ul><li><a href="#tls.createServer">tls.createServer(options, secureConnectionListener)</a></li><li><a href="#event_secureConnection_">Event: 'secureConnection'</a></li><li><a href="#server.listen">server.listen(port, [host], [callback])</a></li><li><a href="#server.close">server.close()</a></li><li><a href="#server.maxConnections">server.maxConnections</a></li><li><a href="#server.connections">server.connections</a></li></ul></li></ul></li><li><a href="#file_System">File System</a><ul><li><a href="#fs.rename">fs.rename(path1, path2, [callback])</a></li><li><a href="#fs.renameSync">fs.renameSync(path1, path2)</a></li><li><a href="#fs.truncate">fs.truncate(fd, len, [callback])</a></li><li><a href="#fs.truncateSync">fs.truncateSync(fd, len)</a></li><li><a href="#fs.chmod">fs.chmod(path, mode, [callback])</a></li><li><a href="#fs.chmodSync">fs.chmodSync(path, mode)</a></li><li><a href="#fs.stat">fs.stat(path, [callback])</a></li><li><a href="#fs.lstat">fs.lstat(path, [callback])</a></li><li><a href="#fs.fstat">fs.fstat(fd, [callback])</a></li><li><a href="#fs.statSync">fs.statSync(path)</a></li><li><a href="#fs.lstatSync">fs.lstatSync(path)</a></li><li><a href="#fs.fstatSync">fs.fstatSync(fd)</a></li><li><a href="#fs.link">fs.link(srcpath, dstpath, [callback])</a></li><li><a href="#fs.linkSync">fs.linkSync(srcpath, dstpath)</a></li><li><a href="#fs.symlink">fs.symlink(linkdata, path, [callback])</a></li><li><a href="#fs.symlinkSync">fs.symlinkSync(linkdata, path)</a></li><li><a href="#fs.readlink">fs.readlink(path, [callback])</a></li><li><a href="#fs.readlinkSync">fs.readlinkSync(path)</a></li><li><a href="#fs.realpath">fs.realpath(path, [callback])</a></li><li><a href="#fs.realpathSync">fs.realpathSync(path)</a></li><li><a href="#fs.unlink">fs.unlink(path, [callback])</a></li><li><a href="#fs.unlinkSync">fs.unlinkSync(path)</a></li><li><a href="#fs.rmdir">fs.rmdir(path, [callback])</a></li><li><a href="#fs.rmdirSync">fs.rmdirSync(path)</a></li><li><a href="#fs.mkdir">fs.mkdir(path, mode, [callback])</a></li><li><a href="#fs.mkdirSync">fs.mkdirSync(path, mode)</a></li><li><a href="#fs.readdir">fs.readdir(path, [callback])</a></li><li><a href="#fs.readdirSync">fs.readdirSync(path)</a></li><li><a href="#fs.close">fs.close(fd, [callback])</a></li><li><a href="#fs.closeSync">fs.closeSync(fd)</a></li><li><a href="#fs.open">fs.open(path, flags, [mode], [callback])</a></li><li><a href="#fs.openSync">fs.openSync(path, flags, [mode])</a></li><li><a href="#fs.write">fs.write(fd, buffer, offset, length, position, [callback])</a></li><li><a href="#fs.writeSync">fs.writeSync(fd, buffer, offset, length, position)</a></li><li><a href="#fs.writeSync">fs.writeSync(fd, str, position, encoding='utf8')</a></li><li><a href="#fs.read">fs.read(fd, buffer, offset, length, position, [callback])</a></li><li><a href="#fs.readSync">fs.readSync(fd, buffer, offset, length, position)</a></li><li><a href="#fs.readSync">fs.readSync(fd, length, position, encoding)</a></li><li><a href="#fs.readFile">fs.readFile(filename, [encoding], [callback])</a></li><li><a href="#fs.readFileSync">fs.readFileSync(filename, [encoding])</a></li><li><a href="#fs.writeFile">fs.writeFile(filename, data, encoding='utf8', [callback])</a></li><li><a href="#fs.writeFileSync">fs.writeFileSync(filename, data, encoding='utf8')</a></li><li><a href="#fs.watchFile">fs.watchFile(filename, [options], listener)</a></li><li><a href="#fs.unwatchFile">fs.unwatchFile(filename)</a></li></ul></li><li><a href="#fs.Stats">fs.Stats</a></li><li><a href="#fs.ReadStream">fs.ReadStream</a><ul><li><a href="#fs.createReadStream">fs.createReadStream(path, [options])</a></li></ul></li><li><a href="#fs.WriteStream">fs.WriteStream</a><ul><li><a href="#event_open_">Event: 'open'</a></li><li><a href="#fs.createWriteStream">fs.createWriteStream(path, [options])</a></li></ul></li><li><a href="#path">Path</a><ul><li><a href="#path.normalize">path.normalize(p)</a></li><li><a href="#path.join">path.join([path1], [path2], [...])</a></li><li><a href="#path.resolve">path.resolve([from ...], to)</a></li><li><a href="#path.dirname">path.dirname(p)</a></li><li><a href="#path.basename">path.basename(p, [ext])</a></li><li><a href="#path.extname">path.extname(p)</a></li><li><a href="#path.exists">path.exists(p, [callback])</a></li><li><a href="#path.existsSync">path.existsSync(p)</a></li><li><a href="#net.createServer_">net.createServer([options], [connectionListener])</a></li><li><a href="#net.createConnection_">net.createConnection(arguments...)</a></li><li><a href="#net.Server_">net.Server</a><ul><li><a href="#server.listen_">server.listen(port, [host], [callback])</a></li><li><a href="#server.listen_">server.listen(path, [callback])</a></li><li><a href="#server.listenFD_">server.listenFD(fd)</a></li><li><a href="#server.close_">server.close()</a></li><li><a href="#server.address_">server.address()</a></li><li><a href="#server.maxConnections_">server.maxConnections</a></li><li><a href="#server.connections_">server.connections</a></li><li><a href="#evento_connection_">Evento: 'connection'</a></li><li><a href="#evento_close_">Evento: 'close'</a></li></ul></li><li><a href="#net.Socket_">net.Socket</a><ul><li><a href="#new_net.Socket_">new net.Socket([options])</a></li><li><a href="#socket.connect_">socket.connect(port, [host], [callback])</a></li><li><a href="#socket.connect_">socket.connect(path, [callback])</a></li><li><a href="#socket.bufferSize_">socket.bufferSize</a></li><li><a href="#socket.setEncoding_">socket.setEncoding(encoding=null)</a></li><li><a href="#socket.setSecure_">socket.setSecure()</a></li><li><a href="#socket.write_">socket.write(data, [encoding], [callback])</a></li><li><a href="#socket.write_">socket.write(data, [encoding], [fileDescriptor], [callback])</a></li><li><a href="#socket.end_">socket.end([data], [encoding])</a></li><li><a href="#socket.destroy_">socket.destroy()</a></li><li><a href="#socket.pause_">socket.pause()</a></li><li><a href="#socket.resume_">socket.resume()</a></li><li><a href="#socket.setTimeout_">socket.setTimeout(timeout, [callback])</a></li><li><a href="#socket.setNoDelay_">socket.setNoDelay(noDelay=true)</a></li><li><a href="#socket.setKeepAlive_">socket.setKeepAlive(enable=false, [initialDelay])</a></li><li><a href="#socket.remoteAddress_">socket.remoteAddress</a></li><li><a href="#evento_connect_">Evento: 'connect'</a></li><li><a href="#evento_data_">Evento: 'data'</a></li><li><a href="#evento_end_">Evento: 'end'</a></li><li><a href="#evento_timeout_">Evento: 'timeout'</a></li><li><a href="#evento_drain_">Evento: 'drain'</a></li><li><a href="#evento_error_">Evento: 'error'</a></li><li><a href="#evento_close_">Evento: 'close'</a></li></ul></li><li><a href="#net.isIP_">net.isIP</a><ul><li><a href="#net.isIP_">net.isIP(input)</a></li><li><a href="#net.isIPv4_">net.isIPv4(input)</a></li><li><a href="#net.isIPv6_">net.isIPv6(input)</a></li></ul></li></ul></li><li><a href="#dNS">DNS</a><ul><li><a href="#dns.lookup">dns.lookup(domain, family=null, callback)</a></li><li><a href="#dns.resolve">dns.resolve(domain, rrtype='A', callback)</a></li><li><a href="#dns.resolve4">dns.resolve4(domain, callback)</a></li><li><a href="#dns.resolve6">dns.resolve6(domain, callback)</a></li><li><a href="#dns.resolveMx">dns.resolveMx(domain, callback)</a></li><li><a href="#dns.resolveTxt">dns.resolveTxt(domain, callback)</a></li><li><a href="#dns.resolveSrv">dns.resolveSrv(domain, callback)</a></li><li><a href="#dns.reverse">dns.reverse(ip, callback)</a></li></ul></li><li><a href="#uDP_Sockets_de_Datagrama">UDP / Sockets de Datagrama</a><ul><li><a href="#evento_message_">Evento: 'message'</a></li><li><a href="#evento_listening_">Evento: 'listening'</a></li><li><a href="#evento_close_">Evento: 'close'</a></li><li><a href="#dgram.createSocket">dgram.createSocket(type, [callback])</a></li><li><a href="#dgram.send">dgram.send(buf, offset, length, path, [callback])</a></li><li><a href="#dgram.send">dgram.send(buf, offset, length, port, address, [callback])</a></li><li><a href="#dgram.bind">dgram.bind(path)</a></li><li><a href="#dgram.bind">dgram.bind(port, [address])</a></li><li><a href="#dgram.close">dgram.close()</a></li><li><a href="#dgram.address">dgram.address()</a></li><li><a href="#dgram.setBroadcast">dgram.setBroadcast(flag)</a></li><li><a href="#dgram.setTTL">dgram.setTTL(ttl)</a></li><li><a href="#dgram.setMulticastTTL">dgram.setMulticastTTL(ttl)</a></li><li><a href="#dgram.setMulticastLoopback">dgram.setMulticastLoopback(flag)</a></li><li><a href="#dgram.addMembership">dgram.addMembership(multicastAddress, [multicastInterface])</a></li><li><a href="#dgram.dropMembership">dgram.dropMembership(multicastAddress, [multicastInterface])</a></li></ul></li><li><a href="#hTTP">HTTP</a></li><li><a href="#http.Server">http.Server</a><ul><li><a href="#event_request_">Event: 'request'</a></li><li><a href="#event_connection_">Event: 'connection'</a></li><li><a href="#event_close_">Event: 'close'</a></li><li><a href="#event_request_">Event: 'request'</a></li><li><a href="#event_checkContinue_">Event: 'checkContinue'</a></li><li><a href="#event_upgrade_">Event: 'upgrade'</a></li><li><a href="#event_clientError_">Event: 'clientError'</a></li><li><a href="#http.createServer">http.createServer(requestListener)</a></li><li><a href="#server.listen">server.listen(port, [hostname], [callback])</a></li><li><a href="#server.listen">server.listen(path, [callback])</a></li><li><a href="#server.close">server.close()</a></li></ul></li><li><a href="#http.ServerRequest">http.ServerRequest</a><ul><li><a href="#event_data_">Event: 'data'</a></li><li><a href="#event_end_">Event: 'end'</a></li><li><a href="#request.method">request.method</a></li><li><a href="#request.url">request.url</a></li><li><a href="#request.headers">request.headers</a></li><li><a href="#request.trailers">request.trailers</a></li><li><a href="#request.httpVersion">request.httpVersion</a></li><li><a href="#request.setEncoding">request.setEncoding(encoding=null)</a></li><li><a href="#request.pause">request.pause()</a></li><li><a href="#request.resume">request.resume()</a></li><li><a href="#request.connection">request.connection</a></li></ul></li><li><a href="#http.ServerResponse">http.ServerResponse</a><ul><li><a href="#response.writeContinue">response.writeContinue()</a></li><li><a href="#response.writeHead">response.writeHead(statusCode, [reasonPhrase], [headers])</a></li><li><a href="#response.statusCode">response.statusCode</a></li><li><a href="#response.setHeader">response.setHeader(name, value)</a></li><li><a href="#response.getHeader">response.getHeader(name)</a></li><li><a href="#response.removeHeader">response.removeHeader(name)</a></li><li><a href="#response.write">response.write(chunk, encoding='utf8')</a></li><li><a href="#response.addTrailers">response.addTrailers(headers)</a></li><li><a href="#response.end">response.end([data], [encoding])</a></li></ul></li><li><a href="#http.request">http.request(options, callback)</a></li><li><a href="#http.get">http.get(options, callback)</a></li><li><a href="#http.Agent">http.Agent</a></li><li><a href="#http.getAgent">http.getAgent(host, port)</a><ul><li><a href="#event_upgrade_">Event: 'upgrade'</a></li><li><a href="#event_continue_">Event: 'continue'</a></li><li><a href="#agent.maxSockets">agent.maxSockets</a></li><li><a href="#agent.sockets">agent.sockets</a></li><li><a href="#agent.queue">agent.queue</a></li></ul></li><li><a href="#http.ClientRequest">http.ClientRequest</a><ul><li><a href="#event_response_">Event 'response'</a></li><li><a href="#request.write">request.write(chunk, encoding='utf8')</a></li><li><a href="#request.end">request.end([data], [encoding])</a></li><li><a href="#request.abort">request.abort()</a></li></ul></li><li><a href="#http.ClientResponse">http.ClientResponse</a><ul><li><a href="#event_data_">Event: 'data'</a></li><li><a href="#event_end_">Event: 'end'</a></li><li><a href="#response.statusCode">response.statusCode</a></li><li><a href="#response.httpVersion">response.httpVersion</a></li><li><a href="#response.headers">response.headers</a></li><li><a href="#response.trailers">response.trailers</a></li><li><a href="#response.setEncoding">response.setEncoding(encoding=null)</a></li><li><a href="#response.pause">response.pause()</a></li><li><a href="#response.resume">response.resume()</a></li></ul></li><li><a href="#hTTPS">HTTPS</a></li><li><a href="#https.Server">https.Server</a></li><li><a href="#https.createServer">https.createServer</a></li><li><a href="#https.request">https.request(options, callback)</a></li><li><a href="#https.get">https.get(options, callback)</a></li><li><a href="#uRL">URL</a><ul><li><a href="#url.parse">url.parse(urlStr, parseQueryString=false)</a></li><li><a href="#url.format">url.format(urlObj)</a></li><li><a href="#url.resolve">url.resolve(from, to)</a></li></ul></li><li><a href="#cadena_de_consulta">Cadena de consulta</a><ul><li><a href="#querystring.stringify">querystring.stringify(obj, sep='&', eq='=')</a></li><li><a href="#querystring.parse">querystring.parse(str, sep='&', eq='=')</a></li><li><a href="#querystring.escape">querystring.escape</a></li><li><a href="#querystring.unescape">querystring.unescape</a></li></ul></li><li><a href="#rEPL">REPL</a><ul><li><a href="#repl.start">repl.start(prompt='> ', stream=process.stdin)</a></li><li><a href="#caracter_sticas_de_REPL">Características de REPL</a></li></ul></li><li><a href="#child_Processes">Child Processes</a><ul><li><a href="#event_exit_">Event:  'exit'</a></li><li><a href="#child.stdin">child.stdin</a></li><li><a href="#child.stdout">child.stdout</a></li><li><a href="#child.stderr">child.stderr</a></li><li><a href="#child.pid">child.pid</a></li><li><a href="#child_process.spawn">child_process.spawn(command, args=[], [options])</a></li><li><a href="#child_process.exec">child_process.exec(command, [options], callback)</a></li><li><a href="#child.kill">child.kill(signal='SIGTERM')</a></li></ul></li><li><a href="#assert">Assert</a><ul><li><a href="#assert.fail">assert.fail(actual, expected, message, operator)</a></li><li><a href="#assert.ok">assert.ok(value, [message])</a></li><li><a href="#assert.equal">assert.equal(actual, expected, [message])</a></li><li><a href="#assert.notEqual">assert.notEqual(actual, expected, [message])</a></li><li><a href="#assert.deepEqual">assert.deepEqual(actual, expected, [message])</a></li><li><a href="#assert.notDeepEqual">assert.notDeepEqual(actual, expected, [message])</a></li><li><a href="#assert.strictEqual">assert.strictEqual(actual, expected, [message])</a></li><li><a href="#assert.notStrictEqual">assert.notStrictEqual(actual, expected, [message])</a></li><li><a href="#assert.throws">assert.throws(block, [error], [message])</a></li><li><a href="#assert.doesNotThrow">assert.doesNotThrow(block, [error], [message])</a></li><li><a href="#assert.ifError">assert.ifError(value)</a></li></ul></li><li><a href="#tTY_">TTY (Terminal)</a><ul><li><a href="#tty.open">tty.open(path, args=[])</a></li><li><a href="#tty.isatty">tty.isatty(fd)</a></li><li><a href="#tty.setRawMode">tty.setRawMode(mode)</a></li><li><a href="#tty.setWindowSize">tty.setWindowSize(fd, row, col)</a></li><li><a href="#tty.getWindowSize">tty.getWindowSize(fd)</a></li></ul></li><li><a href="#m_dulo_os">Módulo os</a><ul><li><a href="#os.hostname">os.hostname()</a></li><li><a href="#os.type">os.type()</a></li><li><a href="#os.release">os.release()</a></li><li><a href="#os.uptime">os.uptime()</a></li><li><a href="#os.loadavg">os.loadavg()</a></li><li><a href="#os.totalmem">os.totalmem()</a></li><li><a href="#os.freemem">os.freemem()</a></li><li><a href="#os.cpus">os.cpus()</a></li></ul></li><li><a href="#depurador">Depurador</a><ul><li><a href="#uso_avanzado">Uso avanzado</a></li></ul></li></ul></li><li><a href="#ap_ndices">Apéndices</a><ul><li><a href="#ap_ndice_1_M_dulos_de_terceros">Apéndice 1 - Módulos de terceros</a></li></ul><hr /></div>
+<h2 id="sinopsis">Sinopsis</h2>
+
+<p>Un ejemplo de un <a href="http.html">servidor web</a> escrito en Node que responde con 'Hola
+mundo':</p>
+
+<pre><code>var http = require('http');
+
+http.createServer(function (request, response) {
+  response.writeHead(200, {'Content-Type': 'text/plain'});
+  response.end('Hola mundo\n');
+}).listen(8124);
+
+console.log('Servidor ejecutándose en http://127.0.0.1:8124/');</code></pre>
+
+<p>Para ejecutar el servidor, copie el código en un fichero llamado <code>example.js</code> y ejecútelo
+con el programa node</p>
+
+<pre><code>&gt; node example.js
+Servidor ejecutándose en http://127.0.0.1:8124/</code></pre>
+
+<p>Todos los ejemplos en está documentación son ejecutados de manera similar.</p>
+
+<h2 id="objetos_Globales">Objetos Globales</h2>
+
+<p>Estos objectos estan disponibles en el ambito global y puedes ser accedidos desde cualquier parte.</p>
+
+<h3 id="global">global</h3>
+
+<p>El namespace del objeto global.</p>
+
+<p>En los navegadores, el ambito del nivel superior es el ambito global. Esto significa que en los navegadores si tu estas en el ambito global <code>var something</code> definirá una variable. In Node esto es diferente. El ambito del nivel superior no es el ambito global; <code>var something</code> dentro de un módulo de node será local para este módulo.</p>
+
+<h3 id="process">process</h3>
+
+<p>El objeto process. Mira la sección 'objeto process'.</p>
+
+<h3 id="require">require()</h3>
+
+<p>Para requerir módulos. Mira la sección 'Modulos'.</p>
+
+<h3 id="require.resolve">require.resolve()</h3>
+
+<p>Usa el mecanismo interno de <code>require()</code> para buscar la localización de un módulo, pero en lugar de cargar el módulo, solo devuelve el nombre del fichero que lo contine.</p>
+
+<h3 id="require.paths">require.paths</h3>
+
+<p>Un array de busqueda de rutas para <code>require()</code>. Este array puede ser modificado para añadirle rutas modificadas.</p>
+
+<p>Ejemplo: Añade una nueva ruta al comienzo de la lista de busqueda.</p>
+
+<pre><code>require.paths.unshift('/usr/local/node');</code></pre>
+
+<h3 id="__filename">__filename</h3>
+
+<p>El nombre del fichero que contiene al script que esta siendo ejecutado. Este esta definido como ruta absoluta, y no es necesariamente el mismo nombre de fichero pasado como argumento en la linea de comando.</p>
+
+<p>Ejemplo: Ejecutando <code>node example.js</code> desde <code>/User/mjr</code></p>
+
+<pre><code>console.log(__filename);
+// /Users/mjr/example.js</code></pre>
+
+<h3 id="__dirname">__dirname</h3>
+
+<p>El nombre del directorio del script que esta siendo ejecutado.</p>
+
+<p>Ejemplo:Ejecutando <code>node example.js</code> desde <code>/User/mjr</code></p>
+
+<pre><code>console.log(__dirname);
+// /Users/mjr</code></pre>
+
+<h3 id="module">module</h3>
+
+<p>Una referencia al actual módulo. En particular <code>module.exports</code> es igual al objeto <code>exports</code>. Mira <code>src/node.js</code> para más información.</p>
+
+<h2 id="timer">Timer</h2>
+
+<h3 id="setTimeout">setTimeout(callback, delay, [arg], [...])</h3>
+
+<p>Para programar la ejecución de <code>callback</code> después de <code>delay</code> milisegundos. Devuelve un <code>timeoutId</code> para un posible uso con <code>clearTimeout()</code>. Opcionalmente, tu puedes también pasar argumentos al callback.</p>
+
+<h3 id="clearTimeout">clearTimeout(timeoutId)</h3>
+
+<p>Evita la ejecución de un callback por uno de sus disparadores.</p>
+
+<h3 id="setInterval">setInterval(callback, delay, [arg], [...])</h3>
+
+<p>Para programar la repetición repetitiva de un <code>callback</code> cada <code>delay</code> milisegundos. Devuelve un <code>intervalId</code> para un posible uso con <code>clearInterval()</code>. Opcionalmente, tu puedes también pasar argumentos al callback.</p>
+
+<h3 id="clearInterval">clearInterval(intervalId)</h3>
+
+<p>Evita la ejecución de un callback por uno de sus disparadores.</p>
+
+<h2 id="m_dulos">Módulos</h2>
+
+<p>Node posee un secillo sistema de carga.  En Node, los ficheros y módulos son de
+correspondencia biunívoca.  A modo de ejemplo, <code>foo.js</code> carga el módulo
+<code>circle.js</code> en el mismo directorio.</p>
+
+<p>El contenido de <code>foo.js</code>:</p>
+
+<pre><code>var circle = require('./circle.js');
+console.log( 'El área de un círculo con radio 4 es '
+           + circle.area(4));</code></pre>
+
+<p>El contenido de <code>circle.js</code>:</p>
+
+<pre><code>var PI = Math.PI;
+
+exports.area = function (r) {
+  return PI * r * r;
+};
+
+exports.circumference = function (r) {
+  return 2 * PI * r;
+};</code></pre>
+
+<p>El módulo <code>circle.js</code> ha exportado las functiones <code>area()</code> y
+<code>circumference()</code>.  Para exportar a un objeto, debe añadir el objeto especial
+<code>exports</code>.</p>
+
+<p>Las variables locales del módulo serán privadas. En este ejemplo la variable <code>PI</code> es
+privada en <code>circle.js</code>.</p>
+
+<h3 id="m_dulos_b_sicos">Módulos básicos</h3>
+
+<p>Node posee varios módulos compilados en binario.  Estos módulos son
+descritos con más detalle en las siguientes secciones del documento.</p>
+
+<p>Los módulos básicos son definidos en el código fuente de node en la carpeta <code>lib/</code>.</p>
+
+<p>Los módulos básicos tienen la preferencia de cargarse primero si su indentificador es
+pasado desde <code>require()</code>. Por ejemplo, <code>require('http')</code> siempre
+devolverá lo construido en el módulo HTTP, incluso si hay un fichero con ese nombre.</p>
+
+<h3 id="m_dulo_File">Módulo File</h3>
+
+<p>Si el nombre exacto del fichero no es encontrado, entonces node intentará cargar 
+el nombre del fichero seguido de la extensión <code>.js</code>, y a continuación con <code>.node</code>.</p>
+
+<p>Los ficheros <code>.js</code> son interpretados como ficheros de texto en JavaScript, y los ficheros <code>.node</code>
+son interpretados como extensiones de módulos compilados cargados con <code>dlopen</code>.</p>
+
+<p>Un módulo con el prefijo <code>'/'</code> indica la ruta absoluta al fichero.  Por
+ejemplo, <code>require('/home/marco/foo.js')</code> cargará el fichero en
+<code>/home/marco/foo.js</code>.</p>
+
+<p>Un módulo con el prefijo <code>'./'</code> es relativo al fichero llamado con <code>require()</code>.
+Es decir, <code>circle.js</code> debe estar en el mismo directorio que <code>foo.js</code> para que 
+<code>require('./circle')</code> lo encuentre.</p>
+
+<p>Si se omite el uso de '/' o './' en el fichero, el módulo puede ser un
+"módulo básico" o se cargará desde la carpeta <code>node_modules</code>.</p>
+
+<h3 id="cargando_desde_la_carpeta_node_modules_">Cargando desde la carpeta `node_modules`</h3>
+
+<p>Si el identificador del módulo pasa a <code>require()</code> no es un módulo nativo,
+y no comienza con <code>'/'</code>, <code>'../'</code>, o <code>'./'</code>, entonces node inicia en el 
+directorio principal del módulo actual, y añade <code>/node_modules</code>, e
+intenta cargar el módulo desde esa ubicación.</p>
+
+<p>Si no se encuentra, entonces se dirige al directorio principal, y así 
+sucesivamente, hasta que el módulo es encontrado, hasta en la raíz del árbol es
+encontrado.</p>
+
+<p>Por ejemplo, si el fichero en <code>'/home/ry/projects/foo.js'</code> es llamado como
+<code>require('bar.js')</code>, entonces node buscaría en las siguientes ubicaciones, en
+este orden:</p>
+
+<ul><li><code>/home/ry/projects/node_modules/bar.js</code></li><li><code>/home/ry/node_modules/bar.js</code></li><li><code>/home/node_modules/bar.js</code></li><li><code>/node_modules/bar.js</code></li></ul>
+
+<p>Esto permite que los programas encuentren sus dependencias, de modo que no
+entren en conflicto.</p>
+
+<h4 id="optimizaci_n_de_proceso_de_b_squeda_en_node_modules_">Optimización de proceso de búsqueda en `node_modules`</h4>
+
+<p>Cuando existen muchos niveles de dependencias anidadas, es posible que los
+árboles de directorios tomen bastante tiempo. Las siguientes optimizaciones se
+realizan para este proceso.</p>
+
+<p>Primero, <code>/node_modules</code> no debe ser anexado a una carpeta ya que termina en
+<code>/node_modules</code>.</p>
+
+<p>Segundo, si el fichero es llamado con  <code>require()</code> ya esta en la jerarquía de
+<code>node_modules</code>, entonces el nivel superior de la carpeta <code>node_modules</code> es tratada como
+la raíz del árbol de búsqueda.</p>
+
+<p>For example, if the file at
+<code>'/home/ry/projects/foo/node_modules/bar/node_modules/baz/quux.js'</code>
+called <code>require('asdf.js')</code>, then node would search the following
+locations:</p>
+
+<p>Por ejemplo, si el fichero en
+<code>'/home/ry/projects/foo/node_modules/bar/node_modules/baz/quux.js'</code>
+llama como <code>require('asdf.js')</code>, entonces node buscaría en las siguientes
+ubicaciones:</p>
+
+<ul><li><code>/home/ry/projects/foo/node_modules/bar/node_modules/baz/node_modules/asdf.js</code></li><li><code>/home/ry/projects/foo/node_modules/bar/node_modules/asdf.js</code></li><li><code>/home/ry/projects/foo/node_modules/asdf.js</code></li></ul>
+
+<h3 id="carpetas_como_m_dulos">Carpetas como módulos</h3>
+
+<p>Es conveniente organizar los programas y librerías en los mismos directorios,
+y proporcionar un único punto de entrar a la biblioteca.
+Existe tres formas en donde una carpeta pueda usar <code>require()</code> como
+un argumento.</p>
+
+<p>Lo primero es crear el fichero <code>package.json</code>en la raíz de la carpeta,
+que especifique el módulo <code>main</code>. Un ejemplo de package.json podría verse
+como esto:</p>
+
+<pre><code>{ "name" : "some-library",
+  "main" : "./lib/some-library.js" }</code></pre>
+
+<p>Si fuera una carpeta en <code>./some-library</code>, entonces
+<code>require('./some-library')</code> trataría de cargar
+<code>./some-library/lib/some-library.js</code>.</p>
+
+<p>Este es el mayor grado de conciencia de Node con el fichero package.json .</p>
+
+<p>Si no hay ningún fichero package.json presente en el directorio, entonces node
+intentará cargar el fichero <code>index.js</code> o <code>index.node</code> de ese directorio.
+Por ejemplo, si no hay ninguín fichero package.json en el ejemplo anterior,
+entonces <code>require('./some-library')</code> intentará cargar:</p>
+
+<ul><li><code>./some-library/index.js</code></li><li><code>./some-library/index.node</code></li></ul>
+
+<h3 id="almacenamiento_en_la_cach_">Almacenamiento en la caché</h3>
+
+<p>Los módulos se alamacenan en la caché después que fueron cargados por primera vez.
+Esto significa (entre otras cosas) que todas las llamadas a <code>require('foo')</code> devuelve
+el mismo ojecto exacto, si se resolvería en el mismo fichero</p>
+
+<h3 id="todos_juntos...">Todos juntos...</h3>
+
+<p>Para obtener el nombre exacto del fichero que se cargará cuando se llame con <code>require()</code>, use
+la función <code>require.resolve()</code>.</p>
+
+<p>Uniendo todo lo anterior, aquí se muestra un algoritmo de alto nievel
+en pseudocódigo de lo que haría require.resolve :</p>
+
+<pre><code>require(X)
+1. Si X es módulo básico,
+   a. devolver el módulo básico
+   b. STOP
+2. Si X inicia con con `./` or `/`,
+   a. LOAD_AS_FILE(Y + X)
+   b. LOAD_AS_DIRECTORY(Y + X)
+3. LOAD_NODE_MODULES(X, dirname(Y))
+4. THROW "not found"
+
+LOAD_AS_FILE(X)
+1. Si X es un fichero, cargar X como texto JavaScript.  STOP
+2. Si X.js es un fichero, cargar X.js como texto JavaScript.  STOP
+3. Si X.node es un fichero, cargar X.node como extensión binaria.  STOP
+
+LOAD_AS_DIRECTORY(X)
+1. Si X/package.json es un fichero,
+   a. Parsear X/package.json, y buscar el campo "main".
+   b. let M = X + (json main field)
+   c. LOAD_AS_FILE(M)
+2. LOAD_AS_FILE(X/index)
+
+LOAD_NODE_MODULES(X, START)
+1. let DIRS=NODE_MODULES_PATHS(START)
+2. for each DIR in DIRS:
+   a. LOAD_AS_FILE(DIR/X)
+   b. LOAD_AS_DIRECTORY(DIR/X)
+
+NODE_MODULES_PATHS(START)
+1. let PARTS = path split(START)
+2. let ROOT = index es una instancia de "node_modules" en PARTS, o 0
+3. let I = count of PARTS - 1
+4. let DIRS = []
+5. while I &gt; ROOT,
+   a. if PARTS[I] = "node_modules" CONTINUE
+   c. DIR = path join(PARTS[0 .. I] + "node_modules")
+   b. DIRS = DIRS + DIR
+6. return DIRS</code></pre>
+
+<h3 id="cargar_desde_las_carpetas_de_require.paths_">Cargar desde las carpetas de `require.paths`</h3>
+
+<p>En node, <code>require.paths</code> es un array de strings que representa las rutas de
+acceso a los módulos cuando estos no tienen el prefijo <code>'/'</code>, <code>'./'</code>, o
+<code>'../'</code>.  Por ejemplo, si establece require.paths como:</p>
+
+<pre><code>[ '/home/micheil/.node_modules',
+  '/usr/local/lib/node_modules' ]</code></pre>
+
+<p>A continuación se llama a <code>require('bar/baz.js')</code> y buscará en las siguientes
+ubicaciones:</p>
+
+<ul><li>1: <code>'/home/micheil/.node_modules/bar/baz.js'</code></li><li>2: <code>'/usr/local/lib/node_modules/bar/baz.js'</code></li></ul>
+
+<p>El array en <code>require.paths</code> puede ser transformado en tiempo de ejecución para modificar
+este comportamiento.</p>
+
+<p>Se establece inicialmente la variable de entorno <code>NODE_PATH</code>, que contiene 
+una lista delimitada por dos puntos de rutas exactas.  En el anterior ejemplo,
+la variable de entorno <code>NODE_PATH</code> puedo haber sido establecido como:</p>
+
+<pre><code>/home/micheil/.node_modules:/usr/local/lib/node_modules</code></pre>
+
+<p>Cargar las ubicaciones desde <code>require.paths</code> sólo se realiza si el
+módulon no se ha encontrado desde el algoritmo <code>node_modules</code>.
+Los módulos globarles son de baja prioridad para las dependencias de los paquetes.</p>
+
+<h4 id="_Nota_Por_favor_evite_la_modificaci_n_de_require.paths_">**Nota:** Por favor evite la modificación de `require.paths`</h4>
+
+<p>Por razones de compatibilidad, <code>require.paths</code> sigue siendo la primera prioridad
+en el proceso de búsqueda de módulos. Sin embargo, puede desaparecer en una próxima
+versión.</p>
+
+<p>Aunque parecía una buena idea en aquel tiempo, y ha permitido ser un 
+experimento muy útil, en la práctica la transformación de <code>require.paths</code> es una
+lista a menudo con problemas y dolores de cabeza.</p>
+
+<h5 id="establecer_require.paths_a_alg_n_otro_valor_para_nada.">Establecer `require.paths` a algún otro valor para nada.</h5>
+
+<p>Esto no hace nada de lo que se podría esperar:</p>
+
+<pre><code>require.paths = [ '/usr/lib/node' ];</code></pre>
+
+<p>Todo lo que se hace aquí es perder la referencia <em>actual</em> de node en la búsqueda
+de rutas, y crea una nueva referencia a otra cosa que no sirve
+para nada.</p>
+
+<h5 id="poner_rutas_relativas_en_require.paths_es..._raro.">Poner rutas relativas en `require.paths` es... raro.</h5>
+
+<p>Si hace esto:</p>
+
+<pre><code>require.paths.push('./lib');</code></pre>
+
+<p>entonces <em>no</em> añada la ruta completa donde se resolvió <code>./lib</code>
+en este sistema de ficheros.  En cambio, esto añade literalmente <code>'./lib'</code>,
+lo que significa si hace <code>require('y.js')</code> en  <code>/a/b/x.js</code>, entonces se ve
+en <code>/a/b/lib/y.js</code>.  Si a continuación se usa <code>require('y.js')</code> en
+<code>/l/m/n/o/p.js</code>, entonces se ve en <code>/l/m/n/o/lib/y.js</code>.</p>
+
+<p>En la práctica, las personas han usado esto de una manera ad hoc para la
+dependencia de paquetes, pero esta técnica es frágil.</p>
+
+<h5 id="cero_aislamiento">Cero aislamiento</h5>
+
+<p>Existe (debido a un diseño lamentable), sólo un array <code>require.paths</code> utilizado para
+todos los módulos.</p>
+
+<p>Como resultado, si un programa en node trata de confiar de este comportamiento, es posible
+que de manera permanente y sutilmente altere el comportamiento de todos los programas 
+escritos en node el mismo proceso. A media que el stack crece, y se reune más
+funcionalidades, ya que esto es un problema con las partes que interactúan en forma
+difíciles de predecir.</p>
+
+<h2 id="addenda_Consejos_para_administrar_paquetes">Addenda: Consejos para administrar paquetes</h2>
+
+<p>La semántica de Node en la función <code>require()</code> fue diseñada para ser lo 
+suficientemente general para soportar una serie de esctructuras de directorios.
+Los paquetes de programas como <code>dpkg</code>, <code>rpm</code>, y <code>npm</code> se esperan que sean construidos 
+como paquetes nativos desde los módulos de Node sin modificaciones.</p>
+
+<p>A continuación sugerimos una estructura en la que puede trabajar:</p>
+
+<p>Supongamos que se desea tener en 
+<code>/usr/lib/node/&lt;some-package&gt;/&lt;some-version&gt;</code> se mantenga el contenido de una
+versión específica de un paquete.</p>
+
+<p>Los paquetes pueden depender uno del otro. Con el fin de instalar el paquete <code>foo</code>, 
+puede que tenga que instalar una versión específica del paquete <code>bar</code>.  El paquete
+ <code>bar</code> puede tener dependencias, y en algunos casos, estas dependencias, incluso pueden 
+entrar en conflicto o crear ciclos.</p>
+
+<p>Desde la búsqueda con Node de la <code>ruta</code> de cualquier módulo cargado (es decir,
+resueltos los enlaces simbólicos), y luego de buscar sus dependencias en la
+carpeta <code>node_modules</code> como se describió anteriormente, esta situación es muy simple de 
+resolver con la siguiente arquitectura:</p>
+
+<ul><li><code>/usr/lib/node/foo/1.2.3/</code> - Contenido del paquete <code>foo</code>, versión 1.2.3.</li><li><code>/usr/lib/node/bar/4.3.2/</code> - Contenido del paquete <code>bar</code> que es
+dependencia de <code>foo</code>.</li><li><code>/usr/lib/node/foo/1.2.3/node_modules/bar</code> - Enlace simbólico a
+<code>/usr/lib/node/bar/4.3.2/</code>.</li><li><code>/usr/lib/node/bar/4.3.2/node_modules/*</code> - Enlaces simbólicos a los paquetes
+que <code>bar</code> depende.</li></ul>
+
+<p>Por lo tanto, incluso si se encuentra, o si hay problemas de dependencias,
+cada módulo será capza de obtener una versión de su dependencia para ser
+utilizada.</p>
+
+<p>Cuando el código en el paquete <code>foo</code> utiliza <code>require('bar')</code>, se obtendrá la
+versión al enlace simbólico en <code>/usr/lib/node/foo/1.2.3/node_modules/bar</code>.
+Luego, cuando el código del paquete <code>bar</code> llame a <code>require('quux')</code>, obtendrá
+la versión simbólica en <code>/usr/lib/node/bar/4.3.2/node_modules/quux</code>.</p>
+
+<p>Además, para hacer el proceso de búsqueda del módulo aún más óptima, en lugar
+de poner los paquetes directamente en <code>/usr/lib/node</code>, se puede poner estos en
+<code>/usr/lib/node_modules/&lt;name&gt;/&lt;version&gt;</code>.  Entonces node no se molestará en
+buscar por dependencias no encontradas en <code>/usr/node_modules</code> o <code>/node_modules</code>.</p>
+
+<p>A fin de que los módulos disponibles para node en REPL, puedan ser útiles,
+añade también la carpeta <code>/usr/lib/node_modules</code> a la variable de entorno <code>$NODE_PATH</code>.
+Desde el módulo de búsquedas usando la carpeta <code>node_modules</code> donde todo es
+relativo, y basado en la ruta real de los ficheros llamados por <code>require()</code>, 
+los paquetes pueden ser llamado desde cualquier lugar.</p>
+
+<h2 id="addons">Addons</h2>
+
+<p>Addons son objetos enlazados dinamicamente. Ellos pueden ser el pegamento entre las librerias C y C++ con NodeJS. La API (en estos momentos) es algo compleja, siendo necesario el conocimiento de varias librerias.</p>
+
+<ul><li><p>V8 JavaScript, una libreria C++. Usada como interfaz con JavaScript:
+creación de objetos, llamada a funciones, etc. Documentada extensamente en fichero de cabecera <code>v8.h</code> (<code>deps/v8/include/v8.h</code> en el arbol de fuentes de Node).</p></li><li><p>libev, C libreria para crear un bucle de evento. En cualquier momentos que sea necesario esperar para que el descriptor de un fichero llegue a ser legible, esperar por un timer, o esperar por una señal, que llevarlo a cabo será necesario utilizar el intefez de libev. Esto es, si tu realizas cualquier I/O, necesitaras usar libev. Node usa en bucle de evento <code>EV_DEFAULT</code>. La documentación puede ser encontrada <a href="http://cvs.schmorp.de/libev/ev.html">aqui</a>.</p></li><li><p>libie, librería para manejar el pool de las hebras. Usado para hacer llamadas bloqueantes POSIX del sistema de forma asincrona. Una amplia variedad de envolturas ya existe para cada llamada, en <code>src/file.cc</code> por lo que posiblemente no tengas que usarla. Si necesitas usarla echale un vistazo al fichero de cabecera <code>deps/libie/eio.h</code>.</p></li><li><p>Librerias internas de Node. La más importante es la clase <code>node::ObjectWrap</code> que probablemente de la que tu desearas heredar.</p></li><li><p>Otras. Mira en <code>deps/</code> para cualquier cosa disponible.</p></li></ul>
+
+<p>Node estáticamente compila todas las dependencias dentro del ejecutable. Cuando compiles tú módulo, tu no tendrás que preocuparte sobre enlazar ninguna de estas librerias.</p>
+
+<p>Para comenzar hagamos un pequeño Addon el cual hará lo siguiente in C++:</p>
+
+<pre><code>exports.hello = 'world';</code></pre>
+
+<p>Para comenzar creamos el fichero <code>hello.cc</code>:</p>
+
+<pre><code>#include &lt;v8.h&gt;
+
+using namespace v8;
+
+extern "C" void
+init (Handle&lt;Object&gt; target)
+{
+  HandleScope scope;
+  target-&gt;Set(String::New("hello"), String::New("world"));
+}</code></pre>
+
+<p>Este código fuente necesita ser construido dentro de <code>hello.node</code>, el Addon binario. Para hacer esto nosotros creamos un fichero llamado <code>wscript</code> el cual es código python y se ve como sigue:</p>
+
+<pre><code>srcdir = '.'
+blddir = 'build'
+VERSION = '0.0.1'
+
+def set_options(opt):
+  opt.tool_options('compiler_cxx')
+
+def configure(conf):
+  conf.check_tool('compiler_cxx')
+  conf.check_tool('node_addon')
+
+def build(bld):
+  obj = bld.new_task_gen('cxx', 'shlib', 'node_addon')
+  obj.target = 'hello'
+  obj.source = 'hello.cc'</code></pre>
+
+<p>Lanzando <code>node-waf configure build</code> crearemos un fichero <code>build/default/hello.node</code> el cual es nuestro Addon.</p>
+
+<p><code>node-waf</code> es solo <a href="http://code.google.com/p/waf">WAF</a>, el sistema de construcción basado en python. <code>node-waf</code> is proporcionado para la facilidad de los usuarios.</p>
+
+<p>Todos los Addons de Node deben exportar un función llamada <code>init</code> con la siguiente constitución:</p>
+
+<pre><code>extern 'C' void init (Handle&lt;Object&gt; target)</code></pre>
+
+<p>Por el momento, esta es toda la documentación sobre Addons. Por favor, mira <a href="https://github.com/ry/node_postgres">https://github.com/ry/node_postgres</a> para un ejemplo real.</p>
+
+<h2 id="process">process</h2>
+
+<p>El objeto <code>process</code> es un objeto global y puede ser accedido desde cualquier parte.
+Es una instancia de <code>EventEmitter</code>.</p>
+
+<h3 id="evento_exit_">Evento: 'exit'</h3>
+
+<p><code>function () {}</code></p>
+
+<p>Emitido cuando el proceso está apunto de salir. Es un buen hook para realizar 
+un control del tiempo constante del estado del módulo (por ejemplo para tests unitarios).<br></br>El bucle del evento principal no seguirá ejecutándose después de finalizar el callback 'exit', 
+por lo tanto los timers no pueden ser programados.</p>
+
+<p>Ejemplo escuchando a <code>exit</code>:</p>
+
+<pre><code>process.on('exit', function () {
+  process.nextTick(function () {
+   console.log('Esto no se ejecutará');
+  });
+  console.log('Apunto de salir.');
+});</code></pre>
+
+<h3 id="evento_uncaughtException_">Evento: 'uncaughtException'</h3>
+
+<p><code>function (err) { }</code></p>
+
+<p>Emitido cuando una excepción es devuelta hacia el bucle de evento. Si se
+ha añadido un listener a esta excepción, no se producirá la acción por defecto 
+(imprimir una traza del stack y salir).</p>
+
+<p>Ejemplo escuchando a <code>uncaughtException</code>:</p>
+
+<pre><code>process.on('uncaughtException', function (err) {
+  console.log('Excepción recogida: ' + err);
+});
+
+setTimeout(function () {
+  console.log('Esto seguirá ejecutándose.');
+}, 500);
+
+// Se fuerza una excepción, pero no se recoge.
+nonexistentFunc();
+console.log('Esto no se ejecutará.');</code></pre>
+
+<p>Nótese que <code>uncaughtException</code> es un mecanismo muy básico para 
+manejar excepciones.  Usando try / catch en tu programa te dará más control sobre
+el flujo de tu programa. Especialmente para aplicaciones de servidor que están diseñados para
+ejecutarse eternamente, <code>uncaughtException</code> puede ser un mecanismo muy útil de seguridad.</p>
+
+<h3 id="eventos_de_se_al">Eventos de señal</h3>
+
+<p><code>function () {}</code></p>
+
+<p>Emitido cuando los procesos reciben una señal. Mirar sigaction(2) para una lista de 
+nombres de señal estándard POSIX como SIGINT, SIGUSR1, etc.</p>
+
+<p>Ejemplo escuchando a <code>SIGINT</code>:</p>
+
+<pre><code>// Empieza leyendo de stdin para evitar salir.
+process.stdin.resume();
+
+process.on('SIGINT', function () {
+  console.log('Recibido SIGINT.  Haz Control-D para salir.');
+});</code></pre>
+
+<p>Una manera sencilla de enviar la señal <code>SIGINT</code> es con <code>Control-C</code> en la mayoria 
+de aplicaciones de terminal.</p>
+
+<h3 id="process.stdout">process.stdout</h3>
+
+<p>Un <code>Stream de Escritura</code> para <code>stdout</code>.</p>
+
+<p>Ejemplo: la definición de <code>console.log</code></p>
+
+<pre><code>console.log = function (d) {
+  process.stdout.write(d + '\n');
+};</code></pre>
+
+<h3 id="process.stderr">process.stderr</h3>
+
+<p>Un stream de escritura para stderr. Las escrituras en este stream son bloqueantes.</p>
+
+<h3 id="process.stdin">process.stdin</h3>
+
+<p>Un <code>Stream de Lectura</code> para stdin. El stream stdin se detiene por defecto, así que 
+se tiene que llamar a <code>process.stdin.resume()</code> para leer de él.</p>
+
+<p>Ejemplo de como abir la entrada estándard (stdin) y escuchar a ambos eventos:</p>
+
+<pre><code>process.stdin.resume();
+process.stdin.setEncoding('utf8');
+
+process.stdin.on('data', function (chunk) {
+  process.stdout.write('data: ' + chunk);
+});
+
+process.stdin.on('end', function () {
+  process.stdout.write('end');
+});</code></pre>
+
+<h3 id="process.argv">process.argv</h3>
+
+<p>Un array que contiene los argumentos de la línea de comandos. El primer elemento será
+'node', el segundo elemento será el nombre del fichero JavaScript. Los
+siguientes elementos serán argumentos adicionales de la línea de comandos.</p>
+
+<pre><code>// imprimir process.argv
+process.argv.forEach(function (val, index, array) {
+  console.log(index + ': ' + val);
+});</code></pre>
+
+<p>Generará:</p>
+
+<pre><code>$ node process-2.js one two=three four
+0: node
+1: /Users/mjr/work/node/process-2.js
+2: one
+3: two=three
+4: four</code></pre>
+
+<h3 id="process.execPath">process.execPath</h3>
+
+<p>Es la ruta absoluta del ejecutable que inició el proceso.</p>
+
+<p>Ejemplo:</p>
+
+<pre><code>/usr/local/bin/node</code></pre>
+
+<h3 id="process.chdir">process.chdir(directory)</h3>
+
+<p>Cambia el directorio actual de trabajo del proceso o lanza una excepción si falla.</p>
+
+<pre><code>console.log('Directorio inicial: ' + process.cwd());
+try {
+  process.chdir('/tmp');
+  console.log('Directorio nuevo: ' + process.cwd());
+}
+catch (err) {
+  console.log('chdir: ' + err);
+}</code></pre>
+
+<h3 id="process.cwd">process.cwd()</h3>
+
+<p>Devuelve el directorio actual de trabajo del proceso.</p>
+
+<pre><code>console.log('Directorio actual: ' + process.cwd());</code></pre>
+
+<h3 id="process.env">process.env</h3>
+
+<p>Un objeto que contiene el entorno del usuario. Mirar environ(7).</p>
+
+<h3 id="process.exit">process.exit(code=0)</h3>
+
+<p>Termina el proceso con el <code>code</code> especificado.  Si se omite, <code>exit</code> usa el código 
+de 'éxito' <code>0</code>.</p>
+
+<p>Para salir con un código de 'fallo':</p>
+
+<pre><code>process.exit(1);</code></pre>
+
+<p>El shell que ha ejecutado node debería ver 1 como código de salida.</p>
+
+<h3 id="process.getgid">process.getgid()</h3>
+
+<p>Obtiene la identidad de grupo del proceso.  (Mirar getgid(2).)
+Es el id de grupo numérico, no el nombre del grupo.</p>
+
+<pre><code>console.log('Actual gid: ' + process.getgid());</code></pre>
+
+<h3 id="process.setgid">process.setgid(id)</h3>
+
+<p>Establece la identidad de grupo del proceso. (Mirar setgid(2).)  Acepta tanto 
+un ID numérico como una cadena de texto con el nombre del grupo. 
+Si se especifica el nombre del grupo, el método se bloquea mientras lo 
+resuelve a un ID numérico.</p>
+
+<pre><code>console.log('Actual gid: ' + process.getgid());
+try {
+  process.setgid(501);
+  console.log('Nuevo gid: ' + process.getgid());
+}
+catch (err) {
+  console.log('Fallo al cambiar el gid: ' + err);
+}</code></pre>
+
+<h3 id="process.getuid">process.getuid()</h3>
+
+<p>Obtiene la identidad de usuario del proceso. (Mirar getuid(2).)
+Es la id de usuario númerica, no el nombre de usuario.</p>
+
+<pre><code>console.log('Actual uid: ' + process.getuid());</code></pre>
+
+<h3 id="process.setuid">process.setuid(id)</h3>
+
+<p>Establece la identidad de usuario del proceso. (Mirar setuid(2).)  Acepta tanto 
+un ID numérico como una cadena de texto con el nombre de usuario.  Si se especifica 
+el nombre de usuario, el método se bloquea mientras lo resuelve a un ID numérico.</p>
+
+<pre><code>console.log('Actual uid: ' + process.getuid());
+try {
+  process.setuid(501);
+  console.log('Nuevo uid: ' + process.getuid());
+}
+catch (err) {
+  console.log('Fallo al establecer uid: ' + err);
+}</code></pre>
+
+<h3 id="process.version">process.version</h3>
+
+<p>Una propiedad dentro del compilado que expone <code>NODE_VERSION</code>.</p>
+
+<pre><code>console.log('Versión: ' + process.version);</code></pre>
+
+<h3 id="process.installPrefix">process.installPrefix</h3>
+
+<p>Una propiedad dentro del compilado que expone <code>NODE_PREFIX</code>.</p>
+
+<pre><code>console.log('Prefijo: ' + process.installPrefix);</code></pre>
+
+<h3 id="process.kill">process.kill(pid, signal='SIGTERM')</h3>
+
+<p>Envia una señal a un proceso. <code>pid</code> es la id de proceso y <code>signal</code> es la cadena de 
+texto que describe la señal a enviar.  Los nombres de señales son cadenas de texto
+ como 'SIGINT' o 'SIGUSR1'.  Si se omite, la señal será 'SIGTERM'.
+Mirar kill(2) para más información.</p>
+
+<p>Notar que ya que el nombre de la función es <code>process.kill</code>, se trata solo de 
+un emisor de señales, como la llamada a sistema <code>kill</code>. La señal enviada
+puede hacer algo más que matar el proceso escogido.</p>
+
+<p>Ejemplo de como enviarse una señal a uno mismo:</p>
+
+<pre><code>process.on('SIGHUP', function () {
+  console.log('Recibida señal SIGHUP.');
+});
+
+setTimeout(function () {
+  console.log('Saliendo.');
+  process.exit(0);
+}, 100);
+
+process.kill(process.pid, 'SIGHUP');</code></pre>
+
+<h3 id="process.pid">process.pid</h3>
+
+<p>El PID del proceso.</p>
+
+<pre><code>console.log('El pid de este proceso es  ' + process.pid);</code></pre>
+
+<h3 id="process.title">process.title</h3>
+
+<p>Getter/setter para establecer lo que mostrará 'ps'.</p>
+
+<h3 id="process.platform">process.platform</h3>
+
+<p>En que plataforma se está ejecutando. <code>'linux2'</code>, <code>'darwin'</code>, etc.</p>
+
+<pre><code>console.log('La plataforma es ' + process.platform);</code></pre>
+
+<h3 id="process.memoryUsage">process.memoryUsage()</h3>
+
+<p>Devuelve un objeto describiendo el uso de la memoria del proceso Node.</p>
+
+<pre><code>var util = require('util');
+
+console.log(util.inspect(process.memoryUsage()));</code></pre>
+
+<p>Generará:</p>
+
+<pre><code>{ rss: 4935680,
+  vsize: 41893888,
+  heapTotal: 1826816,
+  heapUsed: 650472 }</code></pre>
+
+<p><code>heapTotal</code> y <code>heapUsed</code> se refieren al uso de la memoria de V8.</p>
+
+<h3 id="process.nextTick">process.nextTick(callback)</h3>
+
+<p>En la siguiente iteración del bucle del evento se llama a callback.
+No es simplemente un alias para <code>setTimeout(fn, 0)</code> , es mucho
+más eficiente.</p>
+
+<pre><code>process.nextTick(function () {
+  console.log('nextTick callback');
+});</code></pre>
+
+<h3 id="process.umask">process.umask([mask])</h3>
+
+<p>Establece o lee la máscara del modo de creación del fichero del proceso. Los procesos 
+hijos heredan la máscara del proceso padre. Devuelve la antigua máscara si se pasa el argumento 
+<code>mask</code>, si no devuelve la máscara actual. </p>
+
+<pre><code>var oldmask, newmask = 0644;
+
+oldmask = process.umask(newmask);
+console.log('Cambiada umask de: ' + oldmask.toString(8) +
+            ' a ' + newmask.toString(8));</code></pre>
+
+<h2 id="util">util</h2>
+
+<p>Estas funciones estan en el módulo <code>'util'</code>. Usa <code>require('util')</code> para acceder a ellas.</p>
+
+<h3 id="util.debug">util.debug(string)</h3>
+
+<p>Una función de salida síncrona. Bloquerá el proceso y pondrá <code>string</code> inmediatamente en <code>stderr</code>.</p>
+
+<pre><code>require('util').debug('mensaje en stderr');</code></pre>
+
+<h3 id="util.log">util.log(string)</h3>
+
+<p>Salida con timestamp en <code>stdout</code>.</p>
+
+<pre><code>require('util').log('Mensaje con marca de tiempo.');</code></pre>
+
+<h3 id="util.inspect">util.inspect(object, showHidden=false, depth=2)</h3>
+
+<p>Devuelve la cadena que representa a <code>object</code>, lo cual es útil para corregir fallos.</p>
+
+<p>Si <code>showHidden</code> es <code>true</code>, entonces las propiedades no-enumerables del objeto serán mostradas también.</p>
+
+<p>Si <code>depth</code> es proporcionado, le dice a <code>inspect</code> cuantas veces tiene que recurrir mientras formatea el objeto. Esto es útil para objetos muy largos y complejos.</p>
+
+<p>Por defecto solo se recurre un par de veces. Para hacer que recurra indefinidamente pasa <code>null</code> a <code>depth</code>.</p>
+
+<p>Ejemplo de inspeccionar todas las propiedades del objeto <code>util</code>:</p>
+
+<pre><code>var util = require('util');
+
+console.log(util.inspect(util, true, null));</code></pre>
+
+<h3 id="util.pump">util.pump(readableStream, writableStream, [callback])</h3>
+
+<p>Experimental</p>
+
+<p>Lee los datos desde <code>readableStream</code> y los envia al <code>writableStream</code>. Cuando <code>writableStream.write(data)</code> devuelve <code>false</code> <code>readableStream</code> será pausado hasta que ocurra el evento <code>drain</code> sobre <code>writableStream</code>. <code>callback</code> tiene un error como único argumento y es llamada cuando <code>writableStream</code> es cerrado o cuando ocurre un error.</p>
+
+<h3 id="util.inherits">util.inherits(constructor, superConstructor)</h3>
+
+<p>Hereda los métodos del prototype desde un <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/constructor">constructor</a> dentro de otro. El prototype del <code>constructor</code> será configurado a un nuevo objecto creado desde <code>superConstructor</code>.</p>
+
+<p>Como mejora adicional, <code>superConstructor</code>será accesible atravez de la propiedad <code>constructor.super_</code></p>
+
+<pre><code>var util = require("util");
+var events = require("events");
+
+function MyStream() {
+    events.EventEmitter.call(this);
+}
+
+util.inherits(MyStream, events.EventEmitter);
+
+MyStream.prototype.write = function(data) {
+    this.emit("data", data);
+}
+
+var stream = new MyStream();
+
+console.log(stream instanceof events.EventEmitter); // true
+console.log(MyStream.super_ === events.EventEmitter); // true
+
+stream.on("data", function(data) {
+    console.log('Received data: "' + data + '"');
+})
+stream.write("It works!"); // Received data: "It works!"</code></pre>
+
+<h2 id="eventos">Eventos</h2>
+
+<p>Muchos objetos en Node emiten eventos: un <code>net.Server</code> emite un evento cada vez que se establece una conexión, un <code>fs.readStream</code> emite un evento cuando se abre un fichero. Todos los objectos que emiten eventos son instancias de <code>events.EventEmitter</code>.
+Puedes usar este módulo haciendo <code>require("events");</code></p>
+
+<p>Normalmente, los nombres de los eventos siguen la notacion camel-case, sin embargo, no hay ninguna restricción en este aspecto y cualquier cadena será aceptada.</p>
+
+<p>Se pueden adjuntar funciones a objetos, para que sean ejecutadas cuando se emita un evento. Estas funciones reciben el nombre de <em>listeners</em>. </p>
+
+<h3 id="events.EventEmitter">events.EventEmitter</h3>
+
+<p>Para usar la clase EventEmitter, haz de importarla
+haciendo <code>require('events').EventEmiter</code>.</p>
+
+<p>Cuando una instancia de la clase EventEmitter se encuentra con un error, la acción típica
+es emitir un evento de error. Los eventos de error son tratados como un caso especial en node.
+Si no tiene un listener asociado la acción por defecto será imprimir la traza de la pila y salir
+del programa</p>
+
+<p>Todos los EventEmitters emite el evento <code>'newListener'</code> cuando se añaden nuevos listeners.</p>
+
+<h4 id="emitter.addListener">emitter.addListener(event, listener)</h4>
+
+<h4 id="emitter.on">emitter.on(event, listener)</h4>
+
+<p>Añade un listener al final del array de listeners para el evento espeficicado</p>
+
+<pre><code>server.on('connection', function (stream) {
+  console.log('someone connected!');
+});</code></pre>
+
+<h4 id="emitter.once">emitter.once(event, listener)</h4>
+
+<p>Añade un listener al evento. El listener se invocará sólo la primera vez que se dispara el evento.
+luego se elimina. </p>
+
+<pre><code>server.once('connection', function (stream) {
+  console.log('Ah, we have our first user!');
+});</code></pre>
+
+<h4 id="emitter.removeListener">emitter.removeListener(event, listener)</h4>
+
+<p>Elimina un listener del array de listeners asociado al evento especificado
+<strong>Atención</strong>: modifica el indice del array de listeners </p>
+
+<pre><code>var callback = function(stream) {
+  console.log('someone connected!');
+};
+server.on('connection', callback);
+// ...
+server.removeListener('connection', callback);</code></pre>
+
+<h4 id="emitter.removeAllListeners">emitter.removeAllListeners(event)</h4>
+
+<p>Elimina todos los listeners del array de listeners asociado al evento especificado</p>
+
+<h4 id="emitter.setMaxListeners">emitter.setMaxListeners(n)</h4>
+
+<p>Por defecto los EventEmitters imprimirán un warning si se le añaden más de 10 listeners.
+Este comportamiento por defecto ayuda a encontrar memory leaks. Obviamente no todos los EventEmitters
+deberían limitarse a 10. Esta función permite incrementar este valor. Use cero para establecer un valor ilimitado.</p>
+
+<h4 id="emitter.listeners">emitter.listeners(event)</h4>
+
+<p>Devuelve un array de listeners asociado al evento especificado. Este array puede ser manipulado, por ejemplo, eliminando un listener.</p>
+
+<pre><code>server.on('connection', function (stream) {
+  console.log('someone connected!');
+});
+console.log(util.inspect(server.listeners('connection')); // [ [Function] ]</code></pre>
+
+<h4 id="emitter.emit">emitter.emit(event, [arg1], [arg2], [...])</h4>
+
+<p>Llama a cada uno de los listeners en el orden en el que fueron pasados por parámetros</p>
+
+<h4 id="event_newListener_">Event: 'newListener'</h4>
+
+<p><code>function (event, listener) { }</code></p>
+
+<p>Este evento es emitido cada vez que se añade un nuevo listener.</p>
+
+<h2 id="buffers">Buffers</h2>
+
+<p>El puro Javascript es amigable con Unicode, pero no se lleva tan bien con los datos binarios. Cuando tratamos con streams TCP o ficheros del sistema, es necesario manejar streams de octets. Node tiene algunas estrategias para manipular, crear, y consumir streams de octets.</p>
+
+<p>Los datos en Raw son almacenados en instancias de la clase <code>Buffer</code>. Un <code>Buffer</code> es similar a un array de integers pero correspondiendo a una localización en raw de la memeria fuera del heap de V8. Un <code>Buffer</code> no puede ser redimencionado.</p>
+
+<p>El objeto <code>Buffer</code> es global.</p>
+
+<p>Convertir entre Buffers y objectos String de Javascript requiere de un método de codificación explícito. Aquí están las diferentes cadenas de codificación;</p>
+
+<ul><li><p><code>'ascii'</code> - solo para datos de 7 bit ASCII. Este método de codificación es muy rápido, y dejará el bit alto si está configurado.</p></li><li><p><code>'utf-8'</code> - Multiples bytes de caracteres con codificación Unicode. Muchas páginas webs y otros formatos de documentos usan UTF-8.</p></li><li><p><code>'usc2'</code> - 2-bytes, de caracteres con codificación <code>little endian</code> Unicode. Sólo pueden codificar BMP(Basic Multilingual Plane, U+0000 - U+FFFF).</p></li><li><p><code>'base64'</code> - Cadena codificada en Base64.</p></li><li><p><code>'binary'</code> - Una forma de codificar datos binarios en Raw dentro de cadenas pero solo usando los primeros 8 bits de cada caracter. Este método de codificación es obsoleto y debe ser evitado en favor del objeto <code>Buffer</code> donde sea posible. Esta codificación será eliminada en futuras versiones de Node.</p></li></ul>
+
+<h3 id="new_Buffer">new Buffer(size)</h3>
+
+<p>Asigna un nuevo buffer de <code>size</code> octets.</p>
+
+<h3 id="new_Buffer">new Buffer(array)</h3>
+
+<p>Asigna un nuevo buffer usando un <code>array</code> de octets.</p>
+
+<h3 id="new_Buffer">new Buffer(str, encoding='utf8')</h3>
+
+<p>Asigna un nuevo buffer conteniendo el <code>str</code> dado.</p>
+
+<h3 id="buffer.write">buffer.write(string, offset=0, encoding='utf8')</h3>
+
+<p>Escribe <code>string</code> en el Buffer en <code>offset</code> usando el método dado. Devuelve el número de octets escritos. Si <code>Buffer</code> no contiene suficiente espacio para encajar la cadena entera, escribirá una cantidad parcial de la cadena. En caso de codificación <code>utf8</code>, el método no escribirá caracteres parciales.</p>
+
+<p>Ejemplo: Escribe una cadena utf8 dentro de un buffer, y entonces lo imprime por pantalla:</p>
+
+<pre><code>buf = new Buffer(256);
+len = buf.write('\u00bd + \u00bc = \u00be', 0);
+console.log(len + " bytes: " + buf.toString('utf8', 0, len));
+
+// 12 bytes: ½ + ¼ = ¾</code></pre>
+
+<h3 id="buffer.toString">buffer.toString(encoding, start=0, end=buffer.length)</h3>
+
+<p>Decodifica y devuelve un cadena con los datos de un buffer codificado con <code>encoding</code> comenzando en <code>start</code> y terminando en <code>end</code>.</p>
+
+<p>Mira el ejemplo de<code>buffer.write()</code>, arriba.</p>
+
+<h3 id="buffer_index_">buffer[index]</h3>
+
+<p>Obtiene y configura el octet en <code>index</code>. Los valores se refieren a bytes individuales, por lo que el rango legal esta entre <code>0x00</code> and <code>0xFF</code> en hexadecimal o <code>0</code> y <code>255</code>.</p>
+
+<p>Ejemplo: Copiando un cadena ASCII dentro de un buffer, un byte cada vez:</p>
+
+<pre><code>str = "node.js";
+buf = new Buffer(str.length);
+
+for (var i = 0; i &lt; str.length ; i++) {
+  buf[i] = str.charCodeAt(i);
+}
+
+console.log(buf);
+
+// node.js</code></pre>
+
+<h3 id="buffer.isBuffer">Buffer.isBuffer(obj)</h3>
+
+<p>Comprueba si <code>obj</code> es un <code>Buffer</code>.</p>
+
+<h3 id="buffer.byteLength">Buffer.byteLength(string, encoding='utf8')</h3>
+
+<p>Da la longitud de una cadena en bytes. Esto no es más que <code>string.prototype.length</code> puesto que devuelve el número de <em>caracteres</em> en la cadena.</p>
+
+<p>Ejemplo:</p>
+
+<pre><code>str = '\u00bd + \u00bc = \u00be';
+
+console.log(str + ": " + str.length + " characters, " +
+  Buffer.byteLength(str, 'utf8') + " bytes");
+
+// ½ + ¼ = ¾: 9 characters, 12 bytes</code></pre>
+
+<h3 id="buffer.length">buffer.length</h3>
+
+<p>El tamaño del buffer en bytes. Advierta que esto no es necesariamente el contenido. <code>length</code> se refiere a la cantidad de memoria asignada para el objeto buffer. No cambia cuando el contenido del buffer cambia.</p>
+
+<pre><code>buf = new Buffer(1234);
+
+console.log(buf.length);
+buf.write("some string", "ascii", 0);
+console.log(buf.length);
+
+// 1234
+// 1234</code></pre>
+
+<h3 id="buffer.copy">buffer.copy(targetBuffer, targetStart=0, sourceStart=0, sourceEnd=buffer.length)</h3>
+
+<p>Hace un memcpy() entre Buffers.</p>
+
+<p>Ejemplo: construye dos Buffers, entonces copia <code>buf1</code> desde el byte 16 hasta el byte 19 dentro de <code>buf2</code>, comenzando en el octavo byte de <code>buf2</code>.</p>
+
+<pre><code>buf1 = new Buffer(26);
+buf2 = new Buffer(26);
+
+for (var i = 0 ; i &lt; 26 ; i++) {
+  buf1[i] = i + 97; // 97 is ASCII a
+  buf2[i] = 33; // ASCII !
+}
+
+buf1.copy(buf2, 8, 16, 20);
+console.log(buf2.toString('ascii', 0, 25));
+
+// !!!!!!!!qrst!!!!!!!!!!!!!</code></pre>
+
+<h3 id="buffer.slice">buffer.slice(start, end=buffer.length)</h3>
+
+<p>Devuelve un nuevo buffer el cual hace referencia a la misma memoria que el antíguo, pero desplazado y cortado por los indices <code>start</code> y <code>end</code>.</p>
+
+<p><strong>¡Al modificar el nuevo buffer, modificarás la memoria en el buffer original!</strong></p>
+
+<p>Ejemplo: contruye un Buffer con el alfabeto ASCII, toma un fragmento, y entonces modifica un byte desde el Buffer original.</p>
+
+<pre><code>var buf1 = new Buffer(26);
+
+for (var i = 0 ; i &lt; 26 ; i++) {
+  buf1[i] = i + 97; // 97 is ASCII a
+}
+
+var buf2 = buf1.slice(0, 3);
+console.log(buf2.toString('ascii', 0, buf2.length));
+buf1[0] = 33;
+console.log(buf2.toString('ascii', 0, buf2.length));
+
+// abc
+// !bc</code></pre>
+
+<h2 id="streams">Streams</h2>
+
+<p>Un Stream es un interfaz abstracto implementado por varios objetos en Node. Por ejemplo una petición a un servidor HTTP es un Stream, como un stdout. Los Streams son legibles, escribibles o ambos. Todos los stream son instancias de <code>EventEmitter</code>.</p>
+
+<h2 id="readable_Stream">Readable Stream</h2>
+
+<p>A <code>Readable Stream</code> has the following methods, members, and events.</p>
+
+<h3 id="event_data_">Event: 'data'</h3>
+
+<p><code>function (data) { }</code></p>
+
+<p>The <code>'data'</code> event emits either a <code>Buffer</code> (by default) or a string if
+<code>setEncoding()</code> was used.</p>
+
+<h3 id="event_end_">Event: 'end'</h3>
+
+<p><code>function () { }</code></p>
+
+<p>Emitted when the stream has received an EOF (FIN in TCP terminology).
+Indicates that no more <code>'data'</code> events will happen. If the stream is also
+writable, it may be possible to continue writing.</p>
+
+<h3 id="event_error_">Event: 'error'</h3>
+
+<p><code>function (exception) { }</code></p>
+
+<p>Emitted if there was an error receiving data.</p>
+
+<h3 id="event_close_">Event: 'close'</h3>
+
+<p><code>function () { }</code></p>
+
+<p>Emitted when the underlying file descriptor has been closed. Not all streams
+will emit this.  (For example, an incoming HTTP request will not emit
+<code>'close'</code>.)</p>
+
+<h3 id="event_fd_">Event: 'fd'</h3>
+
+<p><code>function (fd) { }</code></p>
+
+<p>Emitted when a file descriptor is received on the stream. Only UNIX streams
+support this functionality; all others will simply never emit this event.</p>
+
+<h3 id="stream.readable">stream.readable</h3>
+
+<p>A boolean that is <code>true</code> by default, but turns <code>false</code> after an <code>'error'</code>
+occurred, the stream came to an <code>'end'</code>, or <code>destroy()</code> was called.</p>
+
+<h3 id="stream.setEncoding">stream.setEncoding(encoding)</h3>
+
+<p>Makes the data event emit a string instead of a <code>Buffer</code>. <code>encoding</code> can be
+<code>'utf8'</code>, <code>'ascii'</code>, or <code>'base64'</code>.</p>
+
+<h3 id="stream.pause">stream.pause()</h3>
+
+<p>Pauses the incoming <code>'data'</code> events.</p>
+
+<h3 id="stream.resume">stream.resume()</h3>
+
+<p>Resumes the incoming <code>'data'</code> events after a <code>pause()</code>.</p>
+
+<h3 id="stream.destroy">stream.destroy()</h3>
+
+<p>Closes the underlying file descriptor. Stream will not emit any more events.</p>
+
+<h3 id="stream.destroySoon">stream.destroySoon()</h3>
+
+<p>After the write queue is drained, close the file descriptor.</p>
+
+<h3 id="stream.pipe">stream.pipe(destination, [options])</h3>
+
+<p>This is a <code>Stream.prototype</code> method available on all <code>Stream</code>s.</p>
+
+<p>Connects this read stream to <code>destination</code> WriteStream. Incoming
+data on this stream gets written to <code>destination</code>. The destination and source
+streams are kept in sync by pausing and resuming as necessary.</p>
+
+<p>Emulating the Unix <code>cat</code> command:</p>
+
+<pre><code>process.stdin.resume();
+process.stdin.pipe(process.stdout);</code></pre>
+
+<p>By default <code>end()</code> is called on the destination when the source stream emits
+<code>end</code>, so that <code>destination</code> is no longer writable. Pass <code>{ end: false }</code> as
+<code>options</code> to keep the destination stream open.</p>
+
+<p>This keeps <code>process.stdout</code> open so that "Goodbye" can be written at the end.</p>
+
+<pre><code>process.stdin.resume();
+
+process.stdin.pipe(process.stdout, { end: false });
+
+process.stdin.on("end", function() {
+  process.stdout.write("Goodbye\n");
+});</code></pre>
+
+<p>NOTE: If the source stream does not support <code>pause()</code> and <code>resume()</code>, this function
+adds simple definitions which simply emit <code>'pause'</code> and <code>'resume'</code> events on
+the source stream.</p>
+
+<h2 id="writable_Stream">Writable Stream</h2>
+
+<p>A <code>Writable Stream</code> has the following methods, members, and events.</p>
+
+<h3 id="event_drain_">Event: 'drain'</h3>
+
+<p><code>function () { }</code></p>
+
+<p>Emitted after a <code>write()</code> method was called that returned <code>false</code> to
+indicate that it is safe to write again.</p>
+
+<h3 id="event_error_">Event: 'error'</h3>
+
+<p><code>function (exception) { }</code></p>
+
+<p>Emitted on error with the exception <code>exception</code>.</p>
+
+<h3 id="event_close_">Event: 'close'</h3>
+
+<p><code>function () { }</code></p>
+
+<p>Emitted when the underlying file descriptor has been closed.</p>
+
+<h3 id="event_pipe_">Event: 'pipe'</h3>
+
+<p><code>function (src) { }</code></p>
+
+<p>Emitted when the stream is passed to a readable stream's pipe method.</p>
+
+<h3 id="stream.writable">stream.writable</h3>
+
+<p>A boolean that is <code>true</code> by default, but turns <code>false</code> after an <code>'error'</code>
+occurred or <code>end()</code> / <code>destroy()</code> was called.</p>
+
+<h3 id="stream.write">stream.write(string, encoding='utf8', [fd])</h3>
+
+<p>Writes <code>string</code> with the given <code>encoding</code> to the stream.  Returns <code>true</code> if
+the string has been flushed to the kernel buffer.  Returns <code>false</code> to
+indicate that the kernel buffer is full, and the data will be sent out in
+the future. The <code>'drain'</code> event will indicate when the kernel buffer is
+empty again. The <code>encoding</code> defaults to <code>'utf8'</code>.</p>
+
+<p>If the optional <code>fd</code> parameter is specified, it is interpreted as an integral
+file descriptor to be sent over the stream. This is only supported for UNIX
+streams, and is silently ignored otherwise. When writing a file descriptor in
+this manner, closing the descriptor before the stream drains risks sending an
+invalid (closed) FD.</p>
+
+<h3 id="stream.write">stream.write(buffer)</h3>
+
+<p>Same as the above except with a raw buffer.</p>
+
+<h3 id="stream.end">stream.end()</h3>
+
+<p>Terminates the stream with EOF or FIN.</p>
+
+<h3 id="stream.end">stream.end(string, encoding)</h3>
+
+<p>Sends <code>string</code> with the given <code>encoding</code> and terminates the stream with EOF
+or FIN. This is useful to reduce the number of packets sent.</p>
+
+<h3 id="stream.end">stream.end(buffer)</h3>
+
+<p>Same as above but with a <code>buffer</code>.</p>
+
+<h3 id="stream.destroy">stream.destroy()</h3>
+
+<p>Closes the underlying file descriptor. Stream will not emit any more events.</p>
+
+<h3 id="stream.destroySoon">stream.destroySoon()</h3>
+
+<p>After the write queue is drained, close the file descriptor. <code>destroySoon()</code>
+can still destroy straight away, as long as there is no data left in the queue
+for writes.</p>
+
+<h2 id="crypto">Crypto</h2>
+
+<p>Usa <code>require('crypto')</code> para acceder a este módulo.</p>
+
+<p>El módulo crypto necesita que OpenSSL esté disponible en el sistema.
+Ofrece una forma de encapsular credenciales seguras para ser usadas como parte de una red HTTPS segura o una conexión http.</p>
+
+<p>Además ofrece un conjunto de envoltorios para los métodos hash, hmac, cipher, decipher, sign y verify de OpenSSL.</p>
+
+<h3 id="crypto.createCredentials">crypto.createCredentials(details)</h3>
+
+<p>Crea un objeto credenciales, con los detalles opcionales en forma de diccionario con las 
+siguientes claves:</p>
+
+<ul><li><code>key</code> : cadena que contiene la clave privada codificada en PEM.</li><li><code>cert</code> : cadena que contiene el certificado codificado en PEM.</li><li><code>ca</code> : cadena o lista de cadenas de certificados de confianza codificados en PEM.</li></ul>
+
+<p>Si no se han dado ningún elemento en <code>ca</code>, node.js usará la lista de CAs de confianza publicadas como dice en
+<a href="http://mxr.mozilla.org/mozilla/source/security/nss/lib/ckfw/builtins/certdata.txt">http://mxr.mozilla.org/mozilla/source/security/nss/lib/ckfw/builtins/certdata.txt</a>.</p>
+
+<h3 id="crypto.createHash">crypto.createHash(algorithm)</h3>
+
+<p>Crea y devuelve un nuevo objeto hash, un hash criptográfico con el algoritmo dado que puede ser usado para generar el hash digests.</p>
+
+<p><code>algorithm</code> depende de los algoritmos disponibles en la versión de OpenSSL en el sistema. Algunos ejemplos son <code>'sha1'</code>, <code>'md5'</code>, <code>'sha256'</code>, <code>'sha512'</code>, etc. 
+En versiones recientes, <code>openssl list-message-digest-algorithms</code> mostrará los algoritmos digest disponibles.</p>
+
+<h3 id="hash.update">hash.update(data)</h3>
+
+<p>Actualiza el contenido del hash con el <code>data</code> dado.
+Esto puede ser invocado muchas veces con dato nuevo mientras estos van llegando.</p>
+
+<h3 id="hash.digest">hash.digest(encoding='binary')</h3>
+
+<p>Calcula el digest todos los datos que van al hash.
+La codificación (<code>encoding</code>) puede ser <code>'hex'</code>, <code>'binary'</code> o <code>'base64'</code>.</p>
+
+<h3 id="crypto.createHmac">crypto.createHmac(algorithm, key)</h3>
+
+<p>Crea y devuelve un objeto hmac, un hmac criptográfico con el algoritmo y la clave dadas.</p>
+
+<p><code>algorithm</code> depende de los algoritmos disponibles en la versión de OpenSSL en el sistema -  ver createHash arriba.
+<code>key</code> es la clave hmac a usar.</p>
+
+<h3 id="hmac.update">hmac.update(data)</h3>
+
+<p>Actualiza el contenido del hmac con el <code>data</code> dado.
+Esto puede ser invocado muchas veces con dato nuevo mientras estos van llegando.</p>
+
+<h3 id="hmac.digest">hmac.digest(encoding='binary')</h3>
+
+<p>Calcula el digest (resumen) de todos los datos que van al hmac.
+La codificación (<code>encoding</code>) puede ser <code>'hex'</code>, <code>'binary'</code> o <code>'base64'</code>.</p>
+
+<h3 id="crypto.createCipher">crypto.createCipher(algorithm, key)</h3>
+
+<p>Crea y devuelve un objeto cipher (codificador), con el algoritmo y la clave dadas.</p>
+
+<p><code>algorithm</code> es dependiente de OpenSSL, por ejemplo <code>'aes192'</code>, etc.
+En versiones recientes, <code>openssl list-cipher-algorithms</code> mostrará los algoritmos cipher disponibles.</p>
+
+<h3 id="cipher.update">cipher.update(data, input_encoding='binary', output_encoding='binary')</h3>
+
+<p>Actualiza el cipher con <code>data</code>, la codificación viene dada en <code>input_encoding</code> y puede ser <code>'utf8'</code>, <code>'ascii'</code> o <code>'binary'</code>. El <code>output_encoding</code> especifica el formato de la salida del dato codificado, y puede ser <code>'binary'</code>, <code>'base64'</code> o <code>'hex'</code>.</p>
+
+<p>Devuelve el contenido codificado, y puede ser llamado muchas veces a medida que nuevos datos van llegando.</p>
+
+<h3 id="cipher.final">cipher.final(output_encoding='binary')</h3>
+
+<p>Devuelve cualquier contenido codificado restante, donde <code>output_encoding</code> puede ser <code>'binary'</code>, <code>'ascii'</code> o <code>'utf8'</code>.</p>
+
+<h3 id="crypto.createDecipher">crypto.createDecipher(algorithm, key)</h3>
+
+<p>Crea y devuelve un objeto decipher (decodificación), con el algoritmo y clave dado.
+Este es el simétrico del objeto cipher (codificación) de arriba.</p>
+
+<h3 id="decipher.update">decipher.update(data, input_encoding='binary', output_encoding='binary')</h3>
+
+<p>Actualiza el objeto decodificador con <code>data</code>, que puede estar codificado en <code>'binary'</code>, <code>'base64'</code> o <code>'hex'</code>.
+El <code>output_decoding</code> especifica en qué formato devolver el texto plano decodificdo: <code>'binary'</code>, <code>'ascii'</code> o <code>'utf8'</code>.</p>
+
+<h3 id="decipher.final">decipher.final(output_encoding='binary')</h3>
+
+<p>Devuelve el texto plano decodificado restante, siendo <code>output_encoding</code> <code>'binary'</code>, <code>'ascii'</code> o <code>'utf8'</code>.</p>
+
+<h3 id="crypto.createSign">crypto.createSign(algorithm)</h3>
+
+<p>Crea y devuelve un objeto firma (signing) con el algoritmo dado.
+En versiones recientes, <code>openssl list-public-key-algorithms</code> mostrará los algoritmos de firmado disponibles. Por ejemplo: <code>'RSA-SHA256'</code>.</p>
+
+<h3 id="signer.update">signer.update(data)</h3>
+
+<p>Actualiza el objeto firma con los datos dados.
+Puede ser llamado muchas veces a medida que nuevos datos van llegando.</p>
+
+<h3 id="signer.sign">signer.sign(private_key, output_format='binary')</h3>
+
+<p>Calcula la firma en todos los datos actualizados pasados a través del objetvo firma.
+<code>private_key</code> es una cadena que contiene la clave privada para firmar codificada en PEM.</p>
+
+<p>Devuelve la firma en <code>output_format</code> que puede estar en <code>'binary'</code>, <code>'hex'</code> o <code>'base64'</code>.</p>
+
+<h3 id="crypto.createVerify">crypto.createVerify(algorithm)</h3>
+
+<p>Crea y devuelve un objeto verificación con el algoritmo dado.
+Este es el simétrico del objeto firma de arriba.</p>
+
+<h3 id="verifier.update">verifier.update(data)</h3>
+
+<p>Actualiza el objeto verificador con los datos dados.
+Puede ser llamado muchas veces a medida que nuevos datos van llegando.</p>
+
+<h3 id="verifier.verify">verifier.verify(cert, signature, signature_format='binary')</h3>
+
+<p>Verifica los datos firmados usando <code>cert</code>, que es una cadena que contiene la llave pública codificada en PEM; y <code>signature</code>, que es la firma del dato previamente calculada; <code>signature_format</code> puede ser <code>'binary'</code>, <code>'hex'</code> o <code>'base64'</code>.</p>
+
+<p>Devuelve true o false dependiendo en la validez de la firma para el dato y la clave pública dadas.</p>
+
+<h2 id="tLS_">TLS (SSL)</h2>
+
+<p>Usa <code>require('tls')</code> para acceder a este módulo.</p>
+
+<p>El módulo <code>tls</code> utiliza OpenSSL para proveer seguridad en la Transport Layer Security y/o Secure Socket Layer: encriptacion de flujo de comunicaciones.</p>
+
+<p>TLS/SSL es una infraestructura de clave publica/privada. Cada cliente y cada servidor deben tener una clave privada. Una clave privada se crea como sigue:</p>
+
+<pre><code>openssl genrsa -out ryans-key.pem 1024</code></pre>
+
+<p>Todos los servidores y algunos clientes necesitan tener un certificado. Los certificados son claves públicas firmadas por una autoridad certificadora (CA) o por ellas mismas. El primer paso para obtener un certificado es crear un fichero de "Petición de firma de Certificado" (CSR). Esto se hace como sigue:</p>
+
+<pre><code>openssl req -new -key ryans-key.pem -out ryans-csr.pem</code></pre>
+
+<p>Para crear un certificado auto firmado con el CSR, hay que hacer:</p>
+
+<pre><code>openssl x509 -req -in ryans-csr.pem -signkey ryans-key.pem -out ryans-cert.pem</code></pre>
+
+<p>De forma alternativa puedes enviar el CSR a la autoridad certificadora para firmarlo.</p>
+
+<p>(TODO: documentos sobre la creación de una CA, por ahora los usuarios interesados deberían echar un vistazo a <code>test/fixtures/keys/Makefile</code> en el código fuente de Node)</p>
+
+<h3 id="s_tls.connect">s = tls.connect(port, [host], [options], callback)</h3>
+
+<p>Crea una nueva conexión cliente al <code>port</code> y al <code>host</code> dados. (<code>host</code> por defecto es <code>localhost</code>.) <code>options</code> debe ser un objeto que especifique:</p>
+
+<ul><li><p><code>key</code>: Un string o <code>Buffer</code> que contiene la llave privada del servidor en formato PEM. (Requerido)</p></li><li><p><code>cert</code>: Un string o <code>Buffer</code> que contiene la clave del certificado del servidor en formato PEM.</p></li><li><p><code>ca</code>: Un array de strings o <code>Buffer</code>s de certificados de confianza. Si esto es omitido, varias CAs "root" bien conocidas serán usadas, como VeriSign. Estas son usadas para autorizar conexiones.</p></li></ul>
+
+<p><code>tls.connect()</code> devuelve un objeto <code>CryptoStream</code> en texto plano.</p>
+
+<p>Después del TSL/SSL handshake el <code>callback</code> es invocado. El <code>callback</code> será invocado independientemente si el certificado del servidor fue autorizado o no. Es responsabilidad del usuario probar <code>s.authorized</code> para ver si el certificado del servidor estaba firmado por una de las CAs especificadas. Si <code>s.authorized === false</code> entonces el error puede encontrarse en <code>s.authorizationError</code>.</p>
+
+<h3 id="tls.Server">tls.Server</h3>
+
+<p>Esta clase es una subclase de <code>net.Server</code> y tiene los mismos métodos.
+En lugar de aceptar solo conexiones TCP en bruto, acepta conexiones encriptadas usando TLS o SSL.</p>
+
+<p>Aquí hay un ejemplo simple de un servidor eco:</p>
+
+<pre><code>var tls = require('tls');
+var fs = require('fs');
+
+var options = {
+  key: fs.readFileSync('server-key.pem'),
+  cert: fs.readFileSync('server-cert.pem')
+};
+
+tls.createServer(options, function (s) {
+  s.write("welcome!\n");
+  s.pipe(s);
+}).listen(8000);</code></pre>
+
+<p>Puedes probar este servidor conectándose a él con <code>openssl s_client</code>:</p>
+
+<pre><code>openssl s_client -connect 127.0.0.1:8000</code></pre>
+
+<h4 id="tls.createServer">tls.createServer(options, secureConnectionListener)</h4>
+
+<p>Este es un constructor para la clase <code>tls.Server</code>. El objeto options puede contener:</p>
+
+<ul><li><p><code>key</code>: Un string o <code>Buffer</code> que contiene la clave privada del servidor en formato PEM. (Requerido)</p></li><li><p><code>cert</code>: Un string o <code>Buffer</code> que contiene el certificado del servidor en formato PEM. (Requerido)</p></li><li><p><code>ca</code>: Un array de strings o <code>Buffer</code>s de certificados de confianza. Si esto es omitido, varias CAs "root" bien conocidas serán usadas, como VeriSign. Estas son usadas para autorizar conexiones.</p></li><li><p><code>requestCert</code>: Si es <code>true</code> el servidor solicitará un certificado de todos los clientes que se conecten e intenten verificar ese certificado. Por defecto: <code>false</code></p></li><li><p><code>rejectUnauthorized</code>: Si es <code>true</code> el servidor rechazará cualquier conexión no autorizada por la lista de CAs suministradas. Esta opción solo tiene efecto si <code>requestCert</code> es <code>true</code>. Por defecto: <code>false</code>.</p></li></ul>
+
+<h4 id="event_secureConnection_">Event: 'secureConnection'</h4>
+
+<p><code>function (cleartextStream) {}</code></p>
+
+<p>Este evento es emitido después de que una nueva conexión haya realizado con éxito el handshake. El argumento es una instancia de <code>stream.Stream</code>. Tiene todos los métodos y eventos de stream.</p>
+
+<p><code>cleartextStream.authorized</code> es un valor boolean que indica si el cliente está verificado por una de las CA suministradas por el servidor. Si <code>cleartextStream.authorized</code> es false, entonces <code>cleartextStream.authorizationError</code> describe como falló la autorización. Relacionado pero merece mencionarse: dependiendo de la configuración del servidor TLS, tus autorizaciones de conexión pueden ser aceptadas.</p>
+
+<h4 id="server.listen">server.listen(port, [host], [callback])</h4>
+
+<p>Empieza aceptando conexiones en el <code>port</code> y el <code>host</code> especificados. Si el <code>host</code> es omitido, el servidor aceptará conexiones dirigidas a cualquier dirección IPv4 (<code>INADDR_ANY</code>).</p>
+
+<p>Esta función es asíncrona. El último parámetro <code>callback</code> se invocará cuando el servidor esté saturado.</p>
+
+<p>Mirar <code>net.Server</code> para más información.</p>
+
+<h4 id="server.close">server.close()</h4>
+
+<p>Detiene el servidor, dejando de aceptar conexiones. Esta función es asíncrona, el servidor finalmente se cierra cuando emite un evento <code>'close'</code>.</p>
+
+<h4 id="server.maxConnections">server.maxConnections</h4>
+
+<p>Establece esta propiedad para rechazar conexiones cuando el número de conexiones del servidor sea alta.</p>
+
+<h4 id="server.connections">server.connections</h4>
+
+<p>Número de conexiones concurrentes en el servidor.</p>
+
+<h2 id="file_System">File System</h2>
+
+<p>File I/O is provided by simple wrappers around standard POSIX functions.  To
+use this module do <code>require('fs')</code>. All the methods have asynchronous and
+synchronous forms.</p>
+
+<p>The asynchronous form always take a completion callback as its last argument.
+The arguments passed to the completion callback depend on the method, but the
+first argument is always reserved for an exception. If the operation was
+completed successfully, then the first argument will be <code>null</code> or <code>undefined</code>.</p>
+
+<p>Here is an example of the asynchronous version:</p>
+
+<pre><code>var fs = require('fs');
+
+fs.unlink('/tmp/hello', function (err) {
+  if (err) throw err;
+  console.log('successfully deleted /tmp/hello');
+});</code></pre>
+
+<p>Here is the synchronous version:</p>
+
+<pre><code>var fs = require('fs');
+
+fs.unlinkSync('/tmp/hello')
+console.log('successfully deleted /tmp/hello');</code></pre>
+
+<p>With the asynchronous methods there is no guaranteed ordering. So the
+following is prone to error:</p>
+
+<pre><code>fs.rename('/tmp/hello', '/tmp/world', function (err) {
+  if (err) throw err;
+  console.log('renamed complete');
+});
+fs.stat('/tmp/world', function (err, stats) {
+  if (err) throw err;
+  console.log('stats: ' + JSON.stringify(stats));
+});</code></pre>
+
+<p>It could be that <code>fs.stat</code> is executed before <code>fs.rename</code>.
+The correct way to do this is to chain the callbacks.</p>
+
+<pre><code>fs.rename('/tmp/hello', '/tmp/world', function (err) {
+  if (err) throw err;
+  fs.stat('/tmp/world', function (err, stats) {
+    if (err) throw err;
+    console.log('stats: ' + JSON.stringify(stats));
+  });
+});</code></pre>
+
+<p>In busy processes, the programmer is <em>strongly encouraged</em> to use the
+asynchronous versions of these calls. The synchronous versions will block
+the entire process until they complete--halting all connections.</p>
+
+<h3 id="fs.rename">fs.rename(path1, path2, [callback])</h3>
+
+<p>Asynchronous rename(2). No arguments other than a possible exception are given
+to the completion callback.</p>
+
+<h3 id="fs.renameSync">fs.renameSync(path1, path2)</h3>
+
+<p>Synchronous rename(2).</p>
+
+<h3 id="fs.truncate">fs.truncate(fd, len, [callback])</h3>
+
+<p>Asynchronous ftruncate(2). No arguments other than a possible exception are
+given to the completion callback.</p>
+
+<h3 id="fs.truncateSync">fs.truncateSync(fd, len)</h3>
+
+<p>Synchronous ftruncate(2).</p>
+
+<h3 id="fs.chmod">fs.chmod(path, mode, [callback])</h3>
+
+<p>Asynchronous chmod(2). No arguments other than a possible exception are given
+to the completion callback.</p>
+
+<h3 id="fs.chmodSync">fs.chmodSync(path, mode)</h3>
+
+<p>Synchronous chmod(2).</p>
+
+<h3 id="fs.stat">fs.stat(path, [callback])</h3>
+
+<p>Asynchronous stat(2). The callback gets two arguments <code>(err, stats)</code> where
+<code>stats</code> is a <code>fs.Stats</code> object. It looks like this:</p>
+
+<pre><code>{ dev: 2049,
+  ino: 305352,
+  mode: 16877,
+  nlink: 12,
+  uid: 1000,
+  gid: 1000,
+  rdev: 0,
+  size: 4096,
+  blksize: 4096,
+  blocks: 8,
+  atime: '2009-06-29T11:11:55Z',
+  mtime: '2009-06-29T11:11:40Z',
+  ctime: '2009-06-29T11:11:40Z' }</code></pre>
+
+<p>See the <code>fs.Stats</code> section below for more information.</p>
+
+<h3 id="fs.lstat">fs.lstat(path, [callback])</h3>
+
+<p>Asynchronous lstat(2). The callback gets two arguments <code>(err, stats)</code> where
+<code>stats</code> is a <code>fs.Stats</code> object. lstat() is identical to stat(), except that if
+path is a symbolic link, then the link itself is stat-ed, not the file that it
+refers to.</p>
+
+<h3 id="fs.fstat">fs.fstat(fd, [callback])</h3>
+
+<p>Asynchronous fstat(2). The callback gets two arguments <code>(err, stats)</code> where
+<code>stats</code> is a <code>fs.Stats</code> object.</p>
+
+<h3 id="fs.statSync">fs.statSync(path)</h3>
+
+<p>Synchronous stat(2). Returns an instance of <code>fs.Stats</code>.</p>
+
+<h3 id="fs.lstatSync">fs.lstatSync(path)</h3>
+
+<p>Synchronous lstat(2). Returns an instance of <code>fs.Stats</code>.</p>
+
+<h3 id="fs.fstatSync">fs.fstatSync(fd)</h3>
+
+<p>Synchronous fstat(2). Returns an instance of <code>fs.Stats</code>.</p>
+
+<h3 id="fs.link">fs.link(srcpath, dstpath, [callback])</h3>
+
+<p>Asynchronous link(2). No arguments other than a possible exception are given to
+the completion callback.</p>
+
+<h3 id="fs.linkSync">fs.linkSync(srcpath, dstpath)</h3>
+
+<p>Synchronous link(2).</p>
+
+<h3 id="fs.symlink">fs.symlink(linkdata, path, [callback])</h3>
+
+<p>Asynchronous symlink(2). No arguments other than a possible exception are given
+to the completion callback.</p>
+
+<h3 id="fs.symlinkSync">fs.symlinkSync(linkdata, path)</h3>
+
+<p>Synchronous symlink(2).</p>
+
+<h3 id="fs.readlink">fs.readlink(path, [callback])</h3>
+
+<p>Asynchronous readlink(2). The callback gets two arguments <code>(err,
+resolvedPath)</code>.</p>
+
+<h3 id="fs.readlinkSync">fs.readlinkSync(path)</h3>
+
+<p>Synchronous readlink(2). Returns the resolved path.</p>
+
+<h3 id="fs.realpath">fs.realpath(path, [callback])</h3>
+
+<p>Asynchronous realpath(2).  The callback gets two arguments <code>(err,
+resolvedPath)</code>.</p>
+
+<h3 id="fs.realpathSync">fs.realpathSync(path)</h3>
+
+<p>Synchronous realpath(2). Returns the resolved path.</p>
+
+<h3 id="fs.unlink">fs.unlink(path, [callback])</h3>
+
+<p>Asynchronous unlink(2). No arguments other than a possible exception are given
+to the completion callback.</p>
+
+<h3 id="fs.unlinkSync">fs.unlinkSync(path)</h3>
+
+<p>Synchronous unlink(2).</p>
+
+<h3 id="fs.rmdir">fs.rmdir(path, [callback])</h3>
+
+<p>Asynchronous rmdir(2). No arguments other than a possible exception are given
+to the completion callback.</p>
+
+<h3 id="fs.rmdirSync">fs.rmdirSync(path)</h3>
+
+<p>Synchronous rmdir(2).</p>
+
+<h3 id="fs.mkdir">fs.mkdir(path, mode, [callback])</h3>
+
+<p>Asynchronous mkdir(2). No arguments other than a possible exception are given
+to the completion callback.</p>
+
+<h3 id="fs.mkdirSync">fs.mkdirSync(path, mode)</h3>
+
+<p>Synchronous mkdir(2).</p>
+
+<h3 id="fs.readdir">fs.readdir(path, [callback])</h3>
+
+<p>Asynchronous readdir(3).  Reads the contents of a directory.
+The callback gets two arguments <code>(err, files)</code> where <code>files</code> is an array of
+the names of the files in the directory excluding <code>'.'</code> and <code>'..'</code>.</p>
+
+<h3 id="fs.readdirSync">fs.readdirSync(path)</h3>
+
+<p>Synchronous readdir(3). Returns an array of filenames excluding <code>'.'</code> and
+<code>'..'</code>.</p>
+
+<h3 id="fs.close">fs.close(fd, [callback])</h3>
+
+<p>Asynchronous close(2).  No arguments other than a possible exception are given
+to the completion callback.</p>
+
+<h3 id="fs.closeSync">fs.closeSync(fd)</h3>
+
+<p>Synchronous close(2).</p>
+
+<h3 id="fs.open">fs.open(path, flags, [mode], [callback])</h3>
+
+<p>Asynchronous file open. See open(2). Flags can be 'r', 'r+', 'w', 'w+', 'a',
+or 'a+'. <code>mode</code> defaults to 0666. The callback gets two arguments <code>(err, fd)</code>.</p>
+
+<h3 id="fs.openSync">fs.openSync(path, flags, [mode])</h3>
+
+<p>Synchronous open(2).</p>
+
+<h3 id="fs.write">fs.write(fd, buffer, offset, length, position, [callback])</h3>
+
+<p>Write <code>buffer</code> to the file specified by <code>fd</code>.</p>
+
+<p><code>offset</code> and <code>length</code> determine the part of the buffer to be written.</p>
+
+<p><code>position</code> refers to the offset from the beginning of the file where this data
+should be written. If <code>position</code> is <code>null</code>, the data will be written at the
+current position.
+See pwrite(2).</p>
+
+<p>The callback will be given two arguments <code>(err, written)</code> where <code>written</code>
+specifies how many <em>bytes</em> were written.</p>
+
+<p>Note that it is unsafe to use <code>fs.write</code> multiple times on the same file
+without waiting for the callback. For this scenario,
+<code>fs.createWriteStream</code> is strongly recommended.</p>
+
+<h3 id="fs.writeSync">fs.writeSync(fd, buffer, offset, length, position)</h3>
+
+<p>Synchronous version of buffer-based <code>fs.write()</code>. Returns the number of bytes
+written.</p>
+
+<h3 id="fs.writeSync">fs.writeSync(fd, str, position, encoding='utf8')</h3>
+
+<p>Synchronous version of string-based <code>fs.write()</code>. Returns the number of bytes
+written.</p>
+
+<h3 id="fs.read">fs.read(fd, buffer, offset, length, position, [callback])</h3>
+
+<p>Read data from the file specified by <code>fd</code>.</p>
+
+<p><code>buffer</code> is the buffer that the data will be written to.</p>
+
+<p><code>offset</code> is offset within the buffer where writing will start.</p>
+
+<p><code>length</code> is an integer specifying the number of bytes to read.</p>
+
+<p><code>position</code> is an integer specifying where to begin reading from in the file.
+If <code>position</code> is <code>null</code>, data will be read from the current file position.</p>
+
+<p>The callback is given the two arguments, <code>(err, bytesRead)</code>.</p>
+
+<h3 id="fs.readSync">fs.readSync(fd, buffer, offset, length, position)</h3>
+
+<p>Synchronous version of buffer-based <code>fs.read</code>. Returns the number of
+<code>bytesRead</code>.</p>
+
+<h3 id="fs.readSync">fs.readSync(fd, length, position, encoding)</h3>
+
+<p>Synchronous version of string-based <code>fs.read</code>. Returns the number of
+<code>bytesRead</code>.</p>
+
+<h3 id="fs.readFile">fs.readFile(filename, [encoding], [callback])</h3>
+
+<p>Asynchronously reads the entire contents of a file. Example:</p>
+
+<pre><code>fs.readFile('/etc/passwd', function (err, data) {
+  if (err) throw err;
+  console.log(data);
+});</code></pre>
+
+<p>The callback is passed two arguments <code>(err, data)</code>, where <code>data</code> is the
+contents of the file.</p>
+
+<p>If no encoding is specified, then the raw buffer is returned.</p>
+
+<h3 id="fs.readFileSync">fs.readFileSync(filename, [encoding])</h3>
+
+<p>Synchronous version of <code>fs.readFile</code>. Returns the contents of the <code>filename</code>.</p>
+
+<p>If <code>encoding</code> is specified then this function returns a string. Otherwise it
+returns a buffer.</p>
+
+<h3 id="fs.writeFile">fs.writeFile(filename, data, encoding='utf8', [callback])</h3>
+
+<p>Asynchronously writes data to a file, replacing the file if it already exists.
+<code>data</code> can be a string or a buffer.</p>
+
+<p>Example:</p>
+
+<pre><code>fs.writeFile('message.txt', 'Hello Node', function (err) {
+  if (err) throw err;
+  console.log('It\'s saved!');
+});</code></pre>
+
+<h3 id="fs.writeFileSync">fs.writeFileSync(filename, data, encoding='utf8')</h3>
+
+<p>The synchronous version of <code>fs.writeFile</code>.</p>
+
+<h3 id="fs.watchFile">fs.watchFile(filename, [options], listener)</h3>
+
+<p>Watch for changes on <code>filename</code>. The callback <code>listener</code> will be called each
+time the file is accessed.</p>
+
+<p>The second argument is optional. The <code>options</code> if provided should be an object
+containing two members a boolean, <code>persistent</code>, and <code>interval</code>, a polling
+value in milliseconds. The default is <code>{ persistent: true, interval: 0 }</code>.</p>
+
+<p>The <code>listener</code> gets two arguments the current stat object and the previous
+stat object:</p>
+
+<pre><code>fs.watchFile(f, function (curr, prev) {
+  console.log('the current mtime is: ' + curr.mtime);
+  console.log('the previous mtime was: ' + prev.mtime);
+});</code></pre>
+
+<p>These stat objects are instances of <code>fs.Stat</code>.</p>
+
+<p>If you want to be notified when the file was modified, not just accessed
+you need to compare <code>curr.mtime</code> and `prev.mtime.</p>
+
+<h3 id="fs.unwatchFile">fs.unwatchFile(filename)</h3>
+
+<p>Stop watching for changes on <code>filename</code>.</p>
+
+<h2 id="fs.Stats">fs.Stats</h2>
+
+<p>Objects returned from <code>fs.stat()</code> and <code>fs.lstat()</code> are of this type.</p>
+
+<ul><li><code>stats.isFile()</code></li><li><code>stats.isDirectory()</code></li><li><code>stats.isBlockDevice()</code></li><li><code>stats.isCharacterDevice()</code></li><li><code>stats.isSymbolicLink()</code> (only valid with  <code>fs.lstat()</code>)</li><li><code>stats.isFIFO()</code></li><li><code>stats.isSocket()</code></li></ul>
+
+<h2 id="fs.ReadStream">fs.ReadStream</h2>
+
+<p><code>ReadStream</code> is a <code>Readable Stream</code>.</p>
+
+<h3 id="fs.createReadStream">fs.createReadStream(path, [options])</h3>
+
+<p>Returns a new ReadStream object (See <code>Readable Stream</code>).</p>
+
+<p><code>options</code> is an object with the following defaults:</p>
+
+<pre><code>{ flags: 'r',
+  encoding: null,
+  fd: null,
+  mode: 0666,
+  bufferSize: 64 * 1024
+}</code></pre>
+
+<p><code>options</code> can include <code>start</code> and <code>end</code> values to read a range of bytes from
+the file instead of the entire file.  Both <code>start</code> and <code>end</code> are inclusive and
+start at 0.  When used, both the limits must be specified always.</p>
+
+<p>An example to read the last 10 bytes of a file which is 100 bytes long:</p>
+
+<pre><code>fs.createReadStream('sample.txt', {start: 90, end: 99});</code></pre>
+
+<h2 id="fs.WriteStream">fs.WriteStream</h2>
+
+<p><code>WriteStream</code> is a <code>Writable Stream</code>.</p>
+
+<h3 id="event_open_">Event: 'open'</h3>
+
+<p><code>function (fd) { }</code></p>
+
+<p> <code>fd</code> is the file descriptor used by the WriteStream.</p>
+
+<h3 id="fs.createWriteStream">fs.createWriteStream(path, [options])</h3>
+
+<p>Returns a new WriteStream object (See <code>Writable Stream</code>).</p>
+
+<p><code>options</code> is an object with the following defaults:</p>
+
+<pre><code>{ flags: 'w',
+  encoding: null,
+  mode: 0666 }</code></pre>
+
+<h2 id="path">Path</h2>
+
+<p>Este módulo contiene utilidades para trabajar con rutas de fichero.  Usa 
+<code>require('path')</code> para utilizarlo.  Ofrece los siguientes métodos: </p>
+
+<h3 id="path.normalize">path.normalize(p)</h3>
+
+<p>Normaliza la cadena de texto de una ruta, se encarga de las partes <code>'..'</code> y <code>'.'</code>.</p>
+
+<p>Cuando se encuentra múltiples barras, se reemplazan por una sola;
+cuando la ruta acaba en barra, se conserva.
+En windows se utilizan contrabarras.</p>
+
+<p>Ejemplo:</p>
+
+<pre><code>path.normalize('/foo/bar//baz/asdf/quux/..')
+// devuelve
+'/foo/bar/baz/asdf'</code></pre>
+
+<h3 id="path.join">path.join([path1], [path2], [...])</h3>
+
+<p>Junta todos los argumentos y normaliza la ruta resultante.</p>
+
+<p>Ejemplo:</p>
+
+<pre><code>node&gt; require('path').join(
+...   '/foo', 'bar', 'baz/asdf', 'quux', '..')
+'/foo/bar/baz/asdf'</code></pre>
+
+<h3 id="path.resolve">path.resolve([from ...], to)</h3>
+
+<p>Resuelve <code>to</code> a una ruta absoluta.</p>
+
+<p>Si <code>to</code> no es absoluta los argumentos <code>from</code> se anteponen ordenados de derecha a 
+izquierda, hasta que se encuentra una ruta absoluta. Si después de usar todas las rutas de <code>from</code> 
+aún no se encuentra una ruta absoluta, también se utiliza el directorio actual de trabajo. La 
+ruta resultante se normaliza, y se eliminan las barras finales a no ser que 
+se resuelva el directorio root.</p>
+
+<p>Otra manera de verlo es como una secuencia de comandos <code>cd</code> en un shell.</p>
+
+<pre><code>path.resolve('foo/bar', '/tmp/file/', '..', 'a/../subfile')</code></pre>
+
+<p>Es como:</p>
+
+<pre><code>cd foo/bar
+cd /tmp/file/
+cd ..
+cd a/../subfile
+pwd</code></pre>
+
+<p>La diferencia es que las distintas rutas no necesitan existir e incluso pueden 
+ser ficheros.</p>
+
+<p>Ejemplos:</p>
+
+<pre><code>path.resolve('/foo/bar', './baz')
+// devuelve
+'/foo/bar/baz'
+
+path.resolve('/foo/bar', '/tmp/file/')
+// devuelve
+'/tmp/file'
+
+path.resolve('wwwroot', 'static_files/png/', '../gif/image.gif')
+// si actualmente en /home/myself/node, devuelve
+'/home/myself/node/wwwroot/static_files/gif/image.gif'</code></pre>
+
+<h3 id="path.dirname">path.dirname(p)</h3>
+
+<p>Devuelve el nombre de directorio de una ruta.  Semejante al comando de Unix <code>dirname</code>.</p>
+
+<p>Ejemplo:</p>
+
+<pre><code>path.dirname('/foo/bar/baz/asdf/quux')
+// devuelve
+'/foo/bar/baz/asdf'</code></pre>
+
+<h3 id="path.basename">path.basename(p, [ext])</h3>
+
+<p>Devuelve la última parte de una ruta.  Semejante al comando de Unix <code>basename</code>.</p>
+
+<p>Ejemplo:</p>
+
+<pre><code>path.basename('/foo/bar/baz/asdf/quux.html')
+// devuelve
+'quux.html'
+
+path.basename('/foo/bar/baz/asdf/quux.html', '.html')
+// devuelve
+'quux'</code></pre>
+
+<h3 id="path.extname">path.extname(p)</h3>
+
+<p>Devuelve la extensión de la ruta.  Todo lo que hay después del último '.' 
+en la última parte de la ruta. Si no hay '.' en la última parte de la ruta o el único 
+'.' es el primer carácter, entonces devuelve un string vacío.  Ejemplos:</p>
+
+<pre><code>path.extname('index.html')
+// devuelve
+'.html'
+
+path.extname('index')
+// devuelve
+''</code></pre>
+
+<h3 id="path.exists">path.exists(p, [callback])</h3>
+
+<p>Comprueba si existe o no la ruta.  Luego, llama al argumento <code>callback</code> 
+con true o false. Ejemplo:</p>
+
+<pre><code>path.exists('/etc/passwd', function (exists) {
+  util.debug(exists ? "it's there" : "no passwd!");
+});</code></pre>
+
+<h3 id="path.existsSync">path.existsSync(p)</h3>
+
+<p>Versión síncrona de <code>path.exists</code>.</p>
+
+<p>﻿## net</p>
+
+<p>El módulo <code>net</code> te proporciona una envoltura asíncrona de la red. Contiene
+métodos para crear servidores y clientes (llamados streams). Puedes incluir 
+este módulo con <code>require("net");</code></p>
+
+<h3 id="net.createServer">net.createServer([options], [connectionListener])</h3>
+
+<p>Crea un nuevo servidor TCP. El argumento <code>connectionListener</code> se establece 
+automáticamente como listener del evento <code>'connection'</code>.</p>
+
+<p>Por omisión <code>options</code> es un objeto como el siguiente:</p>
+
+<pre><code>{ allowHalfOpen: false</code></pre>
+
+<p>
+    }</p>
+
+<p>Si <code>allowHalfOpen</code> es <code>true</code>, entonces el socket no enviará automáticamente el paquete FIN 
+cuando el otro extremo del socket envíe un paquete FIN. El socket se vuelve de no-lectura, pero 
+conserva la escritura. Deberías llamar el método end() explícitamente.
+Mirar el evento <code>'end'</code> para más información.</p>
+
+<h3 id="net.createConnection">net.createConnection(arguments...)</h3>
+
+<p>Construye un nuevo objeto socket y abre un socket al sitio seleccionado. Cuando 
+se establece el socket se emitirá el evento <code>'connect'</code>.</p>
+
+<p>Los argumentos de este método cambian el tipo de conexión:</p>
+
+<ul><li><p><code>net.createConnection(port, [host])</code></p><p>Crea una conexión TCP al <code>port</code> de <code>host</code>. Si se omite <code>host</code>, 
+se asumirá <code>localhost</code>.</p></li><li><p><code>net.createConnection(path)</code></p><p>Crea una conexión socket de unix a <code>path</code></p></li></ul>
+
+<p>---</p>
+
+<h3 id="net.Server">net.Server</h3>
+
+<p>Esta clase se usa para crear un servidor TCP o UNIX.</p>
+
+<p>A continuación hay un ejemplo de un servidor echo que espera conexiones
+por el puerto 8124:</p>
+
+<pre><code>var net = require('net');</code></pre>
+
+<p>
+    var server = net.createServer(function (c) {
+      c.write('hola\r\n');
+      c.pipe(c);
+    });
+    server.listen(8124, 'localhost');</p>
+
+<p>Pruébalo usando <code>telnet</code>:</p>
+
+<pre><code>telnet localhost 8124</code></pre>
+
+<p></p>
+
+<p>Para escuchar en el socket <code>/tmp/echo.sock</code> la última linea se tendría
+que cambiar por</p>
+
+<pre><code>server.listen('/tmp/echo.sock');</code></pre>
+
+<p></p>
+
+<p>Utiliza <code>nc</code> para conectar con un servidor socket del dominio UNIX:	</p>
+
+<pre><code>nc -U /tmp/echo.sock</code></pre>
+
+<p></p>
+
+<p><code>net.Server</code> es un <code>EventEmitter</code> con los siguientes eventos:</p>
+
+<h4 id="server.listen">server.listen(port, [host], [callback])</h4>
+
+<p>Empieza aceptando conexiones en el <code>port</code> y <code>host</code> especificados.  Si se 
+omite el <code>host</code>, el servidor aceptará conexiones dirigidas a cualquier
+dirección IPv4 (<code>INADDR_ANY</code>).</p>
+
+<p>Esta función es asíncrona. Cuando el servidor haya sido enlazado se llamará 
+el último parámetro <code>callback</code>.</p>
+
+<p>Un problema que se encuentran los usuarios es recibir el error <code>EADDRINUSE</code>. Significa
+que otro servidor ya se está ejecutando en el puerto seleccionado. Una de las maneras
+de tratar esto sería esperar un segundo y volverlo a intentar. Esto se puede hacer con</p>
+
+<pre><code>server.on('error', function (e) {</code></pre>
+
+<p>
+      if (e.code == 'EADDRINUSE') {
+        console.log('Dirección en uso, reintentándolo...');
+        setTimeout(function () {
+          server.close();
+          server.listen(PORT, HOST);
+        }, 1000);
+      }
+    });</p>
+
+<p>(Nota: Todos los sockets en Node están configurados con SO_REUSEADDR)</p>
+
+<h4 id="server.listen">server.listen(path, [callback])</h4>
+
+<p>Arranca un socket UNIX de servidor esperando conexiones a través de <code>path</code></p>
+
+<p>Esta función es asíncrona. Cuando el servidor haya sido enlazado se llamará 
+el último parámetro <code>callback</code>.</p>
+
+<h4 id="server.listenFD">server.listenFD(fd)</h4>
+
+<p>Arranca un servidor esperando conexiones en el descriptor de fichero dado.</p>
+
+<p>El descriptor de fichero ya tiene que haber invocado las llamadas de sistema 
+<code>bind(2)</code> y <code>listen(2)</code>.</p>
+
+<h4 id="server.close">server.close()</h4>
+
+<p>El servidor para de aceptar nuevas conexiones. Esta función es 
+asíncrona, el servidor se cerrará definitivamente cuando el servidor 
+emita el evento <code>'close'</code>.</p>
+
+<h4 id="server.address">server.address()</h4>
+
+<p>Devuelve la dirección asociada al servidor según el sistema operativo.
+Útil para encontrar que puerto se ha asignado cuando se ha optado por obtener una dirección asignada por el SO.</p>
+
+<p>Ejemplo:</p>
+
+<pre><code>var server = net.createServer(function (socket) {</code></pre>
+
+<p>
+      socket.end("adiós\n");
+    });</p>
+
+<pre><code>// obtener un puerto aleatorio.</code></pre>
+
+<p>
+    server.listen(function() {
+      address = server.address();
+      console.log("servidor abierto en %j", address);
+    });</p>
+
+<h4 id="server.maxConnections">server.maxConnections</h4>
+
+<p>Establecer esta propiedad para rechazar conexiones cuando el número de conexiones del servidor es elevado.</p>
+
+<h4 id="server.connections">server.connections</h4>
+
+<p>El número de conexiones concurrentes en el servidor.</p>
+
+<h4 id="evento_connection_">Evento: 'connection'</h4>
+
+<p><code>function (socket) {}</code></p>
+
+<p>Emitido cuando se crea una nueva conexión. <code>socket</code> es una instancia de 
+<code>net.Socket</code>.</p>
+
+<h4 id="evento_close_">Evento: 'close'</h4>
+
+<p><code>function () {}</code></p>
+
+<p>Emitido cuando se cierra el servidor.</p>
+
+<p>---</p>
+
+<h3 id="net.Socket">net.Socket</h3>
+
+<p>Este objeto es una abstracción de un socket TCP o UNIX. Las instancias 
+de <code>net.Socket</code> implementan una interfaz duplex Stream.  Las pueden crear
+los usuarios y pueden ser usadas como un cliente (con <code>connect()</code>) o pueden
+crearse con Node y pasarlas al usuario a través del evento <code>'connection'</code> de
+un servidor. </p>
+
+<p>Las instancias de <code>net.Socket</code> son EventEmitters con los siguientes eventos: </p>
+
+<h4 id="new_net.Socket">new net.Socket([options])</h4>
+
+<p>Construye un nuevo objeto socket.</p>
+
+<p><code>options</code> es un objeto que por defecto es:</p>
+
+<pre><code>{ fd: null</code></pre>
+
+<p>
+      type: null
+      allowHalfOpen: false
+    }</p>
+
+<p><code>fd</code> te permite especificar el descriptor de fichero actual del socket. <code>type</code> 
+especifica el protocolo subyacente. Puede ser <code>'tcp4'</code>, <code>'tcp6'</code>, o <code>'unix'</code>.
+Respecto a <code>allowHalfOpen</code>, se refiere a <code>createServer()</code> y el evento <code>'end'</code>. </p>
+
+<h4 id="socket.connect">socket.connect(port, [host], [callback])</h4>
+
+<h4 id="socket.connect">socket.connect(path, [callback])</h4>
+
+<p>Abre la conexión a un socket dado. Si se especifican <code>port</code> y <code>host</code>, 
+entonces el socket se abrirá como un socket TCP, si se omite el <code>host</code>, 
+se asume <code>localhost</code>. Si se expecifica un <code>path</code>, el socket se abrirá como
+un socket de unix a esa ruta.</p>
+
+<p>Normalmente no se necesita este método, ya que <code>net.createConnection</code> abre 
+el socket. Úsalo sólo si estás implementando un Socket a medida o si un
+Socket está cerrado y quieres reutilizarlo para conectar con otro servidor.</p>
+
+<p>Esta función es asíncrona. Se establece el socket cuando se emite el 
+evento <code>'connect'</code>. Si hay algún problema conectando, no se emitirá el
+evento <code>'connect'</code>, se emitirá el evento <code>'error'</code> con la excepción. </p>
+
+<p>El parámetro <code>callback</code> se añadirá como listener del evento 'connect'.</p>
+
+<h4 id="socket.bufferSize">socket.bufferSize</h4>
+
+<p><code>net.Socket</code> tiene la propiedad de que <code>socket.write()</code> siempre funciona. Esto 
+es para ayudar a los usuarios a ejecutarlo lo antes posible. La computadora no tiene
+que mantener necesariamente todos los datos que se escriben en el socket - la conexión podría ser
+demasiado lenta. Internamente, Node, encolará los datos escritos en el socket y los 
+enviará por el cable cuando sea posible. (Internamente se va preguntando 
+al descriptor de fichero del socket si se puede escribir).</p>
+
+<p>La consecuencia de este buffering interno es que la memoria puede crecer. 
+Esta propiedad muestra el número de carácteres almacenados esperando a ser escritos.
+(El número de carácteres es aproximadamente igual al número de bytes a escribir, 
+pero el buffer puede contener strings, y los strings se codifican perezosamente, 
+por lo tanto el número exacto de bytes no es conocido.)</p>
+
+<p>Los usuarios que experimenten grandes o crecidas de <code>bufferSize</code> deberían 
+intentar "regular" el flujo de datos en sus programas con <code>pause()</code> y <code>resume()</code>.</p>
+
+<h4 id="socket.setEncoding">socket.setEncoding(encoding=null)</h4>
+
+<p>Establece la codificación (ya sea <code>'ascii'</code>, <code>'utf8'</code>, o <code>'base64'</code>) para 
+los datos que se reciben.</p>
+
+<h4 id="socket.setSecure">socket.setSecure()</h4>
+
+<p>Esta función se ha eliminado en v0.3. Se usaba para actualizar la conexión a
+SSL/TLS. Mira TLS para la nueva API.</p>
+
+<h4 id="socket.write">socket.write(data, [encoding], [callback])</h4>
+
+<p>Envía los datos al socket. El segundo parámetro especifica la codificación 
+si es un string--por defecto lo codifica a UTF8.</p>
+
+<p>Devuelve <code>true</code> si se han traspasado completamente todos los datos al búfer del 
+kernel. Devuelve <code>false</code> si todos o parte de los datos se ha encolado en la memoria
+de usuario. Se emitirá <code>'drain'</code> cuando el búfer vuelva a estar libre.</p>
+
+<p>El parámetro opcional <code>callback</code> se ejecutará se acabe de escribir - puede 
+que no suceda inmediatamente.</p>
+
+<h4 id="socket.write">socket.write(data, [encoding], [fileDescriptor], [callback])</h4>
+
+<p>Para los sockets UNIX, es posible enviar descriptor de fichero a través 
+del socket. Basta con añadir el argumento <code>fileDescriptor</code> y escuchar el 
+evento <code>'fd'</code> en el otro extremo.</p>
+
+<h4 id="socket.end">socket.end([data], [encoding])</h4>
+
+<p>Cierra parcialmente el socket. I.E., envia un paquete FIN. Es posible 
+que el servidor continue enviando algunos datos.</p>
+
+<p>Si se especifica <code>data</code>, es equivalente a llamar a <code>socket.write(data, encoding)</code> 
+seguido de <code>socket.end()</code>.</p>
+
+<h4 id="socket.destroy">socket.destroy()</h4>
+
+<p>Se asegura que no habrá más actividad de E/S en el socket. Sólo se necesita 
+en caso de errores (errores de parse)</p>
+
+<h4 id="socket.pause">socket.pause()</h4>
+
+<p>Pausa la lectura de los datos. Eso es, no se emitirán eventos <code>'data'</code>. 
+Útil para moderar la velocidad de una subida.</p>
+
+<h4 id="socket.resume">socket.resume()</h4>
+
+<p>Continua leyendo después de llamar a <code>pause()</code>.</p>
+
+<h4 id="socket.setTimeout">socket.setTimeout(timeout, [callback])</h4>
+
+<p>Pone el socket en timeout después de <code>timeout</code> milisegundos de inactividad en 
+el socket. Por defecto <code>net.Socket</code>no tiene timeout.</p>
+
+<p>Cuando se dispara un timeout en espera el socket recibirá un evento <code>'timeout'</code> 
+pero la conexión no se cortará. El usuario tiene que invocar manualmente <code>end()</code> o 
+<code>destroy()</code> en el socket.</p>
+
+<p>Si <code>timeout</code> es 0, entonces el actual timeout en espera se desactiva.</p>
+
+<p>El parametro opcional <code>callback</code> se añadirá como un listener de una sola vez del evento <code>'timeout'</code>.</p>
+
+<h4 id="socket.setNoDelay">socket.setNoDelay(noDelay=true)</h4>
+
+<p>Deshabilita el algoritmo de Nagle. Por defecto las conexiones TCP utilizan 
+el algoritmo de Nagle, almacenan los datos antes de enviarlos fuera. Activando 
+<code>noDelay</code> enviará inmediatamente los datos cada vez que se llame a <code>socket.write()</code>.</p>
+
+<h4 id="socket.setKeepAlive">socket.setKeepAlive(enable=false, [initialDelay])</h4>
+
+<p>Activa/desactiva la funcionalidad keep-alive, y opcionalmente establece
+el retardo inicial antes de que la primera prueba de keep-alive se envíe 
+en un socket en espera. Establece <code>initialDelay</code> (en milisegundos) como el 
+retardo entre el último paquete recibido y la primera prueba de keep-alive. 
+Poniendo un 0 en initialDelay mantendrá el valor por defecto (o el previo).</p>
+
+<h4 id="socket.remoteAddress">socket.remoteAddress</h4>
+
+<p>La representación en string de la dirección IP remota. Por ejemplo 
+<code>'74.125.127.100'</code> o <code>'2001:4860:a005::68'</code>.</p>
+
+<p>Este miembro sólo está presente en las conexiones del lado servidor.</p>
+
+<h4 id="evento_connect_">Evento: 'connect'</h4>
+
+<p><code>function () { }</code></p>
+
+<p>Se emite cuando se establece con éxito una conexión socket.
+Mirar <code>connect()</code>.</p>
+
+<h4 id="evento_data_">Evento: 'data'</h4>
+
+<p><code>function (data) { }</code></p>
+
+<p>Se emite cuando se reciben datos. El argumento <code>data</code> será un <code>Buffer</code> o un 
+<code>String</code>.  La codificación de los datos se establece con <code>socket.setEncoding()</code>. 
+(Mirar la sección de <code>Socket de Lectura</code> para más información.)</p>
+
+<h4 id="evento_end_">Evento: 'end'</h4>
+
+<p><code>function () { }</code></p>
+
+<p>Se emite cuando el otro extremo del socket envía un paquete FIN.</p>
+
+<p>Por defecto (<code>allowHalfOpen == false</code>) el socket destruirá su propio descriptor 
+de fichero una vez haya escrito lo que tiene pendiente en la cola de escritura. 
+Sin embargo, si pones <code>allowHalfOpen == true</code> el socket no llamará a <code>end()</code> 
+automáticamente en su lado permitiendo al usuario escribir cantidades arbitrarias 
+de datos, con la advertencia de que el usuario debería llamar a <code>end()</code> en su 
+lado de inmediato.</p>
+
+<h4 id="evento_timeout_">Evento: 'timeout'</h4>
+
+<p><code>function () { }</code></p>
+
+<p>Se emite si el socket agota el timeout por inactividad. Solo sirve para 
+notificar que el socket estaba inactivo. El usuario tiene que cerrar la conexión 
+manualmente.</p>
+
+<p>Mirar también: <code>socket.setTimeout()</code></p>
+
+<h4 id="evento_drain_">Evento: 'drain'</h4>
+
+<p><code>function () { }</code></p>
+
+<p>Emitido cuando el búfer de escritura se vacía. Sirve para regular las subidas.</p>
+
+<h4 id="evento_error_">Evento: 'error'</h4>
+
+<p><code>function (exception) { }</code></p>
+
+<p>Se emite cuando se produce un error.  Seguidamente se llamará directamente 
+al evento <code>'close'</code>.</p>
+
+<h4 id="evento_close_">Evento: 'close'</h4>
+
+<p><code>function (had_error) { }</code></p>
+
+<p>Se emite cuando se cierra completamente el socket. El argumento <code>had_error</code> es un 
+boolean que advierte si el socket se ha cerrado debido a un error de transmisión.</p>
+
+<p>---</p>
+
+<h3 id="net.isIP">net.isIP</h3>
+
+<h4 id="net.isIP">net.isIP(input)</h4>
+
+<p>Comprueba si input es una dirección IP. Devuelve 0 para strings inválidos, 
+devuelve 4 para direcciones IP de versión 4, y 6 para direcciones IP de versión 6.</p>
+
+<h4 id="net.isIPv4">net.isIPv4(input)</h4>
+
+<p>Devuelve true si input es una dirección de versión 4, si no devuleve false.</p>
+
+<h4 id="net.isIPv6">net.isIPv6(input)</h4>
+
+<p>Devuelve true si input es una dirección de versión 6, si no devuleve false.</p>
+
+<h2 id="dNS">DNS</h2>
+
+<p>Use <code>require('dns')</code> to access this module.</p>
+
+<p>Here is an example which resolves <code>'www.google.com'</code> then reverse
+resolves the IP addresses which are returned.</p>
+
+<pre><code>var dns = require('dns');
+
+dns.resolve4('www.google.com', function (err, addresses) {
+  if (err) throw err;
+
+  console.log('addresses: ' + JSON.stringify(addresses));
+
+  addresses.forEach(function (a) {
+    dns.reverse(a, function (err, domains) {
+      if (err) {
+        console.log('reverse for ' + a + ' failed: ' +
+          err.message);
+      } else {
+        console.log('reverse for ' + a + ': ' +
+          JSON.stringify(domains));
+      }
+    });
+  });
+});</code></pre>
+
+<h3 id="dns.lookup">dns.lookup(domain, family=null, callback)</h3>
+
+<p>Resolves a domain (e.g. <code>'google.com'</code>) into the first found A (IPv4) or
+AAAA (IPv6) record.</p>
+
+<p>The callback has arguments <code>(err, address, family)</code>.  The <code>address</code> argument
+is a string representation of a IP v4 or v6 address. The <code>family</code> argument
+is either the integer 4 or 6 and denotes the family of <code>address</code> (not
+necessarily the value initially passed to <code>lookup</code>).</p>
+
+<h3 id="dns.resolve">dns.resolve(domain, rrtype='A', callback)</h3>
+
+<p>Resolves a domain (e.g. <code>'google.com'</code>) into an array of the record types
+specified by rrtype. Valid rrtypes are <code>A</code> (IPV4 addresses), <code>AAAA</code> (IPV6
+addresses), <code>MX</code> (mail exchange records), <code>TXT</code> (text records), <code>SRV</code> (SRV
+records), and <code>PTR</code> (used for reverse IP lookups).</p>
+
+<p>The callback has arguments <code>(err, addresses)</code>.  The type of each item
+in <code>addresses</code> is determined by the record type, and described in the
+documentation for the corresponding lookup methods below.</p>
+
+<p>On error, <code>err</code> would be an instanceof <code>Error</code> object, where <code>err.errno</code> is
+one of the error codes listed below and <code>err.message</code> is a string describing
+the error in English.</p>
+
+<h3 id="dns.resolve4">dns.resolve4(domain, callback)</h3>
+
+<p>The same as <code>dns.resolve()</code>, but only for IPv4 queries (<code>A</code> records).
+<code>addresses</code> is an array of IPv4 addresses (e.g.
+<code>['74.125.79.104', '74.125.79.105', '74.125.79.106']</code>).</p>
+
+<h3 id="dns.resolve6">dns.resolve6(domain, callback)</h3>
+
+<p>The same as <code>dns.resolve4()</code> except for IPv6 queries (an <code>AAAA</code> query).</p>
+
+<h3 id="dns.resolveMx">dns.resolveMx(domain, callback)</h3>
+
+<p>The same as <code>dns.resolve()</code>, but only for mail exchange queries (<code>MX</code> records).</p>
+
+<p><code>addresses</code> is an array of MX records, each with a priority and an exchange
+attribute (e.g. <code>[{'priority': 10, 'exchange': 'mx.example.com'},...]</code>).</p>
+
+<h3 id="dns.resolveTxt">dns.resolveTxt(domain, callback)</h3>
+
+<p>The same as <code>dns.resolve()</code>, but only for text queries (<code>TXT</code> records).
+<code>addresses</code> is an array of the text records available for <code>domain</code> (e.g.,
+<code>['v=spf1 ip4:0.0.0.0 ~all']</code>).</p>
+
+<h3 id="dns.resolveSrv">dns.resolveSrv(domain, callback)</h3>
+
+<p>The same as <code>dns.resolve()</code>, but only for service records (<code>SRV</code> records).
+<code>addresses</code> is an array of the SRV records available for <code>domain</code>. Properties
+of SRV records are priority, weight, port, and name (e.g.,
+<code>[{'priority': 10, {'weight': 5, 'port': 21223, 'name': 'service.example.com'}, ...]</code>).</p>
+
+<h3 id="dns.reverse">dns.reverse(ip, callback)</h3>
+
+<p>Reverse resolves an ip address to an array of domain names.</p>
+
+<p>The callback has arguments <code>(err, domains)</code>.</p>
+
+<p>If there an an error, <code>err</code> will be non-null and an instanceof the Error
+object.</p>
+
+<p>Each DNS query can return an error code.</p>
+
+<ul><li><code>dns.TEMPFAIL</code>: timeout, SERVFAIL or similar.</li><li><code>dns.PROTOCOL</code>: got garbled reply.</li><li><code>dns.NXDOMAIN</code>: domain does not exists.</li><li><code>dns.NODATA</code>: domain exists but no data of reqd type.</li><li><code>dns.NOMEM</code>: out of memory while processing.</li><li><code>dns.BADQUERY</code>: the query is malformed.</li></ul>
+
+<h2 id="uDP_Sockets_de_Datagrama">UDP / Sockets de Datagrama</h2>
+
+<p>Los sockets de datagrama están disponibles a través de <code>require('dgram')</code>.  Normalmente los datagramas 
+se manejan como mensajes IP/UDP pero también se pueden usar a través de sockets de dominio Unix.</p>
+
+<h3 id="evento_message_">Evento: 'message'</h3>
+
+<p><code>function (msg, rinfo) { }</code></p>
+
+<p>Emitido cuando está disponible un nuevo datagrama en el socket.  <code>msg es un </code>Buffer<code> y </code>rinfo` es 
+un objeto con la dirección de quien lo envía y el número de bytes que contiene el datagrama.</p>
+
+<h3 id="evento_listening_">Evento: 'listening'</h3>
+
+<p><code>function () { }</code></p>
+
+<p>Emitido cuando un socket empieza a escuchar la llegada de datagramas.  Esto ocurre tan pronto como 
+son creados los sockets UDP.  Los sockets de dominio Unix no empiezan a escuchar hasta que se llama 
+implícitamente a <code>bind()</code>.</p>
+
+<h3 id="evento_close_">Evento: 'close'</h3>
+
+<p><code>function () { }</code></p>
+
+<p>Emitido cuando se cierra un socket con <code>close()</code>. No se emitirán nuevos <code>message</code>en este 
+socket.</p>
+
+<h3 id="dgram.createSocket">dgram.createSocket(type, [callback])</h3>
+
+<p>Crea un socket de datagrama del tipo especificado.  Los tipos válidos son:
+<code>udp4</code>, <code>udp6</code> y <code>unix_dgram</code>.</p>
+
+<p>Recibe un callback opcional que se añade como listener de los eventos <code>message</code>.</p>
+
+<h3 id="dgram.send">dgram.send(buf, offset, length, path, [callback])</h3>
+
+<p>Para los sockets de datagrama del dominio Unix, la dirección de destion es un nombre de ruta 
+en sistema de ficheros. Se puede pasar un callback opcional que se invoca cuando se completa la llamada 
+a <code>sendto</code> por parte del SO. No es seguro reutilizar <code>buf</code> hasta que se ha invocado el callback. Hay 
+que tener en cuenta que a no ser que el socket este asociado a un nombre de ruta con <code>bind()</code> no hay manera 
+de recibir mensajes en el socket.</p>
+
+<p>Ejemplo de envío de un mensaje al syslogd en OSX via un socket de dominio Unix <code>/var/run/syslog</code>:</p>
+
+<pre><code>var dgram = require('dgram');
+var message = new Buffer("Un mensaje de log.");
+var client = dgram.createSocket("unix_dgram");
+client.send(message, 0, message.length, "/var/run/syslog",
+  function (err, bytes) {
+    if (err) {
+      throw err;
+    }
+    console.log("Se han escrito " + bytes + " bytes en el socket.");
+});</code></pre>
+
+<h3 id="dgram.send">dgram.send(buf, offset, length, port, address, [callback])</h3>
+
+<p>Para los sockets UDP, el puerto y la dirección IP de destino tienen que especificarse.  Se 
+puede pasar un string al parámetro <code>address</code>, y se podrá resolver por DNS.  Se puede especificar 
+un callback opcional para detectar cualquier error de DNS y cuando puede volverse a usar <code>buf</code>.<br></br>Tener en cuenta que las búsquedas de DNS retrasarán el tiempo del envío, al menos hasta el siguiente 
+tick.  La única manera de asegurarse de que se ha realizado un envío es mediante el callback.</p>
+
+<p>Ejemplo de enviar un paquete UDP a un puerto aleatorio de <code>localhost</code>;</p>
+
+<pre><code>var dgram = require('dgram');
+var message = new Buffer("Algunos bytes");
+var client = dgram.createSocket("udp4");
+client.send(message, 0, message.length, 41234, "localhost");
+client.close();</code></pre>
+
+<h3 id="dgram.bind">dgram.bind(path)</h3>
+
+<p>Para los sockets de datagrama de dominio Unix, empezar a escuchar datagramas entrantes en 
+el socket especificado por <code>path</code>. Notar que los clientes pueden hacer <code>send()</code> sin haber hecho <code>bind()</code>, 
+pero no se recibirá ningún datagrama sin haber hecho un <code>bind()</code>.</p>
+
+<p>Ejemplo de un servidor de datagramas de dominio Unix, que devuelve el eco de los mensajes que recibe:</p>
+
+<pre><code>var dgram = require("dgram");
+var serverPath = "/tmp/dgram_server_sock";
+var server = dgram.createSocket("unix_dgram");
+
+server.on("message", function (msg, rinfo) {
+  console.log("recibido: " + msg + " de " + rinfo.address);
+  server.send(msg, 0, msg.length, rinfo.address);
+});
+
+server.on("listening", function () {
+  console.log("servidor escuchando " + server.address().address);
+})
+
+server.bind(serverPath);</code></pre>
+
+<p>Ejemplo de un cliente de datagramas de dominio Unix que habla con el servidor:</p>
+
+<pre><code>var dgram = require("dgram");
+var serverPath = "/tmp/dgram_server_sock";
+var clientPath = "/tmp/dgram_client_sock";
+
+var message = new Buffer("Un mensaje el " + (new Date()));
+
+var client = dgram.createSocket("unix_dgram");
+
+client.on("message", function (msg, rinfo) {
+  console.log("recibido: " + msg + " de " + rinfo.address);
+});
+
+client.on("listening", function () {
+  console.log("cliente escuchando " + client.address().address);
+  client.send(message, 0, message.length, serverPath);
+});
+
+client.bind(clientPath);</code></pre>
+
+<h3 id="dgram.bind">dgram.bind(port, [address])</h3>
+
+<p>Para los sockets UDP, hay que escuhar los datagramas en un <code>port</code> específico y en el <code>address</code> opcional.  Si 
+no se especifica <code>address</code>, el SO intentará escuchar en todas las direcciones.</p>
+
+<p>Ejemplo de un servidor UDP escuchando en el puerto 41234:</p>
+
+<pre><code>var dgram = require("dgram");
+
+var server = dgram.createSocket("udp4");
+var messageToSend = new Buffer("Un mensaje a enviar");
+
+server.on("message", function (msg, rinfo) {
+  console.log("el servidor ha recibido: " + msg + " de " +
+    rinfo.address + ":" + rinfo.port);
+});
+
+server.on("listening", function () {
+  var address = server.address();
+  console.log("servidor escuchando " +
+      address.address + ":" + address.port);
+});
+
+server.bind(41234);
+// server listening 0.0.0.0:41234</code></pre>
+
+<h3 id="dgram.close">dgram.close()</h3>
+
+<p>Cierra el socket subyacente y para de escuchar datos en él.  Los sockets UDP 
+automáticamente se ponen a escuchar mensjaes, incluso si no han llamado a <code>bind()</code>.</p>
+
+<h3 id="dgram.address">dgram.address()</h3>
+
+<p>Devuelve un objeto que contiene la información de la dirección de un socket.  Para los sockets 
+UDP, este objeto contendrá la <code>address</code> y el <code>port</code>.  Para los sockets de dominio Unix, solo contendrá 
+la <code>address</code>.</p>
+
+<h3 id="dgram.setBroadcast">dgram.setBroadcast(flag)</h3>
+
+<p>Establece o borra la opción del socket <code>SO_BROADCAST</code>.  Cuando se activa esta opción, los 
+paquetes UDP se pueden enviar una dirección de broadcast de un interfaz local.</p>
+
+<h3 id="dgram.setTTL">dgram.setTTL(ttl)</h3>
+
+<p>Establece la opción de socket <code>IP_TTL</code>.  TTL significa "Time to Live", pero en este contexto 
+especifica el número de saltos IP que se permite hacer al paquete.  Cada router o gateway que 
+reenvíe un paquete decrementa el TTL.  Si un router decrementa el TTL a 0, no se reenviará.<br></br>El cambio de los valores del TTL es un uso típico para probar la red o con multicasting.</p>
+
+<p>El argumento que se le pasa a <code>setTTL()</code>es el número de saltos entre 1 y 255.  Por defecto 
+en la mayoría de sistemas es 64.</p>
+
+<h3 id="dgram.setMulticastTTL">dgram.setMulticastTTL(ttl)</h3>
+
+<p>Establece la opción de socket <code>IP_MULTICAST_TTL</code>. TTL significa "Time to Live", pero en este contexto 
+especifica el número de saltos IP que se permite hacer al paquete.  Cada router o gateway que 
+reenvíe un paquete decrementa el TTL.  Si un router decrementa el TTL a 0, no se reenviará.  </p>
+
+<p>El argumento que se le pasa a <code>setMulticastTTL()</code> es el número de saltos entre 0 y 255.  Por defecto 
+en la mayoría de sistemas es 64.</p>
+
+<h3 id="dgram.setMulticastLoopback">dgram.setMulticastLoopback(flag)</h3>
+
+<p>Establece o borra la opción de socket <code>IP_MULTICAST_LOOP</code>.  Cuand esta opción está activa,<br></br>también se recibirán paquetes multicast en el interfaz local. </p>
+
+<h3 id="dgram.addMembership">dgram.addMembership(multicastAddress, [multicastInterface])</h3>
+
+<p>Comunica al kernel la suscripción a un grupo multicast con la opción de socket <code>IP_ADD_MEMBERSHIP</code>. </p>
+
+<p>Si no se especifica <code>multicastAddress</code>, el SO intentará suscribir todos los interfaces válidos.</p>
+
+<h3 id="dgram.dropMembership">dgram.dropMembership(multicastAddress, [multicastInterface])</h3>
+
+<p>El contrario de <code>addMembership</code> - comunica al kernel el abandono de un grupo multicast con 
+la opción de socket <code>IP_DROP_MEMBERSHIP</code>. Este método se llama automáticamente por el kernel 
+cuando se cierra el socket o el proceso termina, así que la mayoría de aplicaciones nunca tendrán 
+que llamarlo. </p>
+
+<p>Si no se especifica <code>multicastAddress</code>, el SO intentará suscribir todos los interfaces válidos.</p>
+
+<h2 id="hTTP">HTTP</h2>
+
+<p>To use the HTTP server and client one must <code>require('http')</code>.</p>
+
+<p>The HTTP interfaces in Node are designed to support many features
+of the protocol which have been traditionally difficult to use.
+In particular, large, possibly chunk-encoded, messages. The interface is
+careful to never buffer entire requests or responses--the
+user is able to stream data.</p>
+
+<p>HTTP message headers are represented by an object like this:</p>
+
+<pre><code>{ 'content-length': '123',
+  'content-type': 'text/plain',
+  'connection': 'keep-alive',
+  'accept': '*/*' }</code></pre>
+
+<p>Keys are lowercased. Values are not modified.</p>
+
+<p>In order to support the full spectrum of possible HTTP applications, Node's
+HTTP API is very low-level. It deals with stream handling and message
+parsing only. It parses a message into headers and body but it does not
+parse the actual headers or the body.</p>
+
+<h2 id="http.Server">http.Server</h2>
+
+<p>This is an <code>EventEmitter</code> with the following events:</p>
+
+<h3 id="event_request_">Event: 'request'</h3>
+
+<p><code>function (request, response) { }</code></p>
+
+<p> <code>request</code> is an instance of <code>http.ServerRequest</code> and <code>response</code> is
+ an instance of <code>http.ServerResponse</code></p>
+
+<h3 id="event_connection_">Event: 'connection'</h3>
+
+<p><code>function (stream) { }</code></p>
+
+<p> When a new TCP stream is established. <code>stream</code> is an object of type
+ <code>net.Stream</code>. Usually users will not want to access this event. The
+ <code>stream</code> can also be accessed at <code>request.connection</code>.</p>
+
+<h3 id="event_close_">Event: 'close'</h3>
+
+<p><code>function (errno) { }</code></p>
+
+<p> Emitted when the server closes.</p>
+
+<h3 id="event_request_">Event: 'request'</h3>
+
+<p><code>function (request, response) {}</code></p>
+
+<p>Emitted each time there is request. Note that there may be multiple requests
+per connection (in the case of keep-alive connections).</p>
+
+<h3 id="event_checkContinue_">Event: 'checkContinue'</h3>
+
+<p><code>function (request, response) {}</code></p>
+
+<p>Emitted each time a request with an http Expect: 100-continue is received.
+If this event isn't listened for, the server will automatically respond
+with a 100 Continue as appropriate.</p>
+
+<p>Handling this event involves calling <code>response.writeContinue</code> if the client
+should continue to send the request body, or generating an appropriate HTTP
+response (e.g., 400 Bad Request) if the client should not continue to send the
+request body.</p>
+
+<p>Note that when this event is emitted and handled, the <code>request</code> event will
+not be emitted.</p>
+
+<h3 id="event_upgrade_">Event: 'upgrade'</h3>
+
+<p><code>function (request, socket, head)</code></p>
+
+<p>Emitted each time a client requests a http upgrade. If this event isn't
+listened for, then clients requesting an upgrade will have their connections
+closed.</p>
+
+<ul><li><code>request</code> is the arguments for the http request, as it is in the request event.</li><li><code>socket</code> is the network socket between the server and client.</li><li><code>head</code> is an instance of Buffer, the first packet of the upgraded stream, this may be empty.</li></ul>
+
+<p>After this event is emitted, the request's socket will not have a <code>data</code>
+event listener, meaning you will need to bind to it in order to handle data
+sent to the server on that socket.</p>
+
+<h3 id="event_clientError_">Event: 'clientError'</h3>
+
+<p><code>function (exception) {}</code></p>
+
+<p>If a client connection emits an 'error' event - it will forwarded here.</p>
+
+<h3 id="http.createServer">http.createServer(requestListener)</h3>
+
+<p>Returns a new web server object.</p>
+
+<p>The <code>requestListener</code> is a function which is automatically
+added to the <code>'request'</code> event.</p>
+
+<h3 id="server.listen">server.listen(port, [hostname], [callback])</h3>
+
+<p>Begin accepting connections on the specified port and hostname.  If the
+hostname is omitted, the server will accept connections directed to any
+IPv4 address (<code>INADDR_ANY</code>).</p>
+
+<p>To listen to a unix socket, supply a filename instead of port and hostname.</p>
+
+<p>This function is asynchronous. The last parameter <code>callback</code> will be called
+when the server has been bound to the port.</p>
+
+<h3 id="server.listen">server.listen(path, [callback])</h3>
+
+<p>Start a UNIX socket server listening for connections on the given <code>path</code>.</p>
+
+<p>This function is asynchronous. The last parameter <code>callback</code> will be called
+when the server has been bound.</p>
+
+<h3 id="server.close">server.close()</h3>
+
+<p>Stops the server from accepting new connections.</p>
+
+<h2 id="http.ServerRequest">http.ServerRequest</h2>
+
+<p>This object is created internally by a HTTP server -- not by
+the user -- and passed as the first argument to a <code>'request'</code> listener.</p>
+
+<p>This is an <code>EventEmitter</code> with the following events:</p>
+
+<h3 id="event_data_">Event: 'data'</h3>
+
+<p><code>function (chunk) { }</code></p>
+
+<p>Emitted when a piece of the message body is received.</p>
+
+<p>Example: A chunk of the body is given as the single
+argument. The transfer-encoding has been decoded.  The
+body chunk is a string.  The body encoding is set with
+<code>request.setBodyEncoding()</code>.</p>
+
+<h3 id="event_end_">Event: 'end'</h3>
+
+<p><code>function () { }</code></p>
+
+<p>Emitted exactly once for each message. No arguments.  After
+emitted no other events will be emitted on the request.</p>
+
+<h3 id="request.method">request.method</h3>
+
+<p>The request method as a string. Read only. Example:
+<code>'GET'</code>, <code>'DELETE'</code>.</p>
+
+<h3 id="request.url">request.url</h3>
+
+<p>Request URL string. This contains only the URL that is
+present in the actual HTTP request. If the request is:</p>
+
+<pre><code>GET /status?name=ryan HTTP/1.1\r\n
+Accept: text/plain\r\n
+\r\n</code></pre>
+
+<p>Then <code>request.url</code> will be:</p>
+
+<pre><code>'/status?name=ryan'</code></pre>
+
+<p>If you would like to parse the URL into its parts, you can use
+<code>require('url').parse(request.url)</code>.  Example:</p>
+
+<pre><code>node&gt; require('url').parse('/status?name=ryan')
+{ href: '/status?name=ryan',
+  search: '?name=ryan',
+  query: 'name=ryan',
+  pathname: '/status' }</code></pre>
+
+<p>If you would like to extract the params from the query string,
+you can use the <code>require('querystring').parse</code> function, or pass
+<code>true</code> as the second argument to <code>require('url').parse</code>.  Example:</p>
+
+<pre><code>node&gt; require('url').parse('/status?name=ryan', true)
+{ href: '/status?name=ryan',
+  search: '?name=ryan',
+  query: { name: 'ryan' },
+  pathname: '/status' }</code></pre>
+
+<h3 id="request.headers">request.headers</h3>
+
+<p>Read only.</p>
+
+<h3 id="request.trailers">request.trailers</h3>
+
+<p>Read only; HTTP trailers (if present). Only populated after the 'end' event.</p>
+
+<h3 id="request.httpVersion">request.httpVersion</h3>
+
+<p>The HTTP protocol version as a string. Read only. Examples:
+<code>'1.1'</code>, <code>'1.0'</code>.
+Also <code>request.httpVersionMajor</code> is the first integer and
+<code>request.httpVersionMinor</code> is the second.</p>
+
+<h3 id="request.setEncoding">request.setEncoding(encoding=null)</h3>
+
+<p>Set the encoding for the request body. Either <code>'utf8'</code> or <code>'binary'</code>. Defaults
+to <code>null</code>, which means that the <code>'data'</code> event will emit a <code>Buffer</code> object..</p>
+
+<h3 id="request.pause">request.pause()</h3>
+
+<p>Pauses request from emitting events.  Useful to throttle back an upload.</p>
+
+<h3 id="request.resume">request.resume()</h3>
+
+<p>Resumes a paused request.</p>
+
+<h3 id="request.connection">request.connection</h3>
+
+<p>The <code>net.Stream</code> object associated with the connection.</p>
+
+<p>With HTTPS support, use request.connection.verifyPeer() and
+request.connection.getPeerCertificate() to obtain the client's
+authentication details.</p>
+
+<h2 id="http.ServerResponse">http.ServerResponse</h2>
+
+<p>This object is created internally by a HTTP server--not by the user. It is
+passed as the second parameter to the <code>'request'</code> event. It is a <code>Writable Stream</code>.</p>
+
+<h3 id="response.writeContinue">response.writeContinue()</h3>
+
+<p>Sends a HTTP/1.1 100 Continue message to the client, indicating that
+the request body should be sent. See the the <code>checkContinue</code> event on
+<code>Server</code>.</p>
+
+<h3 id="response.writeHead">response.writeHead(statusCode, [reasonPhrase], [headers])</h3>
+
+<p>Sends a response header to the request. The status code is a 3-digit HTTP
+status code, like <code>404</code>. The last argument, <code>headers</code>, are the response headers.
+Optionally one can give a human-readable <code>reasonPhrase</code> as the second
+argument.</p>
+
+<p>Example:</p>
+
+<pre><code>var body = 'hello world';
+response.writeHead(200, {
+  'Content-Length': body.length,
+  'Content-Type': 'text/plain' });</code></pre>
+
+<p>This method must only be called once on a message and it must
+be called before <code>response.end()</code> is called.</p>
+
+<p>If you call <code>response.write()</code> or <code>response.end()</code> before calling this, the
+implicit/mutable headers will be calculated and call this function for you.</p>
+
+<h3 id="response.statusCode">response.statusCode</h3>
+
+<p>When using implicit headers (not calling <code>response.writeHead()</code> explicitly), this property
+controls the status code that will be send to the client when the headers get
+flushed.</p>
+
+<p>Example:</p>
+
+<pre><code>response.statusCode = 404;</code></pre>
+
+<h3 id="response.setHeader">response.setHeader(name, value)</h3>
+
+<p>Sets a single header value for implicit headers.  If this header already exists
+in the to-be-sent headers, it's value will be replaced.  Use an array of strings
+here if you need to send multiple headers with the same name.</p>
+
+<p>Example:</p>
+
+<pre><code>response.setHeader("Content-Type", "text/html");</code></pre>
+
+<p>or</p>
+
+<pre><code>response.setHeader("Set-Cookie", ["type=ninja", "language=javascript"]);</code></pre>
+
+<h3 id="response.getHeader">response.getHeader(name)</h3>
+
+<p>Reads out a header that's already been queued but not sent to the client.  Note
+that the name is case insensitive.  This can only be called before headers get
+implicitly flushed.</p>
+
+<p>Example:</p>
+
+<pre><code>var contentType = response.getHeader('content-type');</code></pre>
+
+<h3 id="response.removeHeader">response.removeHeader(name)</h3>
+
+<p>Removes a header that's queued for implicit sending.</p>
+
+<p>Example:</p>
+
+<pre><code>response.removeHeader("Content-Encoding");</code></pre>
+
+<h3 id="response.write">response.write(chunk, encoding='utf8')</h3>
+
+<p>If this method is called and <code>response.writeHead()</code> has not been called, it will
+switch to implicit header mode and flush the implicit headers.</p>
+
+<p>This sends a chunk of the response body. This method may
+be called multiple times to provide successive parts of the body.</p>
+
+<p><code>chunk</code> can be a string or a buffer. If <code>chunk</code> is a string,
+the second parameter specifies how to encode it into a byte stream.
+By default the <code>encoding</code> is <code>'utf8'</code>.</p>
+
+<p><strong>Note</strong>: This is the raw HTTP body and has nothing to do with
+higher-level multi-part body encodings that may be used.</p>
+
+<p>The first time <code>response.write()</code> is called, it will send the buffered
+header information and the first body to the client. The second time
+<code>response.write()</code> is called, Node assumes you're going to be streaming
+data, and sends that separately. That is, the response is buffered up to the
+first chunk of body.</p>
+
+<h3 id="response.addTrailers">response.addTrailers(headers)</h3>
+
+<p>This method adds HTTP trailing headers (a header but at the end of the
+message) to the response.</p>
+
+<p>Trailers will <strong>only</strong> be emitted if chunked encoding is used for the
+response; if it is not (e.g., if the request was HTTP/1.0), they will
+be silently discarded.</p>
+
+<p>Note that HTTP requires the <code>Trailer</code> header to be sent if you intend to
+emit trailers, with a list of the header fields in its value. E.g.,</p>
+
+<pre><code>response.writeHead(200, { 'Content-Type': 'text/plain',
+                          'Trailer': 'TraceInfo' });
+response.write(fileData);
+response.addTrailers({'Content-MD5': "7895bf4b8828b55ceaf47747b4bca667"});
+response.end();</code></pre>
+
+<h3 id="response.end">response.end([data], [encoding])</h3>
+
+<p>This method signals to the server that all of the response headers and body
+has been sent; that server should consider this message complete.
+The method, <code>response.end()</code>, MUST be called on each
+response.</p>
+
+<p>If <code>data</code> is specified, it is equivalent to calling <code>response.write(data, encoding)</code>
+followed by <code>response.end()</code>.</p>
+
+<h2 id="http.request">http.request(options, callback)</h2>
+
+<p>Node maintains several connections per server to make HTTP requests.
+This function allows one to transparently issue requests.</p>
+
+<p>Options:</p>
+
+<ul><li><code>host</code>: A domain name or IP address of the server to issue the request to.</li><li><code>port</code>: Port of remote server.</li><li><code>method</code>: A string specifying the HTTP request method. Possible values:
+<code>'GET'</code> (default), <code>'POST'</code>, <code>'PUT'</code>, and <code>'DELETE'</code>.</li><li><code>path</code>: Request path. Should include query string and fragments if any.
+E.G. <code>'/index.html?page=12'</code></li><li><code>headers</code>: An object containing request headers.</li></ul>
+
+<p><code>http.request()</code> returns an instance of the <code>http.ClientRequest</code>
+class. The <code>ClientRequest</code> instance is a writable stream. If one needs to
+upload a file with a POST request, then write to the <code>ClientRequest</code> object.</p>
+
+<p>Example:</p>
+
+<pre><code>var options = {
+  host: 'www.google.com',
+  port: 80,
+  path: '/upload',
+  method: 'POST'
+};
+
+var req = http.request(options, function(res) {
+  console.log('STATUS: ' + res.statusCode);
+  console.log('HEADERS: ' + JSON.stringify(res.headers));
+  res.setEncoding('utf8');
+  res.on('data', function (chunk) {
+    console.log('BODY: ' + chunk);
+  });
+});
+
+// write data to request body
+req.write('data\n');
+req.write('data\n');
+req.end();</code></pre>
+
+<p>Note that in the example <code>req.end()</code> was called. With <code>http.request()</code> one
+must always call <code>req.end()</code> to signify that you're done with the request -
+even if there is no data being written to the request body.</p>
+
+<p>If any error is encountered during the request (be that with DNS resolution,
+TCP level errors, or actual HTTP parse errors) an <code>'error'</code> event is emitted
+on the returned request object.</p>
+
+<p>There are a few special headers that should be noted.</p>
+
+<ul><li><p>Sending a 'Connection: keep-alive' will notify Node that the connection to
+the server should be persisted until the next request.</p></li><li><p>Sending a 'Content-length' header will disable the default chunked encoding.</p></li><li><p>Sending an 'Expect' header will immediately send the request headers.
+Usually, when sending 'Expect: 100-continue', you should both set a timeout
+and listen for the <code>continue</code> event. See RFC2616 Section 8.2.3 for more
+information.</p></li></ul>
+
+<h2 id="http.get">http.get(options, callback)</h2>
+
+<p>Since most requests are GET requests without bodies, Node provides this
+convenience method. The only difference between this method and <code>http.request()</code> is
+that it sets the method to GET and calls <code>req.end()</code> automatically.</p>
+
+<p>Example:</p>
+
+<pre><code>var options = {
+  host: 'www.google.com',
+  port: 80,
+  path: '/index.html'
+};
+
+http.get(options, function(res) {
+  console.log("Got response: " + res.statusCode);
+}).on('error', function(e) {
+  console.log("Got error: " + e.message);
+});</code></pre>
+
+<h2 id="http.Agent">http.Agent</h2>
+
+<h2 id="http.getAgent">http.getAgent(host, port)</h2>
+
+<p><code>http.request()</code> uses a special <code>Agent</code> for managing multiple connections to
+an HTTP server. Normally <code>Agent</code> instances should not be exposed to user
+code, however in certain situations it's useful to check the status of the
+agent. The <code>http.getAgent()</code> function allows you to access the agents.</p>
+
+<h3 id="event_upgrade_">Event: 'upgrade'</h3>
+
+<p><code>function (request, socket, head)</code></p>
+
+<p>Emitted each time a server responds to a request with an upgrade. If this event
+isn't being listened for, clients receiving an upgrade header will have their
+connections closed.</p>
+
+<p>See the description of the <code>upgrade</code> event for <code>http.Server</code> for further details.</p>
+
+<h3 id="event_continue_">Event: 'continue'</h3>
+
+<p><code>function ()</code></p>
+
+<p>Emitted when the server sends a '100 Continue' HTTP response, usually because
+the request contained 'Expect: 100-continue'. This is an instruction that
+the client should send the request body.</p>
+
+<h3 id="agent.maxSockets">agent.maxSockets</h3>
+
+<p>By default set to 5. Determines how many concurrent sockets the agent can have open.</p>
+
+<h3 id="agent.sockets">agent.sockets</h3>
+
+<p>An array of sockets currently in use by the Agent. Do not modify.</p>
+
+<h3 id="agent.queue">agent.queue</h3>
+
+<p>A queue of requests waiting to be sent to sockets.</p>
+
+<h2 id="http.ClientRequest">http.ClientRequest</h2>
+
+<p>This object is created internally and returned from <code>http.request()</code>.  It
+represents an <em>in-progress</em> request whose header has already been queued.  The 
+header is still mutable using the <code>setHeader(name, value)</code>, <code>getHeader(name)</code>,
+<code>removeHeader(name)</code> API.  The actual header will be sent along with the first
+data chunk or when closing the connection.</p>
+
+<p>To get the response, add a listener for <code>'response'</code> to the request object.
+<code>'response'</code> will be emitted from the request object when the response
+headers have been received.  The <code>'response'</code> event is executed with one
+argument which is an instance of <code>http.ClientResponse</code>.</p>
+
+<p>During the <code>'response'</code> event, one can add listeners to the
+response object; particularly to listen for the <code>'data'</code> event. Note that
+the <code>'response'</code> event is called before any part of the response body is received,
+so there is no need to worry about racing to catch the first part of the
+body. As long as a listener for <code>'data'</code> is added during the <code>'response'</code>
+event, the entire body will be caught.</p>
+
+<pre><code>// Good
+request.on('response', function (response) {
+  response.on('data', function (chunk) {
+    console.log('BODY: ' + chunk);
+  });
+});
+
+// Bad - misses all or part of the body
+request.on('response', function (response) {
+  setTimeout(function () {
+    response.on('data', function (chunk) {
+      console.log('BODY: ' + chunk);
+    });
+  }, 10);
+});</code></pre>
+
+<p>This is a <code>Writable Stream</code>.</p>
+
+<p>This is an <code>EventEmitter</code> with the following events:</p>
+
+<h3 id="event_response_">Event 'response'</h3>
+
+<p><code>function (response) { }</code></p>
+
+<p>Emitted when a response is received to this request. This event is emitted only once. The
+<code>response</code> argument will be an instance of <code>http.ClientResponse</code>.</p>
+
+<h3 id="request.write">request.write(chunk, encoding='utf8')</h3>
+
+<p>Sends a chunk of the body.  By calling this method
+many times, the user can stream a request body to a
+server--in that case it is suggested to use the
+<code>['Transfer-Encoding', 'chunked']</code> header line when
+creating the request.</p>
+
+<p>The <code>chunk</code> argument should be an array of integers
+or a string.</p>
+
+<p>The <code>encoding</code> argument is optional and only
+applies when <code>chunk</code> is a string.</p>
+
+<h3 id="request.end">request.end([data], [encoding])</h3>
+
+<p>Finishes sending the request. If any parts of the body are
+unsent, it will flush them to the stream. If the request is
+chunked, this will send the terminating <code>'0\r\n\r\n'</code>.</p>
+
+<p>If <code>data</code> is specified, it is equivalent to calling <code>request.write(data, encoding)</code>
+followed by <code>request.end()</code>.</p>
+
+<h3 id="request.abort">request.abort()</h3>
+
+<p>Aborts a request.  (New since v0.3.8.)</p>
+
+<h2 id="http.ClientResponse">http.ClientResponse</h2>
+
+<p>This object is created when making a request with <code>http.request()</code>. It is
+passed to the <code>'response'</code> event of the request object.</p>
+
+<p>The response implements the <code>Readable Stream</code> interface.</p>
+
+<h3 id="event_data_">Event: 'data'</h3>
+
+<p><code>function (chunk) {}</code></p>
+
+<p>Emitted when a piece of the message body is received.</p>
+
+<h3 id="event_end_">Event: 'end'</h3>
+
+<p><code>function () {}</code></p>
+
+<p>Emitted exactly once for each message. No arguments. After
+emitted no other events will be emitted on the response.</p>
+
+<h3 id="response.statusCode">response.statusCode</h3>
+
+<p>The 3-digit HTTP response status code. E.G. <code>404</code>.</p>
+
+<h3 id="response.httpVersion">response.httpVersion</h3>
+
+<p>The HTTP version of the connected-to server. Probably either
+<code>'1.1'</code> or <code>'1.0'</code>.
+Also <code>response.httpVersionMajor</code> is the first integer and
+<code>response.httpVersionMinor</code> is the second.</p>
+
+<h3 id="response.headers">response.headers</h3>
+
+<p>The response headers object.</p>
+
+<h3 id="response.trailers">response.trailers</h3>
+
+<p>The response trailers object. Only populated after the 'end' event.</p>
+
+<h3 id="response.setEncoding">response.setEncoding(encoding=null)</h3>
+
+<p>Set the encoding for the response body. Either <code>'utf8'</code>, <code>'ascii'</code>, or <code>'base64'</code>.
+Defaults to <code>null</code>, which means that the <code>'data'</code> event will emit a <code>Buffer</code> object..</p>
+
+<h3 id="response.pause">response.pause()</h3>
+
+<p>Pauses response from emitting events.  Useful to throttle back a download.</p>
+
+<h3 id="response.resume">response.resume()</h3>
+
+<p>Resumes a paused response.</p>
+
+<h2 id="hTTPS">HTTPS</h2>
+
+<p>HTTPS es el protocolo HTTP sobre TLS/SSL. En Node se implementa en un 
+módulo separado.</p>
+
+<h2 id="https.Server">https.Server</h2>
+
+<h2 id="https.createServer">https.createServer</h2>
+
+<p>Ejemplo:</p>
+
+<pre><code>// curl -k https://localhost:8000/
+var https = require('https');
+var fs = require('fs');
+
+var options = {
+  key: fs.readFileSync('test/fixtures/keys/agent2-key.pem'),
+  cert: fs.readFileSync('test/fixtures/keys/agent2-cert.pem')
+};
+
+https.createServer(options, function (req, res) {
+  res.writeHead(200);
+  res.end("hola mundo\n");
+}).listen(8000);</code></pre>
+
+<h2 id="https.request">https.request(options, callback)</h2>
+
+<p>Hace una petición a un servidor web seguro.
+Opciones similares a <code>http.request()</code>.</p>
+
+<p>Ejemplo:</p>
+
+<pre><code>var https = require('https');
+
+var options = {
+  host: 'encrypted.google.com',
+  port: 443,
+  path: '/',
+  method: 'GET'
+};
+
+var req = https.request(options, function(res) {
+  console.log("statusCode: ", res.statusCode);
+  console.log("headers: ", res.headers);
+
+  res.on('data', function(d) {
+    process.stdout.write(d);
+  });
+});
+req.end();
+
+req.on('error', function(e) {
+  console.error(e);
+});</code></pre>
+
+<p>El argumento options tiene las siguientes opciones</p>
+
+<ul><li>host: IP o dominio del host al que hacer la petición. Por defecto <code>'localhost'</code>.</li><li>port: puerto del host al que hacer la petición. Por defecto 443.</li><li>path: Ruta de la petición. Por defecto <code>'/'</code>.</li><li>method: Método de la petición HTTP. Per defecto <code>'GET'</code>.</li><li>key: Clave privada a usar para SSL. Por defecto <code>null</code>.</li><li>cert: Certificado público x509 a usar. Por defecto <code>null</code>.</li><li>ca: Un certificado de autoridad o un array de certificados de autoridad para comprobar contra el host remoto.</li></ul>
+
+<h2 id="https.get">https.get(options, callback)</h2>
+
+<p>Como <code>http.get()</code> pero para HTTPS.</p>
+
+<p>Ejemplo:</p>
+
+<pre><code>var https = require('https');
+
+https.get({ host: 'encrypted.google.com', path: '/' }, function(res) {
+  console.log("statusCode: ", res.statusCode);
+  console.log("headers: ", res.headers);
+
+  res.on('data', function(d) {
+    process.stdout.write(d);
+  });
+
+}).on('error', function(e) {
+  console.error(e);
+});</code></pre>
+
+<h2 id="uRL">URL</h2>
+
+<p>Este módulo posee utilidades para la resolución y análisis de URL.
+Para usarlo utilice <code>require('url')</code>.</p>
+
+<p>Analizar objetos URL tiene algo o mucho de los siguientes campos, dependiendo de
+que exista o no en la cadena de URL. Las partes que no están en la cadena de URL
+no se analizarán y no estarán presente en el objeto. Un ejemplo para la siguiente URL</p>
+
+<p><code>'http://user:pass@host.com:8080/p/a/t/h?query=string#hash'</code></p>
+
+<ul><li><p><code>href</code>: La dirección URL ha sido analizada desde un principio.</p><p>Ejemplo: <code>'http://user:pass@host.com:8080/p/a/t/h?query=string#hash'</code></p></li><li><p><code>protocol</code>: El protocolo de petición (request).</p><p>Ejemplo: <code>'http:'</code></p></li><li><p><code>host</code>: Una parte del host de la URL completa, incluyendo la información del puerto y autentificación.</p><p>Ejemplo: <code>'user:pass@host.com:8080'</code></p></li><li><p><code>auth</code>: Parte de la información de autentificación de la URL.</p><p>Ejemplo: <code>'user:pass'</code></p></li><li><p><code>hostname</code>: Sólo la parte del nombre del host.</p><p>Ejemplo: <code>'host.com'</code></p></li><li><p><code>port</code>: El número de puerto del host.</p><p>Ejemplo: <code>'8080'</code></p></li><li><p><code>pathname</code>: La sección de la ruta de la URL, que viene después del host y antes de la consulta, incluyendo la barra inicial si está presente.</p><p>Ejemplo: <code>'/p/a/t/h'</code></p></li><li><p><code>search</code>: La parte de 'cadena de consulta' de la URL, incluyendo el signo de interrogación principal.</p><p>Ejemplo: <code>'?query=string'</code></p></li><li><p><code>query</code>: La parte de cualquier 'parámetro' de la cadena de consulta, o un parser de un objeto de cadena de consulta.</p><p>Ejemplo: <code>'query=string'</code> o <code>{'query':'string'}</code></p></li><li><p><code>hash</code>: La parte del 'fragmento' de la  URL incluyendo el símbolo de la libra.</p><p>Ejemplo: <code>'#hash'</code></p></li></ul>
+
+<p>Los siguientes métodos son proporcionados por el módulo URL:</p>
+
+<h3 id="url.parse">url.parse(urlStr, parseQueryString=false)</h3>
+
+<p>Toma una cadena de la URL, y la devuelve como un objeto.  Devuelve <code>true</code> como el segundo argumento  a
+la cadena de consulta usando el módulo <code>querystring</code>.</p>
+
+<h3 id="url.format">url.format(urlObj)</h3>
+
+<p>Toma un parser de un objeto URL, y devuelve una cadena de URL.</p>
+
+<h3 id="url.resolve">url.resolve(from, to)</h3>
+
+<p>Toma una URL base, y el atributo href de la URL, y lo determina como un navegador sería la etiqueta anchor (enlace).</p>
+
+<h2 id="cadena_de_consulta">Cadena de consulta</h2>
+
+<p>Este módulo provee de utilidades para el tratamiento de cadenas de consultas.
+Se ofrece los siguientes métodos:</p>
+
+<h3 id="querystring.stringify">querystring.stringify(obj, sep='&amp;', eq='=')</h3>
+
+<p>Serializa un objeto a una cadena de consulta.
+Opcionalmente reemplaza el separador por omisión y la asignación de caracteres.</p>
+
+<p>Ejemplo:</p>
+
+<pre><code>querystring.stringify({foo: 'bar'})
+// devuelve
+'foo=bar'
+
+querystring.stringify({foo: 'bar', baz: 'bob'}, ';', ':')
+// devuelve
+'foo:bar;baz:bob'</code></pre>
+
+<h3 id="querystring.parse">querystring.parse(str, sep='&amp;', eq='=')</h3>
+
+<p>Deserializa una cadena de consulta a un objeto.
+Opcionamente puede reemplazar el separador por omisión y asignar caracteres.</p>
+
+<p>Ejemplo:</p>
+
+<pre><code>querystring.parse('a=b&amp;b=c')
+// returns
+{ a: 'b', b: 'c' }</code></pre>
+
+<h3 id="querystring.escape">querystring.escape</h3>
+
+<p>La función escape es usada por <code>querystring.stringify</code>,
+para proporcionar reemplazos si es necesario.</p>
+
+<h3 id="querystring.unescape">querystring.unescape</h3>
+
+<p>La función unescape es usada por <code>querystring.parse</code>,
+para proporcionar reemplazos  si es necesario.</p>
+
+<h2 id="rEPL">REPL</h2>
+
+<p>Read-Eval-Print-Loop (REPL) está disponible como un programa independiente y fácilmente
+puede incluirse en otros programas.  REPL proporciona una forma de ejecutar interactiva de ejecutar
+JavaScript y ver los resultados.  Puede ser utilizado para la depuración, pruebas, o
+simplemente para probar cosas.</p>
+
+<p>Debe ejectuarlo en <code>node</code> sin singún argumento desde la línea de comandos, debe posicionarse 
+dentro de REPL. Posee la edición simple de líneas de emacs.</p>
+
+<pre><code>mjr:~$ node
+Type '.help' for options.
+&gt; a = [ 1, 2, 3];
+[ 1, 2, 3 ]
+&gt; a.forEach(function (v) {
+...   console.log(v);
+...   });
+1
+2
+3</code></pre>
+
+<p>Para editores avanzados, inice node con la variable de entorno <code>NODE_NO_READLINE=1</code>.
+Esto iniciará la configuración de REPL en la terminal y que le permitirá utilizarlo como <code>rlwrap</code>.</p>
+
+<p>Por ejemplo, puede añadir a continuación a su fichero bashrc:</p>
+
+<pre><code>alias node="env NODE_NO_READLINE=1 rlwrap node"</code></pre>
+
+<h3 id="repl.start">repl.start(prompt='&gt; ', stream=process.stdin)</h3>
+
+<p>Inicia REPL con el <code>prompt</code> como el prompt y  el <code>stream</code> para todo los procesos de I/O (Entrada/Salida). 
+<code>prompt</code> es opcional y por omisión es <code>&gt; </code>.  <code>stream</code> es opcional y por omisión es 
+<code>process.stdin</code>.</p>
+
+<p>Multiples REPLs pueden iniciar con una misma instancia de node.  Cada
+uno de ellos comparten el objeto global, perotendrán un único proceso de I/O.</p>
+
+<p>Here is an example that starts a REPL on stdin, a Unix socket, and a TCP socket:
+Aquí está un ejemplo que inicia REPL en stdin, un socket en Unix, y un socket en TCP:</p>
+
+<pre><code>var net = require("net"),
+    repl = require("repl");
+
+connections = 0;
+
+repl.start("node via stdin&gt; ");
+
+net.createServer(function (socket) {
+  connections += 1;
+  repl.start("node via Unix socket&gt; ", socket);
+}).listen("/tmp/node-repl-sock");
+
+net.createServer(function (socket) {
+  connections += 1;
+  repl.start("node via TCP socket&gt; ", socket);
+}).listen(5001);</code></pre>
+
+<p>Ejecutando el programa desde la línea de comando iniciará REPL en stdin.  Otros
+clientes REPL pueden conectarse a través de un socket Unix o TCP. <code>telnet</code> es útil
+para la conexión de sockets TCP, y <code>socat</code> puede ser conectar ambos sockets Unix y
+TCP.</p>
+
+<p>Al iniciar REPL desde un socket Unix basado en una instancia de stdin, puede 
+conectarse a un  proceso en ejecución de node sin reiniciar el mismo.</p>
+
+<h3 id="caracter_sticas_de_REPL">Características de REPL</h3>
+
+<p>Dentro de REPL, presione Control+D para salir.  Expresiones de varias líneas pueden ser
+ingresadas.</p>
+
+<p>La variable especial <code>_</code> (underscore) contiene el resultado de la última expresión.</p>
+
+<pre><code>&gt; [ "a", "b", "c" ]
+[ 'a', 'b', 'c' ]
+&gt; _.length
+3
+&gt; _ += 1
+4</code></pre>
+
+<p>REPL proporciona acceso a cualquier variable en el ámbito global. Puede exponer una variable
+a REPL explícitamente y asignarl a un contexto de un objeto asociado con cada
+<code>REPLServer</code>.  Por ejemplo:</p>
+
+<pre><code>// repl_test.js
+var repl = require("repl"),
+    msg = "message";
+
+repl.start().context.m = msg;</code></pre>
+
+<p>Las cosas en el objeto <code>context</code> aparecen como local en REPL:</p>
+
+<pre><code>mjr:~$ node repl_test.js
+&gt; m
+'message'</code></pre>
+
+<p>Hay algunos comandos especiales de REPL:</p>
+
+<ul><li><code>.break</code> - Si  bien ingresar expresiones en varias líneas, a veces, pueden perderse
+o simplemente no son tomados en cuenta. <code>.break</code> comenzará de nuevo.</li><li><code>.clear</code> - Restablece el objeto <code>context</code> a un objeto vacío y borra cualquier expresión de varias líneas.</li><li><code>.exit</code> - Cierra los stream de I/O, que hará que REPL termine.</li><li><code>.help</code> - Muestra la lista de comandos especiales.</li></ul>
+
+<h2 id="child_Processes">Child Processes</h2>
+
+<p>Node provides a tri-directional <code>popen(3)</code> facility through the <code>ChildProcess</code>
+class.</p>
+
+<p>It is possible to stream data through the child's <code>stdin</code>, <code>stdout</code>, and
+<code>stderr</code> in a fully non-blocking way.</p>
+
+<p>To create a child process use <code>require('child_process').spawn()</code>.</p>
+
+<p>Child processes always have three streams associated with them. <code>child.stdin</code>,
+<code>child.stdout</code>, and <code>child.stderr</code>.</p>
+
+<p><code>ChildProcess</code> is an <code>EventEmitter</code>.</p>
+
+<h3 id="event_exit_">Event:  'exit'</h3>
+
+<p><code>function (code, signal) {}</code></p>
+
+<p>This event is emitted after the child process ends. If the process terminated
+normally, <code>code</code> is the final exit code of the process, otherwise <code>null</code>. If
+the process terminated due to receipt of a signal, <code>signal</code> is the string name
+of the signal, otherwise <code>null</code>.</p>
+
+<p>See <code>waitpid(2)</code>.</p>
+
+<h3 id="child.stdin">child.stdin</h3>
+
+<p>A <code>Writable Stream</code> that represents the child process's <code>stdin</code>.
+Closing this stream via <code>end()</code> often causes the child process to terminate.</p>
+
+<h3 id="child.stdout">child.stdout</h3>
+
+<p>A <code>Readable Stream</code> that represents the child process's <code>stdout</code>.</p>
+
+<h3 id="child.stderr">child.stderr</h3>
+
+<p>A <code>Readable Stream</code> that represents the child process's <code>stderr</code>.</p>
+
+<h3 id="child.pid">child.pid</h3>
+
+<p>The PID of the child process.</p>
+
+<p>Example:</p>
+
+<pre><code>var spawn = require('child_process').spawn,
+    grep  = spawn('grep', ['ssh']);
+
+console.log('Spawned child pid: ' + grep.pid);
+grep.stdin.end();</code></pre>
+
+<h3 id="child_process.spawn">child_process.spawn(command, args=[], [options])</h3>
+
+<p>Launches a new process with the given <code>command</code>, with  command line arguments in <code>args</code>.
+If omitted, <code>args</code> defaults to an empty Array.</p>
+
+<p>The third argument is used to specify additional options, which defaults to:</p>
+
+<pre><code>{ cwd: undefined,
+  env: process.env,
+  customFds: [-1, -1, -1],
+  setsid: false
+}</code></pre>
+
+<p><code>cwd</code> allows you to specify the working directory from which the process is spawned.
+Use <code>env</code> to specify environment variables that will be visible to the new process.
+With <code>customFds</code> it is possible to hook up the new process' [stdin, stout, stderr] to
+existing streams; <code>-1</code> means that a new stream should be created. <code>setsid</code>,
+if set true, will cause the subprocess to be run in a new session.</p>
+
+<p>Example of running <code>ls -lh /usr</code>, capturing <code>stdout</code>, <code>stderr</code>, and the exit code:</p>
+
+<pre><code>var util  = require('util'),
+    spawn = require('child_process').spawn,
+    ls    = spawn('ls', ['-lh', '/usr']);
+
+ls.stdout.on('data', function (data) {
+  console.log('stdout: ' + data);
+});
+
+ls.stderr.on('data', function (data) {
+  console.log('stderr: ' + data);
+});
+
+ls.on('exit', function (code) {
+  console.log('child process exited with code ' + code);
+});</code></pre>
+
+<p>Example: A very elaborate way to run 'ps ax | grep ssh'</p>
+
+<pre><code>var util  = require('util'),
+    spawn = require('child_process').spawn,
+    ps    = spawn('ps', ['ax']),
+    grep  = spawn('grep', ['ssh']);
+
+ps.stdout.on('data', function (data) {
+  grep.stdin.write(data);
+});
+
+ps.stderr.on('data', function (data) {
+  console.log('ps stderr: ' + data);
+});
+
+ps.on('exit', function (code) {
+  if (code !== 0) {
+    console.log('ps process exited with code ' + code);
+  }
+  grep.stdin.end();
+});
+
+grep.stdout.on('data', function (data) {
+  console.log(data);
+});
+
+grep.stderr.on('data', function (data) {
+  console.log('grep stderr: ' + data);
+});
+
+grep.on('exit', function (code) {
+  if (code !== 0) {
+    console.log('grep process exited with code ' + code);
+  }
+});</code></pre>
+
+<p>Example of checking for failed exec:</p>
+
+<pre><code>var spawn = require('child_process').spawn,
+    child = spawn('bad_command');
+
+child.stderr.setEncoding('utf8');
+child.stderr.on('data', function (data) {
+  if (/^execvp\(\)/.test(data)) {
+    console.log('Failed to start child process.');
+  }
+});</code></pre>
+
+<p>See also: <code>child_process.exec()</code></p>
+
+<h3 id="child_process.exec">child_process.exec(command, [options], callback)</h3>
+
+<p>High-level way to execute a command as a child process, buffer the
+output, and return it all in a callback.</p>
+
+<pre><code>var util = require('util'),
+    exec = require('child_process').exec,
+    child;
+
+child = exec('cat *.js bad_file | wc -l',
+  function (error, stdout, stderr) {
+    console.log('stdout: ' + stdout);
+    console.log('stderr: ' + stderr);
+    if (error !== null) {
+      console.log('exec error: ' + error);
+    }
+});</code></pre>
+
+<p>The callback gets the arguments <code>(error, stdout, stderr)</code>. On success, <code>error</code>
+will be <code>null</code>.  On error, <code>error</code> will be an instance of <code>Error</code> and <code>err.code</code>
+will be the exit code of the child process, and <code>err.signal</code> will be set to the
+signal that terminated the process.</p>
+
+<p>There is a second optional argument to specify several options. The default options are</p>
+
+<pre><code>{ encoding: 'utf8',
+  timeout: 0,
+  maxBuffer: 200*1024,
+  killSignal: 'SIGTERM',
+  cwd: null,
+  env: null }</code></pre>
+
+<p>If <code>timeout</code> is greater than 0, then it will kill the child process
+if it runs longer than <code>timeout</code> milliseconds. The child process is killed with
+<code>killSignal</code> (default: <code>'SIGTERM'</code>). <code>maxBuffer</code> specifies the largest
+amount of data allowed on stdout or stderr - if this value is exceeded then
+the child process is killed.</p>
+
+<h3 id="child.kill">child.kill(signal='SIGTERM')</h3>
+
+<p>Send a signal to the child process. If no argument is given, the process will
+be sent <code>'SIGTERM'</code>. See <code>signal(7)</code> for a list of available signals.</p>
+
+<pre><code>var spawn = require('child_process').spawn,
+    grep  = spawn('grep', ['ssh']);
+
+grep.on('exit', function (code, signal) {
+  console.log('child process terminated due to receipt of signal '+signal);
+});
+
+// send SIGHUP to process
+grep.kill('SIGHUP');</code></pre>
+
+<p>Note that while the function is called <code>kill</code>, the signal delivered to the child
+process may not actually kill it.  <code>kill</code> really just sends a signal to a process.</p>
+
+<p>See <code>kill(2)</code></p>
+
+<h2 id="assert">Assert</h2>
+
+<p>Este módulo es usado para escribir pruebas unitarias de sus aplicaciones, puede
+acceder con <code>require('assert')</code>.</p>
+
+<h3 id="assert.fail">assert.fail(actual, expected, message, operator)</h3>
+
+<p>Evalua si <code>actual</code> es igual a <code>expected</code> usando el operador provisto.</p>
+
+<h3 id="assert.ok">assert.ok(value, [message])</h3>
+
+<p>Evalua si el valor es <code>true</code>, si es equivalente a <code>assert.equal(true, value, message);</code></p>
+
+<h3 id="assert.equal">assert.equal(actual, expected, [message])</h3>
+
+<p>Evalua la igualdad con el operador de comparación ( <code>==</code> ).</p>
+
+<h3 id="assert.notEqual">assert.notEqual(actual, expected, [message])</h3>
+
+<p>Evalua la no igualdad con el operador de comparación en negación ( <code>!=</code> ).</p>
+
+<h3 id="assert.deepEqual">assert.deepEqual(actual, expected, [message])</h3>
+
+<p>Pruebas para las pruebas de afirmación de desigualdad profunda.</p>
+
+<h3 id="assert.notDeepEqual">assert.notDeepEqual(actual, expected, [message])</h3>
+
+<p>Pruebas para cualquier desigualdad profunda.</p>
+
+<h3 id="assert.strictEqual">assert.strictEqual(actual, expected, [message])</h3>
+
+<p>Pruebas de igualdad estrictas, según lo determinado por el operador de igualdad estricto ( <code>===</code> )</p>
+
+<h3 id="assert.notStrictEqual">assert.notStrictEqual(actual, expected, [message])</h3>
+
+<p>Pruebas de no igualdad estrictas, según lo determinado por el operador de no igualdad estricto ( <code>!==</code> )</p>
+
+<h3 id="assert.throws">assert.throws(block, [error], [message])</h3>
+
+<p>Se espera lanzar un <code>bloque</code>(block) de error. El <code>error</code> puede ser un constructor, expresión regular (regexp) o 
+una función de validación.</p>
+
+<p>Validar instanceof usando el constructor:</p>
+
+<pre><code>assert.throws(
+  function() {
+    throw new Error("Wrong value");
+  },
+  Error
+);</code></pre>
+
+<p>Validar un mensaje de error usando RegExp:</p>
+
+<pre><code>assert.throws(
+  function() {
+    throw new Error("Wrong value");
+  },
+  /value/
+);</code></pre>
+
+<p>Error de validación personalizado:</p>
+
+<pre><code>assert.throws(
+  function() {
+    throw new Error("Wrong value");
+  },
+  function(err) {
+    if ( (err instanceof Error) &amp;&amp; /value/.test(err) ) {
+      return true;
+    }
+  },
+  "unexpected error"
+);</code></pre>
+
+<h3 id="assert.doesNotThrow">assert.doesNotThrow(block, [error], [message])</h3>
+
+<p>Se espera un <code>bloque</code> (block) y no produzca un error, vea assert.throws para más detalles.</p>
+
+<h3 id="assert.ifError">assert.ifError(value)</h3>
+
+<p>Comprueba si el valor no es falso, se produce un lanzamiento si el valor es verdadero. Muy útil
+cuando se prueba el primer argumento, <code>error</code> en los callbacks.</p>
+
+<h2 id="tTY_">TTY (Terminal)</h2>
+
+<p>Utilice <code>require('tty')</code> para acceder al módulo.</p>
+
+<p>Ejemplo:</p>
+
+<pre><code>var tty = require('tty');
+tty.setRawMode(true);
+process.stdin.resume();
+process.stdin.on('keypress', function(char, key) {
+  if (key &amp;&amp; key.ctrl &amp;&amp; key.name == 'c') {
+    console.log('salida airosa');
+    process.exit()
+  }
+});</code></pre>
+
+<h3 id="tty.open">tty.open(path, args=[])</h3>
+
+<p>Genera un nuevo proceso con el fichero ejecutable en la <code>ruta</code> como la sesión
+actual a una nueva pseudo terminal.</p>
+
+<p>Devuelve un array <code>[slaveFD, childProcess]</code>. <code>slaveFD</code> es el descriptor de fichero
+esclavo de la pseudo terminal. <code>childProcess</code> es un proceso hijo de un 
+objeto.</p>
+
+<h3 id="tty.isatty">tty.isatty(fd)</h3>
+
+<p>Devuelve <code>true</code> o <code>false</code> dependiendo si el <code>fd</code> es asociado con el
+terminal.</p>
+
+<h3 id="tty.setRawMode">tty.setRawMode(mode)</h3>
+
+<p><code>mode</code> debe ser <code>true</code> o <code>false</code>. Se establece las propiedades al proceso actual
+de stdin fd para actuar ya sea como un dispositivo de modo sin formato o por omisión.</p>
+
+<h3 id="tty.setWindowSize">tty.setWindowSize(fd, row, col)</h3>
+
+<p><code>ioctl</code> ajusta la configuración de la ventana del descriptor de fichero.</p>
+
+<h3 id="tty.getWindowSize">tty.getWindowSize(fd)</h3>
+
+<p>Devuelve <code>[row, col]</code> associado a la TTY con el descriptor de fichero.</p>
+
+<h2 id="m_dulo_os">Módulo os</h2>
+
+<p>Utilice <code>require('os')</code> para acceder al módulo.</p>
+
+<h3 id="os.hostname">os.hostname()</h3>
+
+<p>Devuelve el hostname del sistema operativo.</p>
+
+<h3 id="os.type">os.type()</h3>
+
+<p>Devuelve el nombre del sistema operativo.</p>
+
+<h3 id="os.release">os.release()</h3>
+
+<p>Devuelve la versión del sistema operativo.</p>
+
+<h3 id="os.uptime">os.uptime()</h3>
+
+<p>Devuelve el uptime en segundos del sistema.</p>
+
+<h3 id="os.loadavg">os.loadavg()</h3>
+
+<p>Devuelve un array conteniendo los promedios en 1, 5, y 15 minutos de carga.</p>
+
+<h3 id="os.totalmem">os.totalmem()</h3>
+
+<p>Devuelve la cantidad total en memoria del sistema en bytes</p>
+
+<h3 id="os.freemem">os.freemem()</h3>
+
+<p>Devuelve la cantidad de memoria libre del sistema en bytes.</p>
+
+<h3 id="os.cpus">os.cpus()</h3>
+
+<p>Devuelve un array de objetos que contiene información acerca de cada CPU/core instalado: modelo, velocidad (en MHz), y los tiempos (un objeto que contiene el número de CPU usado por: usuario, nice, sys, idle, e irq).</p>
+
+<p>Ejemplo de inspección de os.cpus:</p>
+
+<pre><code>[ { model: 'Intel(R) Core(TM) i7 CPU         860  @ 2.80GHz',
+    speed: 2926,
+    times:
+     { user: 252020,
+       nice: 0,
+       sys: 30340,
+       idle: 1070356870,
+       irq: 0 } },
+  { model: 'Intel(R) Core(TM) i7 CPU         860  @ 2.80GHz',
+    speed: 2926,
+    times:
+     { user: 306960,
+       nice: 0,
+       sys: 26980,
+       idle: 1071569080,
+       irq: 0 } },
+  { model: 'Intel(R) Core(TM) i7 CPU         860  @ 2.80GHz',
+    speed: 2926,
+    times:
+     { user: 248450,
+       nice: 0,
+       sys: 21750,
+       idle: 1070919370,
+       irq: 0 } },
+  { model: 'Intel(R) Core(TM) i7 CPU         860  @ 2.80GHz',
+    speed: 2926,
+    times:
+     { user: 256880,
+       nice: 0,
+       sys: 19430,
+       idle: 1070905480,
+       irq: 20 } },
+  { model: 'Intel(R) Core(TM) i7 CPU         860  @ 2.80GHz',
+    speed: 2926,
+    times:
+     { user: 511580,
+       nice: 20,
+       sys: 40900,
+       idle: 1070842510,
+       irq: 0 } },
+  { model: 'Intel(R) Core(TM) i7 CPU         860  @ 2.80GHz',
+    speed: 2926,
+    times:
+     { user: 291660,
+       nice: 0,
+       sys: 34360,
+       idle: 1070888000,
+       irq: 10 } },
+  { model: 'Intel(R) Core(TM) i7 CPU         860  @ 2.80GHz',
+    speed: 2926,
+    times:
+     { user: 308260,
+       nice: 0,
+       sys: 55410,
+       idle: 1071129970,
+       irq: 880 } },
+  { model: 'Intel(R) Core(TM) i7 CPU         860  @ 2.80GHz',
+    speed: 2926,
+    times:
+     { user: 266450,
+       nice: 1480,
+       sys: 34920,
+       idle: 1072572010,
+       irq: 30 } } ]</code></pre>
+
+<h2 id="depurador">Depurador</h2>
+
+<p>V8 viene con el complemento depurador (debugger), el cual puede ser accedido desde fuera 
+del proceso vía el <a href="http://code.google.com/p/v8/wiki/DebuggerProtocol">protocolo TCP</a>.
+Node posee un cliente incorporado para el depurador. Para usarlo, inicie Node con el argumento
+<code>debug</code>; y aparecerá:</p>
+
+<pre><code>% node debug myscript.js
+debug&gt;</code></pre>
+
+<p>En este punto <code>myscript.js</code> no está ejecutándose. Para iniciar el script, ingrese
+el comando <code>run</code>. Si todo funciona bien, la salida debe ser algo similar a:</p>
+
+<pre><code>% node debug myscript.js
+debug&gt; run
+debugger listening on port 5858
+connecting...ok</code></pre>
+
+<p>El cliente depurador de Node no soporta toda una gama de comandos, pero
+para cosas sencillas y tareas de inspección es posible su uso. Al poner la declaración <code>debugger;</code>
+en el código fuente del script, permitirá un punto de interrupción.</p>
+
+<p>Por ejemplo, supongamos que <code>myscript.js</code> era así:</p>
+
+<pre><code>// myscript.js
+x = 5;
+setTimeout(function () {
+  debugger;
+  console.log("mundo");
+}, 1000);
+console.log("hola");</code></pre>
+
+<p>Entonces una vez que el depurador se ejecute, esto generará un break en la línea 4</p>
+
+<pre><code>% ./node debug myscript.js
+debug&gt; run
+debugger listening on port 5858
+connecting...ok
+hola
+break in #&lt;an Object&gt;._onTimeout(), myscript.js:4
+  debugger;
+  ^
+debug&gt; next
+break in #&lt;an Object&gt;._onTimeout(), myscript.js:5
+  console.log("mundo");
+  ^
+debug&gt; print x
+5
+debug&gt; print 2+2
+4
+debug&gt; next
+world
+break in #&lt;an Object&gt;._onTimeout() returning undefined, myscript.js:6
+}, 1000);
+^
+debug&gt; quit
+A debugging session is active. Quit anyway? (y or n) y
+%</code></pre>
+
+<p>El comando <code>print</code> permite evaluar las variables. El comando <code>next</code> continúa
+la siguiente línea. Hay otros comandos disponibles y algunos más por venir de
+tipo ayuda. Escriba <code>help</code> para ver otros comandos.</p>
+
+<h3 id="uso_avanzado">Uso avanzado</h3>
+
+<p>El depurador V8 puede ser habilitado y accedido ya sea al iniciar Node con el 
+comando <code>--debug</code> o al señalar un proceso en Node existente con <code>SIGUSR1</code>.</p>
+
+<h1>Apéndices</h1>
+
+<h2 id="ap_ndice_1_M_dulos_de_terceros">Apéndice 1 - Módulos de terceros</h2>
+
+<p>Existen muchos módulos de terceros para Node. En el momento de escribir esto,
+Agosto 2010, el repositorio principal de módulos es 
+<a href="http://github.com/joyent/node/wiki/modules">esta página del wiki</a>.</p>
+
+<p>Este apéndice pretente ser una pequeña guía de ayuda a los recién llegados a
+que puedan encontrar rápidamente módulos de calidad. No prentede ser una
+lista completa. Ya que se puede encontrar mejores módulos y más completos en
+donde sea.</p>
+
+<ul><li><p>Module Installer: <a href="http://github.com/isaacs/npm">npm</a></p></li><li><p>HTTP Middleware: <a href="http://github.com/senchalabs/connect">Connect</a></p></li><li><p>Web Framework: <a href="http://github.com/visionmedia/express">Express</a></p></li><li><p>Web Sockets: <a href="http://github.com/LearnBoost/Socket.IO-node">Socket.IO</a></p></li><li><p>HTML Parsing: <a href="http://github.com/aredridel/html5">HTML5</a></p></li><li><p><a href="http://github.com/agnat/node_mdns">mDNS/Zeroconf/Bonjour</a></p></li><li><p><a href="https://github.com/ry/node-amqp">RabbitMQ, AMQP</a></p></li><li><p><a href="http://github.com/felixge/node-mysql">mysql</a></p></li><li><p>Serialization: <a href="http://github.com/pgriess/node-msgpack">msgpack</a></p></li><li><p>Scraping: <a href="http://github.com/silentrob/Apricot">Apricot</a></p></li><li><p>Debugger: <a href="http://github.com/smtlaissezfaire/ndb">ndb</a> is a CLI debugger
+<a href="http://github.com/dannycoates/node-inspector">inspector</a> is a web based
+tool.</p></li><li><p><a href="http://github.com/mranney/node_pcap">pcap binding</a></p></li><li><p><a href="http://github.com/mscdex/node-ncurses">ncurses</a></p></li><li><p>Testing/TDD/BDD: <a href="http://vowsjs.org/">vows</a>,
+<a href="http://github.com/visionmedia/expresso">expresso</a>,
+<a href="http://github.com/tmpvar/mjsunit.runner">mjsunit.runner</a></p></li></ul>
+
+<p>Parches a esta lista son bienvenidos.</p>
+  </div>
+  <script type="text/javascript" src="assets/sh_main.js"></script>
+  <script type="text/javascript" src="assets/sh_javascript.min.js"></script>
+  <script type="text/javascript">highlight(undefined, undefined, 'pre');</script>
+</body>
+</html>

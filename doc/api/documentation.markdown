@@ -2,7 +2,7 @@
 
 <!-- type=misc -->
 
-El objetivo de este documento es explicar integralmente la API Node.js, tanto
+El objetivo de este documento es explicar íntegralmente la API Node.js, tanto
 como una referencia, como así también un punto de vista conceptual. Cada
 sección describe un módulo integrado (built-in module) o un concepto de alto nivel
 (high-level concept).
@@ -17,7 +17,7 @@ experimental, y se agrega para el beneficio de las IDEs y otras utilidades que
 desean hacer cosas programáticas con la documentación.
 
 Cada archivo `.html` y `.json` es generado en base al correspondiente archivo
-`.markdown` en la carpeta `doc/api` en el árbol del código fuente de node. La
+`.markdown` de la carpeta `doc/api` en el árbol del código fuente de node. La
 documentación es generada utilizando el programa `tools/doc/generate.js`. La
 plantilla html esta ubicada en `doc/template.html`.
 
@@ -28,7 +28,7 @@ plantilla html esta ubicada en `doc/template.html`.
 A lo largo de la documentación verá las indicaciones de estabilidad de cada
 sección. La API Node.js es algo cambiante, y a medida que madura, ciertas
 partes son más confiables que otras. Algunas están tan probados, y son tan
-confiables que es poco probable que cambie en absoluto. Otros son completamente
+confiables que es poco probable que cambien en lo absoluto. Otros son completamente
 nuevos y experimentales, o se considera peligroso y en proceso de ser rediseñado.
 
 Los avisos se parecen a esto:
@@ -37,7 +37,7 @@ Los avisos se parecen a esto:
 
 Los índices de estabilidad son los siguientes:
 
-* **0 - Deprecated**  Esta característica es conocida como problemática, y se han 
+* **0 - Deprecated**  Esta característica es conocida como problemática y ya se han 
 previsto cambios. No confíe en esto. El uso de esta característica puede causar
 advertencias.
 
@@ -46,18 +46,18 @@ cambiar o ser removida en futuras versiones. Por favor, pruébela y de feedback.
 Si esta dirige a un caso de uso importante para usted, hágalo saber al equipo
 principal de node.
 
-* **2 - Unstable** La API está en el proceso de resolución, pero todavia no ha 
-sido suficientemente testeada en el mundo real para ser considerada estable.
-Si es razonable se mantendrá compatiblidad con versiones anteriores 
+* **2 - Unstable** La API está en proceso de resolución, pero todavia no ha sido 
+suficientemente testeada en el mundo real para ser considerada estable.
+Si es razonable se mantendrá compatiblidad con versiones anteriores.
 
-* **3 - Stable**  La API ha resultado satisfactoria, pero limpiar en el código 
-subyacente puede causar pequeños cambios. La compatibilidad con versiones 
-anteriores está garantizada. 
+* **3 - Stable**  La API ha resultado satisfactoria pero limpiar en el código 
+subyacente puede causar pequeños cambios. Esta garantizada la  compatibilidad con 
+versiones anteriores.
 
 * **4 - API Frozen**  La API ha sido testeada ampliamente en producción y es 
-poco provable que alguna vez tenga cambias.
+poco provable que alguna vez tenga cambios.
 
-* **5 - Locked** Al menos que bugs serios sean encontrados este código nunca 
+* **5 - Locked** Al menos que sean encontrados serios bugs este código nunca 
 cambiará. Por favor no sugiera cambios en esta parte, serán rechazados.
 
 ## salida JSON

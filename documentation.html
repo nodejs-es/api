@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>About this Documentation Node.js v0.6.18 Manual &amp; Documentación</title>
+  <title>Acerca de esta documentación Node.js v0.6.18 Manual &amp; Documentación</title>
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/sh.css">
   <link rel="canonical" href="http://nodejs.org/api/documentation.html">
@@ -59,9 +59,9 @@
           <div id="toc">
             <h2>Tabla de Contenidos</h2>
             <ul>
-<li><a href="#documentation_about_this_documentation">About this Documentation</a><ul>
-<li><a href="#documentation_stability_index">Stability Index</a></li>
-<li><a href="#documentation_json_output">JSON Output</a></li>
+<li><a href="#documentation_acerca_de_esta_documentaci_n">Acerca de esta documentación</a><ul>
+<li><a href="#documentation_ndice_de_estabilidad">Índice de estabilidad</a></li>
+<li><a href="#documentation_salida_json">salida JSON</a></li>
 </ul>
 </li>
 </ul>
@@ -69,83 +69,85 @@
           </div>
 
           <div id="apicontent">
-            <h1>About this Documentation<span><a class="mark" href="#documentation_about_this_documentation" id="documentation_about_this_documentation">#</a></span></h1>
+            <h1>Acerca de esta documentación<span><a class="mark" href="#documentation_acerca_de_esta_documentaci_n" id="documentation_acerca_de_esta_documentaci_n">#</a></span></h1>
 <!-- type=misc -->
 
-<p>The goal of this documentation is to comprehensively explain the Node.js
-API, both from a reference as well as a conceptual point of view.  Each
-section describes a built-in module or high-level concept.
+<p>El objetivo de este documento es explicar íntegralmente la API Node.js, tanto
+como una referencia, como así también un punto de vista conceptual. Cada
+sección describe un módulo integrado (built-in module) o un concepto de alto nivel
+(high-level concept).
 
 </p>
-<p>Where appropriate, property types, method arguments, and the arguments
-provided to event handlers are detailed in a list underneath the topic
-heading.
+<p>En su caso, los tipos de propiedades, los argumentos de métodos, y los argumentos
+proporcionados a los controladores de eventos se detallan en una lista debajo
+de la cabecera del topic.
 
 </p>
-<p>Every <code>.html</code> document has a corresponding <code>.json</code> document presenting
-the same information in a structured manner.  This feature is
-experimental, and added for the benefit of IDEs and other utilities that
-wish to do programmatic things with the documentation.
+<p>Cada documento <code>.html</code> tiene un documento correspondiente <code>.json</code> presentando
+la misma información de una manera estructurada. Esta característica es
+experimental, y se agrega para el beneficio de las IDEs y otras utilidades que
+desean hacer cosas programáticas con la documentación.
 
 </p>
-<p>Every <code>.html</code> and <code>.json</code> file is generated based on the corresponding
-<code>.markdown</code> file in the <code>doc/api/</code> folder in node&apos;s source tree.  The
-documentation is generated using the <code>tools/doc/generate.js</code> program.
-The HTML template is located at <code>doc/template.html</code>.
+<p>Cada archivo <code>.html</code> y <code>.json</code> es generado en base al correspondiente archivo
+<code>.markdown</code> de la carpeta <code>doc/api</code> en el árbol del código fuente de node. La
+documentación es generada utilizando el programa <code>tools/doc/generate.js</code>. La
+plantilla html esta ubicada en <code>doc/template.html</code>.
 
 </p>
-<h2>Stability Index<span><a class="mark" href="#documentation_stability_index" id="documentation_stability_index">#</a></span></h2>
+<h2>Índice de estabilidad<span><a class="mark" href="#documentation_ndice_de_estabilidad" id="documentation_ndice_de_estabilidad">#</a></span></h2>
 <!--type=misc-->
 
-<p>Throughout the documentation, you will see indications of a section&apos;s
-stability.  The Node.js API is still somewhat changing, and as it
-matures, certain parts are more reliable than others.  Some are so
-proven, and so relied upon, that they are unlikely to ever change at
-all.  Others are brand new and experimental, or known to be hazardous
-and in the process of being redesigned.
+<p>A lo largo de la documentación verá las indicaciones de estabilidad de cada
+sección. La API Node.js es algo cambiante, y a medida que madura, ciertas
+partes son más confiables que otras. Algunas están tan probados, y son tan
+confiables que es poco probable que cambien en lo absoluto. Otros son completamente
+nuevos y experimentales, o se considera peligroso y en proceso de ser rediseñado.
 
 </p>
-<p>The notices look like this:
+<p>Los avisos se parecen a esto:
 
 </p>
 <pre><code>Stability: 1 Experimental</code></pre>
-<p>The stability indices are as follows:
+<p>Los índices de estabilidad son los siguientes:
 
 </p>
 <ul>
-<li><strong>0 - Deprecated</strong>  This feature is known to be problematic, and changes are
-planned.  Do not rely on it.  Use of the feature may cause warnings.  Backwards
-compatibility should not be expected.</li>
+<li><strong>0 - Deprecated</strong>  Esta característica es conocida como problemática y ya se han 
+previsto cambios. No confíe en esto. El uso de esta característica puede causar
+advertencias.</li>
 </ul>
 <ul>
-<li><strong>1 - Experimental</strong>  This feature was introduced recently, and may change
-or be removed in future versions.  Please try it out and provide feedback.
-If it addresses a use-case that is important to you, tell the node core team.</li>
+<li><strong>1 - Experimental</strong>  Esta característica se ha incluído recientemente y puede 
+cambiar o ser removida en futuras versiones. Por favor, pruébela y de feedback.
+Si esta dirige a un caso de uso importante para usted, hágalo saber al equipo
+principal de node.</li>
 </ul>
 <ul>
-<li><strong>2 - Unstable</strong>  The API is in the process of settling, but has not yet had
-sufficient real-world testing to be considered stable. Backwards-compatibility
-will be maintained if reasonable.</li>
+<li><strong>2 - Unstable</strong> La API está en proceso de resolución, pero todavia no ha sido 
+suficientemente testeada en el mundo real para ser considerada estable.
+Si es razonable se mantendrá compatiblidad con versiones anteriores.</li>
 </ul>
 <ul>
-<li><strong>3 - Stable</strong>  The API has proven satisfactory, but cleanup in the underlying
-code may cause minor changes.  Backwards-compatibility is guaranteed.</li>
+<li><strong>3 - Stable</strong>  La API ha resultado satisfactoria pero limpiar en el código 
+subyacente puede causar pequeños cambios. Esta garantizada la  compatibilidad con 
+versiones anteriores.</li>
 </ul>
 <ul>
-<li><strong>4 - API Frozen</strong>  This API has been tested extensively in production and is
-unlikely to ever have to change.</li>
+<li><strong>4 - API Frozen</strong>  La API ha sido testeada ampliamente en producción y es 
+poco provable que alguna vez tenga cambios.</li>
 </ul>
 <ul>
-<li><strong>5 - Locked</strong>  Unless serious bugs are found, this code will not ever
-change.  Please do not suggest changes in this area; they will be refused.</li>
+<li><strong>5 - Locked</strong> Al menos que sean encontrados serios bugs este código nunca 
+cambiará. Por favor no sugiera cambios en esta parte, serán rechazados.</li>
 </ul>
-<h2>JSON Output<span><a class="mark" href="#documentation_json_output" id="documentation_json_output">#</a></span></h2>
+<h2>salida JSON<span><a class="mark" href="#documentation_salida_json" id="documentation_salida_json">#</a></span></h2>
 <pre><code>Stability: 1 - Experimental</code></pre>
-<p>Every HTML file in the markdown has a corresponding JSON file with the
-same data.
+<p>Cada archivo HTML en el markdown tiene un correspondiente archivo JSON con los
+mismos datos.
 
 </p>
-<p>This feature is new as of node v0.6.12.  It is experimental.
+<p>Esta característica se agregó a partir de node v0.6.12. Es experimental.
 </p>
 
           </div>

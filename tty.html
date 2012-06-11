@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>TTY (Terminal) Node.js v0.6.18 Manual &amp; Documentación</title>
+  <title>TTY (Terminal) Node.js v0.6.19 Manual &amp; Documentación</title>
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/sh.css">
-  <link rel="canonical" href="http://nodejs.org/api/tty.html">
+  <link rel="canonical" href="http://nodejs.org/api/tty-es.html">
 </head>
-<body class="alt apidoc" id="api-section-tty">
+<body class="alt apidoc" id="api-section-tty-es">
+    <div id="bar"><span>es</span><a title="Documentación en inglés" class="mark mark-es" href="en/tty.html">en</a></div>
     <div id="intro" class="interior">
-        <a href="http://www.nodejs.es/" title="Go back to the home page">
-            <img id="logo" src="images/logo-light-es.png" alt="node.js">
+        <a href="http://www.nodejs.es/" title="Volder el site nodejs.es">
+            <img id="logo" src="images/logo-light.png" alt="node.js">
         </a>
     </div>
     <div id="content" class="clearfix">
@@ -21,7 +22,7 @@
                 <li><a href="http://www.nodejs.es/" class="home">Home</a></li>
                 <li><a href="http://api.nodejs.es" class="docs current">Docs</a></li>
                 <li><a href="http://trabajos.nodejs.es/" class="jobs">Trabajos</a></li>
-                <li><a href="https://github.com/nodejs-es/api/" class="download">GitHub</a></li>
+                <li><a href="https://github.com/nodejs-es/node/" class="download">GitHub</a></li>
             </ul>
             <p class="twitter"><a href="http://twitter.com/nodejs_es">@nodejs_es</a></p>
         </div>
@@ -45,12 +46,12 @@
 
         <div id="column1" class="interior">
           <header>
-            <h1>Node.js v0.6.18 Manual &amp; Documentación</h1>
+            <h1>Node.js v0.6.19 Manual &amp; Documentación</h1>
             <div id="gtoc">
               <p>
-                <a href="index.html" name="toc">Indice</a> |
+                <a href="index.html" name="toc">Índice</a> |
                 <a href="all.html">Ver todo en una misma página</a> |
-                <a href="tty.json">Ver como JSON</a>
+                <a href="tty-es.json">Ver como JSON</a>
               </p>
             </div>
             <hr>
@@ -59,12 +60,12 @@
           <div id="toc">
             <h2>Tabla de Contenidos</h2>
             <ul>
-<li><a href="#tty_tty_terminal">TTY (Terminal)</a><ul>
-<li><a href="#tty_tty_open_path_args">tty.open(path, args=[])</a></li>
-<li><a href="#tty_tty_isatty_fd">tty.isatty(fd)</a></li>
-<li><a href="#tty_tty_setrawmode_mode">tty.setRawMode(mode)</a></li>
-<li><a href="#tty_tty_setwindowsize_fd_row_col">tty.setWindowSize(fd, row, col)</a></li>
-<li><a href="#tty_tty_getwindowsize_fd">tty.getWindowSize(fd)</a></li>
+<li><a href="#tty_es_tty_terminal">TTY (Terminal)</a><ul>
+<li><a href="#tty_es_tty_open_path_args">tty.open(path, args=[])</a></li>
+<li><a href="#tty_es_tty_isatty_fd">tty.isatty(fd)</a></li>
+<li><a href="#tty_es_tty_setrawmode_mode">tty.setRawMode(mode)</a></li>
+<li><a href="#tty_es_tty_setwindowsize_fd_row_col">tty.setWindowSize(fd, row, col)</a></li>
+<li><a href="#tty_es_tty_getwindowsize_fd">tty.getWindowSize(fd)</a></li>
 </ul>
 </li>
 </ul>
@@ -72,7 +73,7 @@
           </div>
 
           <div id="apicontent">
-            <h1>TTY (Terminal)<span><a class="mark" href="#tty_tty_terminal" id="tty_tty_terminal">#</a></span></h1>
+            <h1>TTY (Terminal)<span><a class="mark" href="#tty_es_tty_terminal" id="tty_es_tty_terminal">#</a></span></h1>
 <p>Utilice <code>require(&apos;tty&apos;)</code> para acceder al módulo.
 
 </p>
@@ -88,7 +89,7 @@ process.stdin.on(&apos;keypress&apos;, function(char, key) {
     process.exit()
   }
 });</code></pre>
-<h2>tty.open(path, args=[])<span><a class="mark" href="#tty_tty_open_path_args" id="tty_tty_open_path_args">#</a></span></h2>
+<h2>tty.open(path, args=[])<span><a class="mark" href="#tty_es_tty_open_path_args" id="tty_es_tty_open_path_args">#</a></span></h2>
 <p>Genera un nuevo proceso con el fichero ejecutable en la <code>ruta</code> como la sesión
 actual a una nueva pseudo terminal.
 
@@ -99,24 +100,24 @@ objeto.
 
 
 </p>
-<h2>tty.isatty(fd)<span><a class="mark" href="#tty_tty_isatty_fd" id="tty_tty_isatty_fd">#</a></span></h2>
+<h2>tty.isatty(fd)<span><a class="mark" href="#tty_es_tty_isatty_fd" id="tty_es_tty_isatty_fd">#</a></span></h2>
 <p>Devuelve <code>true</code> o <code>false</code> dependiendo si el <code>fd</code> es asociado con el
 terminal.
 
 
 </p>
-<h2>tty.setRawMode(mode)<span><a class="mark" href="#tty_tty_setrawmode_mode" id="tty_tty_setrawmode_mode">#</a></span></h2>
+<h2>tty.setRawMode(mode)<span><a class="mark" href="#tty_es_tty_setrawmode_mode" id="tty_es_tty_setrawmode_mode">#</a></span></h2>
 <p><code>mode</code> debe ser <code>true</code> o <code>false</code>. Se establece las propiedades al proceso actual
 de stdin fd para actuar ya sea como un dispositivo de modo sin formato o por omisión.
 
 
 </p>
-<h2>tty.setWindowSize(fd, row, col)<span><a class="mark" href="#tty_tty_setwindowsize_fd_row_col" id="tty_tty_setwindowsize_fd_row_col">#</a></span></h2>
+<h2>tty.setWindowSize(fd, row, col)<span><a class="mark" href="#tty_es_tty_setwindowsize_fd_row_col" id="tty_es_tty_setwindowsize_fd_row_col">#</a></span></h2>
 <p><code>ioctl</code> ajusta la configuración de la ventana del descriptor de fichero.
 
 
 </p>
-<h2>tty.getWindowSize(fd)<span><a class="mark" href="#tty_tty_getwindowsize_fd" id="tty_tty_getwindowsize_fd">#</a></span></h2>
+<h2>tty.getWindowSize(fd)<span><a class="mark" href="#tty_es_tty_getwindowsize_fd" id="tty_es_tty_getwindowsize_fd">#</a></span></h2>
 <p>Devuelve <code>[row, col]</code> associado a la TTY con el descriptor de fichero.
 
 
@@ -132,7 +133,7 @@ de stdin fd para actuar ya sea como un dispositivo de modo sin formato o por omi
             <li><a href="http://twitter.com/nodejs_es" class="twitter">@nodejs_es</a></li>
         </ul>
 
-        <p>Copyright <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.18/LICENSE">license</a>.</p>
+        <p>Copyright <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.19/LICENSE">license</a>.</p>
     </div>
 </body>
 </html>

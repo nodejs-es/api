@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>URL Node.js v0.6.18 Manual &amp; Documentación</title>
+  <title>URL Node.js v0.6.19 Manual &amp; Documentación</title>
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/sh.css">
-  <link rel="canonical" href="http://nodejs.org/api/url.html">
+  <link rel="canonical" href="http://nodejs.org/api/url-es.html">
 </head>
-<body class="alt apidoc" id="api-section-url">
+<body class="alt apidoc" id="api-section-url-es">
+    <div id="bar"><span>es</span><a title="Documentación en inglés" class="mark mark-es" href="en/url.html">en</a></div>
     <div id="intro" class="interior">
-        <a href="http://www.nodejs.es/" title="Go back to the home page">
-            <img id="logo" src="images/logo-light-es.png" alt="node.js">
+        <a href="http://www.nodejs.es/" title="Volder el site nodejs.es">
+            <img id="logo" src="images/logo-light.png" alt="node.js">
         </a>
     </div>
     <div id="content" class="clearfix">
@@ -21,7 +22,7 @@
                 <li><a href="http://www.nodejs.es/" class="home">Home</a></li>
                 <li><a href="http://api.nodejs.es" class="docs current">Docs</a></li>
                 <li><a href="http://trabajos.nodejs.es/" class="jobs">Trabajos</a></li>
-                <li><a href="https://github.com/nodejs-es/api/" class="download">GitHub</a></li>
+                <li><a href="https://github.com/nodejs-es/node/" class="download">GitHub</a></li>
             </ul>
             <p class="twitter"><a href="http://twitter.com/nodejs_es">@nodejs_es</a></p>
         </div>
@@ -45,12 +46,12 @@
 
         <div id="column1" class="interior">
           <header>
-            <h1>Node.js v0.6.18 Manual &amp; Documentación</h1>
+            <h1>Node.js v0.6.19 Manual &amp; Documentación</h1>
             <div id="gtoc">
               <p>
-                <a href="index.html" name="toc">Indice</a> |
+                <a href="index.html" name="toc">Índice</a> |
                 <a href="all.html">Ver todo en una misma página</a> |
-                <a href="url.json">Ver como JSON</a>
+                <a href="url-es.json">Ver como JSON</a>
               </p>
             </div>
             <hr>
@@ -59,12 +60,12 @@
           <div id="toc">
             <h2>Tabla de Contenidos</h2>
             <ul>
-<li><a href="#url_url">URL</a><ul>
-<li><a href="#url_url_parse_urlstr_parsequerystring_slashesdenotehost">url.parse(urlStr, [parseQueryString], [slashesDenoteHost])</a><ul>
-<li><a href="#url_url_format_urlobj">url.format(urlObj)</a></li>
+<li><a href="#url_es_url">URL</a><ul>
+<li><a href="#url_es_url_parse_urlstr_parsequerystring_slashesdenotehost">url.parse(urlStr, [parseQueryString], [slashesDenoteHost])</a><ul>
+<li><a href="#url_es_url_format_urlobj">url.format(urlObj)</a></li>
 </ul>
 </li>
-<li><a href="#url_url_resolve_from_to">url.resolve(from, to)</a></li>
+<li><a href="#url_es_url_resolve_from_to">url.resolve(from, to)</a></li>
 </ul>
 </li>
 </ul>
@@ -72,7 +73,7 @@
           </div>
 
           <div id="apicontent">
-            <h1>URL<span><a class="mark" href="#url_url" id="url_url">#</a></span></h1>
+            <h1>URL<span><a class="mark" href="#url_es_url" id="url_es_url">#</a></span></h1>
 <p>Este módulo posee utilidades para la resolución y análisis de URL.
 Para usarlo utilice <code>require(&apos;url&apos;)</code>.
 
@@ -120,16 +121,16 @@ no se analizarán y no estarán presente en el objeto. Un ejemplo para la siguie
 <p>Los siguientes métodos son proporcionados por el módulo URL:
 
 </p>
-<h2>url.parse(urlStr, [parseQueryString], [slashesDenoteHost])<span><a class="mark" href="#url_url_parse_urlstr_parsequerystring_slashesdenotehost" id="url_url_parse_urlstr_parsequerystring_slashesdenotehost">#</a></span></h2>
+<h2>url.parse(urlStr, [parseQueryString], [slashesDenoteHost])<span><a class="mark" href="#url_es_url_parse_urlstr_parsequerystring_slashesdenotehost" id="url_es_url_parse_urlstr_parsequerystring_slashesdenotehost">#</a></span></h2>
 <p>Toma una cadena de la URL, y la devuelve como un objeto.  Devuelve <code>true</code> como el segundo argumento  a
 la cadena de consulta usando el módulo <code>querystring</code>.
 
 </p>
-<h3>url.format(urlObj)<span><a class="mark" href="#url_url_format_urlobj" id="url_url_format_urlobj">#</a></span></h3>
+<h3>url.format(urlObj)<span><a class="mark" href="#url_es_url_format_urlobj" id="url_es_url_format_urlobj">#</a></span></h3>
 <p>Toma un parser de un objeto URL, y devuelve una cadena de URL.
 
 </p>
-<h2>url.resolve(from, to)<span><a class="mark" href="#url_url_resolve_from_to" id="url_url_resolve_from_to">#</a></span></h2>
+<h2>url.resolve(from, to)<span><a class="mark" href="#url_es_url_resolve_from_to" id="url_es_url_resolve_from_to">#</a></span></h2>
 <p>Toma una URL base, y el atributo href de la URL, y lo determina como un navegador sería la etiqueta anchor (enlace).
 </p>
 
@@ -143,7 +144,7 @@ la cadena de consulta usando el módulo <code>querystring</code>.
             <li><a href="http://twitter.com/nodejs_es" class="twitter">@nodejs_es</a></li>
         </ul>
 
-        <p>Copyright <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.18/LICENSE">license</a>.</p>
+        <p>Copyright <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.19/LICENSE">license</a>.</p>
     </div>
 </body>
 </html>

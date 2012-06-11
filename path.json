@@ -1,5 +1,5 @@
 {
-  "source": "doc/api/path.markdown",
+  "source": "doc/api/path-es.markdown",
   "modules": [
     {
       "textRaw": "Path",

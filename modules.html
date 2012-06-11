@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Módulos Node.js v0.6.18 Manual &amp; Documentación</title>
+  <title>Módulos Node.js v0.6.19 Manual &amp; Documentación</title>
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/sh.css">
-  <link rel="canonical" href="http://nodejs.org/api/modules.html">
+  <link rel="canonical" href="http://nodejs.org/api/modules-es.html">
 </head>
-<body class="alt apidoc" id="api-section-modules">
+<body class="alt apidoc" id="api-section-modules-es">
+    <div id="bar"><span>es</span><a title="Documentación en inglés" class="mark mark-es" href="en/modules.html">en</a></div>
     <div id="intro" class="interior">
-        <a href="http://www.nodejs.es/" title="Go back to the home page">
-            <img id="logo" src="images/logo-light-es.png" alt="node.js">
+        <a href="http://www.nodejs.es/" title="Volder el site nodejs.es">
+            <img id="logo" src="images/logo-light.png" alt="node.js">
         </a>
     </div>
     <div id="content" class="clearfix">
@@ -21,7 +22,7 @@
                 <li><a href="http://www.nodejs.es/" class="home">Home</a></li>
                 <li><a href="http://api.nodejs.es" class="docs current">Docs</a></li>
                 <li><a href="http://trabajos.nodejs.es/" class="jobs">Trabajos</a></li>
-                <li><a href="https://github.com/nodejs-es/api/" class="download">GitHub</a></li>
+                <li><a href="https://github.com/nodejs-es/node/" class="download">GitHub</a></li>
             </ul>
             <p class="twitter"><a href="http://twitter.com/nodejs_es">@nodejs_es</a></p>
         </div>
@@ -45,12 +46,12 @@
 
         <div id="column1" class="interior">
           <header>
-            <h1>Node.js v0.6.18 Manual &amp; Documentación</h1>
+            <h1>Node.js v0.6.19 Manual &amp; Documentación</h1>
             <div id="gtoc">
               <p>
-                <a href="index.html" name="toc">Indice</a> |
+                <a href="index.html" name="toc">Índice</a> |
                 <a href="all.html">Ver todo en una misma página</a> |
-                <a href="modules.json">Ver como JSON</a>
+                <a href="modules-es.json">Ver como JSON</a>
               </p>
             </div>
             <hr>
@@ -59,26 +60,26 @@
           <div id="toc">
             <h2>Tabla de Contenidos</h2>
             <ul>
-<li><a href="#modules_m_dulos">Módulos</a><ul>
-<li><a href="#modules_m_dulos_b_sicos">Módulos básicos</a></li>
-<li><a href="#modules_m_dulo_file">Módulo File</a></li>
-<li><a href="#modules_cargando_desde_la_carpeta_node_modules">Cargando desde la carpeta <code>node_modules</code></a><ul>
-<li><a href="#modules_optimizaci_n_de_proceso_de_b_squeda_en_node_modules">Optimización de proceso de búsqueda en <code>node_modules</code></a></li>
+<li><a href="#modules_es_m_dulos">Módulos</a><ul>
+<li><a href="#modules_es_m_dulos_b_sicos">Módulos básicos</a></li>
+<li><a href="#modules_es_m_dulo_file">Módulo File</a></li>
+<li><a href="#modules_es_cargando_desde_la_carpeta_node_modules">Cargando desde la carpeta <code>node_modules</code></a><ul>
+<li><a href="#modules_es_optimizaci_n_de_proceso_de_b_squeda_en_node_modules">Optimización de proceso de búsqueda en <code>node_modules</code></a></li>
 </ul>
 </li>
-<li><a href="#modules_carpetas_como_m_dulos">Carpetas como módulos</a></li>
-<li><a href="#modules_almacenamiento_en_la_cach">Almacenamiento en la caché</a></li>
-<li><a href="#modules_todos_juntos">Todos juntos...</a></li>
-<li><a href="#modules_cargar_desde_las_carpetas_de_require_paths">Cargar desde las carpetas de <code>require.paths</code></a><ul>
-<li><a href="#modules_nota_por_favor_evite_la_modificaci_n_de_require_paths"><strong>Nota:</strong> Por favor evite la modificación de <code>require.paths</code></a><ul>
-<li><a href="#modules_establecer_require_paths_a_alg_n_otro_valor_para_nada">Establecer <code>require.paths</code> a algún otro valor para nada.</a></li>
-<li><a href="#modules_poner_rutas_relativas_en_require_paths_es_raro">Poner rutas relativas en <code>require.paths</code> es... raro.</a></li>
-<li><a href="#modules_cero_aislamiento">Cero aislamiento</a></li>
+<li><a href="#modules_es_carpetas_como_m_dulos">Carpetas como módulos</a></li>
+<li><a href="#modules_es_almacenamiento_en_la_cach">Almacenamiento en la caché</a></li>
+<li><a href="#modules_es_todos_juntos">Todos juntos...</a></li>
+<li><a href="#modules_es_cargar_desde_las_carpetas_de_require_paths">Cargar desde las carpetas de <code>require.paths</code></a><ul>
+<li><a href="#modules_es_nota_por_favor_evite_la_modificaci_n_de_require_paths"><strong>Nota:</strong> Por favor evite la modificación de <code>require.paths</code></a><ul>
+<li><a href="#modules_es_establecer_require_paths_a_alg_n_otro_valor_para_nada">Establecer <code>require.paths</code> a algún otro valor para nada.</a></li>
+<li><a href="#modules_es_poner_rutas_relativas_en_require_paths_es_raro">Poner rutas relativas en <code>require.paths</code> es... raro.</a></li>
+<li><a href="#modules_es_cero_aislamiento">Cero aislamiento</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#modules_addenda_consejos_para_administrar_paquetes">Addenda: Consejos para administrar paquetes</a></li>
+<li><a href="#modules_es_addenda_consejos_para_administrar_paquetes">Addenda: Consejos para administrar paquetes</a></li>
 </ul>
 </li>
 </ul>
@@ -86,7 +87,7 @@
           </div>
 
           <div id="apicontent">
-            <h1>Módulos<span><a class="mark" href="#modules_m_dulos" id="modules_m_dulos">#</a></span></h1>
+            <h1>Módulos<span><a class="mark" href="#modules_es_m_dulos" id="modules_es_m_dulos">#</a></span></h1>
 <p>Node posee un secillo sistema de carga.  En Node, los ficheros y módulos son de
 correspondencia biunívoca.  A modo de ejemplo, <code>foo.js</code> carga el módulo
 <code>circle.js</code> en el mismo directorio.
@@ -120,7 +121,7 @@ exports.circumference = function (r) {
 privada en <code>circle.js</code>.
 
 </p>
-<h2>Módulos básicos<span><a class="mark" href="#modules_m_dulos_b_sicos" id="modules_m_dulos_b_sicos">#</a></span></h2>
+<h2>Módulos básicos<span><a class="mark" href="#modules_es_m_dulos_b_sicos" id="modules_es_m_dulos_b_sicos">#</a></span></h2>
 <p>Node posee varios módulos compilados en binario.  Estos módulos son
 descritos con más detalle en las siguientes secciones del documento.
 
@@ -133,7 +134,7 @@ pasado desde <code>require()</code>. Por ejemplo, <code>require(&apos;http&apos;
 devolverá lo construido en el módulo HTTP, incluso si hay un fichero con ese nombre.
 
 </p>
-<h2>Módulo File<span><a class="mark" href="#modules_m_dulo_file" id="modules_m_dulo_file">#</a></span></h2>
+<h2>Módulo File<span><a class="mark" href="#modules_es_m_dulo_file" id="modules_es_m_dulo_file">#</a></span></h2>
 <p>Si el nombre exacto del fichero no es encontrado, entonces node intentará cargar 
 el nombre del fichero seguido de la extensión <code>.js</code>, y a continuación con <code>.node</code>.
 
@@ -157,7 +158,7 @@ Es decir, <code>circle.js</code> debe estar en el mismo directorio que <code>foo
 
 
 </p>
-<h2>Cargando desde la carpeta <code>node_modules</code><span><a class="mark" href="#modules_cargando_desde_la_carpeta_node_modules" id="modules_cargando_desde_la_carpeta_node_modules">#</a></span></h2>
+<h2>Cargando desde la carpeta <code>node_modules</code><span><a class="mark" href="#modules_es_cargando_desde_la_carpeta_node_modules" id="modules_es_cargando_desde_la_carpeta_node_modules">#</a></span></h2>
 <p>Si el identificador del módulo pasa a <code>require()</code> no es un módulo nativo,
 y no comienza con <code>&apos;/&apos;</code>, <code>&apos;../&apos;</code>, o <code>&apos;./&apos;</code>, entonces node inicia en el 
 directorio principal del módulo actual, y añade <code>/node_modules</code>, e
@@ -185,7 +186,7 @@ entren en conflicto.
 
 
 </p>
-<h3>Optimización de proceso de búsqueda en <code>node_modules</code><span><a class="mark" href="#modules_optimizaci_n_de_proceso_de_b_squeda_en_node_modules" id="modules_optimizaci_n_de_proceso_de_b_squeda_en_node_modules">#</a></span></h3>
+<h3>Optimización de proceso de búsqueda en <code>node_modules</code><span><a class="mark" href="#modules_es_optimizaci_n_de_proceso_de_b_squeda_en_node_modules" id="modules_es_optimizaci_n_de_proceso_de_b_squeda_en_node_modules">#</a></span></h3>
 <p>Cuando existen muchos niveles de dependencias anidadas, es posible que los
 árboles de directorios tomen bastante tiempo. Las siguientes optimizaciones se
 realizan para este proceso.
@@ -217,7 +218,7 @@ ubicaciones:
 <li><code>/home/ry/projects/foo/node_modules/bar/node_modules/asdf.js</code></li>
 <li><code>/home/ry/projects/foo/node_modules/asdf.js</code></li>
 </ul>
-<h2>Carpetas como módulos<span><a class="mark" href="#modules_carpetas_como_m_dulos" id="modules_carpetas_como_m_dulos">#</a></span></h2>
+<h2>Carpetas como módulos<span><a class="mark" href="#modules_es_carpetas_como_m_dulos" id="modules_es_carpetas_como_m_dulos">#</a></span></h2>
 <p>Es conveniente organizar los programas y librerías en los mismos directorios,
 y proporcionar un único punto de entrar a la biblioteca.
 Existe tres formas en donde una carpeta pueda usar <code>require()</code> como
@@ -250,13 +251,13 @@ entonces <code>require(&apos;./some-library&apos;)</code> intentará cargar:
 <li><code>./some-library/index.js</code></li>
 <li><code>./some-library/index.node</code></li>
 </ul>
-<h2>Almacenamiento en la caché<span><a class="mark" href="#modules_almacenamiento_en_la_cach" id="modules_almacenamiento_en_la_cach">#</a></span></h2>
+<h2>Almacenamiento en la caché<span><a class="mark" href="#modules_es_almacenamiento_en_la_cach" id="modules_es_almacenamiento_en_la_cach">#</a></span></h2>
 <p>Los módulos se alamacenan en la caché después que fueron cargados por primera vez.
 Esto significa (entre otras cosas) que todas las llamadas a <code>require(&apos;foo&apos;)</code> devuelve
 el mismo ojecto exacto, si se resolvería en el mismo fichero
 
 </p>
-<h2>Todos juntos...<span><a class="mark" href="#modules_todos_juntos" id="modules_todos_juntos">#</a></span></h2>
+<h2>Todos juntos...<span><a class="mark" href="#modules_es_todos_juntos" id="modules_es_todos_juntos">#</a></span></h2>
 <p>Para obtener el nombre exacto del fichero que se cargará cuando se llame con <code>require()</code>, use
 la función <code>require.resolve()</code>.
 
@@ -303,7 +304,7 @@ NODE_MODULES_PATHS(START)
    c. DIR = path join(PARTS[0 .. I] + &quot;node_modules&quot;)
    b. DIRS = DIRS + DIR
 6. return DIRS</code></pre>
-<h2>Cargar desde las carpetas de <code>require.paths</code><span><a class="mark" href="#modules_cargar_desde_las_carpetas_de_require_paths" id="modules_cargar_desde_las_carpetas_de_require_paths">#</a></span></h2>
+<h2>Cargar desde las carpetas de <code>require.paths</code><span><a class="mark" href="#modules_es_cargar_desde_las_carpetas_de_require_paths" id="modules_es_cargar_desde_las_carpetas_de_require_paths">#</a></span></h2>
 <p>En node, <code>require.paths</code> es un array de strings que representa las rutas de
 acceso a los módulos cuando estos no tienen el prefijo <code>&apos;/&apos;</code>, <code>&apos;./&apos;</code>, o
 <code>&apos;../&apos;</code>.  Por ejemplo, si establece require.paths como:
@@ -334,7 +335,7 @@ módulon no se ha encontrado desde el algoritmo <code>node_modules</code>.
 Los módulos globarles son de baja prioridad para las dependencias de los paquetes.
 
 </p>
-<h3><strong>Nota:</strong> Por favor evite la modificación de <code>require.paths</code><span><a class="mark" href="#modules_nota_por_favor_evite_la_modificaci_n_de_require_paths" id="modules_nota_por_favor_evite_la_modificaci_n_de_require_paths">#</a></span></h3>
+<h3><strong>Nota:</strong> Por favor evite la modificación de <code>require.paths</code><span><a class="mark" href="#modules_es_nota_por_favor_evite_la_modificaci_n_de_require_paths" id="modules_es_nota_por_favor_evite_la_modificaci_n_de_require_paths">#</a></span></h3>
 <p>Por razones de compatibilidad, <code>require.paths</code> sigue siendo la primera prioridad
 en el proceso de búsqueda de módulos. Sin embargo, puede desaparecer en una próxima
 versión.
@@ -345,7 +346,7 @@ experimento muy útil, en la práctica la transformación de <code>require.paths
 lista a menudo con problemas y dolores de cabeza.
 
 </p>
-<h4>Establecer <code>require.paths</code> a algún otro valor para nada.<span><a class="mark" href="#modules_establecer_require_paths_a_alg_n_otro_valor_para_nada" id="modules_establecer_require_paths_a_alg_n_otro_valor_para_nada">#</a></span></h4>
+<h4>Establecer <code>require.paths</code> a algún otro valor para nada.<span><a class="mark" href="#modules_es_establecer_require_paths_a_alg_n_otro_valor_para_nada" id="modules_es_establecer_require_paths_a_alg_n_otro_valor_para_nada">#</a></span></h4>
 <p>Esto no hace nada de lo que se podría esperar:
 
 </p>
@@ -355,7 +356,7 @@ de rutas, y crea una nueva referencia a otra cosa que no sirve
 para nada.
 
 </p>
-<h4>Poner rutas relativas en <code>require.paths</code> es... raro.<span><a class="mark" href="#modules_poner_rutas_relativas_en_require_paths_es_raro" id="modules_poner_rutas_relativas_en_require_paths_es_raro">#</a></span></h4>
+<h4>Poner rutas relativas en <code>require.paths</code> es... raro.<span><a class="mark" href="#modules_es_poner_rutas_relativas_en_require_paths_es_raro" id="modules_es_poner_rutas_relativas_en_require_paths_es_raro">#</a></span></h4>
 <p>Si hace esto:
 
 </p>
@@ -371,7 +372,7 @@ en <code>/a/b/lib/y.js</code>.  Si a continuación se usa <code>require(&apos;y.
 dependencia de paquetes, pero esta técnica es frágil.
 
 </p>
-<h4>Cero aislamiento<span><a class="mark" href="#modules_cero_aislamiento" id="modules_cero_aislamiento">#</a></span></h4>
+<h4>Cero aislamiento<span><a class="mark" href="#modules_es_cero_aislamiento" id="modules_es_cero_aislamiento">#</a></span></h4>
 <p>Existe (debido a un diseño lamentable), sólo un array <code>require.paths</code> utilizado para
 todos los módulos.
 
@@ -383,7 +384,7 @@ funcionalidades, ya que esto es un problema con las partes que interactúan en f
 difíciles de predecir.
 
 </p>
-<h2>Addenda: Consejos para administrar paquetes<span><a class="mark" href="#modules_addenda_consejos_para_administrar_paquetes" id="modules_addenda_consejos_para_administrar_paquetes">#</a></span></h2>
+<h2>Addenda: Consejos para administrar paquetes<span><a class="mark" href="#modules_es_addenda_consejos_para_administrar_paquetes" id="modules_es_addenda_consejos_para_administrar_paquetes">#</a></span></h2>
 <p>La semántica de Node en la función <code>require()</code> fue diseñada para ser lo 
 suficientemente general para soportar una serie de esctructuras de directorios.
 Los paquetes de programas como <code>dpkg</code>, <code>rpm</code>, y <code>npm</code> se esperan que sean construidos 
@@ -453,7 +454,7 @@ los paquetes pueden ser llamado desde cualquier lugar.
             <li><a href="http://twitter.com/nodejs_es" class="twitter">@nodejs_es</a></li>
         </ul>
 
-        <p>Copyright <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.18/LICENSE">license</a>.</p>
+        <p>Copyright <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.19/LICENSE">license</a>.</p>
     </div>
 </body>
 </html>

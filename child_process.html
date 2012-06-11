@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Child Process Node.js v0.6.18 Manual &amp; Documentación</title>
+  <title>Child Process Node.js v0.6.19 Manual &amp; Documentación</title>
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/sh.css">
-  <link rel="canonical" href="http://nodejs.org/api/child_process.html">
+  <link rel="canonical" href="http://nodejs.org/api/child_process-es.html">
 </head>
-<body class="alt apidoc" id="api-section-child_process">
+<body class="alt apidoc" id="api-section-child_process-es">
+    <div id="bar"><span>es</span><a title="Documentación en inglés" class="mark mark-es" href="en/child_process.html">en</a></div>
     <div id="intro" class="interior">
-        <a href="http://www.nodejs.es/" title="Go back to the home page">
-            <img id="logo" src="images/logo-light-es.png" alt="node.js">
+        <a href="http://www.nodejs.es/" title="Volder el site nodejs.es">
+            <img id="logo" src="images/logo-light.png" alt="node.js">
         </a>
     </div>
     <div id="content" class="clearfix">
@@ -21,7 +22,7 @@
                 <li><a href="http://www.nodejs.es/" class="home">Home</a></li>
                 <li><a href="http://api.nodejs.es" class="docs current">Docs</a></li>
                 <li><a href="http://trabajos.nodejs.es/" class="jobs">Trabajos</a></li>
-                <li><a href="https://github.com/nodejs-es/api/" class="download">GitHub</a></li>
+                <li><a href="https://github.com/nodejs-es/node/" class="download">GitHub</a></li>
             </ul>
             <p class="twitter"><a href="http://twitter.com/nodejs_es">@nodejs_es</a></p>
         </div>
@@ -45,12 +46,12 @@
 
         <div id="column1" class="interior">
           <header>
-            <h1>Node.js v0.6.18 Manual &amp; Documentación</h1>
+            <h1>Node.js v0.6.19 Manual &amp; Documentación</h1>
             <div id="gtoc">
               <p>
-                <a href="index.html" name="toc">Indice</a> |
+                <a href="index.html" name="toc">Índice</a> |
                 <a href="all.html">Ver todo en una misma página</a> |
-                <a href="child_process.json">Ver como JSON</a>
+                <a href="child_process-es.json">Ver como JSON</a>
               </p>
             </div>
             <hr>
@@ -59,22 +60,22 @@
           <div id="toc">
             <h2>Tabla de Contenidos</h2>
             <ul>
-<li><a href="#child_process_child_process">Child Process</a><ul>
-<li><a href="#child_process_class_childprocess">Class: ChildProcess</a><ul>
-<li><a href="#child_process_evento_exit">Evento:  &apos;exit&apos;</a></li>
-<li><a href="#child_process_event_disconnect">Event: &apos;disconnect&apos;</a></li>
-<li><a href="#child_process_child_stdin">child.stdin</a></li>
-<li><a href="#child_process_child_stdout">child.stdout</a></li>
-<li><a href="#child_process_child_stderr">child.stderr</a></li>
-<li><a href="#child_process_child_pid">child.pid</a></li>
-<li><a href="#child_process_child_kill_signal">child.kill([signal])</a></li>
-<li><a href="#child_process_child_send_message_sendhandle">child.send(message, [sendHandle])</a></li>
+<li><a href="#child_process_es_child_process">Child Process</a><ul>
+<li><a href="#child_process_es_class_childprocess">Class: ChildProcess</a><ul>
+<li><a href="#child_process_es_evento_exit">Evento:  &apos;exit&apos;</a></li>
+<li><a href="#child_process_es_event_disconnect">Event: &apos;disconnect&apos;</a></li>
+<li><a href="#child_process_es_child_stdin">child.stdin</a></li>
+<li><a href="#child_process_es_child_stdout">child.stdout</a></li>
+<li><a href="#child_process_es_child_stderr">child.stderr</a></li>
+<li><a href="#child_process_es_child_pid">child.pid</a></li>
+<li><a href="#child_process_es_child_kill_signal">child.kill([signal])</a></li>
+<li><a href="#child_process_es_child_send_message_sendhandle">child.send(message, [sendHandle])</a></li>
 </ul>
 </li>
-<li><a href="#child_process_child_process_spawn_command_args_options">child_process.spawn(command, [args], [options])</a></li>
-<li><a href="#child_process_child_process_exec_command_options_callback">child_process.exec(command, [options], callback)</a></li>
-<li><a href="#child_process_child_process_execfile_file_args_options_callback">child_process.execFile(file, args, options, callback)</a></li>
-<li><a href="#child_process_child_process_fork_modulepath_args_options">child_process.fork(modulePath, [args], [options])</a></li>
+<li><a href="#child_process_es_child_process_spawn_command_args_options">child_process.spawn(command, [args], [options])</a></li>
+<li><a href="#child_process_es_child_process_exec_command_options_callback">child_process.exec(command, [options], callback)</a></li>
+<li><a href="#child_process_es_child_process_execfile_file_args_options_callback">child_process.execFile(file, args, options, callback)</a></li>
+<li><a href="#child_process_es_child_process_fork_modulepath_args_options">child_process.fork(modulePath, [args], [options])</a></li>
 </ul>
 </li>
 </ul>
@@ -82,7 +83,7 @@
           </div>
 
           <div id="apicontent">
-            <h1>Child Process<span><a class="mark" href="#child_process_child_process" id="child_process_child_process">#</a></span></h1>
+            <h1>Child Process<span><a class="mark" href="#child_process_es_child_process" id="child_process_es_child_process">#</a></span></h1>
 <pre><code>Stability: 3 - Stable</code></pre>
 <p>Node proporciona un <code>popen(3)</code> tri-direccional a través del
 módulo <code>ChildProcess</code>.
@@ -97,7 +98,7 @@ módulo <code>ChildProcess</code>.
 diferente, y se explica a continuación.
 
 </p>
-<h2>Class: ChildProcess<span><a class="mark" href="#child_process_class_childprocess" id="child_process_class_childprocess">#</a></span></h2>
+<h2>Class: ChildProcess<span><a class="mark" href="#child_process_es_class_childprocess" id="child_process_es_class_childprocess">#</a></span></h2>
 <p><code>ChildProcess</code> es <code>EventEmitter</code>.
 
 </p>
@@ -111,7 +112,7 @@ which can be piped to and from.
 <code>spawn()</code> or <code>fork()</code> methods to create a Child Process instance.
 
 </p>
-<h3>Evento:  &apos;exit&apos;<span><a class="mark" href="#child_process_evento_exit" id="child_process_evento_exit">#</a></span></h3>
+<h3>Evento:  &apos;exit&apos;<span><a class="mark" href="#child_process_es_evento_exit" id="child_process_es_evento_exit">#</a></span></h3>
 <div class="signature"><ul>
 <li><code>code</code> <span class="type">Number</span> the exit code, if it exited normally.</li>
 <li><code>signal</code> <span class="type">String</span> the signal passed to kill the child process, if it
@@ -126,14 +127,14 @@ la señal, en caso contrario <code>null</code>.
 <p>Véase <code>waitpid(2)</code>.
 
 </p>
-<h3>Event: &apos;disconnect&apos;<span><a class="mark" href="#child_process_event_disconnect" id="child_process_event_disconnect">#</a></span></h3>
+<h3>Event: &apos;disconnect&apos;<span><a class="mark" href="#child_process_es_event_disconnect" id="child_process_es_event_disconnect">#</a></span></h3>
 <p>This event is emitted after using the <code>.disconnect()</code> method in the parent or
 in the child. After disconnecting it is no longer possible to send messages.
 An alternative way to check if you can send messages is to see if the
 <code>child.connected</code> property is <code>true</code>.
 
 </p>
-<h3>child.stdin<span><a class="mark" href="#child_process_child_stdin" id="child_process_child_stdin">#</a></span></h3>
+<h3>child.stdin<span><a class="mark" href="#child_process_es_child_stdin" id="child_process_es_child_stdin">#</a></span></h3>
 <div class="signature"><ul>
 <li><span class="type">Stream object</span></li>
 </div></ul>
@@ -145,7 +146,7 @@ Cerrar este stream vía <code>end()</code> a menudo causa que termine el proceso
 not be set.
 
 </p>
-<h3>child.stdout<span><a class="mark" href="#child_process_child_stdout" id="child_process_child_stdout">#</a></span></h3>
+<h3>child.stdout<span><a class="mark" href="#child_process_es_child_stdout" id="child_process_es_child_stdout">#</a></span></h3>
 <div class="signature"><ul>
 <li><span class="type">Stream object</span></li>
 </div></ul>
@@ -156,7 +157,7 @@ not be set.
 not be set.
 
 </p>
-<h3>child.stderr<span><a class="mark" href="#child_process_child_stderr" id="child_process_child_stderr">#</a></span></h3>
+<h3>child.stderr<span><a class="mark" href="#child_process_es_child_stderr" id="child_process_es_child_stderr">#</a></span></h3>
 <div class="signature"><ul>
 <li><span class="type">Stream object</span></li>
 </div></ul>
@@ -167,7 +168,7 @@ not be set.
 not be set.
 
 </p>
-<h3>child.pid<span><a class="mark" href="#child_process_child_pid" id="child_process_child_pid">#</a></span></h3>
+<h3>child.pid<span><a class="mark" href="#child_process_es_child_pid" id="child_process_es_child_pid">#</a></span></h3>
 <div class="signature"><ul>
 <li><span class="type">Integer</span></li>
 </div></ul>
@@ -182,7 +183,7 @@ not be set.
 
 console.log(&apos;Spawned child pid: &apos; + grep.pid);
 grep.stdin.end();</code></pre>
-<h3>child.kill([signal])<span><a class="mark" href="#child_process_child_kill_signal" id="child_process_child_kill_signal">#</a></span></h3>
+<h3>child.kill([signal])<span><a class="mark" href="#child_process_es_child_kill_signal" id="child_process_es_child_kill_signal">#</a></span></h3>
 <div class="signature"><ul>
 <li><code>signal</code> <span class="type">String</span></li>
 </div></ul>
@@ -207,7 +208,7 @@ puede o no terminarlo.  <code>kill</code> realmente solo manda una señal a un p
 
 
 </p>
-<h3>child.send(message, [sendHandle])<span><a class="mark" href="#child_process_child_send_message_sendhandle" id="child_process_child_send_message_sendhandle">#</a></span></h3>
+<h3>child.send(message, [sendHandle])<span><a class="mark" href="#child_process_es_child_send_message_sendhandle" id="child_process_es_child_send_message_sendhandle">#</a></span></h3>
 <div class="signature"><ul>
 <li><code>message</code> <span class="type">Object</span></li>
 <li><code>sendHandle</code> <span class="type">Handle object</span></li>
@@ -218,7 +219,7 @@ puede o no terminarlo.  <code>kill</code> realmente solo manda una señal a un p
 <p>See <code>child_process.fork()</code> for details.
 
 </p>
-<h2>child_process.spawn(command, [args], [options])<span><a class="mark" href="#child_process_child_process_spawn_command_args_options" id="child_process_child_process_spawn_command_args_options">#</a></span></h2>
+<h2>child_process.spawn(command, [args], [options])<span><a class="mark" href="#child_process_es_child_process_spawn_command_args_options" id="child_process_es_child_process_spawn_command_args_options">#</a></span></h2>
 <div class="signature"><ul>
 <li><code>command</code> <span class="type">String</span> The command to run</li>
 <li><code>args</code> <span class="type">Array</span> List of string arguments</li>
@@ -334,7 +335,7 @@ undocumented APIs in Node, they should not be used.
 <p>Véase tambien: <code>child_process.exec()</code> y <code>child_process.fork()</code>
 
 </p>
-<h2>child_process.exec(command, [options], callback)<span><a class="mark" href="#child_process_child_process_exec_command_options_callback" id="child_process_child_process_exec_command_options_callback">#</a></span></h2>
+<h2>child_process.exec(command, [options], callback)<span><a class="mark" href="#child_process_es_child_process_exec_command_options_callback" id="child_process_es_child_process_exec_command_options_callback">#</a></span></h2>
 <div class="signature"><ul>
 <li><code>command</code> <span class="type">String</span> The command to run, with space-separated arguments</li>
 <li><code>options</code> <span class="type">Object</span><ul>
@@ -396,7 +397,7 @@ sera terminado.
 
 
 </p>
-<h2>child_process.execFile(file, args, options, callback)<span><a class="mark" href="#child_process_child_process_execfile_file_args_options_callback" id="child_process_child_process_execfile_file_args_options_callback">#</a></span></h2>
+<h2>child_process.execFile(file, args, options, callback)<span><a class="mark" href="#child_process_es_child_process_execfile_file_args_options_callback" id="child_process_es_child_process_execfile_file_args_options_callback">#</a></span></h2>
 <div class="signature"><ul>
 <li><code>file</code> <span class="type">String</span> The filename of the program to run</li>
 <li><code>args</code> <span class="type">Array</span> List of string arguments</li>
@@ -426,7 +427,7 @@ leaner than <code>child_process.exec</code>. It has the same options.
 
 
 </p>
-<h2>child_process.fork(modulePath, [args], [options])<span><a class="mark" href="#child_process_child_process_fork_modulepath_args_options" id="child_process_child_process_fork_modulepath_args_options">#</a></span></h2>
+<h2>child_process.fork(modulePath, [args], [options])<span><a class="mark" href="#child_process_es_child_process_fork_modulepath_args_options" id="child_process_es_child_process_fork_modulepath_args_options">#</a></span></h2>
 <div class="signature"><ul>
 <li><code>modulePath</code> <span class="type">String</span> The module to run in the child</li>
 <li><code>args</code> <span class="type">Array</span> List of string arguments</li>
@@ -534,7 +535,7 @@ there is no IPC channel keeping it alive. When calling this method the
             <li><a href="http://twitter.com/nodejs_es" class="twitter">@nodejs_es</a></li>
         </ul>
 
-        <p>Copyright <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.18/LICENSE">license</a>.</p>
+        <p>Copyright <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.19/LICENSE">license</a>.</p>
     </div>
 </body>
 </html>

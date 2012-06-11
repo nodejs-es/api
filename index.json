@@ -1,5 +1,5 @@
 {
-  "source": "doc/api/index.markdown",
+  "source": "doc/api/index-es.markdown",
   "desc": [
     {
       "type": "list_start",
@@ -30,7 +30,7 @@
     },
     {
       "type": "text",
-      "text": "[Globals](globals.html)"
+      "text": "[Objetos Globales](globals.html)"
     },
     {
       "type": "list_item_end"
@@ -60,7 +60,7 @@
     },
     {
       "type": "text",
-      "text": "[Modules](modules.html)"
+      "text": "[Módulos](modules.html)"
     },
     {
       "type": "list_item_end"
@@ -80,7 +80,7 @@
     },
     {
       "type": "text",
-      "text": "[Process](process.html)"
+      "text": "[Procesos](process.html)"
     },
     {
       "type": "list_item_end"
@@ -90,7 +90,7 @@
     },
     {
       "type": "text",
-      "text": "[Utilities](util.html)"
+      "text": "[Utilidades](util.html)"
     },
     {
       "type": "list_item_end"
@@ -100,7 +100,7 @@
     },
     {
       "type": "text",
-      "text": "[Events](events.html)"
+      "text": "[Eventos](events.html)"
     },
     {
       "type": "list_item_end"
@@ -160,7 +160,7 @@
     },
     {
       "type": "text",
-      "text": "[File System](fs.html)"
+      "text": "[Sistema de Archivos](fs.html)"
     },
     {
       "type": "list_item_end"

@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Readline Node.js v0.6.18 Manual &amp; Documentación</title>
+  <title>Readline Node.js v0.6.19 Manual &amp; Documentación</title>
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/sh.css">
-  <link rel="canonical" href="http://nodejs.org/api/readline.html">
+  <link rel="canonical" href="http://nodejs.org/api/readline-es.html">
 </head>
-<body class="alt apidoc" id="api-section-readline">
+<body class="alt apidoc" id="api-section-readline-es">
+    <div id="bar"><span>es</span><a title="Documentación en inglés" class="mark mark-es" href="en/readline.html">en</a></div>
     <div id="intro" class="interior">
-        <a href="http://www.nodejs.es/" title="Go back to the home page">
-            <img id="logo" src="images/logo-light-es.png" alt="node.js">
+        <a href="http://www.nodejs.es/" title="Volder el site nodejs.es">
+            <img id="logo" src="images/logo-light.png" alt="node.js">
         </a>
     </div>
     <div id="content" class="clearfix">
@@ -21,7 +22,7 @@
                 <li><a href="http://www.nodejs.es/" class="home">Home</a></li>
                 <li><a href="http://api.nodejs.es" class="docs current">Docs</a></li>
                 <li><a href="http://trabajos.nodejs.es/" class="jobs">Trabajos</a></li>
-                <li><a href="https://github.com/nodejs-es/api/" class="download">GitHub</a></li>
+                <li><a href="https://github.com/nodejs-es/node/" class="download">GitHub</a></li>
             </ul>
             <p class="twitter"><a href="http://twitter.com/nodejs_es">@nodejs_es</a></p>
         </div>
@@ -45,12 +46,12 @@
 
         <div id="column1" class="interior">
           <header>
-            <h1>Node.js v0.6.18 Manual &amp; Documentación</h1>
+            <h1>Node.js v0.6.19 Manual &amp; Documentación</h1>
             <div id="gtoc">
               <p>
-                <a href="index.html" name="toc">Indice</a> |
+                <a href="index.html" name="toc">Índice</a> |
                 <a href="all.html">Ver todo en una misma página</a> |
-                <a href="readline.json">Ver como JSON</a>
+                <a href="readline-es.json">Ver como JSON</a>
               </p>
             </div>
             <hr>
@@ -59,17 +60,17 @@
           <div id="toc">
             <h2>Tabla de Contenidos</h2>
             <ul>
-<li><a href="#readline_readline">Readline</a><ul>
-<li><a href="#readline_createinterface_input_output_completer">createInterface(input, output, completer)</a></li>
-<li><a href="#readline_interface_setprompt_prompt_length">interface.setPrompt(prompt, length)</a></li>
-<li><a href="#readline_interface_prompt">interface.prompt()</a></li>
-<li><a href="#readline_interface_question_query_cb">interface.question(query, cb)</a><ul>
-<li><a href="#readline_interface_close">interface.close()</a></li>
+<li><a href="#readline_es_readline">Readline</a><ul>
+<li><a href="#readline_es_createinterface_input_output_completer">createInterface(input, output, completer)</a></li>
+<li><a href="#readline_es_interface_setprompt_prompt_length">interface.setPrompt(prompt, length)</a></li>
+<li><a href="#readline_es_interface_prompt">interface.prompt()</a></li>
+<li><a href="#readline_es_interface_question_query_cb">interface.question(query, cb)</a><ul>
+<li><a href="#readline_es_interface_close">interface.close()</a></li>
 </ul>
 </li>
-<li><a href="#readline_interface_pause">interface.pause()</a></li>
-<li><a href="#readline_interface_resume">interface.resume()</a></li>
-<li><a href="#readline_interface_write">interface.write()</a></li>
+<li><a href="#readline_es_interface_pause">interface.pause()</a></li>
+<li><a href="#readline_es_interface_resume">interface.resume()</a></li>
+<li><a href="#readline_es_interface_write">interface.write()</a></li>
 </ul>
 </li>
 </ul>
@@ -77,7 +78,7 @@
           </div>
 
           <div id="apicontent">
-            <h1>Readline<span><a class="mark" href="#readline_readline" id="readline_readline">#</a></span></h1>
+            <h1>Readline<span><a class="mark" href="#readline_es_readline" id="readline_es_readline">#</a></span></h1>
 <pre><code>Stability: 3 - Stable</code></pre>
 <p>This module allows reading of a stream (such as STDIN) on a line-by-line basis.
 
@@ -99,20 +100,20 @@ i.question(&quot;What do you think of node.js?&quot;, function(answer) {
 });
 </pre>
 
-<h2>createInterface(input, output, completer)<span><a class="mark" href="#readline_createinterface_input_output_completer" id="readline_createinterface_input_output_completer">#</a></span></h2>
+<h2>createInterface(input, output, completer)<span><a class="mark" href="#readline_es_createinterface_input_output_completer" id="readline_es_createinterface_input_output_completer">#</a></span></h2>
 <p>Returns an interface object, which reads from input, and writes to output.
 TODO: I think &quot;completer&quot; is used for tab-completion, but not sure.
 
 </p>
-<h2>interface.setPrompt(prompt, length)<span><a class="mark" href="#readline_interface_setprompt_prompt_length" id="readline_interface_setprompt_prompt_length">#</a></span></h2>
+<h2>interface.setPrompt(prompt, length)<span><a class="mark" href="#readline_es_interface_setprompt_prompt_length" id="readline_es_interface_setprompt_prompt_length">#</a></span></h2>
 <p>TODO
 
 </p>
-<h2>interface.prompt()<span><a class="mark" href="#readline_interface_prompt" id="readline_interface_prompt">#</a></span></h2>
+<h2>interface.prompt()<span><a class="mark" href="#readline_es_interface_prompt" id="readline_es_interface_prompt">#</a></span></h2>
 <p>TODO: Appears to trigger showing the prompt.
 
 </p>
-<h2>interface.question(query, cb)<span><a class="mark" href="#readline_interface_question_query_cb" id="readline_interface_question_query_cb">#</a></span></h2>
+<h2>interface.question(query, cb)<span><a class="mark" href="#readline_es_interface_question_query_cb" id="readline_es_interface_question_query_cb">#</a></span></h2>
 <p>Displays the query to the user, and then calls the callback after the user
 has typed in their response.
 
@@ -126,19 +127,19 @@ interface.question(&quot;What is your favorite food?&quot;, function(answer) {
 });
 </pre>
 
-<h3>interface.close()<span><a class="mark" href="#readline_interface_close" id="readline_interface_close">#</a></span></h3>
+<h3>interface.close()<span><a class="mark" href="#readline_es_interface_close" id="readline_es_interface_close">#</a></span></h3>
 <p>TODO
 
 </p>
-<h2>interface.pause()<span><a class="mark" href="#readline_interface_pause" id="readline_interface_pause">#</a></span></h2>
+<h2>interface.pause()<span><a class="mark" href="#readline_es_interface_pause" id="readline_es_interface_pause">#</a></span></h2>
 <p>TODO
 
 </p>
-<h2>interface.resume()<span><a class="mark" href="#readline_interface_resume" id="readline_interface_resume">#</a></span></h2>
+<h2>interface.resume()<span><a class="mark" href="#readline_es_interface_resume" id="readline_es_interface_resume">#</a></span></h2>
 <p>TODO
 
 </p>
-<h2>interface.write()<span><a class="mark" href="#readline_interface_write" id="readline_interface_write">#</a></span></h2>
+<h2>interface.write()<span><a class="mark" href="#readline_es_interface_write" id="readline_es_interface_write">#</a></span></h2>
 <p>TODO
 </p>
 
@@ -152,7 +153,7 @@ interface.question(&quot;What is your favorite food?&quot;, function(answer) {
             <li><a href="http://twitter.com/nodejs_es" class="twitter">@nodejs_es</a></li>
         </ul>
 
-        <p>Copyright <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.18/LICENSE">license</a>.</p>
+        <p>Copyright <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.19/LICENSE">license</a>.</p>
     </div>
 </body>
 </html>

@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>DNS Node.js v0.6.18 Manual &amp; Documentación</title>
+  <title>DNS Node.js v0.6.19 Manual &amp; Documentación</title>
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/sh.css">
-  <link rel="canonical" href="http://nodejs.org/api/dns.html">
+  <link rel="canonical" href="http://nodejs.org/api/dns-es.html">
 </head>
-<body class="alt apidoc" id="api-section-dns">
+<body class="alt apidoc" id="api-section-dns-es">
+    <div id="bar"><span>es</span><a title="Documentación en inglés" class="mark mark-es" href="en/dns.html">en</a></div>
     <div id="intro" class="interior">
-        <a href="http://www.nodejs.es/" title="Go back to the home page">
-            <img id="logo" src="images/logo-light-es.png" alt="node.js">
+        <a href="http://www.nodejs.es/" title="Volder el site nodejs.es">
+            <img id="logo" src="images/logo-light.png" alt="node.js">
         </a>
     </div>
     <div id="content" class="clearfix">
@@ -21,7 +22,7 @@
                 <li><a href="http://www.nodejs.es/" class="home">Home</a></li>
                 <li><a href="http://api.nodejs.es" class="docs current">Docs</a></li>
                 <li><a href="http://trabajos.nodejs.es/" class="jobs">Trabajos</a></li>
-                <li><a href="https://github.com/nodejs-es/api/" class="download">GitHub</a></li>
+                <li><a href="https://github.com/nodejs-es/node/" class="download">GitHub</a></li>
             </ul>
             <p class="twitter"><a href="http://twitter.com/nodejs_es">@nodejs_es</a></p>
         </div>
@@ -45,12 +46,12 @@
 
         <div id="column1" class="interior">
           <header>
-            <h1>Node.js v0.6.18 Manual &amp; Documentación</h1>
+            <h1>Node.js v0.6.19 Manual &amp; Documentación</h1>
             <div id="gtoc">
               <p>
-                <a href="index.html" name="toc">Indice</a> |
+                <a href="index.html" name="toc">Índice</a> |
                 <a href="all.html">Ver todo en una misma página</a> |
-                <a href="dns.json">Ver como JSON</a>
+                <a href="dns-es.json">Ver como JSON</a>
               </p>
             </div>
             <hr>
@@ -59,17 +60,17 @@
           <div id="toc">
             <h2>Tabla de Contenidos</h2>
             <ul>
-<li><a href="#dns_dns">DNS</a><ul>
-<li><a href="#dns_dns_lookup_domain_family_callback">dns.lookup(domain, [family], callback)</a></li>
-<li><a href="#dns_dns_resolve_domain_rrtype_callback">dns.resolve(domain, [rrtype], callback)</a></li>
-<li><a href="#dns_dns_resolve4_domain_callback">dns.resolve4(domain, callback)</a></li>
-<li><a href="#dns_dns_resolve6_domain_callback">dns.resolve6(domain, callback)</a></li>
-<li><a href="#dns_dns_resolvemx_domain_callback">dns.resolveMx(domain, callback)</a></li>
-<li><a href="#dns_dns_resolvetxt_domain_callback">dns.resolveTxt(domain, callback)</a></li>
-<li><a href="#dns_dns_resolvesrv_domain_callback">dns.resolveSrv(domain, callback)</a></li>
-<li><a href="#dns_dns_reverse_ip_callback">dns.reverse(ip, callback)</a></li>
-<li><a href="#dns_dns_resolvens_domain_callback">dns.resolveNs(domain, callback)</a></li>
-<li><a href="#dns_dns_resolvecname_domain_callback">dns.resolveCname(domain, callback)</a></li>
+<li><a href="#dns_es_dns">DNS</a><ul>
+<li><a href="#dns_es_dns_lookup_domain_family_callback">dns.lookup(domain, [family], callback)</a></li>
+<li><a href="#dns_es_dns_resolve_domain_rrtype_callback">dns.resolve(domain, [rrtype], callback)</a></li>
+<li><a href="#dns_es_dns_resolve4_domain_callback">dns.resolve4(domain, callback)</a></li>
+<li><a href="#dns_es_dns_resolve6_domain_callback">dns.resolve6(domain, callback)</a></li>
+<li><a href="#dns_es_dns_resolvemx_domain_callback">dns.resolveMx(domain, callback)</a></li>
+<li><a href="#dns_es_dns_resolvetxt_domain_callback">dns.resolveTxt(domain, callback)</a></li>
+<li><a href="#dns_es_dns_resolvesrv_domain_callback">dns.resolveSrv(domain, callback)</a></li>
+<li><a href="#dns_es_dns_reverse_ip_callback">dns.reverse(ip, callback)</a></li>
+<li><a href="#dns_es_dns_resolvens_domain_callback">dns.resolveNs(domain, callback)</a></li>
+<li><a href="#dns_es_dns_resolvecname_domain_callback">dns.resolveCname(domain, callback)</a></li>
 </ul>
 </li>
 </ul>
@@ -77,7 +78,7 @@
           </div>
 
           <div id="apicontent">
-            <h1>DNS<span><a class="mark" href="#dns_dns" id="dns_dns">#</a></span></h1>
+            <h1>DNS<span><a class="mark" href="#dns_es_dns" id="dns_es_dns">#</a></span></h1>
 <pre><code>Stability: 3 - Stable</code></pre>
 <p>Use <code>require(&apos;dns&apos;)</code> to access this module. All methods in the dns module
 use C-Ares except for <code>dns.lookup</code> which uses <code>getaddrinfo(3)</code> in a thread
@@ -111,7 +112,7 @@ dns.resolve4(&apos;www.google.com&apos;, function (err, addresses) {
     });
   });
 });</code></pre>
-<h2>dns.lookup(domain, [family], callback)<span><a class="mark" href="#dns_dns_lookup_domain_family_callback" id="dns_dns_lookup_domain_family_callback">#</a></span></h2>
+<h2>dns.lookup(domain, [family], callback)<span><a class="mark" href="#dns_es_dns_lookup_domain_family_callback" id="dns_es_dns_lookup_domain_family_callback">#</a></span></h2>
 <p>Resolves a domain (e.g. <code>&apos;google.com&apos;</code>) into the first found A (IPv4) or
 AAAA (IPv6) record.
 The <code>family</code> can be the integer <code>4</code> or <code>6</code>. Defaults to <code>null</code> that indicates
@@ -125,7 +126,7 @@ necessarily the value initially passed to <code>lookup</code>).
 
 
 </p>
-<h2>dns.resolve(domain, [rrtype], callback)<span><a class="mark" href="#dns_dns_resolve_domain_rrtype_callback" id="dns_dns_resolve_domain_rrtype_callback">#</a></span></h2>
+<h2>dns.resolve(domain, [rrtype], callback)<span><a class="mark" href="#dns_es_dns_resolve_domain_rrtype_callback" id="dns_es_dns_resolve_domain_rrtype_callback">#</a></span></h2>
 <p>Resolves a domain (e.g. <code>&apos;google.com&apos;</code>) into an array of the record types
 specified by rrtype. Valid rrtypes are <code>&apos;A&apos;</code> (IPV4 addresses, default),
 <code>&apos;AAAA&apos;</code> (IPV6 addresses), <code>&apos;MX&apos;</code> (mail exchange records), <code>&apos;TXT&apos;</code> (text
@@ -144,18 +145,18 @@ the error in English.
 
 
 </p>
-<h2>dns.resolve4(domain, callback)<span><a class="mark" href="#dns_dns_resolve4_domain_callback" id="dns_dns_resolve4_domain_callback">#</a></span></h2>
+<h2>dns.resolve4(domain, callback)<span><a class="mark" href="#dns_es_dns_resolve4_domain_callback" id="dns_es_dns_resolve4_domain_callback">#</a></span></h2>
 <p>The same as <code>dns.resolve()</code>, but only for IPv4 queries (<code>A</code> records).
 <code>addresses</code> is an array of IPv4 addresses (e.g.
 <code>[&apos;74.125.79.104&apos;, &apos;74.125.79.105&apos;, &apos;74.125.79.106&apos;]</code>).
 
 </p>
-<h2>dns.resolve6(domain, callback)<span><a class="mark" href="#dns_dns_resolve6_domain_callback" id="dns_dns_resolve6_domain_callback">#</a></span></h2>
+<h2>dns.resolve6(domain, callback)<span><a class="mark" href="#dns_es_dns_resolve6_domain_callback" id="dns_es_dns_resolve6_domain_callback">#</a></span></h2>
 <p>The same as <code>dns.resolve4()</code> except for IPv6 queries (an <code>AAAA</code> query).
 
 
 </p>
-<h2>dns.resolveMx(domain, callback)<span><a class="mark" href="#dns_dns_resolvemx_domain_callback" id="dns_dns_resolvemx_domain_callback">#</a></span></h2>
+<h2>dns.resolveMx(domain, callback)<span><a class="mark" href="#dns_es_dns_resolvemx_domain_callback" id="dns_es_dns_resolvemx_domain_callback">#</a></span></h2>
 <p>The same as <code>dns.resolve()</code>, but only for mail exchange queries (<code>MX</code> records).
 
 </p>
@@ -163,33 +164,33 @@ the error in English.
 attribute (e.g. <code>[{&apos;priority&apos;: 10, &apos;exchange&apos;: &apos;mx.example.com&apos;},...]</code>).
 
 </p>
-<h2>dns.resolveTxt(domain, callback)<span><a class="mark" href="#dns_dns_resolvetxt_domain_callback" id="dns_dns_resolvetxt_domain_callback">#</a></span></h2>
+<h2>dns.resolveTxt(domain, callback)<span><a class="mark" href="#dns_es_dns_resolvetxt_domain_callback" id="dns_es_dns_resolvetxt_domain_callback">#</a></span></h2>
 <p>The same as <code>dns.resolve()</code>, but only for text queries (<code>TXT</code> records).
 <code>addresses</code> is an array of the text records available for <code>domain</code> (e.g.,
 <code>[&apos;v=spf1 ip4:0.0.0.0 ~all&apos;]</code>).
 
 </p>
-<h2>dns.resolveSrv(domain, callback)<span><a class="mark" href="#dns_dns_resolvesrv_domain_callback" id="dns_dns_resolvesrv_domain_callback">#</a></span></h2>
+<h2>dns.resolveSrv(domain, callback)<span><a class="mark" href="#dns_es_dns_resolvesrv_domain_callback" id="dns_es_dns_resolvesrv_domain_callback">#</a></span></h2>
 <p>The same as <code>dns.resolve()</code>, but only for service records (<code>SRV</code> records).
 <code>addresses</code> is an array of the SRV records available for <code>domain</code>. Properties
 of SRV records are priority, weight, port, and name (e.g.,
 <code>[{&apos;priority&apos;: 10, {&apos;weight&apos;: 5, &apos;port&apos;: 21223, &apos;name&apos;: &apos;service.example.com&apos;}, ...]</code>).
 
 </p>
-<h2>dns.reverse(ip, callback)<span><a class="mark" href="#dns_dns_reverse_ip_callback" id="dns_dns_reverse_ip_callback">#</a></span></h2>
+<h2>dns.reverse(ip, callback)<span><a class="mark" href="#dns_es_dns_reverse_ip_callback" id="dns_es_dns_reverse_ip_callback">#</a></span></h2>
 <p>Reverse resolves an ip address to an array of domain names.
 
 </p>
 <p>The callback has arguments <code>(err, domains)</code>.
 
 </p>
-<h2>dns.resolveNs(domain, callback)<span><a class="mark" href="#dns_dns_resolvens_domain_callback" id="dns_dns_resolvens_domain_callback">#</a></span></h2>
+<h2>dns.resolveNs(domain, callback)<span><a class="mark" href="#dns_es_dns_resolvens_domain_callback" id="dns_es_dns_resolvens_domain_callback">#</a></span></h2>
 <p>The same as <code>dns.resolve()</code>, but only for name server records (<code>NS</code> records).
 <code>addresses</code> is an array of the name server records available for <code>domain</code>
 (e.g., <code>[&apos;ns1.example.com&apos;, &apos;ns2.example.com&apos;]</code>).
 
 </p>
-<h2>dns.resolveCname(domain, callback)<span><a class="mark" href="#dns_dns_resolvecname_domain_callback" id="dns_dns_resolvecname_domain_callback">#</a></span></h2>
+<h2>dns.resolveCname(domain, callback)<span><a class="mark" href="#dns_es_dns_resolvecname_domain_callback" id="dns_es_dns_resolvecname_domain_callback">#</a></span></h2>
 <p>The same as <code>dns.resolve()</code>, but only for canonical name records (<code>CNAME</code>
 records). <code>addresses</code> is an array of the canonical name records available for
 <code>domain</code> (e.g., <code>[&apos;bar.example.com&apos;]</code>).
@@ -221,7 +222,7 @@ object.
             <li><a href="http://twitter.com/nodejs_es" class="twitter">@nodejs_es</a></li>
         </ul>
 
-        <p>Copyright <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.18/LICENSE">license</a>.</p>
+        <p>Copyright <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.19/LICENSE">license</a>.</p>
     </div>
 </body>
 </html>

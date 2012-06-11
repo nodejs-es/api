@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Depurador Node.js v0.6.18 Manual &amp; Documentación</title>
+  <title>Depurador Node.js v0.6.19 Manual &amp; Documentación</title>
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/sh.css">
-  <link rel="canonical" href="http://nodejs.org/api/debugger.html">
+  <link rel="canonical" href="http://nodejs.org/api/debugger-es.html">
 </head>
-<body class="alt apidoc" id="api-section-debugger">
+<body class="alt apidoc" id="api-section-debugger-es">
+    <div id="bar"><span>es</span><a title="Documentación en inglés" class="mark mark-es" href="en/debugger.html">en</a></div>
     <div id="intro" class="interior">
-        <a href="http://www.nodejs.es/" title="Go back to the home page">
-            <img id="logo" src="images/logo-light-es.png" alt="node.js">
+        <a href="http://www.nodejs.es/" title="Volder el site nodejs.es">
+            <img id="logo" src="images/logo-light.png" alt="node.js">
         </a>
     </div>
     <div id="content" class="clearfix">
@@ -21,7 +22,7 @@
                 <li><a href="http://www.nodejs.es/" class="home">Home</a></li>
                 <li><a href="http://api.nodejs.es" class="docs current">Docs</a></li>
                 <li><a href="http://trabajos.nodejs.es/" class="jobs">Trabajos</a></li>
-                <li><a href="https://github.com/nodejs-es/api/" class="download">GitHub</a></li>
+                <li><a href="https://github.com/nodejs-es/node/" class="download">GitHub</a></li>
             </ul>
             <p class="twitter"><a href="http://twitter.com/nodejs_es">@nodejs_es</a></p>
         </div>
@@ -45,12 +46,12 @@
 
         <div id="column1" class="interior">
           <header>
-            <h1>Node.js v0.6.18 Manual &amp; Documentación</h1>
+            <h1>Node.js v0.6.19 Manual &amp; Documentación</h1>
             <div id="gtoc">
               <p>
-                <a href="index.html" name="toc">Indice</a> |
+                <a href="index.html" name="toc">Índice</a> |
                 <a href="all.html">Ver todo en una misma página</a> |
-                <a href="debugger.json">Ver como JSON</a>
+                <a href="debugger-es.json">Ver como JSON</a>
               </p>
             </div>
             <hr>
@@ -59,17 +60,17 @@
           <div id="toc">
             <h2>Tabla de Contenidos</h2>
             <ul>
-<li><a href="#debugger_depurador">Depurador</a><ul>
-<li><a href="#debugger_watchers">Watchers</a></li>
-<li><a href="#debugger_commands_reference">Commands reference</a><ul>
-<li><a href="#debugger_stepping">Stepping</a></li>
-<li><a href="#debugger_breakpoints">Breakpoints</a></li>
-<li><a href="#debugger_info">Info</a></li>
-<li><a href="#debugger_execution_control">Execution control</a></li>
-<li><a href="#debugger_various">Various</a></li>
+<li><a href="#debugger_es_depurador">Depurador</a><ul>
+<li><a href="#debugger_es_watchers">Watchers</a></li>
+<li><a href="#debugger_es_commands_reference">Commands reference</a><ul>
+<li><a href="#debugger_es_stepping">Stepping</a></li>
+<li><a href="#debugger_es_breakpoints">Breakpoints</a></li>
+<li><a href="#debugger_es_info">Info</a></li>
+<li><a href="#debugger_es_execution_control">Execution control</a></li>
+<li><a href="#debugger_es_various">Various</a></li>
 </ul>
 </li>
-<li><a href="#debugger_uso_avanzado">Uso avanzado</a></li>
+<li><a href="#debugger_es_uso_avanzado">Uso avanzado</a></li>
 </ul>
 </li>
 </ul>
@@ -77,7 +78,7 @@
           </div>
 
           <div id="apicontent">
-            <h1>Depurador<span><a class="mark" href="#debugger_depurador" id="debugger_depurador">#</a></span></h1>
+            <h1>Depurador<span><a class="mark" href="#debugger_es_depurador" id="debugger_es_depurador">#</a></span></h1>
 <pre><code>Stability: 3 - Stable</code></pre>
 <!-- type=misc -->
 
@@ -156,7 +157,7 @@ continúa la siguiente línea. Hay otros comandos disponibles y algunos más por
 tipo ayuda. Escriba <code>help</code> para ver otros comandos.
 
 </p>
-<h2>Watchers<span><a class="mark" href="#debugger_watchers" id="debugger_watchers">#</a></span></h2>
+<h2>Watchers<span><a class="mark" href="#debugger_es_watchers" id="debugger_es_watchers">#</a></span></h2>
 <p>You can watch expression and variable values while debugging your code.
 On every breakpoint each expression from the watchers list will be evaluated
 in the current context and displayed just before the breakpoint&apos;s source code
@@ -168,8 +169,8 @@ prints the active watchers. To remove a watcher, type
 <code>unwatch(&quot;my_expression&quot;)</code>.
 
 </p>
-<h2>Commands reference<span><a class="mark" href="#debugger_commands_reference" id="debugger_commands_reference">#</a></span></h2>
-<h3>Stepping<span><a class="mark" href="#debugger_stepping" id="debugger_stepping">#</a></span></h3>
+<h2>Commands reference<span><a class="mark" href="#debugger_es_commands_reference" id="debugger_es_commands_reference">#</a></span></h2>
+<h3>Stepping<span><a class="mark" href="#debugger_es_stepping" id="debugger_es_stepping">#</a></span></h3>
 <ul>
 <li><code>cont</code>, <code>c</code> - Continue execution</li>
 <li><code>next</code>, <code>n</code> - Step next</li>
@@ -177,7 +178,7 @@ prints the active watchers. To remove a watcher, type
 <li><code>out</code>, <code>o</code> - Step out</li>
 <li><code>pause</code> - Pause running code (like pause button in Developer TOols)</li>
 </ul>
-<h3>Breakpoints<span><a class="mark" href="#debugger_breakpoints" id="debugger_breakpoints">#</a></span></h3>
+<h3>Breakpoints<span><a class="mark" href="#debugger_es_breakpoints" id="debugger_es_breakpoints">#</a></span></h3>
 <div class="signature"><ul>
 <li><code>setBreakpoint()</code>, <code>sb()</code> - Set breakpoint on current line</li>
 <li><code>setBreakpoint(line)</code>, <code>sb(line)</code> - Set breakpoint on specific line</li>
@@ -187,7 +188,7 @@ functions body</li>
 script.js</li>
 <li><code>clearBreakpoint</code>, <code>cb(...)</code> - Clear breakpoint</li>
 </div></ul>
-<h3>Info<span><a class="mark" href="#debugger_info" id="debugger_info">#</a></span></h3>
+<h3>Info<span><a class="mark" href="#debugger_es_info" id="debugger_es_info">#</a></span></h3>
 <div class="signature"><ul>
 <li><code>backtrace</code>, <code>bt</code> - Print backtrace of current execution frame</li>
 <li><code>list(5)</code> - List scripts source code with 5 line context (5 lines before and
@@ -198,18 +199,18 @@ after)</li>
 breakpoint)</li>
 <li><code>repl</code> - Open debugger&apos;s repl for evaluation in debugging script&apos;s context</li>
 </div></ul>
-<h3>Execution control<span><a class="mark" href="#debugger_execution_control" id="debugger_execution_control">#</a></span></h3>
+<h3>Execution control<span><a class="mark" href="#debugger_es_execution_control" id="debugger_es_execution_control">#</a></span></h3>
 <div class="signature"><ul>
 <li><code>run</code> - Run script (automatically runs on debugger&apos;s start)</li>
 <li><code>restart</code> - Restart script</li>
 <li><code>kill</code> - Kill script</li>
 </div></ul>
-<h3>Various<span><a class="mark" href="#debugger_various" id="debugger_various">#</a></span></h3>
+<h3>Various<span><a class="mark" href="#debugger_es_various" id="debugger_es_various">#</a></span></h3>
 <div class="signature"><ul>
 <li><code>scripts</code> - List all loaded scripts</li>
 <li><code>version</code> - Display v8&apos;s version</li>
 </div></ul>
-<h2>Uso avanzado<span><a class="mark" href="#debugger_uso_avanzado" id="debugger_uso_avanzado">#</a></span></h2>
+<h2>Uso avanzado<span><a class="mark" href="#debugger_es_uso_avanzado" id="debugger_es_uso_avanzado">#</a></span></h2>
 <p>El depurador V8 puede ser habilitado y accedido ya sea al iniciar Node con el 
 comando <code>--debug</code> o al señalar un proceso en Node existente 
 con <code>SIGUSR1</code>.</p>
@@ -224,7 +225,7 @@ con <code>SIGUSR1</code>.</p>
             <li><a href="http://twitter.com/nodejs_es" class="twitter">@nodejs_es</a></li>
         </ul>
 
-        <p>Copyright <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.18/LICENSE">license</a>.</p>
+        <p>Copyright <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.19/LICENSE">license</a>.</p>
     </div>
 </body>
 </html>

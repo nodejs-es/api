@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Path Node.js v0.6.18 Manual &amp; Documentación</title>
+  <title>Path Node.js v0.6.19 Manual &amp; Documentación</title>
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/sh.css">
-  <link rel="canonical" href="http://nodejs.org/api/path.html">
+  <link rel="canonical" href="http://nodejs.org/api/path-es.html">
 </head>
-<body class="alt apidoc" id="api-section-path">
+<body class="alt apidoc" id="api-section-path-es">
+    <div id="bar"><span>es</span><a title="Documentación en inglés" class="mark mark-es" href="en/path.html">en</a></div>
     <div id="intro" class="interior">
-        <a href="http://www.nodejs.es/" title="Go back to the home page">
-            <img id="logo" src="images/logo-light-es.png" alt="node.js">
+        <a href="http://www.nodejs.es/" title="Volder el site nodejs.es">
+            <img id="logo" src="images/logo-light.png" alt="node.js">
         </a>
     </div>
     <div id="content" class="clearfix">
@@ -21,7 +22,7 @@
                 <li><a href="http://www.nodejs.es/" class="home">Home</a></li>
                 <li><a href="http://api.nodejs.es" class="docs current">Docs</a></li>
                 <li><a href="http://trabajos.nodejs.es/" class="jobs">Trabajos</a></li>
-                <li><a href="https://github.com/nodejs-es/api/" class="download">GitHub</a></li>
+                <li><a href="https://github.com/nodejs-es/node/" class="download">GitHub</a></li>
             </ul>
             <p class="twitter"><a href="http://twitter.com/nodejs_es">@nodejs_es</a></p>
         </div>
@@ -45,12 +46,12 @@
 
         <div id="column1" class="interior">
           <header>
-            <h1>Node.js v0.6.18 Manual &amp; Documentación</h1>
+            <h1>Node.js v0.6.19 Manual &amp; Documentación</h1>
             <div id="gtoc">
               <p>
-                <a href="index.html" name="toc">Indice</a> |
+                <a href="index.html" name="toc">Índice</a> |
                 <a href="all.html">Ver todo en una misma página</a> |
-                <a href="path.json">Ver como JSON</a>
+                <a href="path-es.json">Ver como JSON</a>
               </p>
             </div>
             <hr>
@@ -59,14 +60,14 @@
           <div id="toc">
             <h2>Tabla de Contenidos</h2>
             <ul>
-<li><a href="#path_path">Path</a><ul>
-<li><a href="#path_path_normalize_p">path.normalize(p)</a></li>
-<li><a href="#path_path_join_path1_path2">path.join([path1], [path2], [...])</a></li>
-<li><a href="#path_path_resolve_from_to">path.resolve([from ...], to)</a></li>
-<li><a href="#path_path_relative_from_to">path.relative(from, to)</a></li>
-<li><a href="#path_path_dirname_p">path.dirname(p)</a></li>
-<li><a href="#path_path_basename_p_ext">path.basename(p, [ext])</a></li>
-<li><a href="#path_path_extname_p">path.extname(p)</a></li>
+<li><a href="#path_es_path">Path</a><ul>
+<li><a href="#path_es_path_normalize_p">path.normalize(p)</a></li>
+<li><a href="#path_es_path_join_path1_path2">path.join([path1], [path2], [...])</a></li>
+<li><a href="#path_es_path_resolve_from_to">path.resolve([from ...], to)</a></li>
+<li><a href="#path_es_path_relative_from_to">path.relative(from, to)</a></li>
+<li><a href="#path_es_path_dirname_p">path.dirname(p)</a></li>
+<li><a href="#path_es_path_basename_p_ext">path.basename(p, [ext])</a></li>
+<li><a href="#path_es_path_extname_p">path.extname(p)</a></li>
 </ul>
 </li>
 </ul>
@@ -74,7 +75,7 @@
           </div>
 
           <div id="apicontent">
-            <h1>Path<span><a class="mark" href="#path_path" id="path_path">#</a></span></h1>
+            <h1>Path<span><a class="mark" href="#path_es_path" id="path_es_path">#</a></span></h1>
 <pre><code>Stability: 3 - Stable</code></pre>
 <p>Este módulo contiene utilidades para trabajar con rutas de fichero.
 Casi todos los métodos llevan sólo una transformaciones en el string.
@@ -84,7 +85,7 @@ El sistema de archivos no es consulta para comprobar si las rutas son válidos.
 <p>Utilice <code>require(&apos;path&apos;)</code> para utilizarlo.  Los siguientes métodos son provistos:
 
 </p>
-<h2>path.normalize(p)<span><a class="mark" href="#path_path_normalize_p" id="path_path_normalize_p">#</a></span></h2>
+<h2>path.normalize(p)<span><a class="mark" href="#path_es_path_normalize_p" id="path_es_path_normalize_p">#</a></span></h2>
 <p>Normaliza la cadena de texto de una ruta, se encarga de las partes <code>&apos;..&apos;</code> y <code>&apos;.&apos;</code>.
 
 </p>
@@ -99,7 +100,7 @@ En windows se utilizan contrabarras.
 <pre><code>path.normalize(&apos;/foo/bar//baz/asdf/quux/..&apos;)
 // returns
 &apos;/foo/bar/baz/asdf&apos;</code></pre>
-<h2>path.join([path1], [path2], [...])<span><a class="mark" href="#path_path_join_path1_path2" id="path_path_join_path1_path2">#</a></span></h2>
+<h2>path.join([path1], [path2], [...])<span><a class="mark" href="#path_es_path_join_path1_path2" id="path_es_path_join_path1_path2">#</a></span></h2>
 <p>Junta todos los argumentos y normaliza la ruta resultante.
 Non-string arguments are ignored.
 
@@ -114,7 +115,7 @@ Non-string arguments are ignored.
 path.join(&apos;foo&apos;, {}, &apos;bar&apos;)
 // returns
 &apos;foo/bar&apos;</code></pre>
-<h2>path.resolve([from ...], to)<span><a class="mark" href="#path_path_resolve_from_to" id="path_path_resolve_from_to">#</a></span></h2>
+<h2>path.resolve([from ...], to)<span><a class="mark" href="#path_es_path_resolve_from_to" id="path_es_path_resolve_from_to">#</a></span></h2>
 <p>Resuelve <code>to</code> a una ruta absoluta.
 
 </p>
@@ -162,7 +163,7 @@ path.resolve(&apos;/foo/bar&apos;, &apos;/tmp/file/&apos;)
 path.resolve(&apos;wwwroot&apos;, &apos;static_files/png/&apos;, &apos;../gif/image.gif&apos;)
 // if currently in /home/myself/node, it returns
 &apos;/home/myself/node/wwwroot/static_files/gif/image.gif&apos;</code></pre>
-<h2>path.relative(from, to)<span><a class="mark" href="#path_path_relative_from_to" id="path_path_relative_from_to">#</a></span></h2>
+<h2>path.relative(from, to)<span><a class="mark" href="#path_es_path_relative_from_to" id="path_es_path_relative_from_to">#</a></span></h2>
 <p>Solve the relative path from <code>from</code> to <code>to</code>.
 
 </p>
@@ -182,7 +183,7 @@ path from one to the other.  This is actually the reverse transform of
 path.relative(&apos;/data/orandea/test/aaa&apos;, &apos;/data/orandea/impl/bbb&apos;)
 // returns
 &apos;../../impl/bbb&apos;</code></pre>
-<h2>path.dirname(p)<span><a class="mark" href="#path_path_dirname_p" id="path_path_dirname_p">#</a></span></h2>
+<h2>path.dirname(p)<span><a class="mark" href="#path_es_path_dirname_p" id="path_es_path_dirname_p">#</a></span></h2>
 <p>Devuelve el nombre de directorio de una ruta.  Semejante al comando de Unix <code>dirname</code>.
 
 </p>
@@ -192,7 +193,7 @@ path.relative(&apos;/data/orandea/test/aaa&apos;, &apos;/data/orandea/impl/bbb&a
 <pre><code>path.dirname(&apos;/foo/bar/baz/asdf/quux&apos;)
 // returns
 &apos;/foo/bar/baz/asdf&apos;</code></pre>
-<h2>path.basename(p, [ext])<span><a class="mark" href="#path_path_basename_p_ext" id="path_path_basename_p_ext">#</a></span></h2>
+<h2>path.basename(p, [ext])<span><a class="mark" href="#path_es_path_basename_p_ext" id="path_es_path_basename_p_ext">#</a></span></h2>
 <p>Devuelve la última parte de una ruta.  Semejante al comando de Unix <code>basename</code>.
 
 </p>
@@ -206,7 +207,7 @@ path.relative(&apos;/data/orandea/test/aaa&apos;, &apos;/data/orandea/impl/bbb&a
 path.basename(&apos;/foo/bar/baz/asdf/quux.html&apos;, &apos;.html&apos;)
 // returns
 &apos;quux&apos;</code></pre>
-<h2>path.extname(p)<span><a class="mark" href="#path_path_extname_p" id="path_path_extname_p">#</a></span></h2>
+<h2>path.extname(p)<span><a class="mark" href="#path_es_path_extname_p" id="path_es_path_extname_p">#</a></span></h2>
 <p>Devuelve la extensión de la ruta.  Todo lo que hay después del último &apos;.&apos; 
 en la última parte de la ruta. Si no hay &apos;.&apos; en la última parte de la ruta o el único 
 &apos;.&apos; es el primer carácter, entonces devuelve un string vacío.  Ejemplos:
@@ -234,7 +235,7 @@ path.extname(&apos;index&apos;)
             <li><a href="http://twitter.com/nodejs_es" class="twitter">@nodejs_es</a></li>
         </ul>
 
-        <p>Copyright <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.18/LICENSE">license</a>.</p>
+        <p>Copyright <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.19/LICENSE">license</a>.</p>
     </div>
 </body>
 </html>

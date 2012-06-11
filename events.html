@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Eventos Node.js v0.6.18 Manual &amp; Documentación</title>
+  <title>Eventos Node.js v0.6.19 Manual &amp; Documentación</title>
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/sh.css">
-  <link rel="canonical" href="http://nodejs.org/api/events.html">
+  <link rel="canonical" href="http://nodejs.org/api/events-es.html">
 </head>
-<body class="alt apidoc" id="api-section-events">
+<body class="alt apidoc" id="api-section-events-es">
+    <div id="bar"><span>es</span><a title="Documentación en inglés" class="mark mark-es" href="en/events.html">en</a></div>
     <div id="intro" class="interior">
-        <a href="http://www.nodejs.es/" title="Go back to the home page">
-            <img id="logo" src="images/logo-light-es.png" alt="node.js">
+        <a href="http://www.nodejs.es/" title="Volder el site nodejs.es">
+            <img id="logo" src="images/logo-light.png" alt="node.js">
         </a>
     </div>
     <div id="content" class="clearfix">
@@ -21,7 +22,7 @@
                 <li><a href="http://www.nodejs.es/" class="home">Home</a></li>
                 <li><a href="http://api.nodejs.es" class="docs current">Docs</a></li>
                 <li><a href="http://trabajos.nodejs.es/" class="jobs">Trabajos</a></li>
-                <li><a href="https://github.com/nodejs-es/api/" class="download">GitHub</a></li>
+                <li><a href="https://github.com/nodejs-es/node/" class="download">GitHub</a></li>
             </ul>
             <p class="twitter"><a href="http://twitter.com/nodejs_es">@nodejs_es</a></p>
         </div>
@@ -45,12 +46,12 @@
 
         <div id="column1" class="interior">
           <header>
-            <h1>Node.js v0.6.18 Manual &amp; Documentación</h1>
+            <h1>Node.js v0.6.19 Manual &amp; Documentación</h1>
             <div id="gtoc">
               <p>
-                <a href="index.html" name="toc">Indice</a> |
+                <a href="index.html" name="toc">Índice</a> |
                 <a href="all.html">Ver todo en una misma página</a> |
-                <a href="events.json">Ver como JSON</a>
+                <a href="events-es.json">Ver como JSON</a>
               </p>
             </div>
             <hr>
@@ -59,17 +60,17 @@
           <div id="toc">
             <h2>Tabla de Contenidos</h2>
             <ul>
-<li><a href="#events_eventos">Eventos</a><ul>
-<li><a href="#events_events_eventemitter">events.EventEmitter</a></li>
-<li><a href="#events_emitter_addlistener_event_listener">emitter.addListener(event, listener)</a></li>
-<li><a href="#events_emitter_on_event_listener">emitter.on(event, listener)</a></li>
-<li><a href="#events_emitter_once_event_listener">emitter.once(event, listener)</a></li>
-<li><a href="#events_emitter_removelistener_event_listener">emitter.removeListener(event, listener)</a></li>
-<li><a href="#events_emitter_removealllisteners_event">emitter.removeAllListeners(event)</a></li>
-<li><a href="#events_emitter_setmaxlisteners_n">emitter.setMaxListeners(n)</a></li>
-<li><a href="#events_emitter_listeners_event">emitter.listeners(event)</a></li>
-<li><a href="#events_emitter_emit_event_arg1_arg2">emitter.emit(event, [arg1], [arg2], [...])</a></li>
-<li><a href="#events_event_newlistener">Event: &apos;newListener&apos;</a></li>
+<li><a href="#events_es_eventos">Eventos</a><ul>
+<li><a href="#events_es_events_eventemitter">events.EventEmitter</a></li>
+<li><a href="#events_es_emitter_addlistener_event_listener">emitter.addListener(event, listener)</a></li>
+<li><a href="#events_es_emitter_on_event_listener">emitter.on(event, listener)</a></li>
+<li><a href="#events_es_emitter_once_event_listener">emitter.once(event, listener)</a></li>
+<li><a href="#events_es_emitter_removelistener_event_listener">emitter.removeListener(event, listener)</a></li>
+<li><a href="#events_es_emitter_removealllisteners_event">emitter.removeAllListeners(event)</a></li>
+<li><a href="#events_es_emitter_setmaxlisteners_n">emitter.setMaxListeners(n)</a></li>
+<li><a href="#events_es_emitter_listeners_event">emitter.listeners(event)</a></li>
+<li><a href="#events_es_emitter_emit_event_arg1_arg2">emitter.emit(event, [arg1], [arg2], [...])</a></li>
+<li><a href="#events_es_event_newlistener">Event: &apos;newListener&apos;</a></li>
 </ul>
 </li>
 </ul>
@@ -77,7 +78,7 @@
           </div>
 
           <div id="apicontent">
-            <h1>Eventos<span><a class="mark" href="#events_eventos" id="events_eventos">#</a></span></h1>
+            <h1>Eventos<span><a class="mark" href="#events_es_eventos" id="events_es_eventos">#</a></span></h1>
 <p>Muchos objetos en Node emiten eventos: un <code>net.Server</code> emite un evento cada vez que se establece una conexión, un <code>fs.readStream</code> emite un evento cuando se abre un fichero. Todos los objectos que emiten eventos son instancias de <code>events.EventEmitter</code>.
 Puedes usar este módulo haciendo <code>require(&quot;events&quot;);</code>
 
@@ -88,7 +89,7 @@ Puedes usar este módulo haciendo <code>require(&quot;events&quot;);</code>
 <p>Se pueden adjuntar funciones a objetos, para que sean ejecutadas cuando se emita un evento. Estas funciones reciben el nombre de <em>listeners</em>. 
 
 </p>
-<h2>events.EventEmitter<span><a class="mark" href="#events_events_eventemitter" id="events_events_eventemitter">#</a></span></h2>
+<h2>events.EventEmitter<span><a class="mark" href="#events_es_events_eventemitter" id="events_es_events_eventemitter">#</a></span></h2>
 <p>Para usar la clase EventEmitter, haz de importarla
 haciendo <code>require(&apos;events&apos;).EventEmiter</code>.
 
@@ -102,15 +103,15 @@ del programa
 <p>Todos los EventEmitters emite el evento <code>&apos;newListener&apos;</code> cuando se añaden nuevos listeners.
 
 </p>
-<h2>emitter.addListener(event, listener)<span><a class="mark" href="#events_emitter_addlistener_event_listener" id="events_emitter_addlistener_event_listener">#</a></span></h2>
-<h2>emitter.on(event, listener)<span><a class="mark" href="#events_emitter_on_event_listener" id="events_emitter_on_event_listener">#</a></span></h2>
+<h2>emitter.addListener(event, listener)<span><a class="mark" href="#events_es_emitter_addlistener_event_listener" id="events_es_emitter_addlistener_event_listener">#</a></span></h2>
+<h2>emitter.on(event, listener)<span><a class="mark" href="#events_es_emitter_on_event_listener" id="events_es_emitter_on_event_listener">#</a></span></h2>
 <p>Añade un listener al final del array de listeners para el evento espeficicado
 
 </p>
 <pre><code>server.on(&apos;connection&apos;, function (stream) {
   console.log(&apos;someone connected!&apos;);
 });</code></pre>
-<h2>emitter.once(event, listener)<span><a class="mark" href="#events_emitter_once_event_listener" id="events_emitter_once_event_listener">#</a></span></h2>
+<h2>emitter.once(event, listener)<span><a class="mark" href="#events_es_emitter_once_event_listener" id="events_es_emitter_once_event_listener">#</a></span></h2>
 <p>Añade un listener al evento. El listener se invocará sólo la primera vez que se dispara el evento.
 luego se elimina. 
 
@@ -118,7 +119,7 @@ luego se elimina.
 <pre><code>server.once(&apos;connection&apos;, function (stream) {
   console.log(&apos;Ah, we have our first user!&apos;);
 });</code></pre>
-<h2>emitter.removeListener(event, listener)<span><a class="mark" href="#events_emitter_removelistener_event_listener" id="events_emitter_removelistener_event_listener">#</a></span></h2>
+<h2>emitter.removeListener(event, listener)<span><a class="mark" href="#events_es_emitter_removelistener_event_listener" id="events_es_emitter_removelistener_event_listener">#</a></span></h2>
 <p>Elimina un listener del array de listeners asociado al evento especificado
 <strong>Atención</strong>: modifica el indice del array de listeners 
 
@@ -129,18 +130,18 @@ luego se elimina.
 server.on(&apos;connection&apos;, callback);
 // ...
 server.removeListener(&apos;connection&apos;, callback);</code></pre>
-<h2>emitter.removeAllListeners(event)<span><a class="mark" href="#events_emitter_removealllisteners_event" id="events_emitter_removealllisteners_event">#</a></span></h2>
+<h2>emitter.removeAllListeners(event)<span><a class="mark" href="#events_es_emitter_removealllisteners_event" id="events_es_emitter_removealllisteners_event">#</a></span></h2>
 <p>Elimina todos los listeners del array de listeners asociado al evento especificado
 
 </p>
-<h2>emitter.setMaxListeners(n)<span><a class="mark" href="#events_emitter_setmaxlisteners_n" id="events_emitter_setmaxlisteners_n">#</a></span></h2>
+<h2>emitter.setMaxListeners(n)<span><a class="mark" href="#events_es_emitter_setmaxlisteners_n" id="events_es_emitter_setmaxlisteners_n">#</a></span></h2>
 <p>Por defecto los EventEmitters imprimirán un warning si se le añaden más de 10 listeners.
 Este comportamiento por defecto ayuda a encontrar memory leaks. Obviamente no todos los EventEmitters
 deberían limitarse a 10. Esta función permite incrementar este valor. Use cero para establecer un valor ilimitado.
 
 
 </p>
-<h2>emitter.listeners(event)<span><a class="mark" href="#events_emitter_listeners_event" id="events_emitter_listeners_event">#</a></span></h2>
+<h2>emitter.listeners(event)<span><a class="mark" href="#events_es_emitter_listeners_event" id="events_es_emitter_listeners_event">#</a></span></h2>
 <p>Devuelve un array de listeners asociado al evento especificado. Este array puede ser manipulado, por ejemplo, eliminando un listener.
 
 </p>
@@ -148,11 +149,11 @@ deberían limitarse a 10. Esta función permite incrementar este valor. Use cero
   console.log(&apos;someone connected!&apos;);
 });
 console.log(util.inspect(server.listeners(&apos;connection&apos;)); // [ [Function] ]</code></pre>
-<h2>emitter.emit(event, [arg1], [arg2], [...])<span><a class="mark" href="#events_emitter_emit_event_arg1_arg2" id="events_emitter_emit_event_arg1_arg2">#</a></span></h2>
+<h2>emitter.emit(event, [arg1], [arg2], [...])<span><a class="mark" href="#events_es_emitter_emit_event_arg1_arg2" id="events_es_emitter_emit_event_arg1_arg2">#</a></span></h2>
 <p>Llama a cada uno de los listeners en el orden en el que fueron pasados por parámetros
 
 </p>
-<h2>Event: &apos;newListener&apos;<span><a class="mark" href="#events_event_newlistener" id="events_event_newlistener">#</a></span></h2>
+<h2>Event: &apos;newListener&apos;<span><a class="mark" href="#events_es_event_newlistener" id="events_es_event_newlistener">#</a></span></h2>
 <p><code>function (event, listener) { }</code>
 
 </p>
@@ -169,7 +170,7 @@ console.log(util.inspect(server.listeners(&apos;connection&apos;)); // [ [Functi
             <li><a href="http://twitter.com/nodejs_es" class="twitter">@nodejs_es</a></li>
         </ul>
 
-        <p>Copyright <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.18/LICENSE">license</a>.</p>
+        <p>Copyright <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.19/LICENSE">license</a>.</p>
     </div>
 </body>
 </html>

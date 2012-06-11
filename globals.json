@@ -1,5 +1,5 @@
 {
-  "source": "doc/api/globals.markdown",
+  "source": "doc/api/globals-es.markdown",
   "globals": [
     {
       "textRaw": "global",
@@ -25,13 +25,13 @@
       "textRaw": "Class: Buffer",
       "type": "global",
       "name": "Buffer",
-      "desc": "<p>Used to handle binary data. See the <a href=\"buffer.html\">buffer section</a>.\n\n</p>\n"
+      "desc": "<p>Utilizado para manejar datos binarios . Véase la  <a href=\"buffer.html\">sección buffer</a>.\n\n</p>\n"
     },
     {
       "textRaw": "clearInterval(t)",
       "type": "global",
       "name": "clearInterval",
-      "desc": "<p>The timer functions are global variables. See the <a href=\"timers.html\">timers</a> section.</p>\n"
+      "desc": "<p>The timer functions are global variables. See the <a href=\"timers.html\">timers</a> section.\n</p>\n"
     }
   ],
   "vars": [
@@ -39,13 +39,13 @@
       "textRaw": "require()",
       "type": "var",
       "name": "require",
-      "desc": "<p>Para requerir módulos. Véase la sección <a href=\"modules.html#modules\">Módules</a>.\n<code>require</code> no es global sino más bien local para cada módulo.\n\n</p>\n",
+      "desc": "<p>Para requerir módulos. Véase la <a href=\"modules.html#modules\">sección Módules</a>.\n<code>require</code> no es global sino más bien local para cada módulo.\n\n</p>\n",
       "methods": [
         {
           "textRaw": "require.resolve()",
           "type": "method",
           "name": "resolve",
-          "desc": "<p>Usa el mecanismo interno de <code>require()</code> para buscar la localización de un módulo,\npero en lugar de cargar el módulo, solo devuelve el nombre del fichero que lo contine.\n\n</p>\n",
+          "desc": "<p>Usa el mecanismo interno de <code>require()</code> para buscar la localización de un módulo,\npero en lugar de cargar el módulo, solo devuelve el nombre del fichero que lo\ncontiene.\n\n</p>\n",
           "signatures": [
             {
               "params": []
@@ -93,7 +93,7 @@
       "textRaw": "setInterval(cb, ms)",
       "type": "method",
       "name": "setInterval",
-      "desc": "<p>The timer functions are global variables. See the <a href=\"timers.html\">timers</a> section.</p>\n",
+      "desc": "<p>The timer functions are global variables. See the <a href=\"timers.html\">timers</a> section.\n</p>\n",
       "signatures": [
         {
           "params": [
@@ -139,13 +139,13 @@
           "textRaw": "Class: Buffer",
           "type": "global",
           "name": "Buffer",
-          "desc": "<p>Used to handle binary data. See the <a href=\"buffer.html\">buffer section</a>.\n\n</p>\n"
+          "desc": "<p>Utilizado para manejar datos binarios . Véase la  <a href=\"buffer.html\">sección buffer</a>.\n\n</p>\n"
         },
         {
           "textRaw": "clearInterval(t)",
           "type": "global",
           "name": "clearInterval",
-          "desc": "<p>The timer functions are global variables. See the <a href=\"timers.html\">timers</a> section.</p>\n"
+          "desc": "<p>The timer functions are global variables. See the <a href=\"timers.html\">timers</a> section.\n</p>\n"
         }
       ],
       "vars": [
@@ -153,13 +153,13 @@
           "textRaw": "require()",
           "type": "var",
           "name": "require",
-          "desc": "<p>Para requerir módulos. Véase la sección <a href=\"modules.html#modules\">Módules</a>.\n<code>require</code> no es global sino más bien local para cada módulo.\n\n</p>\n",
+          "desc": "<p>Para requerir módulos. Véase la <a href=\"modules.html#modules\">sección Módules</a>.\n<code>require</code> no es global sino más bien local para cada módulo.\n\n</p>\n",
           "methods": [
             {
               "textRaw": "require.resolve()",
               "type": "method",
               "name": "resolve",
-              "desc": "<p>Usa el mecanismo interno de <code>require()</code> para buscar la localización de un módulo,\npero en lugar de cargar el módulo, solo devuelve el nombre del fichero que lo contine.\n\n</p>\n",
+              "desc": "<p>Usa el mecanismo interno de <code>require()</code> para buscar la localización de un módulo,\npero en lugar de cargar el módulo, solo devuelve el nombre del fichero que lo\ncontiene.\n\n</p>\n",
               "signatures": [
                 {
                   "params": []
@@ -207,7 +207,7 @@
           "textRaw": "setInterval(cb, ms)",
           "type": "method",
           "name": "setInterval",
-          "desc": "<p>The timer functions are global variables. See the <a href=\"timers.html\">timers</a> section.</p>\n",
+          "desc": "<p>The timer functions are global variables. See the <a href=\"timers.html\">timers</a> section.\n</p>\n",
           "signatures": [
             {
               "params": [

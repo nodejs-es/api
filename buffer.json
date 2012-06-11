@@ -1,5 +1,5 @@
 {
-  "source": "doc/api/buffer.markdown",
+  "source": "doc/api/buffer-es.markdown",
   "modules": [
     {
       "textRaw": "Buffer",

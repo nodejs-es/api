@@ -1,5 +1,5 @@
 {
-  "source": "doc/api/timers.markdown",
+  "source": "doc/api/timers-es.markdown",
   "modules": [
     {
       "textRaw": "Timer",

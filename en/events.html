@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Events Node.js v0.6.19 Manual &amp; Documentación</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/sh.css">
+  <link rel="canonical" href="http://nodejs.org/api/events.html">
+</head>
+<body class="alt apidoc" id="api-section-events">
+    <div id="bar"><a title="Traducción al español" class="mark mark-es" href="../events.html">es</a><span>en</span></div>
+    <div id="intro" class="interior">
+        <a href="http://www.nodejs.es/" title="Volder el site nodejs.es">
+            <img id="logo" src="images/logo-light.png" alt="node.js">
+        </a>
+    </div>
+    <div id="content" class="clearfix">
+      <div id="column2" class="interior">
+        <div class="official-nodejs-es menu-block">
+          <h2>Nodejs.es</h2>
+            <ul>
+                <li><a href="http://www.nodejs.es/" class="home">Home</a></li>
+                <li><a href="http://api.nodejs.es" class="docs current">Docs</a></li>
+                <li><a href="http://trabajos.nodejs.es/" class="jobs">Trabajos</a></li>
+                <li><a href="https://github.com/nodejs-es/node/" class="download">GitHub</a></li>
+            </ul>
+            <p class="twitter"><a href="http://twitter.com/nodejs_es">@nodejs_es</a></p>
+        </div>
+
+        <div class="official-site menu-block">
+          <h2>Sitio Oficial</h2>
+            <ul>
+                <li><a href="http://www.nodejs.org/" class="home">Home</a></li>
+                <li><a href="http://www.nodejs.org/#download" class="download">Descargar</a></li>
+                <li><a href="http://www.nodejs.org/about/" class="about">Acerca</a></li>
+                <li><a href="http://search.npmjs.org/" class="npm">Registo npm</a></li>
+                <li><a href="http://nodejs.org/api/" class="docs">Docs</a></li>
+                <li><a href="http://blog.nodejs.org" class="blog">Blog</a></li>
+                <li><a href="http://www.nodejs.org/community/" class="community">Comunidad</a></li>
+                <li><a href="http://www.nodejs.org/logos/" class="logos">Logos</a></li>
+                <li><a href="http://jobs.nodejs.org/" class="jobs">Trabajos</a></li>
+            </ul>
+            <p class="twitter"><a href="http://twitter.com/nodejs">@nodejs</a></p>
+        </div>
+      </div>
+
+        <div id="column1" class="interior">
+          <header>
+            <h1>Node.js v0.6.19 Manual &amp; Documentación</h1>
+            <div id="gtoc">
+              <p>
+                <a href="index.html" name="toc">Índice</a> |
+                <a href="all.html">Ver todo en una misma página</a> |
+                <a href="events.json">Ver como JSON</a>
+              </p>
+            </div>
+            <hr>
+          </header>
+
+          <div id="toc">
+            <h2>Tabla de Contenidos</h2>
+            <ul>
+<li><a href="#events_events">Events</a><ul>
+<li><a href="#events_class_events_eventemitter">Class: events.EventEmitter</a><ul>
+<li><a href="#events_emitter_addlistener_event_listener">emitter.addListener(event, listener)</a></li>
+<li><a href="#events_emitter_on_event_listener">emitter.on(event, listener)</a></li>
+<li><a href="#events_emitter_once_event_listener">emitter.once(event, listener)</a></li>
+<li><a href="#events_emitter_removelistener_event_listener">emitter.removeListener(event, listener)</a></li>
+<li><a href="#events_emitter_removealllisteners_event">emitter.removeAllListeners([event])</a></li>
+<li><a href="#events_emitter_setmaxlisteners_n">emitter.setMaxListeners(n)</a></li>
+<li><a href="#events_emitter_listeners_event">emitter.listeners(event)</a></li>
+<li><a href="#events_emitter_emit_event_arg1_arg2">emitter.emit(event, [arg1], [arg2], [...])</a></li>
+<li><a href="#events_event_newlistener">Event: &apos;newListener&apos;</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+
+          <div id="apicontent">
+            <h1>Events<span><a class="mark" href="#events_events" id="events_events">#</a></span></h1>
+<pre><code>Stability: 4 - API Frozen</code></pre>
+<!--type=module-->
+
+<p>Many objects in Node emit events: a <code>net.Server</code> emits an event each time
+a peer connects to it, a <code>fs.readStream</code> emits an event when the file is
+opened. All objects which emit events are instances of <code>events.EventEmitter</code>.
+You can access this module by doing: <code>require(&quot;events&quot;);</code>
+
+</p>
+<p>Typically, event names are represented by a camel-cased string, however,
+there aren&apos;t any strict restrictions on that, as any string will be accepted.
+
+</p>
+<p>Functions can then be attached to objects, to be executed when an event
+is emitted. These functions are called <em>listeners</em>.
+
+
+</p>
+<h2>Class: events.EventEmitter<span><a class="mark" href="#events_class_events_eventemitter" id="events_class_events_eventemitter">#</a></span></h2>
+<p>To access the EventEmitter class, <code>require(&apos;events&apos;).EventEmitter</code>.
+
+</p>
+<p>When an <code>EventEmitter</code> instance experiences an error, the typical action is
+to emit an <code>&apos;error&apos;</code> event.  Error events are treated as a special case in node.
+If there is no listener for it, then the default action is to print a stack
+trace and exit the program.
+
+</p>
+<p>All EventEmitters emit the event <code>&apos;newListener&apos;</code> when new listeners are
+added.
+
+</p>
+<h3>emitter.addListener(event, listener)<span><a class="mark" href="#events_emitter_addlistener_event_listener" id="events_emitter_addlistener_event_listener">#</a></span></h3>
+<h3>emitter.on(event, listener)<span><a class="mark" href="#events_emitter_on_event_listener" id="events_emitter_on_event_listener">#</a></span></h3>
+<p>Adds a listener to the end of the listeners array for the specified event.
+
+</p>
+<pre><code>server.on(&apos;connection&apos;, function (stream) {
+  console.log(&apos;someone connected!&apos;);
+});</code></pre>
+<h3>emitter.once(event, listener)<span><a class="mark" href="#events_emitter_once_event_listener" id="events_emitter_once_event_listener">#</a></span></h3>
+<p>Adds a <strong>one time</strong> listener for the event. This listener is
+invoked only the next time the event is fired, after which
+it is removed.
+
+</p>
+<pre><code>server.once(&apos;connection&apos;, function (stream) {
+  console.log(&apos;Ah, we have our first user!&apos;);
+});</code></pre>
+<h3>emitter.removeListener(event, listener)<span><a class="mark" href="#events_emitter_removelistener_event_listener" id="events_emitter_removelistener_event_listener">#</a></span></h3>
+<p>Remove a listener from the listener array for the specified event.
+<strong>Caution</strong>: changes array indices in the listener array behind the listener.
+
+</p>
+<pre><code>var callback = function(stream) {
+  console.log(&apos;someone connected!&apos;);
+};
+server.on(&apos;connection&apos;, callback);
+// ...
+server.removeListener(&apos;connection&apos;, callback);</code></pre>
+<h3>emitter.removeAllListeners([event])<span><a class="mark" href="#events_emitter_removealllisteners_event" id="events_emitter_removealllisteners_event">#</a></span></h3>
+<p>Removes all listeners, or those of the specified event.
+
+
+</p>
+<h3>emitter.setMaxListeners(n)<span><a class="mark" href="#events_emitter_setmaxlisteners_n" id="events_emitter_setmaxlisteners_n">#</a></span></h3>
+<p>By default EventEmitters will print a warning if more than 10 listeners are
+added for a particular event. This is a useful default which helps finding memory leaks.
+Obviously not all Emitters should be limited to 10. This function allows
+that to be increased. Set to zero for unlimited.
+
+
+</p>
+<h3>emitter.listeners(event)<span><a class="mark" href="#events_emitter_listeners_event" id="events_emitter_listeners_event">#</a></span></h3>
+<p>Returns an array of listeners for the specified event. This array can be
+manipulated, e.g. to remove listeners.
+
+</p>
+<pre><code>server.on(&apos;connection&apos;, function (stream) {
+  console.log(&apos;someone connected!&apos;);
+});
+console.log(util.inspect(server.listeners(&apos;connection&apos;))); // [ [Function] ]</code></pre>
+<h3>emitter.emit(event, [arg1], [arg2], [...])<span><a class="mark" href="#events_emitter_emit_event_arg1_arg2" id="events_emitter_emit_event_arg1_arg2">#</a></span></h3>
+<p>Execute each of the listeners in order with the supplied arguments.
+
+</p>
+<h3>Event: &apos;newListener&apos;<span><a class="mark" href="#events_event_newlistener" id="events_event_newlistener">#</a></span></h3>
+<div class="signature"><ul>
+<li><code>event</code> <span class="type">String</span> The event name</li>
+<li><code>listener</code> <span class="type">Function</span> The event handler function</li>
+</div></ul>
+<p>This event is emitted any time someone adds a new listener.
+</p>
+
+          </div>
+        </div>
+    </div>
+    <div id="footer">
+        <ul class="clearfix">
+            <li><a href="http://www.nodejs.org/">Node.js</a></li>
+            <li><a href="http://www.nodejs.es/">Node.js en español</a></li>
+            <li><a href="http://twitter.com/nodejs_es" class="twitter">@nodejs_es</a></li>
+        </ul>
+
+        <p>Copyright <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.19/LICENSE">license</a>.</p>
+    </div>
+</body>
+</html>
+

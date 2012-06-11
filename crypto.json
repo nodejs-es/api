@@ -1,5 +1,5 @@
 {
-  "source": "doc/api/crypto.markdown",
+  "source": "doc/api/crypto-es.markdown",
   "modules": [
     {
       "textRaw": "Crypto",

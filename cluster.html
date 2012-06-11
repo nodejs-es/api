@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Cluster Node.js v0.6.18 Manual &amp; Documentación</title>
+  <title>Cluster Node.js v0.6.19 Manual &amp; Documentación</title>
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/sh.css">
-  <link rel="canonical" href="http://nodejs.org/api/cluster.html">
+  <link rel="canonical" href="http://nodejs.org/api/cluster-es.html">
 </head>
-<body class="alt apidoc" id="api-section-cluster">
+<body class="alt apidoc" id="api-section-cluster-es">
+    <div id="bar"><span>es</span><a title="Documentación en inglés" class="mark mark-es" href="en/cluster.html">en</a></div>
     <div id="intro" class="interior">
-        <a href="http://www.nodejs.es/" title="Go back to the home page">
-            <img id="logo" src="images/logo-light-es.png" alt="node.js">
+        <a href="http://www.nodejs.es/" title="Volder el site nodejs.es">
+            <img id="logo" src="images/logo-light.png" alt="node.js">
         </a>
     </div>
     <div id="content" class="clearfix">
@@ -21,7 +22,7 @@
                 <li><a href="http://www.nodejs.es/" class="home">Home</a></li>
                 <li><a href="http://api.nodejs.es" class="docs current">Docs</a></li>
                 <li><a href="http://trabajos.nodejs.es/" class="jobs">Trabajos</a></li>
-                <li><a href="https://github.com/nodejs-es/api/" class="download">GitHub</a></li>
+                <li><a href="https://github.com/nodejs-es/node/" class="download">GitHub</a></li>
             </ul>
             <p class="twitter"><a href="http://twitter.com/nodejs_es">@nodejs_es</a></p>
         </div>
@@ -45,12 +46,12 @@
 
         <div id="column1" class="interior">
           <header>
-            <h1>Node.js v0.6.18 Manual &amp; Documentación</h1>
+            <h1>Node.js v0.6.19 Manual &amp; Documentación</h1>
             <div id="gtoc">
               <p>
-                <a href="index.html" name="toc">Indice</a> |
+                <a href="index.html" name="toc">Índice</a> |
                 <a href="all.html">Ver todo en una misma página</a> |
-                <a href="cluster.json">Ver como JSON</a>
+                <a href="cluster-es.json">Ver como JSON</a>
               </p>
             </div>
             <hr>
@@ -59,31 +60,31 @@
           <div id="toc">
             <h2>Tabla de Contenidos</h2>
             <ul>
-<li><a href="#cluster_cluster">Cluster</a><ul>
-<li><a href="#cluster_cluster_settings">cluster.settings</a></li>
-<li><a href="#cluster_cluster_ismaster">cluster.isMaster</a></li>
-<li><a href="#cluster_cluster_isworker">cluster.isWorker</a></li>
-<li><a href="#cluster_event_fork">Event: &apos;fork&apos;</a></li>
-<li><a href="#cluster_event_online">Event: &apos;online&apos;</a></li>
-<li><a href="#cluster_event_listening">Event: &apos;listening&apos;</a></li>
-<li><a href="#cluster_event_death">Event: &apos;death&apos;</a></li>
-<li><a href="#cluster_event_setup">Event: &apos;setup&apos;</a></li>
-<li><a href="#cluster_cluster_setupmaster_settings">cluster.setupMaster([settings])</a></li>
-<li><a href="#cluster_cluster_fork_env">cluster.fork([env])</a></li>
-<li><a href="#cluster_cluster_settings_1">cluster.settings</a></li>
-<li><a href="#cluster_cluster_workers">cluster.workers</a></li>
-<li><a href="#cluster_class_worker">Class: Worker</a><ul>
-<li><a href="#cluster_worker_uniqueid">worker.uniqueID</a></li>
-<li><a href="#cluster_worker_process">worker.process</a></li>
-<li><a href="#cluster_worker_suicide">worker.suicide</a></li>
-<li><a href="#cluster_worker_send_message_sendhandle">worker.send(message, [sendHandle])</a></li>
-<li><a href="#cluster_worker_destroy">worker.destroy()</a></li>
-<li><a href="#cluster_event_message">Event: &apos;message&apos;</a></li>
-<li><a href="#cluster_event_online_1">Event: &apos;online&apos;</a></li>
-<li><a href="#cluster_event_listening_1">Event: &apos;listening&apos;</a></li>
+<li><a href="#cluster_es_cluster">Cluster</a><ul>
+<li><a href="#cluster_es_cluster_settings">cluster.settings</a></li>
+<li><a href="#cluster_es_cluster_ismaster">cluster.isMaster</a></li>
+<li><a href="#cluster_es_cluster_isworker">cluster.isWorker</a></li>
+<li><a href="#cluster_es_event_fork">Event: &apos;fork&apos;</a></li>
+<li><a href="#cluster_es_event_online">Event: &apos;online&apos;</a></li>
+<li><a href="#cluster_es_event_listening">Event: &apos;listening&apos;</a></li>
+<li><a href="#cluster_es_event_death">Event: &apos;death&apos;</a></li>
+<li><a href="#cluster_es_event_setup">Event: &apos;setup&apos;</a></li>
+<li><a href="#cluster_es_cluster_setupmaster_settings">cluster.setupMaster([settings])</a></li>
+<li><a href="#cluster_es_cluster_fork_env">cluster.fork([env])</a></li>
+<li><a href="#cluster_es_cluster_settings_1">cluster.settings</a></li>
+<li><a href="#cluster_es_cluster_workers">cluster.workers</a></li>
+<li><a href="#cluster_es_class_worker">Class: Worker</a><ul>
+<li><a href="#cluster_es_worker_uniqueid">worker.uniqueID</a></li>
+<li><a href="#cluster_es_worker_process">worker.process</a></li>
+<li><a href="#cluster_es_worker_suicide">worker.suicide</a></li>
+<li><a href="#cluster_es_worker_send_message_sendhandle">worker.send(message, [sendHandle])</a></li>
+<li><a href="#cluster_es_worker_destroy">worker.destroy()</a></li>
+<li><a href="#cluster_es_event_message">Event: &apos;message&apos;</a></li>
+<li><a href="#cluster_es_event_online_1">Event: &apos;online&apos;</a></li>
+<li><a href="#cluster_es_event_listening_1">Event: &apos;listening&apos;</a></li>
 </ul>
 </li>
-<li><a href="#cluster_event_death_1">Event: &apos;death&apos;</a></li>
+<li><a href="#cluster_es_event_death_1">Event: &apos;death&apos;</a></li>
 </ul>
 </li>
 </ul>
@@ -91,7 +92,7 @@
           </div>
 
           <div id="apicontent">
-            <h1>Cluster<span><a class="mark" href="#cluster_cluster" id="cluster_cluster">#</a></span></h1>
+            <h1>Cluster<span><a class="mark" href="#cluster_es_cluster" id="cluster_es_cluster">#</a></span></h1>
 <pre><code>Stability: 1 - Experimental</code></pre>
 <p>A single instance of Node runs in a single thread. To take advantage of
 multi-core systems the user will sometimes want to launch a cluster of Node
@@ -133,7 +134,7 @@ Worker 2437 online</code></pre>
 Please try it out and provide feedback.
 
 </p>
-<h2>cluster.settings<span><a class="mark" href="#cluster_cluster_settings" id="cluster_cluster_settings">#</a></span></h2>
+<h2>cluster.settings<span><a class="mark" href="#cluster_es_cluster_settings" id="cluster_es_cluster_settings">#</a></span></h2>
 <div class="signature"><ul>
 <li><span class="type">Object</span><ul>
 <li><code>exec</code> <span class="type">String</span> file path to worker file.  (Default=<code>__filename</code>)</li>
@@ -148,7 +149,7 @@ Please try it out and provide feedback.
 This object is not supposed to be change or set manually, by you.
 
 </p>
-<h2>cluster.isMaster<span><a class="mark" href="#cluster_cluster_ismaster" id="cluster_cluster_ismaster">#</a></span></h2>
+<h2>cluster.isMaster<span><a class="mark" href="#cluster_es_cluster_ismaster" id="cluster_es_cluster_ismaster">#</a></span></h2>
 <div class="signature"><ul>
 <li><span class="type">Boolean</span></li>
 </div></ul>
@@ -157,7 +158,7 @@ by the <code>process.env.NODE_UNIQUE_ID</code>. If <code>process.env.NODE_UNIQUE
 undefined, then <code>isMaster</code> is <code>true</code>.
 
 </p>
-<h2>cluster.isWorker<span><a class="mark" href="#cluster_cluster_isworker" id="cluster_cluster_isworker">#</a></span></h2>
+<h2>cluster.isWorker<span><a class="mark" href="#cluster_es_cluster_isworker" id="cluster_es_cluster_isworker">#</a></span></h2>
 <div class="signature"><ul>
 <li><span class="type">Boolean</span></li>
 </div></ul>
@@ -166,7 +167,7 @@ If the <code>process.env.NODE_UNIQUE_ID</code> is set to a value, then
 <code>isWorker</code> is <code>true</code>.
 
 </p>
-<h2>Event: &apos;fork&apos;<span><a class="mark" href="#cluster_event_fork" id="cluster_event_fork">#</a></span></h2>
+<h2>Event: &apos;fork&apos;<span><a class="mark" href="#cluster_es_event_fork" id="cluster_es_event_fork">#</a></span></h2>
 <div class="signature"><ul>
 <li><code>worker</code> <span class="type">Worker object</span></li>
 </div></ul>
@@ -189,7 +190,7 @@ cluster.on(&apos;death&apos;, function (worker) {
   clearTimeout(timeouts[worker.uniqueID]);
   errorMsg();
 });</code></pre>
-<h2>Event: &apos;online&apos;<span><a class="mark" href="#cluster_event_online" id="cluster_event_online">#</a></span></h2>
+<h2>Event: &apos;online&apos;<span><a class="mark" href="#cluster_es_event_online" id="cluster_es_event_online">#</a></span></h2>
 <div class="signature"><ul>
 <li><code>worker</code> <span class="type">Worker object</span></li>
 </div></ul>
@@ -203,7 +204,7 @@ being executed.
 <pre><code>cluster.on(&apos;online&apos;, function (worker) {
   console.log(&quot;Yay, the worker responded after it was forked&quot;);
 });</code></pre>
-<h2>Event: &apos;listening&apos;<span><a class="mark" href="#cluster_event_listening" id="cluster_event_listening">#</a></span></h2>
+<h2>Event: &apos;listening&apos;<span><a class="mark" href="#cluster_es_event_listening" id="cluster_es_event_listening">#</a></span></h2>
 <div class="signature"><ul>
 <li><code>worker</code> <span class="type">Worker object</span></li>
 </div></ul>
@@ -215,7 +216,7 @@ where the &apos;listening&apos; event is emitted.
 <pre><code>cluster.on(&apos;listening&apos;, function (worker) {
   console.log(&quot;We are now connected&quot;);
 });</code></pre>
-<h2>Event: &apos;death&apos;<span><a class="mark" href="#cluster_event_death" id="cluster_event_death">#</a></span></h2>
+<h2>Event: &apos;death&apos;<span><a class="mark" href="#cluster_es_event_death" id="cluster_es_event_death">#</a></span></h2>
 <div class="signature"><ul>
 <li><code>worker</code> <span class="type">Worker object</span></li>
 </div></ul>
@@ -227,7 +228,7 @@ This can be used to restart the worker by calling <code>fork()</code> again.
   console.log(&apos;worker &apos; + worker.pid + &apos; died. restart...&apos;);
   cluster.fork();
 });</code></pre>
-<h2>Event: &apos;setup&apos;<span><a class="mark" href="#cluster_event_setup" id="cluster_event_setup">#</a></span></h2>
+<h2>Event: &apos;setup&apos;<span><a class="mark" href="#cluster_es_event_setup" id="cluster_es_event_setup">#</a></span></h2>
 <div class="signature"><ul>
 <li><code>worker</code> <span class="type">Worker object</span></li>
 </div></ul>
@@ -236,7 +237,7 @@ If <code>.setupMaster()</code> was not executed before <code>fork()</code> this 
 call <code>.setupMaster()</code> with no arguments.
 
 </p>
-<h2>cluster.setupMaster([settings])<span><a class="mark" href="#cluster_cluster_setupmaster_settings" id="cluster_cluster_setupmaster_settings">#</a></span></h2>
+<h2>cluster.setupMaster([settings])<span><a class="mark" href="#cluster_es_cluster_setupmaster_settings" id="cluster_es_cluster_setupmaster_settings">#</a></span></h2>
 <div class="signature"><ul>
 <li><code>settings</code> <span class="type">Object</span><ul>
 <li><code>exec</code> <span class="type">String</span> file path to worker file.  (Default=<code>__filename</code>)</li>
@@ -261,7 +262,7 @@ cluster.setupMaster({
   silent : true
 });
 cluster.autoFork();</code></pre>
-<h2>cluster.fork([env])<span><a class="mark" href="#cluster_cluster_fork_env" id="cluster_cluster_fork_env">#</a></span></h2>
+<h2>cluster.fork([env])<span><a class="mark" href="#cluster_es_cluster_fork_env" id="cluster_es_cluster_fork_env">#</a></span></h2>
 <div class="signature"><ul>
 <li><code>env</code> <span class="type">Object</span> Key/value pairs to add to child process environment.</li>
 <li>return <span class="type">Worker object</span></li>
@@ -269,7 +270,7 @@ cluster.autoFork();</code></pre>
 <p>Spawn a new worker process. This can only be called from the master process.
 
 </p>
-<h2>cluster.settings<span><a class="mark" href="#cluster_cluster_settings_1" id="cluster_cluster_settings_1">#</a></span></h2>
+<h2>cluster.settings<span><a class="mark" href="#cluster_es_cluster_settings_1" id="cluster_es_cluster_settings_1">#</a></span></h2>
 <div class="signature"><ul>
 <li><span class="type">Object</span><ul>
 <li><code>exec</code> <span class="type">String</span> file path to worker file.  Default: <code>__filename</code></li>
@@ -284,7 +285,7 @@ cluster.autoFork();</code></pre>
 This object is not supposed to be change or set manually.
 
 </p>
-<h2>cluster.workers<span><a class="mark" href="#cluster_cluster_workers" id="cluster_cluster_workers">#</a></span></h2>
+<h2>cluster.workers<span><a class="mark" href="#cluster_es_cluster_workers" id="cluster_es_cluster_workers">#</a></span></h2>
 <div class="signature"><ul>
 <li><span class="type">Object</span></li>
 </div></ul>
@@ -308,13 +309,13 @@ the worker&apos;s uniqueID is the easiest way to find the worker.
 <pre><code>socket.on(&apos;data&apos;, function (uniqueID) {
   var worker = cluster.workers[uniqueID];
 });</code></pre>
-<h2>Class: Worker<span><a class="mark" href="#cluster_class_worker" id="cluster_class_worker">#</a></span></h2>
+<h2>Class: Worker<span><a class="mark" href="#cluster_es_class_worker" id="cluster_es_class_worker">#</a></span></h2>
 <p>A Worker object contains all public information and method about a worker.
 In the master it can be obtained using <code>cluster.workers</code>. In a worker
 it can be obtained using <code>cluster.worker</code>.
 
 </p>
-<h3>worker.uniqueID<span><a class="mark" href="#cluster_worker_uniqueid" id="cluster_worker_uniqueid">#</a></span></h3>
+<h3>worker.uniqueID<span><a class="mark" href="#cluster_es_worker_uniqueid" id="cluster_es_worker_uniqueid">#</a></span></h3>
 <div class="signature"><ul>
 <li><span class="type">String</span></li>
 </div></ul>
@@ -326,7 +327,7 @@ it can be obtained using <code>cluster.worker</code>.
 cluster.workers
 
 </p>
-<h3>worker.process<span><a class="mark" href="#cluster_worker_process" id="cluster_worker_process">#</a></span></h3>
+<h3>worker.process<span><a class="mark" href="#cluster_es_worker_process" id="cluster_es_worker_process">#</a></span></h3>
 <div class="signature"><ul>
 <li><span class="type">ChildProcess object</span></li>
 </div></ul>
@@ -337,7 +338,7 @@ from this function is stored in process.
 <p>See: <a href="child_process.html">Child Process module</a>
 
 </p>
-<h3>worker.suicide<span><a class="mark" href="#cluster_worker_suicide" id="cluster_worker_suicide">#</a></span></h3>
+<h3>worker.suicide<span><a class="mark" href="#cluster_es_worker_suicide" id="cluster_es_worker_suicide">#</a></span></h3>
 <div class="signature"><ul>
 <li><span class="type">Boolean</span></li>
 </div></ul>
@@ -346,7 +347,7 @@ from this function is stored in process.
 method, and false otherwise.
 
 </p>
-<h3>worker.send(message, [sendHandle])<span><a class="mark" href="#cluster_worker_send_message_sendhandle" id="cluster_worker_send_message_sendhandle">#</a></span></h3>
+<h3>worker.send(message, [sendHandle])<span><a class="mark" href="#cluster_es_worker_send_message_sendhandle" id="cluster_es_worker_send_message_sendhandle">#</a></span></h3>
 <div class="signature"><ul>
 <li><code>message</code> <span class="type">Object</span></li>
 <li><code>sendHandle</code> <span class="type">Handle object</span></li>
@@ -369,7 +370,7 @@ send a message to a specific worker.  However in a worker you can also use
     process.send(msg);
   });
 }</code></pre>
-<h3>worker.destroy()<span><a class="mark" href="#cluster_worker_destroy" id="cluster_worker_destroy">#</a></span></h3>
+<h3>worker.destroy()<span><a class="mark" href="#cluster_es_worker_destroy" id="cluster_es_worker_destroy">#</a></span></h3>
 <p>This function will kill the worker, and inform the master to not spawn a
 new worker.  To know the difference between suicide and accidentally death
 a suicide boolean is set to true.
@@ -383,7 +384,7 @@ a suicide boolean is set to true.
 
 // destroy worker
 worker.destroy();</code></pre>
-<h3>Event: &apos;message&apos;<span><a class="mark" href="#cluster_event_message" id="cluster_event_message">#</a></span></h3>
+<h3>Event: &apos;message&apos;<span><a class="mark" href="#cluster_es_event_message" id="cluster_es_event_message">#</a></span></h3>
 <div class="signature"><ul>
 <li><code>message</code> <span class="type">Object</span></li>
 </div></ul>
@@ -431,7 +432,7 @@ if (cluster.isMaster) {
     process.send({ cmd: &apos;notifyRequest&apos; });
   }).listen(8000);
 }</code></pre>
-<h3>Event: &apos;online&apos;<span><a class="mark" href="#cluster_event_online_1" id="cluster_event_online_1">#</a></span></h3>
+<h3>Event: &apos;online&apos;<span><a class="mark" href="#cluster_es_event_online_1" id="cluster_es_event_online_1">#</a></span></h3>
 <div class="signature"><ul>
 <li><code>worker</code> <span class="type">Worker object</span></li>
 </div></ul>
@@ -442,7 +443,7 @@ on the specified worker.
 <pre><code>cluster.fork().on(&apos;online&apos;, function (worker) {
   // Worker is online
 };</code></pre>
-<h3>Event: &apos;listening&apos;<span><a class="mark" href="#cluster_event_listening_1" id="cluster_event_listening_1">#</a></span></h3>
+<h3>Event: &apos;listening&apos;<span><a class="mark" href="#cluster_es_event_listening_1" id="cluster_es_event_listening_1">#</a></span></h3>
 <div class="signature"><ul>
 <li><code>worker</code> <span class="type">Worker object</span></li>
 </div></ul>
@@ -453,7 +454,7 @@ on the specified worker.
 <pre><code>cluster.fork().on(&apos;listening&apos;, function (worker) {
   // Worker is listening
 };</code></pre>
-<h2>Event: &apos;death&apos;<span><a class="mark" href="#cluster_event_death_1" id="cluster_event_death_1">#</a></span></h2>
+<h2>Event: &apos;death&apos;<span><a class="mark" href="#cluster_es_event_death_1" id="cluster_es_event_death_1">#</a></span></h2>
 <div class="signature"><ul>
 <li><code>worker</code> <span class="type">Worker object</span></li>
 </div></ul>
@@ -475,7 +476,7 @@ on the specified worker.
             <li><a href="http://twitter.com/nodejs_es" class="twitter">@nodejs_es</a></li>
         </ul>
 
-        <p>Copyright <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.18/LICENSE">license</a>.</p>
+        <p>Copyright <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.19/LICENSE">license</a>.</p>
     </div>
 </body>
 </html>

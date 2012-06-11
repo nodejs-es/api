@@ -1,5 +1,5 @@
 {
-  "source": "doc/api/dns.markdown",
+  "source": "doc/api/dns-es.markdown",
   "modules": [
     {
       "textRaw": "DNS",

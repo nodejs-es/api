@@ -1,5 +1,5 @@
 {
-  "source": "doc/api/assert.markdown",
+  "source": "doc/api/assert-es.markdown",
   "modules": [
     {
       "textRaw": "Assert",

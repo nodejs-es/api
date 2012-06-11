@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Cluster Node.js v0.6.19 Manual &amp; Documentación</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/sh.css">
+  <link rel="canonical" href="http://nodejs.org/api/cluster.html">
+</head>
+<body class="alt apidoc" id="api-section-cluster">
+    <div id="bar"><a title="Traducción al español" class="mark mark-es" href="../cluster.html">es</a><span>en</span></div>
+    <div id="intro" class="interior">
+        <a href="http://www.nodejs.es/" title="Volder el site nodejs.es">
+            <img id="logo" src="images/logo-light.png" alt="node.js">
+        </a>
+    </div>
+    <div id="content" class="clearfix">
+      <div id="column2" class="interior">
+        <div class="official-nodejs-es menu-block">
+          <h2>Nodejs.es</h2>
+            <ul>
+                <li><a href="http://www.nodejs.es/" class="home">Home</a></li>
+                <li><a href="http://api.nodejs.es" class="docs current">Docs</a></li>
+                <li><a href="http://trabajos.nodejs.es/" class="jobs">Trabajos</a></li>
+                <li><a href="https://github.com/nodejs-es/node/" class="download">GitHub</a></li>
+            </ul>
+            <p class="twitter"><a href="http://twitter.com/nodejs_es">@nodejs_es</a></p>
+        </div>
+
+        <div class="official-site menu-block">
+          <h2>Sitio Oficial</h2>
+            <ul>
+                <li><a href="http://www.nodejs.org/" class="home">Home</a></li>
+                <li><a href="http://www.nodejs.org/#download" class="download">Descargar</a></li>
+                <li><a href="http://www.nodejs.org/about/" class="about">Acerca</a></li>
+                <li><a href="http://search.npmjs.org/" class="npm">Registo npm</a></li>
+                <li><a href="http://nodejs.org/api/" class="docs">Docs</a></li>
+                <li><a href="http://blog.nodejs.org" class="blog">Blog</a></li>
+                <li><a href="http://www.nodejs.org/community/" class="community">Comunidad</a></li>
+                <li><a href="http://www.nodejs.org/logos/" class="logos">Logos</a></li>
+                <li><a href="http://jobs.nodejs.org/" class="jobs">Trabajos</a></li>
+            </ul>
+            <p class="twitter"><a href="http://twitter.com/nodejs">@nodejs</a></p>
+        </div>
+      </div>
+
+        <div id="column1" class="interior">
+          <header>
+            <h1>Node.js v0.6.19 Manual &amp; Documentación</h1>
+            <div id="gtoc">
+              <p>
+                <a href="index.html" name="toc">Índice</a> |
+                <a href="all.html">Ver todo en una misma página</a> |
+                <a href="cluster.json">Ver como JSON</a>
+              </p>
+            </div>
+            <hr>
+          </header>
+
+          <div id="toc">
+            <h2>Tabla de Contenidos</h2>
+            <ul>
+<li><a href="#cluster_cluster">Cluster</a><ul>
+<li><a href="#cluster_cluster_fork">cluster.fork()</a></li>
+<li><a href="#cluster_cluster_ismaster">cluster.isMaster</a></li>
+<li><a href="#cluster_cluster_isworker">cluster.isWorker</a></li>
+<li><a href="#cluster_event_death">Event: &apos;death&apos;</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+
+          <div id="apicontent">
+            <h1>Cluster<span><a class="mark" href="#cluster_cluster" id="cluster_cluster">#</a></span></h1>
+<pre><code>Stability: 1 Experimental - Drastic changes in future versions</code></pre>
+<p>A single instance of Node runs in a single thread. To take advantage of
+multi-core systems the user will sometimes want to launch a cluster of Node
+processes to handle the load.
+
+</p>
+<p>The cluster module allows you to easily create a network of processes that
+all share server ports.
+
+</p>
+<pre><code>var cluster = require(&apos;cluster&apos;);
+var http = require(&apos;http&apos;);
+var numCPUs = require(&apos;os&apos;).cpus().length;
+
+if (cluster.isMaster) {
+  // Fork workers.
+  for (var i = 0; i &lt; numCPUs; i++) {
+    cluster.fork();
+  }
+
+  cluster.on(&apos;death&apos;, function(worker) {
+    console.log(&apos;worker &apos; + worker.pid + &apos; died&apos;);
+  });
+} else {
+  // Worker processes have a http server.
+  http.Server(function(req, res) {
+    res.writeHead(200);
+    res.end(&quot;hello world\n&quot;);
+  }).listen(8000);
+}</code></pre>
+<p>Running node will now share port 8000 between the workers:
+
+</p>
+<pre><code>% node server.js
+Worker 2438 online
+Worker 2437 online</code></pre>
+<p>The difference between <code>cluster.fork()</code> and <code>child_process.fork()</code> is simply
+that cluster allows TCP servers to be shared between workers. <code>cluster.fork</code>
+is implemented on top of <code>child_process.fork</code>. The message passing API that
+is available with <code>child_process.fork</code> is available with <code>cluster</code> as well.
+As an example, here is a cluster which keeps count of the number of requests
+in the master process via message passing:
+
+</p>
+<pre><code>var cluster = require(&apos;cluster&apos;);
+var http = require(&apos;http&apos;);
+var numReqs = 0;
+
+if (cluster.isMaster) {
+  // Fork workers.
+  for (var i = 0; i &lt; 2; i++) {
+    var worker = cluster.fork();
+
+    worker.on(&apos;message&apos;, function(msg) {
+      if (msg.cmd &amp;&amp; msg.cmd == &apos;notifyRequest&apos;) {
+        numReqs++;
+      }
+    });
+  }
+
+  setInterval(function() {
+    console.log(&quot;numReqs =&quot;, numReqs);
+  }, 1000);
+} else {
+  // Worker processes have a http server.
+  http.Server(function(req, res) {
+    res.writeHead(200);
+    res.end(&quot;hello world\n&quot;);
+    // Send message to master process
+    process.send({ cmd: &apos;notifyRequest&apos; });
+  }).listen(8000);
+}</code></pre>
+<h2>cluster.fork()<span><a class="mark" href="#cluster_cluster_fork" id="cluster_cluster_fork">#</a></span></h2>
+<p>Spawn a new worker process. This can only be called from the master process.
+
+</p>
+<h2>cluster.isMaster<span><a class="mark" href="#cluster_cluster_ismaster" id="cluster_cluster_ismaster">#</a></span></h2>
+<h2>cluster.isWorker<span><a class="mark" href="#cluster_cluster_isworker" id="cluster_cluster_isworker">#</a></span></h2>
+<p>Boolean flags to determine if the current process is a master or a worker
+process in a cluster. A process <code>isMaster</code> if <code>process.env.NODE_WORKER_ID</code>
+is undefined.
+
+</p>
+<h2>Event: &apos;death&apos;<span><a class="mark" href="#cluster_event_death" id="cluster_event_death">#</a></span></h2>
+<p>When any of the workers die the cluster module will emit the &apos;death&apos; event.
+This can be used to restart the worker by calling <code>fork()</code> again.
+
+</p>
+<pre><code>cluster.on(&apos;death&apos;, function(worker) {
+  console.log(&apos;worker &apos; + worker.pid + &apos; died. restart...&apos;);
+  cluster.fork();
+});</code></pre>
+<p>Different techniques can be used to restart the worker depending on the
+application.
+</p>
+
+          </div>
+        </div>
+    </div>
+    <div id="footer">
+        <ul class="clearfix">
+            <li><a href="http://www.nodejs.org/">Node.js</a></li>
+            <li><a href="http://www.nodejs.es/">Node.js en español</a></li>
+            <li><a href="http://twitter.com/nodejs_es" class="twitter">@nodejs_es</a></li>
+        </ul>
+
+        <p>Copyright <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.19/LICENSE">license</a>.</p>
+    </div>
+</body>
+</html>
+

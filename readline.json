@@ -1,5 +1,5 @@
 {
-  "source": "doc/api/readline.markdown",
+  "source": "doc/api/readline-es.markdown",
   "modules": [
     {
       "textRaw": "Readline",

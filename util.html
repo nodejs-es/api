@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>util Node.js v0.6.18 Manual &amp; Documentación</title>
+  <title>util Node.js v0.6.19 Manual &amp; Documentación</title>
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/sh.css">
-  <link rel="canonical" href="http://nodejs.org/api/util.html">
+  <link rel="canonical" href="http://nodejs.org/api/util-es.html">
 </head>
-<body class="alt apidoc" id="api-section-util">
+<body class="alt apidoc" id="api-section-util-es">
+    <div id="bar"><span>es</span><a title="Documentación en inglés" class="mark mark-es" href="en/util.html">en</a></div>
     <div id="intro" class="interior">
-        <a href="http://www.nodejs.es/" title="Go back to the home page">
-            <img id="logo" src="images/logo-light-es.png" alt="node.js">
+        <a href="http://www.nodejs.es/" title="Volder el site nodejs.es">
+            <img id="logo" src="images/logo-light.png" alt="node.js">
         </a>
     </div>
     <div id="content" class="clearfix">
@@ -21,7 +22,7 @@
                 <li><a href="http://www.nodejs.es/" class="home">Home</a></li>
                 <li><a href="http://api.nodejs.es" class="docs current">Docs</a></li>
                 <li><a href="http://trabajos.nodejs.es/" class="jobs">Trabajos</a></li>
-                <li><a href="https://github.com/nodejs-es/api/" class="download">GitHub</a></li>
+                <li><a href="https://github.com/nodejs-es/node/" class="download">GitHub</a></li>
             </ul>
             <p class="twitter"><a href="http://twitter.com/nodejs_es">@nodejs_es</a></p>
         </div>
@@ -45,12 +46,12 @@
 
         <div id="column1" class="interior">
           <header>
-            <h1>Node.js v0.6.18 Manual &amp; Documentación</h1>
+            <h1>Node.js v0.6.19 Manual &amp; Documentación</h1>
             <div id="gtoc">
               <p>
-                <a href="index.html" name="toc">Indice</a> |
+                <a href="index.html" name="toc">Índice</a> |
                 <a href="all.html">Ver todo en una misma página</a> |
-                <a href="util.json">Ver como JSON</a>
+                <a href="util-es.json">Ver como JSON</a>
               </p>
             </div>
             <hr>
@@ -59,19 +60,19 @@
           <div id="toc">
             <h2>Tabla de Contenidos</h2>
             <ul>
-<li><a href="#util_util">util</a><ul>
-<li><a href="#util_util_format">util.format()</a></li>
-<li><a href="#util_util_debug_string">util.debug(string)</a><ul>
-<li><a href="#util_util_log_string">util.log(string)</a></li>
-<li><a href="#util_util_inspect_object_showhidden_false_depth_2">util.inspect(object, showHidden=false, depth=2)</a></li>
+<li><a href="#util_es_util">util</a><ul>
+<li><a href="#util_es_util_format">util.format()</a></li>
+<li><a href="#util_es_util_debug_string">util.debug(string)</a><ul>
+<li><a href="#util_es_util_log_string">util.log(string)</a></li>
+<li><a href="#util_es_util_inspect_object_showhidden_false_depth_2">util.inspect(object, showHidden=false, depth=2)</a></li>
 </ul>
 </li>
-<li><a href="#util_util_isarray_object">util.isArray(object)</a></li>
-<li><a href="#util_util_isregexp_object">util.isRegExp(object)</a></li>
-<li><a href="#util_util_isdate_object">util.isDate(object)</a></li>
-<li><a href="#util_util_iserror_object">util.isError(object)</a></li>
-<li><a href="#util_util_pump_readablestream_writablestream_callback">util.pump(readableStream, writableStream, [callback])</a><ul>
-<li><a href="#util_util_inherits_constructor_superconstructor">util.inherits(constructor, superConstructor)</a></li>
+<li><a href="#util_es_util_isarray_object">util.isArray(object)</a></li>
+<li><a href="#util_es_util_isregexp_object">util.isRegExp(object)</a></li>
+<li><a href="#util_es_util_isdate_object">util.isDate(object)</a></li>
+<li><a href="#util_es_util_iserror_object">util.isError(object)</a></li>
+<li><a href="#util_es_util_pump_readablestream_writablestream_callback">util.pump(readableStream, writableStream, [callback])</a><ul>
+<li><a href="#util_es_util_inherits_constructor_superconstructor">util.inherits(constructor, superConstructor)</a></li>
 </ul>
 </li>
 </ul>
@@ -81,14 +82,14 @@
           </div>
 
           <div id="apicontent">
-            <h1>util<span><a class="mark" href="#util_util" id="util_util">#</a></span></h1>
+            <h1>util<span><a class="mark" href="#util_es_util" id="util_es_util">#</a></span></h1>
 <pre><code>Stability: 5 - Locked</code></pre>
 <p>Estas funciones estan en el módulo <code>&apos;util&apos;</code>. Usa <code>require(&apos;util&apos;)</code> para acceder 
 a ellas.
 
 
 </p>
-<h2>util.format()<span><a class="mark" href="#util_util_format" id="util_util_format">#</a></span></h2>
+<h2>util.format()<span><a class="mark" href="#util_es_util_format" id="util_es_util_format">#</a></span></h2>
 <p>Returns a formatted string using the first argument as a <code>printf</code>-like format.
 
 </p>
@@ -120,18 +121,18 @@ Each argument is converted to a string with <code>util.inspect()</code>.
 
 </p>
 <pre><code>util.format(1, 2, 3); // &apos;1 2 3&apos;</code></pre>
-<h2>util.debug(string)<span><a class="mark" href="#util_util_debug_string" id="util_util_debug_string">#</a></span></h2>
+<h2>util.debug(string)<span><a class="mark" href="#util_es_util_debug_string" id="util_es_util_debug_string">#</a></span></h2>
 <p>Una función de salida síncrona. Bloquerá el proceso y pondrá 
 <code>string</code> inmediatamente en <code>stderr</code>.
 
 </p>
 <pre><code>require(&apos;util&apos;).debug(&apos;mensaje en stderr&apos;);</code></pre>
-<h3>util.log(string)<span><a class="mark" href="#util_util_log_string" id="util_util_log_string">#</a></span></h3>
+<h3>util.log(string)<span><a class="mark" href="#util_es_util_log_string" id="util_es_util_log_string">#</a></span></h3>
 <p>Salida con timestamp en <code>stdout</code>.
 
 </p>
 <pre><code>require(&apos;util&apos;).log(&apos;Mensaje con marca de tiempo.&apos;);</code></pre>
-<h3>util.inspect(object, showHidden=false, depth=2)<span><a class="mark" href="#util_util_inspect_object_showhidden_false_depth_2" id="util_util_inspect_object_showhidden_false_depth_2">#</a></span></h3>
+<h3>util.inspect(object, showHidden=false, depth=2)<span><a class="mark" href="#util_es_util_inspect_object_showhidden_false_depth_2" id="util_es_util_inspect_object_showhidden_false_depth_2">#</a></span></h3>
 <p>Devuelve la cadena que representa a <code>object</code>, lo cual es útil para corregir fallos.
 
 </p>
@@ -157,7 +158,7 @@ Por omisión es <code>false</code>.
 <pre><code>var util = require(&apos;util&apos;);
 
 console.log(util.inspect(util, true, null));</code></pre>
-<h2>util.isArray(object)<span><a class="mark" href="#util_util_isarray_object" id="util_util_isarray_object">#</a></span></h2>
+<h2>util.isArray(object)<span><a class="mark" href="#util_es_util_isarray_object" id="util_es_util_isarray_object">#</a></span></h2>
 <p>Returns <code>true</code> if the given &quot;object&quot; is an <code>Array</code>. <code>false</code> otherwise.
 
 </p>
@@ -169,7 +170,7 @@ util.isArray(new Array)
   // true
 util.isArray({})
   // false</code></pre>
-<h2>util.isRegExp(object)<span><a class="mark" href="#util_util_isregexp_object" id="util_util_isregexp_object">#</a></span></h2>
+<h2>util.isRegExp(object)<span><a class="mark" href="#util_es_util_isregexp_object" id="util_es_util_isregexp_object">#</a></span></h2>
 <p>Returns <code>true</code> if the given &quot;object&quot; is a <code>RegExp</code>. <code>false</code> otherwise.
 
 </p>
@@ -181,7 +182,7 @@ util.isRegExp(new RegExp(&apos;another regexp&apos;))
   // true
 util.isRegExp({})
   // false</code></pre>
-<h2>util.isDate(object)<span><a class="mark" href="#util_util_isdate_object" id="util_util_isdate_object">#</a></span></h2>
+<h2>util.isDate(object)<span><a class="mark" href="#util_es_util_isdate_object" id="util_es_util_isdate_object">#</a></span></h2>
 <p>Returns <code>true</code> if the given &quot;object&quot; is a <code>Date</code>. <code>false</code> otherwise.
 
 </p>
@@ -193,7 +194,7 @@ util.isDate(Date())
   // false (without &apos;new&apos; returns a String)
 util.isDate({})
   // false</code></pre>
-<h2>util.isError(object)<span><a class="mark" href="#util_util_iserror_object" id="util_util_iserror_object">#</a></span></h2>
+<h2>util.isError(object)<span><a class="mark" href="#util_es_util_iserror_object" id="util_es_util_iserror_object">#</a></span></h2>
 <p>Returns <code>true</code> if the given &quot;object&quot; is an <code>Error</code>. <code>false</code> otherwise.
 
 </p>
@@ -205,7 +206,7 @@ util.isError(new TypeError())
   // true
 util.isError({ name: &apos;Error&apos;, message: &apos;an error occurred&apos; })
   // false</code></pre>
-<h2>util.pump(readableStream, writableStream, [callback])<span><a class="mark" href="#util_util_pump_readablestream_writablestream_callback" id="util_util_pump_readablestream_writablestream_callback">#</a></span></h2>
+<h2>util.pump(readableStream, writableStream, [callback])<span><a class="mark" href="#util_es_util_pump_readablestream_writablestream_callback" id="util_es_util_pump_readablestream_writablestream_callback">#</a></span></h2>
 <p>Experimental
 
 </p>
@@ -217,7 +218,7 @@ cerrado o cuando ocurre un error.
 
 
 </p>
-<h3>util.inherits(constructor, superConstructor)<span><a class="mark" href="#util_util_inherits_constructor_superconstructor" id="util_util_inherits_constructor_superconstructor">#</a></span></h3>
+<h3>util.inherits(constructor, superConstructor)<span><a class="mark" href="#util_es_util_inherits_constructor_superconstructor" id="util_es_util_inherits_constructor_superconstructor">#</a></span></h3>
 <p>Hereda los métodos del prototype desde un 
 <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/constructor">constructor</a>
 dentro de otro. El prototype del <code>constructor</code> será configurado a un nuevo
@@ -261,7 +262,7 @@ stream.write(&quot;It works!&quot;); // Received data: &quot;It works!&quot;</co
             <li><a href="http://twitter.com/nodejs_es" class="twitter">@nodejs_es</a></li>
         </ul>
 
-        <p>Copyright <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.18/LICENSE">license</a>.</p>
+        <p>Copyright <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.19/LICENSE">license</a>.</p>
     </div>
 </body>
 </html>

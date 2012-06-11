@@ -1,5 +1,5 @@
 {
-  "source": "doc/api/tty.markdown",
+  "source": "doc/api/tty-es.markdown",
   "modules": [
     {
       "textRaw": "TTY (Terminal)",

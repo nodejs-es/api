@@ -1,5 +1,5 @@
 {
-  "source": "doc/api/repl.markdown",
+  "source": "doc/api/repl-es.markdown",
   "modules": [
     {
       "textRaw": "REPL",

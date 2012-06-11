@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>console Node.js v0.6.18 Manual &amp; Documentación</title>
+  <title>console Node.js v0.6.19 Manual &amp; Documentación</title>
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/sh.css">
-  <link rel="canonical" href="http://nodejs.org/api/stdio.html">
+  <link rel="canonical" href="http://nodejs.org/api/stdio-es.html">
 </head>
-<body class="alt apidoc" id="api-section-stdio">
+<body class="alt apidoc" id="api-section-stdio-es">
+    <div id="bar"><span>es</span><a title="Documentación en inglés" class="mark mark-es" href="en/stdio.html">en</a></div>
     <div id="intro" class="interior">
-        <a href="http://www.nodejs.es/" title="Go back to the home page">
-            <img id="logo" src="images/logo-light-es.png" alt="node.js">
+        <a href="http://www.nodejs.es/" title="Volder el site nodejs.es">
+            <img id="logo" src="images/logo-light.png" alt="node.js">
         </a>
     </div>
     <div id="content" class="clearfix">
@@ -21,7 +22,7 @@
                 <li><a href="http://www.nodejs.es/" class="home">Home</a></li>
                 <li><a href="http://api.nodejs.es" class="docs current">Docs</a></li>
                 <li><a href="http://trabajos.nodejs.es/" class="jobs">Trabajos</a></li>
-                <li><a href="https://github.com/nodejs-es/api/" class="download">GitHub</a></li>
+                <li><a href="https://github.com/nodejs-es/node/" class="download">GitHub</a></li>
             </ul>
             <p class="twitter"><a href="http://twitter.com/nodejs_es">@nodejs_es</a></p>
         </div>
@@ -45,12 +46,12 @@
 
         <div id="column1" class="interior">
           <header>
-            <h1>Node.js v0.6.18 Manual &amp; Documentación</h1>
+            <h1>Node.js v0.6.19 Manual &amp; Documentación</h1>
             <div id="gtoc">
               <p>
-                <a href="index.html" name="toc">Indice</a> |
+                <a href="index.html" name="toc">Índice</a> |
                 <a href="all.html">Ver todo en una misma página</a> |
-                <a href="stdio.json">Ver como JSON</a>
+                <a href="stdio-es.json">Ver como JSON</a>
               </p>
             </div>
             <hr>
@@ -59,16 +60,16 @@
           <div id="toc">
             <h2>Tabla de Contenidos</h2>
             <ul>
-<li><a href="#stdio_console">console</a><ul>
-<li><a href="#stdio_console_log">console.log()</a></li>
-<li><a href="#stdio_console_info">console.info()</a></li>
-<li><a href="#stdio_console_warn">console.warn()</a></li>
-<li><a href="#stdio_console_error">console.error()</a></li>
-<li><a href="#stdio_console_dir_obj">console.dir(obj)</a></li>
-<li><a href="#stdio_console_time_label">console.time(label)</a></li>
-<li><a href="#stdio_console_timeend_label">console.timeEnd(label)</a></li>
-<li><a href="#stdio_console_trace">console.trace()</a></li>
-<li><a href="#stdio_console_assert">console.assert()</a></li>
+<li><a href="#stdio_es_console">console</a><ul>
+<li><a href="#stdio_es_console_log">console.log()</a></li>
+<li><a href="#stdio_es_console_info">console.info()</a></li>
+<li><a href="#stdio_es_console_warn">console.warn()</a></li>
+<li><a href="#stdio_es_console_error">console.error()</a></li>
+<li><a href="#stdio_es_console_dir_obj">console.dir(obj)</a></li>
+<li><a href="#stdio_es_console_time_label">console.time(label)</a></li>
+<li><a href="#stdio_es_console_timeend_label">console.timeEnd(label)</a></li>
+<li><a href="#stdio_es_console_trace">console.trace()</a></li>
+<li><a href="#stdio_es_console_assert">console.assert()</a></li>
 </ul>
 </li>
 </ul>
@@ -76,7 +77,7 @@
           </div>
 
           <div id="apicontent">
-            <h1>console<span><a class="mark" href="#stdio_console" id="stdio_console">#</a></span></h1>
+            <h1>console<span><a class="mark" href="#stdio_es_console" id="stdio_es_console">#</a></span></h1>
 <pre><code>Stability: 4 - API Frozen</code></pre>
 <ul>
 <li>{Object}</li>
@@ -88,7 +89,7 @@ provided by most web browsers, here the output is sent to stdout or stderr.
 
 
 </p>
-<h2>console.log()<span><a class="mark" href="#stdio_console_log" id="stdio_console_log">#</a></span></h2>
+<h2>console.log()<span><a class="mark" href="#stdio_es_console_log" id="stdio_es_console_log">#</a></span></h2>
 <p>Prints to stdout with newline. This function can take multiple arguments in a
 <code>printf()</code>-like way. Example:
 
@@ -99,25 +100,25 @@ is used on each argument.
 See <a href="util.html#util.format">util.format()</a> for more information.
 
 </p>
-<h2>console.info()<span><a class="mark" href="#stdio_console_info" id="stdio_console_info">#</a></span></h2>
+<h2>console.info()<span><a class="mark" href="#stdio_es_console_info" id="stdio_es_console_info">#</a></span></h2>
 <p>Same as <code>console.log</code>.
 
 </p>
-<h2>console.warn()<span><a class="mark" href="#stdio_console_warn" id="stdio_console_warn">#</a></span></h2>
-<h2>console.error()<span><a class="mark" href="#stdio_console_error" id="stdio_console_error">#</a></span></h2>
+<h2>console.warn()<span><a class="mark" href="#stdio_es_console_warn" id="stdio_es_console_warn">#</a></span></h2>
+<h2>console.error()<span><a class="mark" href="#stdio_es_console_error" id="stdio_es_console_error">#</a></span></h2>
 <p>Same as <code>console.log</code> but prints to stderr.
 
 </p>
-<h2>console.dir(obj)<span><a class="mark" href="#stdio_console_dir_obj" id="stdio_console_dir_obj">#</a></span></h2>
+<h2>console.dir(obj)<span><a class="mark" href="#stdio_es_console_dir_obj" id="stdio_es_console_dir_obj">#</a></span></h2>
 <p>Uses <code>util.inspect</code> on <code>obj</code> and prints resulting string to stderr.
 
 </p>
-<h2>console.time(label)<span><a class="mark" href="#stdio_console_time_label" id="stdio_console_time_label">#</a></span></h2>
+<h2>console.time(label)<span><a class="mark" href="#stdio_es_console_time_label" id="stdio_es_console_time_label">#</a></span></h2>
 <p>Mark a time.
 
 
 </p>
-<h2>console.timeEnd(label)<span><a class="mark" href="#stdio_console_timeend_label" id="stdio_console_timeend_label">#</a></span></h2>
+<h2>console.timeEnd(label)<span><a class="mark" href="#stdio_es_console_timeend_label" id="stdio_es_console_timeend_label">#</a></span></h2>
 <p>Finish timer, record output. Example
 
 </p>
@@ -126,11 +127,11 @@ for (var i = 0; i &lt; 100; i++) {
   ;
 }
 console.timeEnd(&apos;100-elements&apos;);</code></pre>
-<h2>console.trace()<span><a class="mark" href="#stdio_console_trace" id="stdio_console_trace">#</a></span></h2>
+<h2>console.trace()<span><a class="mark" href="#stdio_es_console_trace" id="stdio_es_console_trace">#</a></span></h2>
 <p>Print a stack trace to stderr of the current position.
 
 </p>
-<h2>console.assert()<span><a class="mark" href="#stdio_console_assert" id="stdio_console_assert">#</a></span></h2>
+<h2>console.assert()<span><a class="mark" href="#stdio_es_console_assert" id="stdio_es_console_assert">#</a></span></h2>
 <p>Same as <code>assert.ok()</code>.
 </p>
 
@@ -144,7 +145,7 @@ console.timeEnd(&apos;100-elements&apos;);</code></pre>
             <li><a href="http://twitter.com/nodejs_es" class="twitter">@nodejs_es</a></li>
         </ul>
 
-        <p>Copyright <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.18/LICENSE">license</a>.</p>
+        <p>Copyright <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.19/LICENSE">license</a>.</p>
     </div>
 </body>
 </html>

@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Cadena de consulta Node.js v0.6.18 Manual &amp; Documentación</title>
+  <title>Cadena de consulta Node.js v0.6.19 Manual &amp; Documentación</title>
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/sh.css">
-  <link rel="canonical" href="http://nodejs.org/api/querystring.html">
+  <link rel="canonical" href="http://nodejs.org/api/querystring-es.html">
 </head>
-<body class="alt apidoc" id="api-section-querystring">
+<body class="alt apidoc" id="api-section-querystring-es">
+    <div id="bar"><span>es</span><a title="Documentación en inglés" class="mark mark-es" href="en/querystring.html">en</a></div>
     <div id="intro" class="interior">
-        <a href="http://www.nodejs.es/" title="Go back to the home page">
-            <img id="logo" src="images/logo-light-es.png" alt="node.js">
+        <a href="http://www.nodejs.es/" title="Volder el site nodejs.es">
+            <img id="logo" src="images/logo-light.png" alt="node.js">
         </a>
     </div>
     <div id="content" class="clearfix">
@@ -21,7 +22,7 @@
                 <li><a href="http://www.nodejs.es/" class="home">Home</a></li>
                 <li><a href="http://api.nodejs.es" class="docs current">Docs</a></li>
                 <li><a href="http://trabajos.nodejs.es/" class="jobs">Trabajos</a></li>
-                <li><a href="https://github.com/nodejs-es/api/" class="download">GitHub</a></li>
+                <li><a href="https://github.com/nodejs-es/node/" class="download">GitHub</a></li>
             </ul>
             <p class="twitter"><a href="http://twitter.com/nodejs_es">@nodejs_es</a></p>
         </div>
@@ -45,12 +46,12 @@
 
         <div id="column1" class="interior">
           <header>
-            <h1>Node.js v0.6.18 Manual &amp; Documentación</h1>
+            <h1>Node.js v0.6.19 Manual &amp; Documentación</h1>
             <div id="gtoc">
               <p>
-                <a href="index.html" name="toc">Indice</a> |
+                <a href="index.html" name="toc">Índice</a> |
                 <a href="all.html">Ver todo en una misma página</a> |
-                <a href="querystring.json">Ver como JSON</a>
+                <a href="querystring-es.json">Ver como JSON</a>
               </p>
             </div>
             <hr>
@@ -59,11 +60,11 @@
           <div id="toc">
             <h2>Tabla de Contenidos</h2>
             <ul>
-<li><a href="#querystring_cadena_de_consulta">Cadena de consulta</a><ul>
-<li><a href="#querystring_querystring_stringify_obj_sep_eq">querystring.stringify(obj, sep=&apos;&amp;&apos;, eq=&apos;=&apos;)</a></li>
-<li><a href="#querystring_querystring_parse_str_sep_eq">querystring.parse(str, sep=&apos;&amp;&apos;, eq=&apos;=&apos;)</a></li>
-<li><a href="#querystring_querystring_escape">querystring.escape</a></li>
-<li><a href="#querystring_querystring_unescape">querystring.unescape</a></li>
+<li><a href="#querystring_es_cadena_de_consulta">Cadena de consulta</a><ul>
+<li><a href="#querystring_es_querystring_stringify_obj_sep_eq">querystring.stringify(obj, sep=&apos;&amp;&apos;, eq=&apos;=&apos;)</a></li>
+<li><a href="#querystring_es_querystring_parse_str_sep_eq">querystring.parse(str, sep=&apos;&amp;&apos;, eq=&apos;=&apos;)</a></li>
+<li><a href="#querystring_es_querystring_escape">querystring.escape</a></li>
+<li><a href="#querystring_es_querystring_unescape">querystring.unescape</a></li>
 </ul>
 </li>
 </ul>
@@ -71,12 +72,12 @@
           </div>
 
           <div id="apicontent">
-            <h1>Cadena de consulta<span><a class="mark" href="#querystring_cadena_de_consulta" id="querystring_cadena_de_consulta">#</a></span></h1>
+            <h1>Cadena de consulta<span><a class="mark" href="#querystring_es_cadena_de_consulta" id="querystring_es_cadena_de_consulta">#</a></span></h1>
 <p>Este módulo provee de utilidades para el tratamiento de cadenas de consultas.
 Se ofrece los siguientes métodos:
 
 </p>
-<h2>querystring.stringify(obj, sep=&apos;&amp;&apos;, eq=&apos;=&apos;)<span><a class="mark" href="#querystring_querystring_stringify_obj_sep_eq" id="querystring_querystring_stringify_obj_sep_eq">#</a></span></h2>
+<h2>querystring.stringify(obj, sep=&apos;&amp;&apos;, eq=&apos;=&apos;)<span><a class="mark" href="#querystring_es_querystring_stringify_obj_sep_eq" id="querystring_es_querystring_stringify_obj_sep_eq">#</a></span></h2>
 <p>Serializa un objeto a una cadena de consulta.
 Opcionalmente reemplaza el separador por omisión y la asignación de caracteres.
 
@@ -91,7 +92,7 @@ Opcionalmente reemplaza el separador por omisión y la asignación de caracteres
 querystring.stringify({foo: &apos;bar&apos;, baz: &apos;bob&apos;}, &apos;;&apos;, &apos;:&apos;)
 // devuelve
 &apos;foo:bar;baz:bob&apos;</code></pre>
-<h2>querystring.parse(str, sep=&apos;&amp;&apos;, eq=&apos;=&apos;)<span><a class="mark" href="#querystring_querystring_parse_str_sep_eq" id="querystring_querystring_parse_str_sep_eq">#</a></span></h2>
+<h2>querystring.parse(str, sep=&apos;&amp;&apos;, eq=&apos;=&apos;)<span><a class="mark" href="#querystring_es_querystring_parse_str_sep_eq" id="querystring_es_querystring_parse_str_sep_eq">#</a></span></h2>
 <p>Deserializa una cadena de consulta a un objeto.
 Opcionamente puede reemplazar el separador por omisión y asignar caracteres.
 
@@ -102,12 +103,12 @@ Opcionamente puede reemplazar el separador por omisión y asignar caracteres.
 <pre><code>querystring.parse(&apos;a=b&amp;b=c&apos;)
 // returns
 { a: &apos;b&apos;, b: &apos;c&apos; }</code></pre>
-<h2>querystring.escape<span><a class="mark" href="#querystring_querystring_escape" id="querystring_querystring_escape">#</a></span></h2>
+<h2>querystring.escape<span><a class="mark" href="#querystring_es_querystring_escape" id="querystring_es_querystring_escape">#</a></span></h2>
 <p>La función escape es usada por <code>querystring.stringify</code>,
 para proporcionar reemplazos si es necesario.
 
 </p>
-<h2>querystring.unescape<span><a class="mark" href="#querystring_querystring_unescape" id="querystring_querystring_unescape">#</a></span></h2>
+<h2>querystring.unescape<span><a class="mark" href="#querystring_es_querystring_unescape" id="querystring_es_querystring_unescape">#</a></span></h2>
 <p>La función unescape es usada por <code>querystring.parse</code>,
 para proporcionar reemplazos  si es necesario.
 </p>
@@ -122,7 +123,7 @@ para proporcionar reemplazos  si es necesario.
             <li><a href="http://twitter.com/nodejs_es" class="twitter">@nodejs_es</a></li>
         </ul>
 
-        <p>Copyright <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.18/LICENSE">license</a>.</p>
+        <p>Copyright <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.19/LICENSE">license</a>.</p>
     </div>
 </body>
 </html>

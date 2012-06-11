@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>process Node.js v0.6.18 Manual &amp; Documentación</title>
+  <title>process Node.js v0.6.19 Manual &amp; Documentación</title>
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/sh.css">
-  <link rel="canonical" href="http://nodejs.org/api/process.html">
+  <link rel="canonical" href="http://nodejs.org/api/process-es.html">
 </head>
-<body class="alt apidoc" id="api-section-process">
+<body class="alt apidoc" id="api-section-process-es">
+    <div id="bar"><span>es</span><a title="Documentación en inglés" class="mark mark-es" href="en/process.html">en</a></div>
     <div id="intro" class="interior">
-        <a href="http://www.nodejs.es/" title="Go back to the home page">
-            <img id="logo" src="images/logo-light-es.png" alt="node.js">
+        <a href="http://www.nodejs.es/" title="Volder el site nodejs.es">
+            <img id="logo" src="images/logo-light.png" alt="node.js">
         </a>
     </div>
     <div id="content" class="clearfix">
@@ -21,7 +22,7 @@
                 <li><a href="http://www.nodejs.es/" class="home">Home</a></li>
                 <li><a href="http://api.nodejs.es" class="docs current">Docs</a></li>
                 <li><a href="http://trabajos.nodejs.es/" class="jobs">Trabajos</a></li>
-                <li><a href="https://github.com/nodejs-es/api/" class="download">GitHub</a></li>
+                <li><a href="https://github.com/nodejs-es/node/" class="download">GitHub</a></li>
             </ul>
             <p class="twitter"><a href="http://twitter.com/nodejs_es">@nodejs_es</a></p>
         </div>
@@ -45,12 +46,12 @@
 
         <div id="column1" class="interior">
           <header>
-            <h1>Node.js v0.6.18 Manual &amp; Documentación</h1>
+            <h1>Node.js v0.6.19 Manual &amp; Documentación</h1>
             <div id="gtoc">
               <p>
-                <a href="index.html" name="toc">Indice</a> |
+                <a href="index.html" name="toc">Índice</a> |
                 <a href="all.html">Ver todo en una misma página</a> |
-                <a href="process.json">Ver como JSON</a>
+                <a href="process-es.json">Ver como JSON</a>
               </p>
             </div>
             <hr>
@@ -59,42 +60,42 @@
           <div id="toc">
             <h2>Tabla de Contenidos</h2>
             <ul>
-<li><a href="#process_process">process</a><ul>
-<li><a href="#process_evento_exit">Evento: &apos;exit&apos;</a></li>
-<li><a href="#process_evento_uncaughtexception">Evento: &apos;uncaughtException&apos;</a></li>
-<li><a href="#process_eventos_de_se_al">Eventos de señal</a></li>
-<li><a href="#process_process_stdout">process.stdout</a><ul>
-<li><a href="#process_process_stderr">process.stderr</a></li>
-<li><a href="#process_process_stdin">process.stdin</a></li>
-<li><a href="#process_process_argv">process.argv</a></li>
-<li><a href="#process_process_execpath">process.execPath</a></li>
+<li><a href="#process_es_process">process</a><ul>
+<li><a href="#process_es_evento_exit">Evento: &apos;exit&apos;</a></li>
+<li><a href="#process_es_evento_uncaughtexception">Evento: &apos;uncaughtException&apos;</a></li>
+<li><a href="#process_es_eventos_de_se_al">Eventos de señal</a></li>
+<li><a href="#process_es_process_stdout">process.stdout</a><ul>
+<li><a href="#process_es_process_stderr">process.stderr</a></li>
+<li><a href="#process_es_process_stdin">process.stdin</a></li>
+<li><a href="#process_es_process_argv">process.argv</a></li>
+<li><a href="#process_es_process_execpath">process.execPath</a></li>
 </ul>
 </li>
-<li><a href="#process_process_chdir_directory">process.chdir(directory)</a></li>
-<li><a href="#process_process_cwd">process.cwd()</a><ul>
-<li><a href="#process_process_env">process.env</a></li>
-<li><a href="#process_process_exit_code_0">process.exit(code=0)</a></li>
+<li><a href="#process_es_process_chdir_directory">process.chdir(directory)</a></li>
+<li><a href="#process_es_process_cwd">process.cwd()</a><ul>
+<li><a href="#process_es_process_env">process.env</a></li>
+<li><a href="#process_es_process_exit_code_0">process.exit(code=0)</a></li>
 </ul>
 </li>
-<li><a href="#process_process_getgid">process.getgid()</a><ul>
-<li><a href="#process_process_setgid_id">process.setgid(id)</a></li>
+<li><a href="#process_es_process_getgid">process.getgid()</a><ul>
+<li><a href="#process_es_process_setgid_id">process.setgid(id)</a></li>
 </ul>
 </li>
-<li><a href="#process_process_getuid">process.getuid()</a><ul>
-<li><a href="#process_process_setuid_id">process.setuid(id)</a></li>
+<li><a href="#process_es_process_getuid">process.getuid()</a><ul>
+<li><a href="#process_es_process_setuid_id">process.setuid(id)</a></li>
 </ul>
 </li>
-<li><a href="#process_process_version">process.version</a></li>
-<li><a href="#process_process_installprefix">process.installPrefix</a></li>
-<li><a href="#process_process_kill_pid_signal_sigterm">process.kill(pid, signal=&apos;SIGTERM&apos;)</a></li>
-<li><a href="#process_process_pid">process.pid</a><ul>
-<li><a href="#process_process_title">process.title</a></li>
+<li><a href="#process_es_process_version">process.version</a></li>
+<li><a href="#process_es_process_installprefix">process.installPrefix</a></li>
+<li><a href="#process_es_process_kill_pid_signal_sigterm">process.kill(pid, signal=&apos;SIGTERM&apos;)</a></li>
+<li><a href="#process_es_process_pid">process.pid</a><ul>
+<li><a href="#process_es_process_title">process.title</a></li>
 </ul>
 </li>
-<li><a href="#process_process_platform">process.platform</a><ul>
-<li><a href="#process_process_memoryusage">process.memoryUsage()</a></li>
-<li><a href="#process_process_nexttick_callback">process.nextTick(callback)</a></li>
-<li><a href="#process_process_umask_mask">process.umask([mask])</a></li>
+<li><a href="#process_es_process_platform">process.platform</a><ul>
+<li><a href="#process_es_process_memoryusage">process.memoryUsage()</a></li>
+<li><a href="#process_es_process_nexttick_callback">process.nextTick(callback)</a></li>
+<li><a href="#process_es_process_umask_mask">process.umask([mask])</a></li>
 </ul>
 </li>
 </ul>
@@ -104,13 +105,13 @@
           </div>
 
           <div id="apicontent">
-            <h1>process<span><a class="mark" href="#process_process" id="process_process">#</a></span></h1>
+            <h1>process<span><a class="mark" href="#process_es_process" id="process_es_process">#</a></span></h1>
 <p>El objeto <code>process</code> es un objeto global y puede ser accedido desde cualquier parte.
 Es una instancia de <code>EventEmitter</code>.
 
 
 </p>
-<h2>Evento: &apos;exit&apos;<span><a class="mark" href="#process_evento_exit" id="process_evento_exit">#</a></span></h2>
+<h2>Evento: &apos;exit&apos;<span><a class="mark" href="#process_es_evento_exit" id="process_es_evento_exit">#</a></span></h2>
 <p><code>function () {}</code>
 
 </p>
@@ -128,7 +129,7 @@ por lo tanto los timers no pueden ser programados.
   });
   console.log(&apos;Apunto de salir.&apos;);
 });</code></pre>
-<h2>Evento: &apos;uncaughtException&apos;<span><a class="mark" href="#process_evento_uncaughtexception" id="process_evento_uncaughtexception">#</a></span></h2>
+<h2>Evento: &apos;uncaughtException&apos;<span><a class="mark" href="#process_es_evento_uncaughtexception" id="process_es_evento_uncaughtexception">#</a></span></h2>
 <p><code>function (err) { }</code>
 
 </p>
@@ -158,7 +159,7 @@ ejecutarse eternamente, <code>uncaughtException</code> puede ser un mecanismo mu
 
 
 </p>
-<h2>Eventos de señal<span><a class="mark" href="#process_eventos_de_se_al" id="process_eventos_de_se_al">#</a></span></h2>
+<h2>Eventos de señal<span><a class="mark" href="#process_es_eventos_de_se_al" id="process_es_eventos_de_se_al">#</a></span></h2>
 <p><code>function () {}</code>
 
 </p>
@@ -180,7 +181,7 @@ de aplicaciones de terminal.
 
 
 </p>
-<h2>process.stdout<span><a class="mark" href="#process_process_stdout" id="process_process_stdout">#</a></span></h2>
+<h2>process.stdout<span><a class="mark" href="#process_es_process_stdout" id="process_es_process_stdout">#</a></span></h2>
 <p>Un <code>Stream de Escritura</code> para <code>stdout</code>.
 
 </p>
@@ -190,12 +191,12 @@ de aplicaciones de terminal.
 <pre><code>console.log = function (d) {
   process.stdout.write(d + &apos;\n&apos;);
 };</code></pre>
-<h3>process.stderr<span><a class="mark" href="#process_process_stderr" id="process_process_stderr">#</a></span></h3>
+<h3>process.stderr<span><a class="mark" href="#process_es_process_stderr" id="process_es_process_stderr">#</a></span></h3>
 <p>Un stream de escritura para stderr. Las escrituras en este stream son bloqueantes.
 
 
 </p>
-<h3>process.stdin<span><a class="mark" href="#process_process_stdin" id="process_process_stdin">#</a></span></h3>
+<h3>process.stdin<span><a class="mark" href="#process_es_process_stdin" id="process_es_process_stdin">#</a></span></h3>
 <p>Un <code>Stream de Lectura</code> para stdin. El stream stdin se detiene por defecto, así que 
 se tiene que llamar a <code>process.stdin.resume()</code> para leer de él.
 
@@ -213,7 +214,7 @@ process.stdin.on(&apos;data&apos;, function (chunk) {
 process.stdin.on(&apos;end&apos;, function () {
   process.stdout.write(&apos;end&apos;);
 });</code></pre>
-<h3>process.argv<span><a class="mark" href="#process_process_argv" id="process_process_argv">#</a></span></h3>
+<h3>process.argv<span><a class="mark" href="#process_es_process_argv" id="process_es_process_argv">#</a></span></h3>
 <p>Un array que contiene los argumentos de la línea de comandos. El primer elemento será
 &apos;node&apos;, el segundo elemento será el nombre del fichero JavaScript. Los
 siguientes elementos serán argumentos adicionales de la línea de comandos.
@@ -232,7 +233,7 @@ process.argv.forEach(function (val, index, array) {
 2: one
 3: two=three
 4: four</code></pre>
-<h3>process.execPath<span><a class="mark" href="#process_process_execpath" id="process_process_execpath">#</a></span></h3>
+<h3>process.execPath<span><a class="mark" href="#process_es_process_execpath" id="process_es_process_execpath">#</a></span></h3>
 <p>Es la ruta absoluta del ejecutable que inició el proceso.
 
 </p>
@@ -240,7 +241,7 @@ process.argv.forEach(function (val, index, array) {
 
 </p>
 <pre><code>/usr/local/bin/node</code></pre>
-<h2>process.chdir(directory)<span><a class="mark" href="#process_process_chdir_directory" id="process_process_chdir_directory">#</a></span></h2>
+<h2>process.chdir(directory)<span><a class="mark" href="#process_es_process_chdir_directory" id="process_es_process_chdir_directory">#</a></span></h2>
 <p>Cambia el directorio actual de trabajo del proceso o lanza una excepción si falla.
 
 </p>
@@ -252,17 +253,17 @@ try {
 catch (err) {
   console.log(&apos;chdir: &apos; + err);
 }</code></pre>
-<h2>process.cwd()<span><a class="mark" href="#process_process_cwd" id="process_process_cwd">#</a></span></h2>
+<h2>process.cwd()<span><a class="mark" href="#process_es_process_cwd" id="process_es_process_cwd">#</a></span></h2>
 <p>Devuelve el directorio actual de trabajo del proceso.
 
 </p>
 <pre><code>console.log(&apos;Directorio actual: &apos; + process.cwd());</code></pre>
-<h3>process.env<span><a class="mark" href="#process_process_env" id="process_process_env">#</a></span></h3>
+<h3>process.env<span><a class="mark" href="#process_es_process_env" id="process_es_process_env">#</a></span></h3>
 <p>Un objeto que contiene el entorno del usuario. Mirar environ(7).
 
 
 </p>
-<h3>process.exit(code=0)<span><a class="mark" href="#process_process_exit_code_0" id="process_process_exit_code_0">#</a></span></h3>
+<h3>process.exit(code=0)<span><a class="mark" href="#process_es_process_exit_code_0" id="process_es_process_exit_code_0">#</a></span></h3>
 <p>Termina el proceso con el <code>code</code> especificado.  Si se omite, <code>exit</code> usa el código 
 de &apos;éxito&apos; <code>0</code>.
 
@@ -275,13 +276,13 @@ de &apos;éxito&apos; <code>0</code>.
 
 
 </p>
-<h2>process.getgid()<span><a class="mark" href="#process_process_getgid" id="process_process_getgid">#</a></span></h2>
+<h2>process.getgid()<span><a class="mark" href="#process_es_process_getgid" id="process_es_process_getgid">#</a></span></h2>
 <p>Obtiene la identidad de grupo del proceso.  (Mirar getgid(2).)
 Es el id de grupo numérico, no el nombre del grupo.
 
 </p>
 <pre><code>console.log(&apos;Actual gid: &apos; + process.getgid());</code></pre>
-<h3>process.setgid(id)<span><a class="mark" href="#process_process_setgid_id" id="process_process_setgid_id">#</a></span></h3>
+<h3>process.setgid(id)<span><a class="mark" href="#process_es_process_setgid_id" id="process_es_process_setgid_id">#</a></span></h3>
 <p>Establece la identidad de grupo del proceso. (Mirar setgid(2).)  Acepta tanto 
 un ID numérico como una cadena de texto con el nombre del grupo. 
 Si se especifica el nombre del grupo, el método se bloquea mientras lo 
@@ -296,13 +297,13 @@ try {
 catch (err) {
   console.log(&apos;Fallo al cambiar el gid: &apos; + err);
 }</code></pre>
-<h2>process.getuid()<span><a class="mark" href="#process_process_getuid" id="process_process_getuid">#</a></span></h2>
+<h2>process.getuid()<span><a class="mark" href="#process_es_process_getuid" id="process_es_process_getuid">#</a></span></h2>
 <p>Obtiene la identidad de usuario del proceso. (Mirar getuid(2).)
 Es la id de usuario númerica, no el nombre de usuario.
 
 </p>
 <pre><code>console.log(&apos;Actual uid: &apos; + process.getuid());</code></pre>
-<h3>process.setuid(id)<span><a class="mark" href="#process_process_setuid_id" id="process_process_setuid_id">#</a></span></h3>
+<h3>process.setuid(id)<span><a class="mark" href="#process_es_process_setuid_id" id="process_es_process_setuid_id">#</a></span></h3>
 <p>Establece la identidad de usuario del proceso. (Mirar setuid(2).)  Acepta tanto 
 un ID numérico como una cadena de texto con el nombre de usuario.  Si se especifica 
 el nombre de usuario, el método se bloquea mientras lo resuelve a un ID numérico.
@@ -316,17 +317,17 @@ try {
 catch (err) {
   console.log(&apos;Fallo al establecer uid: &apos; + err);
 }</code></pre>
-<h2>process.version<span><a class="mark" href="#process_process_version" id="process_process_version">#</a></span></h2>
+<h2>process.version<span><a class="mark" href="#process_es_process_version" id="process_es_process_version">#</a></span></h2>
 <p>Una propiedad dentro del compilado que expone <code>NODE_VERSION</code>.
 
 </p>
 <pre><code>console.log(&apos;Versión: &apos; + process.version);</code></pre>
-<h2>process.installPrefix<span><a class="mark" href="#process_process_installprefix" id="process_process_installprefix">#</a></span></h2>
+<h2>process.installPrefix<span><a class="mark" href="#process_es_process_installprefix" id="process_es_process_installprefix">#</a></span></h2>
 <p>Una propiedad dentro del compilado que expone <code>NODE_PREFIX</code>.
 
 </p>
 <pre><code>console.log(&apos;Prefijo: &apos; + process.installPrefix);</code></pre>
-<h2>process.kill(pid, signal=&apos;SIGTERM&apos;)<span><a class="mark" href="#process_process_kill_pid_signal_sigterm" id="process_process_kill_pid_signal_sigterm">#</a></span></h2>
+<h2>process.kill(pid, signal=&apos;SIGTERM&apos;)<span><a class="mark" href="#process_es_process_kill_pid_signal_sigterm" id="process_es_process_kill_pid_signal_sigterm">#</a></span></h2>
 <p>Envia una señal a un proceso. <code>pid</code> es la id de proceso y <code>signal</code> es la cadena de 
 texto que describe la señal a enviar.  Los nombres de señales son cadenas de texto
  como &apos;SIGINT&apos; o &apos;SIGUSR1&apos;.  Si se omite, la señal será &apos;SIGTERM&apos;.
@@ -351,22 +352,22 @@ setTimeout(function () {
 }, 100);
 
 process.kill(process.pid, &apos;SIGHUP&apos;);</code></pre>
-<h2>process.pid<span><a class="mark" href="#process_process_pid" id="process_process_pid">#</a></span></h2>
+<h2>process.pid<span><a class="mark" href="#process_es_process_pid" id="process_es_process_pid">#</a></span></h2>
 <p>El PID del proceso.
 
 </p>
 <pre><code>console.log(&apos;El pid de este proceso es  &apos; + process.pid);</code></pre>
-<h3>process.title<span><a class="mark" href="#process_process_title" id="process_process_title">#</a></span></h3>
+<h3>process.title<span><a class="mark" href="#process_es_process_title" id="process_es_process_title">#</a></span></h3>
 <p>Getter/setter para establecer lo que mostrará &apos;ps&apos;.
 
 
 </p>
-<h2>process.platform<span><a class="mark" href="#process_process_platform" id="process_process_platform">#</a></span></h2>
+<h2>process.platform<span><a class="mark" href="#process_es_process_platform" id="process_es_process_platform">#</a></span></h2>
 <p>En que plataforma se está ejecutando. <code>&apos;linux2&apos;</code>, <code>&apos;darwin&apos;</code>, etc.
 
 </p>
 <pre><code>console.log(&apos;La plataforma es &apos; + process.platform);</code></pre>
-<h3>process.memoryUsage()<span><a class="mark" href="#process_process_memoryusage" id="process_process_memoryusage">#</a></span></h3>
+<h3>process.memoryUsage()<span><a class="mark" href="#process_es_process_memoryusage" id="process_es_process_memoryusage">#</a></span></h3>
 <p>Devuelve un objeto describiendo el uso de la memoria del proceso Node.
 
 </p>
@@ -384,7 +385,7 @@ console.log(util.inspect(process.memoryUsage()));</code></pre>
 
 
 </p>
-<h3>process.nextTick(callback)<span><a class="mark" href="#process_process_nexttick_callback" id="process_process_nexttick_callback">#</a></span></h3>
+<h3>process.nextTick(callback)<span><a class="mark" href="#process_es_process_nexttick_callback" id="process_es_process_nexttick_callback">#</a></span></h3>
 <p>En la siguiente iteración del bucle del evento se llama a callback.
 No es simplemente un alias para <code>setTimeout(fn, 0)</code> , es mucho
 más eficiente.
@@ -393,7 +394,7 @@ más eficiente.
 <pre><code>process.nextTick(function () {
   console.log(&apos;nextTick callback&apos;);
 });</code></pre>
-<h3>process.umask([mask])<span><a class="mark" href="#process_process_umask_mask" id="process_process_umask_mask">#</a></span></h3>
+<h3>process.umask([mask])<span><a class="mark" href="#process_es_process_umask_mask" id="process_es_process_umask_mask">#</a></span></h3>
 <p>Establece o lee la máscara del modo de creación del fichero del proceso. Los procesos 
 hijos heredan la máscara del proceso padre. Devuelve la antigua máscara si se pasa el argumento 
 <code>mask</code>, si no devuelve la máscara actual. 
@@ -415,7 +416,7 @@ console.log(&apos;Cambiada umask de: &apos; + oldmask.toString(8) +
             <li><a href="http://twitter.com/nodejs_es" class="twitter">@nodejs_es</a></li>
         </ul>
 
-        <p>Copyright <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.18/LICENSE">license</a>.</p>
+        <p>Copyright <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.19/LICENSE">license</a>.</p>
     </div>
 </body>
 </html>

@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Objetos Globales Node.js v0.6.18 Manual &amp; Documentación</title>
+  <title>Objetos Globales Node.js v0.6.19 Manual &amp; Documentación</title>
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/sh.css">
-  <link rel="canonical" href="http://nodejs.org/api/globals.html">
+  <link rel="canonical" href="http://nodejs.org/api/globals-es.html">
 </head>
-<body class="alt apidoc" id="api-section-globals">
+<body class="alt apidoc" id="api-section-globals-es">
+    <div id="bar"><span>es</span><a title="Documentación en inglés" class="mark mark-es" href="en/globals.html">en</a></div>
     <div id="intro" class="interior">
-        <a href="http://www.nodejs.es/" title="Go back to the home page">
-            <img id="logo" src="images/logo-light-es.png" alt="node.js">
+        <a href="http://www.nodejs.es/" title="Volder el site nodejs.es">
+            <img id="logo" src="images/logo-light.png" alt="node.js">
         </a>
     </div>
     <div id="content" class="clearfix">
@@ -21,7 +22,7 @@
                 <li><a href="http://www.nodejs.es/" class="home">Home</a></li>
                 <li><a href="http://api.nodejs.es" class="docs current">Docs</a></li>
                 <li><a href="http://trabajos.nodejs.es/" class="jobs">Trabajos</a></li>
-                <li><a href="https://github.com/nodejs-es/api/" class="download">GitHub</a></li>
+                <li><a href="https://github.com/nodejs-es/node/" class="download">GitHub</a></li>
             </ul>
             <p class="twitter"><a href="http://twitter.com/nodejs_es">@nodejs_es</a></p>
         </div>
@@ -45,12 +46,12 @@
 
         <div id="column1" class="interior">
           <header>
-            <h1>Node.js v0.6.18 Manual &amp; Documentación</h1>
+            <h1>Node.js v0.6.19 Manual &amp; Documentación</h1>
             <div id="gtoc">
               <p>
-                <a href="index.html" name="toc">Indice</a> |
+                <a href="index.html" name="toc">Índice</a> |
                 <a href="all.html">Ver todo en una misma página</a> |
-                <a href="globals.json">Ver como JSON</a>
+                <a href="globals-es.json">Ver como JSON</a>
               </p>
             </div>
             <hr>
@@ -59,26 +60,26 @@
           <div id="toc">
             <h2>Tabla de Contenidos</h2>
             <ul>
-<li><a href="#globals_objetos_globales">Objetos Globales</a><ul>
-<li><a href="#globals_global">global</a><ul>
-<li><a href="#globals_process">process</a></li>
-<li><a href="#globals_console">console</a></li>
+<li><a href="#globals_es_objetos_globales">Objetos Globales</a><ul>
+<li><a href="#globals_es_global">global</a><ul>
+<li><a href="#globals_es_process">process</a></li>
+<li><a href="#globals_es_console">console</a></li>
 </ul>
 </li>
-<li><a href="#globals_class_buffer">Class: Buffer</a></li>
-<li><a href="#globals_require">require()</a><ul>
-<li><a href="#globals_require_resolve">require.resolve()</a></li>
-<li><a href="#globals_require_cache">require.cache</a></li>
-<li><a href="#globals_filename">__filename</a></li>
+<li><a href="#globals_es_class_buffer">Class: Buffer</a></li>
+<li><a href="#globals_es_require">require()</a><ul>
+<li><a href="#globals_es_require_resolve">require.resolve()</a></li>
+<li><a href="#globals_es_require_cache">require.cache</a></li>
+<li><a href="#globals_es_filename">__filename</a></li>
 </ul>
 </li>
-<li><a href="#globals_dirname">__dirname</a></li>
-<li><a href="#globals_module">module</a></li>
-<li><a href="#globals_exports">exports</a></li>
-<li><a href="#globals_settimeout_cb_ms">setTimeout(cb, ms)</a></li>
-<li><a href="#globals_cleartimeout_t">clearTimeout(t)</a></li>
-<li><a href="#globals_setinterval_cb_ms">setInterval(cb, ms)</a></li>
-<li><a href="#globals_clearinterval_t">clearInterval(t)</a></li>
+<li><a href="#globals_es_dirname">__dirname</a></li>
+<li><a href="#globals_es_module">module</a></li>
+<li><a href="#globals_es_exports">exports</a></li>
+<li><a href="#globals_es_settimeout_cb_ms">setTimeout(cb, ms)</a></li>
+<li><a href="#globals_es_cleartimeout_t">clearTimeout(t)</a></li>
+<li><a href="#globals_es_setinterval_cb_ms">setInterval(cb, ms)</a></li>
+<li><a href="#globals_es_clearinterval_t">clearInterval(t)</a></li>
 </ul>
 </li>
 </ul>
@@ -86,14 +87,14 @@
           </div>
 
           <div id="apicontent">
-            <h1>Objetos Globales<span><a class="mark" href="#globals_objetos_globales" id="globals_objetos_globales">#</a></span></h1>
+            <h1>Objetos Globales<span><a class="mark" href="#globals_es_objetos_globales" id="globals_es_objetos_globales">#</a></span></h1>
 <!-- type=misc -->
 
 <p>Estos objectos estan disponibles en todos los módulos. Algunos de estos
 objetos no están en el ámbito global pero si a nivel módulo - Tómelo en cuenta.
 
 </p>
-<h2>global<span><a class="mark" href="#globals_global" id="globals_global">#</a></span></h2>
+<h2>global<span><a class="mark" href="#globals_es_global" id="globals_es_global">#</a></span></h2>
 <!-- type=global -->
 
 <ul>
@@ -105,7 +106,7 @@ En Node esto es diferente. El ambito del nivel superior no es el ambito global;
 <code>var something</code> dentro de un módulo de node será local para este módulo.
 
 </p>
-<h3>process<span><a class="mark" href="#globals_process" id="globals_process">#</a></span></h3>
+<h3>process<span><a class="mark" href="#globals_es_process" id="globals_es_process">#</a></span></h3>
 <!-- type=global -->
 
 <ul>
@@ -114,7 +115,7 @@ En Node esto es diferente. El ambito del nivel superior no es el ambito global;
 <p>El objeto process. Véase la sección <a href="process.html#process">objeto process</a>.
 
 </p>
-<h3>console<span><a class="mark" href="#globals_console" id="globals_console">#</a></span></h3>
+<h3>console<span><a class="mark" href="#globals_es_console" id="globals_es_console">#</a></span></h3>
 <!-- type=global -->
 
 <ul>
@@ -123,31 +124,32 @@ En Node esto es diferente. El ambito del nivel superior no es el ambito global;
 <p>Usado para la salida de pantalla de stdout y stderr. Véase la sección <a href="stdio.html">stdio</a>
 
 </p>
-<h2>Class: Buffer<span><a class="mark" href="#globals_class_buffer" id="globals_class_buffer">#</a></span></h2>
+<h2>Class: Buffer<span><a class="mark" href="#globals_es_class_buffer" id="globals_es_class_buffer">#</a></span></h2>
 <!-- type=global -->
 
 <ul>
 <li>{Function}</li>
 </ul>
-<p>Used to handle binary data. See the <a href="buffer.html">buffer section</a>.
+<p>Utilizado para manejar datos binarios . Véase la  <a href="buffer.html">sección buffer</a>.
 
 </p>
-<h2>require()<span><a class="mark" href="#globals_require" id="globals_require">#</a></span></h2>
+<h2>require()<span><a class="mark" href="#globals_es_require" id="globals_es_require">#</a></span></h2>
 <!-- type=var -->
 
 <ul>
 <li>{Function}</li>
 </ul>
-<p>Para requerir módulos. Véase la sección <a href="modules.html#modules">Módules</a>.
+<p>Para requerir módulos. Véase la <a href="modules.html#modules">sección Módules</a>.
 <code>require</code> no es global sino más bien local para cada módulo.
 
 </p>
-<h3>require.resolve()<span><a class="mark" href="#globals_require_resolve" id="globals_require_resolve">#</a></span></h3>
+<h3>require.resolve()<span><a class="mark" href="#globals_es_require_resolve" id="globals_es_require_resolve">#</a></span></h3>
 <p>Usa el mecanismo interno de <code>require()</code> para buscar la localización de un módulo,
-pero en lugar de cargar el módulo, solo devuelve el nombre del fichero que lo contine.
+pero en lugar de cargar el módulo, solo devuelve el nombre del fichero que lo
+contiene.
 
 </p>
-<h3>require.cache<span><a class="mark" href="#globals_require_cache" id="globals_require_cache">#</a></span></h3>
+<h3>require.cache<span><a class="mark" href="#globals_es_require_cache" id="globals_es_require_cache">#</a></span></h3>
 <div class="signature"><ul>
 <li><span class="type">Object</span></li>
 </div></ul>
@@ -155,7 +157,7 @@ pero en lugar de cargar el módulo, solo devuelve el nombre del fichero que lo c
 value from this object, the next <code>require</code> will reload the module.
 
 </p>
-<h3>__filename<span><a class="mark" href="#globals_filename" id="globals_filename">#</a></span></h3>
+<h3>__filename<span><a class="mark" href="#globals_es_filename" id="globals_es_filename">#</a></span></h3>
 <!-- type=var -->
 
 <ul>
@@ -175,7 +177,7 @@ del módulo es la ruta al mismo.
 <p><code>__filename</code> isn&apos;t actually a global but rather local to each module.
 
 </p>
-<h2>__dirname<span><a class="mark" href="#globals_dirname" id="globals_dirname">#</a></span></h2>
+<h2>__dirname<span><a class="mark" href="#globals_es_dirname" id="globals_es_dirname">#</a></span></h2>
 <!-- type=var -->
 
 <ul>
@@ -193,7 +195,7 @@ del módulo es la ruta al mismo.
 
 
 </p>
-<h2>module<span><a class="mark" href="#globals_module" id="globals_module">#</a></span></h2>
+<h2>module<span><a class="mark" href="#globals_es_module" id="globals_es_module">#</a></span></h2>
 <!-- type=var -->
 
 <ul>
@@ -208,7 +210,7 @@ del módulo es la ruta al mismo.
 información.
 
 </p>
-<h2>exports<span><a class="mark" href="#globals_exports" id="globals_exports">#</a></span></h2>
+<h2>exports<span><a class="mark" href="#globals_es_exports" id="globals_es_exports">#</a></span></h2>
 <!-- type=var -->
 
 <p>An object which is shared between all instances of the current module and
@@ -224,13 +226,14 @@ information.
 <p>See the <a href="modules.html">module section</a> for more information.
 
 </p>
-<h2>setTimeout(cb, ms)<span><a class="mark" href="#globals_settimeout_cb_ms" id="globals_settimeout_cb_ms">#</a></span></h2>
-<h2>clearTimeout(t)<span><a class="mark" href="#globals_cleartimeout_t" id="globals_cleartimeout_t">#</a></span></h2>
-<h2>setInterval(cb, ms)<span><a class="mark" href="#globals_setinterval_cb_ms" id="globals_setinterval_cb_ms">#</a></span></h2>
-<h2>clearInterval(t)<span><a class="mark" href="#globals_clearinterval_t" id="globals_clearinterval_t">#</a></span></h2>
+<h2>setTimeout(cb, ms)<span><a class="mark" href="#globals_es_settimeout_cb_ms" id="globals_es_settimeout_cb_ms">#</a></span></h2>
+<h2>clearTimeout(t)<span><a class="mark" href="#globals_es_cleartimeout_t" id="globals_es_cleartimeout_t">#</a></span></h2>
+<h2>setInterval(cb, ms)<span><a class="mark" href="#globals_es_setinterval_cb_ms" id="globals_es_setinterval_cb_ms">#</a></span></h2>
+<h2>clearInterval(t)<span><a class="mark" href="#globals_es_clearinterval_t" id="globals_es_clearinterval_t">#</a></span></h2>
 <!--type=global-->
 
-<p>The timer functions are global variables. See the <a href="timers.html">timers</a> section.</p>
+<p>The timer functions are global variables. See the <a href="timers.html">timers</a> section.
+</p>
 
           </div>
         </div>
@@ -242,7 +245,7 @@ information.
             <li><a href="http://twitter.com/nodejs_es" class="twitter">@nodejs_es</a></li>
         </ul>
 
-        <p>Copyright <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.18/LICENSE">license</a>.</p>
+        <p>Copyright <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.19/LICENSE">license</a>.</p>
     </div>
 </body>
 </html>

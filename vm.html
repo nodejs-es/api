@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Executing JavaScript Node.js v0.6.18 Manual &amp; Documentación</title>
+  <title>Executing JavaScript Node.js v0.6.19 Manual &amp; Documentación</title>
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/sh.css">
-  <link rel="canonical" href="http://nodejs.org/api/vm.html">
+  <link rel="canonical" href="http://nodejs.org/api/vm-es.html">
 </head>
-<body class="alt apidoc" id="api-section-vm">
+<body class="alt apidoc" id="api-section-vm-es">
+    <div id="bar"><span>es</span><a title="Documentación en inglés" class="mark mark-es" href="en/vm.html">en</a></div>
     <div id="intro" class="interior">
-        <a href="http://www.nodejs.es/" title="Go back to the home page">
-            <img id="logo" src="images/logo-light-es.png" alt="node.js">
+        <a href="http://www.nodejs.es/" title="Volder el site nodejs.es">
+            <img id="logo" src="images/logo-light.png" alt="node.js">
         </a>
     </div>
     <div id="content" class="clearfix">
@@ -21,7 +22,7 @@
                 <li><a href="http://www.nodejs.es/" class="home">Home</a></li>
                 <li><a href="http://api.nodejs.es" class="docs current">Docs</a></li>
                 <li><a href="http://trabajos.nodejs.es/" class="jobs">Trabajos</a></li>
-                <li><a href="https://github.com/nodejs-es/api/" class="download">GitHub</a></li>
+                <li><a href="https://github.com/nodejs-es/node/" class="download">GitHub</a></li>
             </ul>
             <p class="twitter"><a href="http://twitter.com/nodejs_es">@nodejs_es</a></p>
         </div>
@@ -45,12 +46,12 @@
 
         <div id="column1" class="interior">
           <header>
-            <h1>Node.js v0.6.18 Manual &amp; Documentación</h1>
+            <h1>Node.js v0.6.19 Manual &amp; Documentación</h1>
             <div id="gtoc">
               <p>
-                <a href="index.html" name="toc">Indice</a> |
+                <a href="index.html" name="toc">Índice</a> |
                 <a href="all.html">Ver todo en una misma página</a> |
-                <a href="vm.json">Ver como JSON</a>
+                <a href="vm-es.json">Ver como JSON</a>
               </p>
             </div>
             <hr>
@@ -59,15 +60,15 @@
           <div id="toc">
             <h2>Tabla de Contenidos</h2>
             <ul>
-<li><a href="#vm_executing_javascript">Executing JavaScript</a><ul>
-<li><a href="#vm_vm_runinthiscontext_code_filename">vm.runInThisContext(code, [filename])</a></li>
-<li><a href="#vm_vm_runinnewcontext_code_sandbox_filename">vm.runInNewContext(code, [sandbox], [filename])</a></li>
-<li><a href="#vm_vm_runincontext_code_context_filename">vm.runInContext(code, context, [filename])</a></li>
-<li><a href="#vm_vm_createcontext_initsandbox">vm.createContext([initSandbox])</a></li>
-<li><a href="#vm_vm_createscript_code_filename">vm.createScript(code, [filename])</a></li>
-<li><a href="#vm_class_script">Class: Script</a><ul>
-<li><a href="#vm_script_runinthiscontext">script.runInThisContext()</a></li>
-<li><a href="#vm_script_runinnewcontext_sandbox">script.runInNewContext([sandbox])</a></li>
+<li><a href="#vm_es_executing_javascript">Executing JavaScript</a><ul>
+<li><a href="#vm_es_vm_runinthiscontext_code_filename">vm.runInThisContext(code, [filename])</a></li>
+<li><a href="#vm_es_vm_runinnewcontext_code_sandbox_filename">vm.runInNewContext(code, [sandbox], [filename])</a></li>
+<li><a href="#vm_es_vm_runincontext_code_context_filename">vm.runInContext(code, context, [filename])</a></li>
+<li><a href="#vm_es_vm_createcontext_initsandbox">vm.createContext([initSandbox])</a></li>
+<li><a href="#vm_es_vm_createscript_code_filename">vm.createScript(code, [filename])</a></li>
+<li><a href="#vm_es_class_script">Class: Script</a><ul>
+<li><a href="#vm_es_script_runinthiscontext">script.runInThisContext()</a></li>
+<li><a href="#vm_es_script_runinnewcontext_sandbox">script.runInNewContext([sandbox])</a></li>
 </ul>
 </li>
 </ul>
@@ -77,7 +78,7 @@
           </div>
 
           <div id="apicontent">
-            <h1>Executing JavaScript<span><a class="mark" href="#vm_executing_javascript" id="vm_executing_javascript">#</a></span></h1>
+            <h1>Executing JavaScript<span><a class="mark" href="#vm_es_executing_javascript" id="vm_es_executing_javascript">#</a></span></h1>
 <pre><code>Stability: 3 - Stable</code></pre>
 <!--name=vm-->
 
@@ -89,7 +90,7 @@
 
 
 </p>
-<h2>vm.runInThisContext(code, [filename])<span><a class="mark" href="#vm_vm_runinthiscontext_code_filename" id="vm_vm_runinthiscontext_code_filename">#</a></span></h2>
+<h2>vm.runInThisContext(code, [filename])<span><a class="mark" href="#vm_es_vm_runinthiscontext_code_filename" id="vm_es_vm_runinthiscontext_code_filename">#</a></span></h2>
 <p><code>vm.runInThisContext()</code> compiles <code>code</code>, runs it and returns the result. Running
 code does not have access to local scope. <code>filename</code> is optional, it&apos;s used only
 in stack traces.
@@ -121,7 +122,7 @@ and throws an exception.
 
 
 </p>
-<h2>vm.runInNewContext(code, [sandbox], [filename])<span><a class="mark" href="#vm_vm_runinnewcontext_code_sandbox_filename" id="vm_vm_runinnewcontext_code_sandbox_filename">#</a></span></h2>
+<h2>vm.runInNewContext(code, [sandbox], [filename])<span><a class="mark" href="#vm_es_vm_runinnewcontext_code_sandbox_filename" id="vm_es_vm_runinnewcontext_code_sandbox_filename">#</a></span></h2>
 <p><code>vm.runInNewContext</code> compiles <code>code</code>, then runs it in <code>sandbox</code> and returns the
 result. Running code does not have access to local scope. The object <code>sandbox</code>
 will be used as the global object for <code>code</code>.
@@ -152,7 +153,7 @@ requires a separate process.
 and throws an exception.
 
 </p>
-<h2>vm.runInContext(code, context, [filename])<span><a class="mark" href="#vm_vm_runincontext_code_context_filename" id="vm_vm_runincontext_code_context_filename">#</a></span></h2>
+<h2>vm.runInContext(code, context, [filename])<span><a class="mark" href="#vm_es_vm_runincontext_code_context_filename" id="vm_es_vm_runincontext_code_context_filename">#</a></span></h2>
 <p><code>vm.runInContext</code> compiles <code>code</code>, then runs it in <code>context</code> and returns the
 result. A (V8) context comprises a global object, together with a set of
 built-in objects and functions. Running code does not have access to local scope
@@ -189,14 +190,14 @@ requires a separate process.
 and throws an exception.
 
 </p>
-<h2>vm.createContext([initSandbox])<span><a class="mark" href="#vm_vm_createcontext_initsandbox" id="vm_vm_createcontext_initsandbox">#</a></span></h2>
+<h2>vm.createContext([initSandbox])<span><a class="mark" href="#vm_es_vm_createcontext_initsandbox" id="vm_es_vm_createcontext_initsandbox">#</a></span></h2>
 <p><code>vm.createContext</code> creates a new context which is suitable for use as the 2nd argument of a subsequent
 call to <code>vm.runInContext</code>. A (V8) context comprises a global object together with a set of
 build-in objects and functions. The optional argument <code>initSandbox</code> will be shallow-copied
 to seed the initial contents of the global object used by the context.
 
 </p>
-<h2>vm.createScript(code, [filename])<span><a class="mark" href="#vm_vm_createscript_code_filename" id="vm_vm_createscript_code_filename">#</a></span></h2>
+<h2>vm.createScript(code, [filename])<span><a class="mark" href="#vm_es_vm_createscript_code_filename" id="vm_es_vm_createscript_code_filename">#</a></span></h2>
 <p><code>createScript</code> compiles <code>code</code> but does not run it. Instead, it returns a
 <code>vm.Script</code> object representing this compiled code. This script can be run
 later many times using methods below. The returned script is not bound to any
@@ -209,11 +210,11 @@ and throws an exception.
 
 
 </p>
-<h2>Class: Script<span><a class="mark" href="#vm_class_script" id="vm_class_script">#</a></span></h2>
+<h2>Class: Script<span><a class="mark" href="#vm_es_class_script" id="vm_es_class_script">#</a></span></h2>
 <p>A class for running scripts.  Returned by vm.createScript.
 
 </p>
-<h3>script.runInThisContext()<span><a class="mark" href="#vm_script_runinthiscontext" id="vm_script_runinthiscontext">#</a></span></h3>
+<h3>script.runInThisContext()<span><a class="mark" href="#vm_es_script_runinthiscontext" id="vm_es_script_runinthiscontext">#</a></span></h3>
 <p>Similar to <code>vm.runInThisContext</code> but a method of a precompiled <code>Script</code> object.
 <code>script.runInThisContext</code> runs the code of <code>script</code> and returns the result.
 Running code does not have access to local scope, but does have access to the <code>global</code> object
@@ -236,7 +237,7 @@ for (var i = 0; i &lt; 1000 ; i += 1) {
 console.log(globalVar);
 
 // 1000</code></pre>
-<h3>script.runInNewContext([sandbox])<span><a class="mark" href="#vm_script_runinnewcontext_sandbox" id="vm_script_runinnewcontext_sandbox">#</a></span></h3>
+<h3>script.runInNewContext([sandbox])<span><a class="mark" href="#vm_es_script_runinnewcontext_sandbox" id="vm_es_script_runinnewcontext_sandbox">#</a></span></h3>
 <p>Similar to <code>vm.runInNewContext</code> a method of a precompiled <code>Script</code> object.
 <code>script.runInNewContext</code> runs the code of <code>script</code> with <code>sandbox</code> as the global object and returns the result.
 Running code does not have access to local scope. <code>sandbox</code> is optional.
@@ -276,7 +277,7 @@ requires a separate process.</p>
             <li><a href="http://twitter.com/nodejs_es" class="twitter">@nodejs_es</a></li>
         </ul>
 
-        <p>Copyright <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.18/LICENSE">license</a>.</p>
+        <p>Copyright <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.19/LICENSE">license</a>.</p>
     </div>
 </body>
 </html>

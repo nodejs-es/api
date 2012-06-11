@@ -1,5 +1,5 @@
 {
-  "source": "doc/api/all.markdown",
+  "source": "doc/api/all-es.markdown",
   "miscs": [
     {
       "textRaw": "Acerca de esta documentación",
@@ -60,13 +60,13 @@
           "textRaw": "Class: Buffer",
           "type": "global",
           "name": "Buffer",
-          "desc": "<p>Used to handle binary data. See the <a href=\"buffer.html\">buffer section</a>.\n\n</p>\n"
+          "desc": "<p>Utilizado para manejar datos binarios . Véase la  <a href=\"buffer.html\">sección buffer</a>.\n\n</p>\n"
         },
         {
           "textRaw": "clearInterval(t)",
           "type": "global",
           "name": "clearInterval",
-          "desc": "<p>The timer functions are global variables. See the <a href=\"timers.html\">timers</a> section.\n</p>\n"
+          "desc": "<p>The timer functions are global variables. See the <a href=\"timers.html\">timers</a> section.\n\n</p>\n"
         },
         {
           "textRaw": "console",
@@ -198,13 +198,13 @@
           "textRaw": "require()",
           "type": "var",
           "name": "require",
-          "desc": "<p>Para requerir módulos. Véase la sección <a href=\"modules.html#modules\">Módules</a>.\n<code>require</code> no es global sino más bien local para cada módulo.\n\n</p>\n",
+          "desc": "<p>Para requerir módulos. Véase la <a href=\"modules.html#modules\">sección Módules</a>.\n<code>require</code> no es global sino más bien local para cada módulo.\n\n</p>\n",
           "methods": [
             {
               "textRaw": "require.resolve()",
               "type": "method",
               "name": "resolve",
-              "desc": "<p>Usa el mecanismo interno de <code>require()</code> para buscar la localización de un módulo,\npero en lugar de cargar el módulo, solo devuelve el nombre del fichero que lo contine.\n\n</p>\n",
+              "desc": "<p>Usa el mecanismo interno de <code>require()</code> para buscar la localización de un módulo,\npero en lugar de cargar el módulo, solo devuelve el nombre del fichero que lo\ncontiene.\n\n</p>\n",
               "signatures": [
                 {
                   "params": []
@@ -252,7 +252,7 @@
           "textRaw": "setInterval(cb, ms)",
           "type": "method",
           "name": "setInterval",
-          "desc": "<p>The timer functions are global variables. See the <a href=\"timers.html\">timers</a> section.\n</p>\n",
+          "desc": "<p>The timer functions are global variables. See the <a href=\"timers.html\">timers</a> section.\n\n</p>\n",
           "signatures": [
             {
               "params": [
@@ -338,13 +338,13 @@
       "textRaw": "Class: Buffer",
       "type": "global",
       "name": "Buffer",
-      "desc": "<p>Used to handle binary data. See the <a href=\"buffer.html\">buffer section</a>.\n\n</p>\n"
+      "desc": "<p>Utilizado para manejar datos binarios . Véase la  <a href=\"buffer.html\">sección buffer</a>.\n\n</p>\n"
     },
     {
       "textRaw": "clearInterval(t)",
       "type": "global",
       "name": "clearInterval",
-      "desc": "<p>The timer functions are global variables. See the <a href=\"timers.html\">timers</a> section.\n</p>\n"
+      "desc": "<p>The timer functions are global variables. See the <a href=\"timers.html\">timers</a> section.\n\n</p>\n"
     },
     {
       "textRaw": "console",
@@ -476,13 +476,13 @@
       "textRaw": "require()",
       "type": "var",
       "name": "require",
-      "desc": "<p>Para requerir módulos. Véase la sección <a href=\"modules.html#modules\">Módules</a>.\n<code>require</code> no es global sino más bien local para cada módulo.\n\n</p>\n",
+      "desc": "<p>Para requerir módulos. Véase la <a href=\"modules.html#modules\">sección Módules</a>.\n<code>require</code> no es global sino más bien local para cada módulo.\n\n</p>\n",
       "methods": [
         {
           "textRaw": "require.resolve()",
           "type": "method",
           "name": "resolve",
-          "desc": "<p>Usa el mecanismo interno de <code>require()</code> para buscar la localización de un módulo,\npero en lugar de cargar el módulo, solo devuelve el nombre del fichero que lo contine.\n\n</p>\n",
+          "desc": "<p>Usa el mecanismo interno de <code>require()</code> para buscar la localización de un módulo,\npero en lugar de cargar el módulo, solo devuelve el nombre del fichero que lo\ncontiene.\n\n</p>\n",
           "signatures": [
             {
               "params": []
@@ -530,7 +530,7 @@
       "textRaw": "setInterval(cb, ms)",
       "type": "method",
       "name": "setInterval",
-      "desc": "<p>The timer functions are global variables. See the <a href=\"timers.html\">timers</a> section.\n</p>\n",
+      "desc": "<p>The timer functions are global variables. See the <a href=\"timers.html\">timers</a> section.\n\n</p>\n",
       "signatures": [
         {
           "params": [
@@ -9055,7 +9055,7 @@
           "type": "event",
           "name": "death",
           "params": [],
-          "desc": "<p>Same as the <code>cluster.on(&apos;death&apos;)</code> event, but emits only when the state change\non the specified worker.\n\n</p>\n<pre><code>cluster.fork().on(&apos;death&apos;, function (worker) {\n  // Worker has died\n};</code></pre>\n<p>@include appendix_1</p>\n"
+          "desc": "<p>Same as the <code>cluster.on(&apos;death&apos;)</code> event, but emits only when the state change\non the specified worker.\n\n</p>\n<pre><code>cluster.fork().on(&apos;death&apos;, function (worker) {\n  // Worker has died\n};</code></pre>\n"
         }
       ],
       "methods": [
@@ -9238,6 +9238,13 @@
       ],
       "type": "module",
       "displayName": "Cluster"
+    },
+    {
+      "textRaw": "Apéndice 1 - Módulos de terceros",
+      "name": "apéndice_1_-_módulos_de_terceros",
+      "desc": "<p>Existen muchos módulos de terceros para Node. En el momento de escribir esto,\nAgosto 2010, el repositorio principal de módulos es \n<a href=\"http://github.com/joyent/node/wiki/modules\">esta página del wiki</a>.\n\n</p>\n<p>Este apéndice pretente ser una pequeña guía de ayuda a los recién llegados a\nque puedan encontrar rápidamente módulos de calidad. No prentede ser una\nlista completa. Ya que se puede encontrar mejores módulos y más completos en\ndonde sea.\n\n</p>\n<ul>\n<li><p>Module Installer: <a href=\"http://github.com/isaacs/npm\">npm</a></p>\n</li>\n<li><p>HTTP Middleware: <a href=\"http://github.com/senchalabs/connect\">Connect</a></p>\n</li>\n<li><p>Web Framework: <a href=\"http://github.com/visionmedia/express\">Express</a></p>\n</li>\n<li><p>Web Sockets: <a href=\"https://github.com/learnboost/socket.io\">Socket.IO</a></p>\n</li>\n<li><p>HTML Parsing: <a href=\"http://github.com/aredridel/html5\">HTML5</a></p>\n</li>\n<li><p><a href=\"http://github.com/agnat/node_mdns\">mDNS/Zeroconf/Bonjour</a></p>\n</li>\n<li><p><a href=\"https://github.com/postwait/node-amqp\">RabbitMQ, AMQP</a></p>\n</li>\n<li><p><a href=\"https://github.com/felixge/node-mysql\">mysql</a></p>\n</li>\n<li><p>Serialization: <a href=\"https://github.com/pgriess/node-msgpack\">msgpack</a></p>\n</li>\n<li><p>Scraping: <a href=\"https://github.com/silentrob/Apricot\">Apricot</a></p>\n</li>\n<li><p>Debugger: <a href=\"https://github.com/smtlaissezfaire/ndb\">ndb</a> is a CLI debugger\n<a href=\"https://github.com/dannycoates/node-inspector\">inspector</a> is a web based\ntool.</p>\n</li>\n<li><p><a href=\"https://github.com/mranney/node_pcap\">pcap binding</a></p>\n</li>\n<li><p><a href=\"https://github.com/mscdex/node-ncurses\">ncurses</a></p>\n</li>\n<li><p>Testing/TDD/BDD: <a href=\"http://vowsjs.org/\">vows</a>,\n<a href=\"https://github.com/visionmedia/mocha\">mocha</a>,\n<a href=\"https://github.com/tmpvar/mjsunit.runner\">mjsunit.runner</a></p>\n</li>\n</ul>\n<p>Parches a esta lista son bienvenidos.\n</p>\n",
+      "type": "module",
+      "displayName": "Apéndice 1 - Módulos de terceros"
     }
   ],
   "stability": 3,

@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>TLS (SSL) Node.js v0.6.18 Manual &amp; Documentación</title>
+  <title>TLS (SSL) Node.js v0.6.19 Manual &amp; Documentación</title>
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/sh.css">
-  <link rel="canonical" href="http://nodejs.org/api/tls.html">
+  <link rel="canonical" href="http://nodejs.org/api/tls-es.html">
 </head>
-<body class="alt apidoc" id="api-section-tls">
+<body class="alt apidoc" id="api-section-tls-es">
+    <div id="bar"><span>es</span><a title="Documentación en inglés" class="mark mark-es" href="en/tls.html">en</a></div>
     <div id="intro" class="interior">
-        <a href="http://www.nodejs.es/" title="Go back to the home page">
-            <img id="logo" src="images/logo-light-es.png" alt="node.js">
+        <a href="http://www.nodejs.es/" title="Volder el site nodejs.es">
+            <img id="logo" src="images/logo-light.png" alt="node.js">
         </a>
     </div>
     <div id="content" class="clearfix">
@@ -21,7 +22,7 @@
                 <li><a href="http://www.nodejs.es/" class="home">Home</a></li>
                 <li><a href="http://api.nodejs.es" class="docs current">Docs</a></li>
                 <li><a href="http://trabajos.nodejs.es/" class="jobs">Trabajos</a></li>
-                <li><a href="https://github.com/nodejs-es/api/" class="download">GitHub</a></li>
+                <li><a href="https://github.com/nodejs-es/node/" class="download">GitHub</a></li>
             </ul>
             <p class="twitter"><a href="http://twitter.com/nodejs_es">@nodejs_es</a></p>
         </div>
@@ -45,12 +46,12 @@
 
         <div id="column1" class="interior">
           <header>
-            <h1>Node.js v0.6.18 Manual &amp; Documentación</h1>
+            <h1>Node.js v0.6.19 Manual &amp; Documentación</h1>
             <div id="gtoc">
               <p>
-                <a href="index.html" name="toc">Indice</a> |
+                <a href="index.html" name="toc">Índice</a> |
                 <a href="all.html">Ver todo en una misma página</a> |
-                <a href="tls.json">Ver como JSON</a>
+                <a href="tls-es.json">Ver como JSON</a>
               </p>
             </div>
             <hr>
@@ -59,16 +60,16 @@
           <div id="toc">
             <h2>Tabla de Contenidos</h2>
             <ul>
-<li><a href="#tls_tls_ssl">TLS (SSL)</a><ul>
-<li><a href="#tls_s_tls_connect_port_host_options_callback">s = tls.connect(port, [host], [options], callback)</a></li>
-<li><a href="#tls_starttls">STARTTLS</a></li>
-<li><a href="#tls_tls_server">tls.Server</a><ul>
-<li><a href="#tls_tls_createserver_options_secureconnectionlistener">tls.createServer(options, secureConnectionListener)</a></li>
-<li><a href="#tls_event_secureconnection">Event: &apos;secureConnection&apos;</a></li>
-<li><a href="#tls_server_listen_port_host_callback">server.listen(port, [host], [callback])</a></li>
-<li><a href="#tls_server_close">server.close()</a></li>
-<li><a href="#tls_server_maxconnections">server.maxConnections</a></li>
-<li><a href="#tls_server_connections">server.connections</a></li>
+<li><a href="#tls_es_tls_ssl">TLS (SSL)</a><ul>
+<li><a href="#tls_es_s_tls_connect_port_host_options_callback">s = tls.connect(port, [host], [options], callback)</a></li>
+<li><a href="#tls_es_starttls">STARTTLS</a></li>
+<li><a href="#tls_es_tls_server">tls.Server</a><ul>
+<li><a href="#tls_es_tls_createserver_options_secureconnectionlistener">tls.createServer(options, secureConnectionListener)</a></li>
+<li><a href="#tls_es_event_secureconnection">Event: &apos;secureConnection&apos;</a></li>
+<li><a href="#tls_es_server_listen_port_host_callback">server.listen(port, [host], [callback])</a></li>
+<li><a href="#tls_es_server_close">server.close()</a></li>
+<li><a href="#tls_es_server_maxconnections">server.maxConnections</a></li>
+<li><a href="#tls_es_server_connections">server.connections</a></li>
 </ul>
 </li>
 </ul>
@@ -78,7 +79,7 @@
           </div>
 
           <div id="apicontent">
-            <h1>TLS (SSL)<span><a class="mark" href="#tls_tls_ssl" id="tls_tls_ssl">#</a></span></h1>
+            <h1>TLS (SSL)<span><a class="mark" href="#tls_es_tls_ssl" id="tls_es_tls_ssl">#</a></span></h1>
 <p>Usa <code>require(&apos;tls&apos;)</code> para acceder a este módulo.
 
 </p>
@@ -103,7 +104,7 @@
 <p>(TODO: documentos sobre la creación de una CA, por ahora los usuarios interesados deberían echar un vistazo a <code>test/fixtures/keys/Makefile</code> en el código fuente de Node)
 
 </p>
-<h2>s = tls.connect(port, [host], [options], callback)<span><a class="mark" href="#tls_s_tls_connect_port_host_options_callback" id="tls_s_tls_connect_port_host_options_callback">#</a></span></h2>
+<h2>s = tls.connect(port, [host], [options], callback)<span><a class="mark" href="#tls_es_s_tls_connect_port_host_options_callback" id="tls_es_s_tls_connect_port_host_options_callback">#</a></span></h2>
 <p>Crea una nueva conexión cliente al <code>port</code> y al <code>host</code> dados. (<code>host</code> por defecto es <code>localhost</code>.) <code>options</code> debe ser un objeto que especifique:
 
 </p>
@@ -122,7 +123,7 @@
 
 
 </p>
-<h2>STARTTLS<span><a class="mark" href="#tls_starttls" id="tls_starttls">#</a></span></h2>
+<h2>STARTTLS<span><a class="mark" href="#tls_es_starttls" id="tls_es_starttls">#</a></span></h2>
 <p>In the v0.4 branch no function exists for starting a TLS session on an
 already existing TCP connection.  This is possible it just requires a bit of
 work. The technique is to use <code>tls.createSecurePair()</code> which returns two
@@ -136,7 +137,7 @@ piped to the socket, the plaintext stream is what the user interacts with therea
 
 
 </p>
-<h2>tls.Server<span><a class="mark" href="#tls_tls_server" id="tls_tls_server">#</a></span></h2>
+<h2>tls.Server<span><a class="mark" href="#tls_es_tls_server" id="tls_es_tls_server">#</a></span></h2>
 <p>Esta clase es una subclase de <code>net.Server</code> y tiene los mismos métodos.
 En lugar de aceptar solo conexiones TCP en bruto, acepta conexiones encriptadas usando TLS o SSL.
 
@@ -160,7 +161,7 @@ tls.createServer(options, function (s) {
 
 </p>
 <pre><code>openssl s_client -connect 127.0.0.1:8000</code></pre>
-<h3>tls.createServer(options, secureConnectionListener)<span><a class="mark" href="#tls_tls_createserver_options_secureconnectionlistener" id="tls_tls_createserver_options_secureconnectionlistener">#</a></span></h3>
+<h3>tls.createServer(options, secureConnectionListener)<span><a class="mark" href="#tls_es_tls_createserver_options_secureconnectionlistener" id="tls_es_tls_createserver_options_secureconnectionlistener">#</a></span></h3>
 <p>Este es un constructor para la clase <code>tls.Server</code>. El objeto options puede contener:
 
 </p>
@@ -176,7 +177,7 @@ tls.createServer(options, function (s) {
 <li><p><code>rejectUnauthorized</code>: Si es <code>true</code> el servidor rechazará cualquier conexión no autorizada por la lista de CAs suministradas. Esta opción solo tiene efecto si <code>requestCert</code> es <code>true</code>. Por defecto: <code>false</code>.</p>
 </li>
 </ul>
-<h3>Event: &apos;secureConnection&apos;<span><a class="mark" href="#tls_event_secureconnection" id="tls_event_secureconnection">#</a></span></h3>
+<h3>Event: &apos;secureConnection&apos;<span><a class="mark" href="#tls_es_event_secureconnection" id="tls_es_event_secureconnection">#</a></span></h3>
 <p><code>function (cleartextStream) {}</code>
 
 </p>
@@ -186,7 +187,7 @@ tls.createServer(options, function (s) {
 <p><code>cleartextStream.authorized</code> es un valor boolean que indica si el cliente está verificado por una de las CA suministradas por el servidor. Si <code>cleartextStream.authorized</code> es false, entonces <code>cleartextStream.authorizationError</code> describe como falló la autorización. Relacionado pero merece mencionarse: dependiendo de la configuración del servidor TLS, tus autorizaciones de conexión pueden ser aceptadas.
 
 </p>
-<h3>server.listen(port, [host], [callback])<span><a class="mark" href="#tls_server_listen_port_host_callback" id="tls_server_listen_port_host_callback">#</a></span></h3>
+<h3>server.listen(port, [host], [callback])<span><a class="mark" href="#tls_es_server_listen_port_host_callback" id="tls_es_server_listen_port_host_callback">#</a></span></h3>
 <p>Empieza aceptando conexiones en el <code>port</code> y el <code>host</code> especificados. Si el <code>host</code> es omitido, el servidor aceptará conexiones dirigidas a cualquier dirección IPv4 (<code>INADDR_ANY</code>).
 
 </p>
@@ -196,15 +197,15 @@ tls.createServer(options, function (s) {
 <p>Mirar <code>net.Server</code> para más información.
 
 </p>
-<h3>server.close()<span><a class="mark" href="#tls_server_close" id="tls_server_close">#</a></span></h3>
+<h3>server.close()<span><a class="mark" href="#tls_es_server_close" id="tls_es_server_close">#</a></span></h3>
 <p>Detiene el servidor, dejando de aceptar conexiones. Esta función es asíncrona, el servidor finalmente se cierra cuando emite un evento <code>&apos;close&apos;</code>.
 
 </p>
-<h3>server.maxConnections<span><a class="mark" href="#tls_server_maxconnections" id="tls_server_maxconnections">#</a></span></h3>
+<h3>server.maxConnections<span><a class="mark" href="#tls_es_server_maxconnections" id="tls_es_server_maxconnections">#</a></span></h3>
 <p>Establece esta propiedad para rechazar conexiones cuando el número de conexiones del servidor sea alta.
 
 </p>
-<h3>server.connections<span><a class="mark" href="#tls_server_connections" id="tls_server_connections">#</a></span></h3>
+<h3>server.connections<span><a class="mark" href="#tls_es_server_connections" id="tls_es_server_connections">#</a></span></h3>
 <p>Número de conexiones concurrentes en el servidor.
 </p>
 
@@ -218,7 +219,7 @@ tls.createServer(options, function (s) {
             <li><a href="http://twitter.com/nodejs_es" class="twitter">@nodejs_es</a></li>
         </ul>
 
-        <p>Copyright <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.18/LICENSE">license</a>.</p>
+        <p>Copyright <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.19/LICENSE">license</a>.</p>
     </div>
 </body>
 </html>

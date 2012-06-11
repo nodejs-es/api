@@ -1,5 +1,5 @@
 {
-  "source": "doc/api/querystring.markdown",
+  "source": "doc/api/querystring-es.markdown",
   "modules": [
     {
       "textRaw": "Cadena de consulta",

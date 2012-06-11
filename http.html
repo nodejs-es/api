@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>HTTP Node.js v0.6.18 Manual &amp; Documentación</title>
+  <title>HTTP Node.js v0.6.19 Manual &amp; Documentación</title>
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/sh.css">
-  <link rel="canonical" href="http://nodejs.org/api/http.html">
+  <link rel="canonical" href="http://nodejs.org/api/http-es.html">
 </head>
-<body class="alt apidoc" id="api-section-http">
+<body class="alt apidoc" id="api-section-http-es">
+    <div id="bar"><span>es</span><a title="Documentación en inglés" class="mark mark-es" href="en/http.html">en</a></div>
     <div id="intro" class="interior">
-        <a href="http://www.nodejs.es/" title="Go back to the home page">
-            <img id="logo" src="images/logo-light-es.png" alt="node.js">
+        <a href="http://www.nodejs.es/" title="Volder el site nodejs.es">
+            <img id="logo" src="images/logo-light.png" alt="node.js">
         </a>
     </div>
     <div id="content" class="clearfix">
@@ -21,7 +22,7 @@
                 <li><a href="http://www.nodejs.es/" class="home">Home</a></li>
                 <li><a href="http://api.nodejs.es" class="docs current">Docs</a></li>
                 <li><a href="http://trabajos.nodejs.es/" class="jobs">Trabajos</a></li>
-                <li><a href="https://github.com/nodejs-es/api/" class="download">GitHub</a></li>
+                <li><a href="https://github.com/nodejs-es/node/" class="download">GitHub</a></li>
             </ul>
             <p class="twitter"><a href="http://twitter.com/nodejs_es">@nodejs_es</a></p>
         </div>
@@ -45,12 +46,12 @@
 
         <div id="column1" class="interior">
           <header>
-            <h1>Node.js v0.6.18 Manual &amp; Documentación</h1>
+            <h1>Node.js v0.6.19 Manual &amp; Documentación</h1>
             <div id="gtoc">
               <p>
-                <a href="index.html" name="toc">Indice</a> |
+                <a href="index.html" name="toc">Índice</a> |
                 <a href="all.html">Ver todo en una misma página</a> |
-                <a href="http.json">Ver como JSON</a>
+                <a href="http-es.json">Ver como JSON</a>
               </p>
             </div>
             <hr>
@@ -59,75 +60,75 @@
           <div id="toc">
             <h2>Tabla de Contenidos</h2>
             <ul>
-<li><a href="#http_http">HTTP</a><ul>
-<li><a href="#http_http_server">http.Server</a><ul>
-<li><a href="#http_evento_request">Evento: &apos;request&apos;</a></li>
-<li><a href="#http_evento_connection">Evento: &apos;connection&apos;</a></li>
-<li><a href="#http_evento_close">Evento: &apos;close&apos;</a></li>
-<li><a href="#http_evento_request_1">Evento: &apos;request&apos;</a></li>
-<li><a href="#http_evento_checkcontinue">Evento: &apos;checkContinue&apos;</a></li>
-<li><a href="#http_evento_upgrade">Evento: &apos;upgrade&apos;</a></li>
-<li><a href="#http_evento_clienterror">Evento: &apos;clientError&apos;</a></li>
-<li><a href="#http_http_createserver_requestlistener">http.createServer(requestListener)</a></li>
-<li><a href="#http_server_listen_port_hostname_callback">server.listen(port, [hostname], [callback])</a></li>
-<li><a href="#http_server_listen_path_callback">server.listen(path, [callback])</a></li>
-<li><a href="#http_server_close">server.close()</a></li>
+<li><a href="#http_es_http">HTTP</a><ul>
+<li><a href="#http_es_http_server">http.Server</a><ul>
+<li><a href="#http_es_evento_request">Evento: &apos;request&apos;</a></li>
+<li><a href="#http_es_evento_connection">Evento: &apos;connection&apos;</a></li>
+<li><a href="#http_es_evento_close">Evento: &apos;close&apos;</a></li>
+<li><a href="#http_es_evento_request_1">Evento: &apos;request&apos;</a></li>
+<li><a href="#http_es_evento_checkcontinue">Evento: &apos;checkContinue&apos;</a></li>
+<li><a href="#http_es_evento_upgrade">Evento: &apos;upgrade&apos;</a></li>
+<li><a href="#http_es_evento_clienterror">Evento: &apos;clientError&apos;</a></li>
+<li><a href="#http_es_http_createserver_requestlistener">http.createServer(requestListener)</a></li>
+<li><a href="#http_es_server_listen_port_hostname_callback">server.listen(port, [hostname], [callback])</a></li>
+<li><a href="#http_es_server_listen_path_callback">server.listen(path, [callback])</a></li>
+<li><a href="#http_es_server_close">server.close()</a></li>
 </ul>
 </li>
-<li><a href="#http_http_serverrequest">http.ServerRequest</a><ul>
-<li><a href="#http_event_data">Event: &apos;data&apos;</a></li>
-<li><a href="#http_event_end">Event: &apos;end&apos;</a></li>
-<li><a href="#http_request_method">request.method</a></li>
-<li><a href="#http_request_url">request.url</a></li>
-<li><a href="#http_request_headers">request.headers</a></li>
-<li><a href="#http_request_trailers">request.trailers</a></li>
-<li><a href="#http_request_httpversion">request.httpVersion</a></li>
-<li><a href="#http_request_setencoding_encoding_null">request.setEncoding(encoding=null)</a></li>
-<li><a href="#http_request_pause">request.pause()</a></li>
-<li><a href="#http_request_resume">request.resume()</a></li>
-<li><a href="#http_request_connection">request.connection</a></li>
+<li><a href="#http_es_http_serverrequest">http.ServerRequest</a><ul>
+<li><a href="#http_es_event_data">Event: &apos;data&apos;</a></li>
+<li><a href="#http_es_event_end">Event: &apos;end&apos;</a></li>
+<li><a href="#http_es_request_method">request.method</a></li>
+<li><a href="#http_es_request_url">request.url</a></li>
+<li><a href="#http_es_request_headers">request.headers</a></li>
+<li><a href="#http_es_request_trailers">request.trailers</a></li>
+<li><a href="#http_es_request_httpversion">request.httpVersion</a></li>
+<li><a href="#http_es_request_setencoding_encoding_null">request.setEncoding(encoding=null)</a></li>
+<li><a href="#http_es_request_pause">request.pause()</a></li>
+<li><a href="#http_es_request_resume">request.resume()</a></li>
+<li><a href="#http_es_request_connection">request.connection</a></li>
 </ul>
 </li>
-<li><a href="#http_http_serverresponse">http.ServerResponse</a><ul>
-<li><a href="#http_response_writecontinue">response.writeContinue()</a></li>
-<li><a href="#http_response_writehead_statuscode_reasonphrase_headers">response.writeHead(statusCode, [reasonPhrase], [headers])</a></li>
-<li><a href="#http_response_statuscode">response.statusCode</a></li>
-<li><a href="#http_response_setheader_name_value">response.setHeader(name, value)</a></li>
-<li><a href="#http_response_getheader_name">response.getHeader(name)</a></li>
-<li><a href="#http_response_removeheader_name">response.removeHeader(name)</a></li>
-<li><a href="#http_response_write_chunk_encoding_utf8">response.write(chunk, encoding=&apos;utf8&apos;)</a></li>
-<li><a href="#http_response_addtrailers_headers">response.addTrailers(headers)</a></li>
-<li><a href="#http_response_end_data_encoding">response.end([data], [encoding])</a></li>
+<li><a href="#http_es_http_serverresponse">http.ServerResponse</a><ul>
+<li><a href="#http_es_response_writecontinue">response.writeContinue()</a></li>
+<li><a href="#http_es_response_writehead_statuscode_reasonphrase_headers">response.writeHead(statusCode, [reasonPhrase], [headers])</a></li>
+<li><a href="#http_es_response_statuscode">response.statusCode</a></li>
+<li><a href="#http_es_response_setheader_name_value">response.setHeader(name, value)</a></li>
+<li><a href="#http_es_response_getheader_name">response.getHeader(name)</a></li>
+<li><a href="#http_es_response_removeheader_name">response.removeHeader(name)</a></li>
+<li><a href="#http_es_response_write_chunk_encoding_utf8">response.write(chunk, encoding=&apos;utf8&apos;)</a></li>
+<li><a href="#http_es_response_addtrailers_headers">response.addTrailers(headers)</a></li>
+<li><a href="#http_es_response_end_data_encoding">response.end([data], [encoding])</a></li>
 </ul>
 </li>
-<li><a href="#http_http_request_options_callback">http.request(options, callback)</a></li>
-<li><a href="#http_http_get_options_callback">http.get(options, callback)</a></li>
-<li><a href="#http_http_agent">http.Agent</a></li>
-<li><a href="#http_http_getagent_host_port">http.getAgent(host, port)</a><ul>
-<li><a href="#http_event_upgrade">Event: &apos;upgrade&apos;</a></li>
-<li><a href="#http_event_continue">Event: &apos;continue&apos;</a></li>
-<li><a href="#http_agent_maxsockets">agent.maxSockets</a></li>
-<li><a href="#http_agent_sockets">agent.sockets</a></li>
-<li><a href="#http_agent_queue">agent.queue</a></li>
+<li><a href="#http_es_http_request_options_callback">http.request(options, callback)</a></li>
+<li><a href="#http_es_http_get_options_callback">http.get(options, callback)</a></li>
+<li><a href="#http_es_http_agent">http.Agent</a></li>
+<li><a href="#http_es_http_getagent_host_port">http.getAgent(host, port)</a><ul>
+<li><a href="#http_es_event_upgrade">Event: &apos;upgrade&apos;</a></li>
+<li><a href="#http_es_event_continue">Event: &apos;continue&apos;</a></li>
+<li><a href="#http_es_agent_maxsockets">agent.maxSockets</a></li>
+<li><a href="#http_es_agent_sockets">agent.sockets</a></li>
+<li><a href="#http_es_agent_queue">agent.queue</a></li>
 </ul>
 </li>
-<li><a href="#http_http_clientrequest">http.ClientRequest</a><ul>
-<li><a href="#http_event_response">Event &apos;response&apos;</a></li>
-<li><a href="#http_request_write_chunk_encoding_utf8">request.write(chunk, encoding=&apos;utf8&apos;)</a></li>
-<li><a href="#http_request_end_data_encoding">request.end([data], [encoding])</a></li>
-<li><a href="#http_request_abort">request.abort()</a></li>
+<li><a href="#http_es_http_clientrequest">http.ClientRequest</a><ul>
+<li><a href="#http_es_event_response">Event &apos;response&apos;</a></li>
+<li><a href="#http_es_request_write_chunk_encoding_utf8">request.write(chunk, encoding=&apos;utf8&apos;)</a></li>
+<li><a href="#http_es_request_end_data_encoding">request.end([data], [encoding])</a></li>
+<li><a href="#http_es_request_abort">request.abort()</a></li>
 </ul>
 </li>
-<li><a href="#http_http_clientresponse">http.ClientResponse</a><ul>
-<li><a href="#http_event_data_1">Event: &apos;data&apos;</a></li>
-<li><a href="#http_event_end_1">Event: &apos;end&apos;</a></li>
-<li><a href="#http_response_statuscode_1">response.statusCode</a></li>
-<li><a href="#http_response_httpversion">response.httpVersion</a></li>
-<li><a href="#http_response_headers">response.headers</a></li>
-<li><a href="#http_response_trailers">response.trailers</a></li>
-<li><a href="#http_response_setencoding_encoding_null">response.setEncoding(encoding=null)</a></li>
-<li><a href="#http_response_pause">response.pause()</a></li>
-<li><a href="#http_response_resume">response.resume()</a></li>
+<li><a href="#http_es_http_clientresponse">http.ClientResponse</a><ul>
+<li><a href="#http_es_event_data_1">Event: &apos;data&apos;</a></li>
+<li><a href="#http_es_event_end_1">Event: &apos;end&apos;</a></li>
+<li><a href="#http_es_response_statuscode_1">response.statusCode</a></li>
+<li><a href="#http_es_response_httpversion">response.httpVersion</a></li>
+<li><a href="#http_es_response_headers">response.headers</a></li>
+<li><a href="#http_es_response_trailers">response.trailers</a></li>
+<li><a href="#http_es_response_setencoding_encoding_null">response.setEncoding(encoding=null)</a></li>
+<li><a href="#http_es_response_pause">response.pause()</a></li>
+<li><a href="#http_es_response_resume">response.resume()</a></li>
 </ul>
 </li>
 </ul>
@@ -137,7 +138,7 @@
           </div>
 
           <div id="apicontent">
-            <h1>HTTP<span><a class="mark" href="#http_http" id="http_http">#</a></span></h1>
+            <h1>HTTP<span><a class="mark" href="#http_es_http" id="http_es_http">#</a></span></h1>
 <p>Para usar el servidor y el cliente HTTP se debe añadir <code>require(&apos;http&apos;)</code>.
 
 </p>
@@ -165,11 +166,11 @@ las cabeceras o el body.
 
 
 </p>
-<h2>http.Server<span><a class="mark" href="#http_http_server" id="http_http_server">#</a></span></h2>
+<h2>http.Server<span><a class="mark" href="#http_es_http_server" id="http_es_http_server">#</a></span></h2>
 <p>Es un <code>EventEmitter</code> con los siguientes eventos:
 
 </p>
-<h3>Evento: &apos;request&apos;<span><a class="mark" href="#http_evento_request" id="http_evento_request">#</a></span></h3>
+<h3>Evento: &apos;request&apos;<span><a class="mark" href="#http_es_evento_request" id="http_es_evento_request">#</a></span></h3>
 <p><code>function (request, response) { }</code>
 
 </p>
@@ -177,7 +178,7 @@ las cabeceras o el body.
  instancia de <code>http.ServerResponse</code>
 
 </p>
-<h3>Evento: &apos;connection&apos;<span><a class="mark" href="#http_evento_connection" id="http_evento_connection">#</a></span></h3>
+<h3>Evento: &apos;connection&apos;<span><a class="mark" href="#http_es_evento_connection" id="http_es_evento_connection">#</a></span></h3>
 <p><code>function (stream) { }</code>
 
 </p>
@@ -186,14 +187,14 @@ las cabeceras o el body.
 También se puede acceder el <code>stream</code> desde  <code>request.connection</code>.
 
 </p>
-<h3>Evento: &apos;close&apos;<span><a class="mark" href="#http_evento_close" id="http_evento_close">#</a></span></h3>
+<h3>Evento: &apos;close&apos;<span><a class="mark" href="#http_es_evento_close" id="http_es_evento_close">#</a></span></h3>
 <p><code>function (errno) { }</code>
 
 </p>
 <p> Emitido cuando se cierra el servidor.
 
 </p>
-<h3>Evento: &apos;request&apos;<span><a class="mark" href="#http_evento_request_1" id="http_evento_request_1">#</a></span></h3>
+<h3>Evento: &apos;request&apos;<span><a class="mark" href="#http_es_evento_request_1" id="http_es_evento_request_1">#</a></span></h3>
 <p><code>function (request, response) {}</code>
 
 </p>
@@ -201,7 +202,7 @@ También se puede acceder el <code>stream</code> desde  <code>request.connection
 para cada conexión (en el caso de las conexiones keep-alive).
 
 </p>
-<h3>Evento: &apos;checkContinue&apos;<span><a class="mark" href="#http_evento_checkcontinue" id="http_evento_checkcontinue">#</a></span></h3>
+<h3>Evento: &apos;checkContinue&apos;<span><a class="mark" href="#http_es_evento_checkcontinue" id="http_es_evento_checkcontinue">#</a></span></h3>
 <p><code>function (request, response) {}</code>
 
 </p>
@@ -220,7 +221,7 @@ del body.
 emitirá.
 
 </p>
-<h3>Evento: &apos;upgrade&apos;<span><a class="mark" href="#http_evento_upgrade" id="http_evento_upgrade">#</a></span></h3>
+<h3>Evento: &apos;upgrade&apos;<span><a class="mark" href="#http_es_evento_upgrade" id="http_es_evento_upgrade">#</a></span></h3>
 <p><code>function (request, socket, head)</code>
 
 </p>
@@ -239,14 +240,14 @@ evento <code>data</code>, esto significa que necesitarás asociarlo para tratar 
 enviados al servidor en ese socket.
 
 </p>
-<h3>Evento: &apos;clientError&apos;<span><a class="mark" href="#http_evento_clienterror" id="http_evento_clienterror">#</a></span></h3>
+<h3>Evento: &apos;clientError&apos;<span><a class="mark" href="#http_es_evento_clienterror" id="http_es_evento_clienterror">#</a></span></h3>
 <p><code>function (exception) {}</code>
 
 </p>
 <p>Si la conexión de un cliente emite un evento de &apos;error&apos; - será tratado aquí.
 
 </p>
-<h3>http.createServer(requestListener)<span><a class="mark" href="#http_http_createserver_requestlistener" id="http_http_createserver_requestlistener">#</a></span></h3>
+<h3>http.createServer(requestListener)<span><a class="mark" href="#http_es_http_createserver_requestlistener" id="http_es_http_createserver_requestlistener">#</a></span></h3>
 <p>Devuelve un nuevo objeto de servidor web.
 
 </p>
@@ -254,7 +255,7 @@ enviados al servidor en ese socket.
 al evento <code>&apos;request&apos;</code>. 
 
 </p>
-<h3>server.listen(port, [hostname], [callback])<span><a class="mark" href="#http_server_listen_port_hostname_callback" id="http_server_listen_port_hostname_callback">#</a></span></h3>
+<h3>server.listen(port, [hostname], [callback])<span><a class="mark" href="#http_es_server_listen_port_hostname_callback" id="http_es_server_listen_port_hostname_callback">#</a></span></h3>
 <p>Begin accepting connections on the specified port and hostname.  If the
 hostname is omitted, the server will accept connections directed to any
 IPv4 address (<code>INADDR_ANY</code>).
@@ -268,7 +269,7 @@ when the server has been bound to the port.
 
 
 </p>
-<h3>server.listen(path, [callback])<span><a class="mark" href="#http_server_listen_path_callback" id="http_server_listen_path_callback">#</a></span></h3>
+<h3>server.listen(path, [callback])<span><a class="mark" href="#http_es_server_listen_path_callback" id="http_es_server_listen_path_callback">#</a></span></h3>
 <p>Start a UNIX socket server listening for connections on the given <code>path</code>.
 
 </p>
@@ -277,12 +278,12 @@ when the server has been bound.
 
 
 </p>
-<h3>server.close()<span><a class="mark" href="#http_server_close" id="http_server_close">#</a></span></h3>
+<h3>server.close()<span><a class="mark" href="#http_es_server_close" id="http_es_server_close">#</a></span></h3>
 <p>Stops the server from accepting new connections.
 
 
 </p>
-<h2>http.ServerRequest<span><a class="mark" href="#http_http_serverrequest" id="http_http_serverrequest">#</a></span></h2>
+<h2>http.ServerRequest<span><a class="mark" href="#http_es_http_serverrequest" id="http_es_http_serverrequest">#</a></span></h2>
 <p>This object is created internally by a HTTP server -- not by
 the user -- and passed as the first argument to a <code>&apos;request&apos;</code> listener.
 
@@ -290,7 +291,7 @@ the user -- and passed as the first argument to a <code>&apos;request&apos;</cod
 <p>This is an <code>EventEmitter</code> with the following events:
 
 </p>
-<h3>Event: &apos;data&apos;<span><a class="mark" href="#http_event_data" id="http_event_data">#</a></span></h3>
+<h3>Event: &apos;data&apos;<span><a class="mark" href="#http_es_event_data" id="http_es_event_data">#</a></span></h3>
 <p><code>function (chunk) { }</code>
 
 </p>
@@ -303,7 +304,7 @@ body chunk is a string.  The body encoding is set with
 <code>request.setBodyEncoding()</code>.
 
 </p>
-<h3>Event: &apos;end&apos;<span><a class="mark" href="#http_event_end" id="http_event_end">#</a></span></h3>
+<h3>Event: &apos;end&apos;<span><a class="mark" href="#http_es_event_end" id="http_es_event_end">#</a></span></h3>
 <p><code>function () { }</code>
 
 </p>
@@ -312,13 +313,13 @@ emitted no other events will be emitted on the request.
 
 
 </p>
-<h3>request.method<span><a class="mark" href="#http_request_method" id="http_request_method">#</a></span></h3>
+<h3>request.method<span><a class="mark" href="#http_es_request_method" id="http_es_request_method">#</a></span></h3>
 <p>The request method as a string. Read only. Example:
 <code>&apos;GET&apos;</code>, <code>&apos;DELETE&apos;</code>.
 
 
 </p>
-<h3>request.url<span><a class="mark" href="#http_request_url" id="http_request_url">#</a></span></h3>
+<h3>request.url<span><a class="mark" href="#http_es_request_url" id="http_es_request_url">#</a></span></h3>
 <p>Request URL string. This contains only the URL that is
 present in the actual HTTP request. If the request is:
 
@@ -349,15 +350,15 @@ you can use the <code>require(&apos;querystring&apos;).parse</code> function, or
   search: &apos;?name=ryan&apos;,
   query: { name: &apos;ryan&apos; },
   pathname: &apos;/status&apos; }</code></pre>
-<h3>request.headers<span><a class="mark" href="#http_request_headers" id="http_request_headers">#</a></span></h3>
+<h3>request.headers<span><a class="mark" href="#http_es_request_headers" id="http_es_request_headers">#</a></span></h3>
 <p>Read only.
 
 </p>
-<h3>request.trailers<span><a class="mark" href="#http_request_trailers" id="http_request_trailers">#</a></span></h3>
+<h3>request.trailers<span><a class="mark" href="#http_es_request_trailers" id="http_es_request_trailers">#</a></span></h3>
 <p>Read only; HTTP trailers (if present). Only populated after the &apos;end&apos; event.
 
 </p>
-<h3>request.httpVersion<span><a class="mark" href="#http_request_httpversion" id="http_request_httpversion">#</a></span></h3>
+<h3>request.httpVersion<span><a class="mark" href="#http_es_request_httpversion" id="http_es_request_httpversion">#</a></span></h3>
 <p>The HTTP protocol version as a string. Read only. Examples:
 <code>&apos;1.1&apos;</code>, <code>&apos;1.0&apos;</code>.
 Also <code>request.httpVersionMajor</code> is the first integer and
@@ -365,22 +366,22 @@ Also <code>request.httpVersionMajor</code> is the first integer and
 
 
 </p>
-<h3>request.setEncoding(encoding=null)<span><a class="mark" href="#http_request_setencoding_encoding_null" id="http_request_setencoding_encoding_null">#</a></span></h3>
+<h3>request.setEncoding(encoding=null)<span><a class="mark" href="#http_es_request_setencoding_encoding_null" id="http_es_request_setencoding_encoding_null">#</a></span></h3>
 <p>Set the encoding for the request body. Either <code>&apos;utf8&apos;</code> or <code>&apos;binary&apos;</code>. Defaults
 to <code>null</code>, which means that the <code>&apos;data&apos;</code> event will emit a <code>Buffer</code> object..
 
 
 </p>
-<h3>request.pause()<span><a class="mark" href="#http_request_pause" id="http_request_pause">#</a></span></h3>
+<h3>request.pause()<span><a class="mark" href="#http_es_request_pause" id="http_es_request_pause">#</a></span></h3>
 <p>Pauses request from emitting events.  Useful to throttle back an upload.
 
 
 </p>
-<h3>request.resume()<span><a class="mark" href="#http_request_resume" id="http_request_resume">#</a></span></h3>
+<h3>request.resume()<span><a class="mark" href="#http_es_request_resume" id="http_es_request_resume">#</a></span></h3>
 <p>Resumes a paused request.
 
 </p>
-<h3>request.connection<span><a class="mark" href="#http_request_connection" id="http_request_connection">#</a></span></h3>
+<h3>request.connection<span><a class="mark" href="#http_es_request_connection" id="http_es_request_connection">#</a></span></h3>
 <p>The <code>net.Stream</code> object associated with the connection.
 
 
@@ -392,18 +393,18 @@ authentication details.
 
 
 </p>
-<h2>http.ServerResponse<span><a class="mark" href="#http_http_serverresponse" id="http_http_serverresponse">#</a></span></h2>
+<h2>http.ServerResponse<span><a class="mark" href="#http_es_http_serverresponse" id="http_es_http_serverresponse">#</a></span></h2>
 <p>This object is created internally by a HTTP server--not by the user. It is
 passed as the second parameter to the <code>&apos;request&apos;</code> event. It is a <code>Writable Stream</code>.
 
 </p>
-<h3>response.writeContinue()<span><a class="mark" href="#http_response_writecontinue" id="http_response_writecontinue">#</a></span></h3>
+<h3>response.writeContinue()<span><a class="mark" href="#http_es_response_writecontinue" id="http_es_response_writecontinue">#</a></span></h3>
 <p>Sends a HTTP/1.1 100 Continue message to the client, indicating that
 the request body should be sent. See the the <code>checkContinue</code> event on
 <code>Server</code>.
 
 </p>
-<h3>response.writeHead(statusCode, [reasonPhrase], [headers])<span><a class="mark" href="#http_response_writehead_statuscode_reasonphrase_headers" id="http_response_writehead_statuscode_reasonphrase_headers">#</a></span></h3>
+<h3>response.writeHead(statusCode, [reasonPhrase], [headers])<span><a class="mark" href="#http_es_response_writehead_statuscode_reasonphrase_headers" id="http_es_response_writehead_statuscode_reasonphrase_headers">#</a></span></h3>
 <p>Sends a response header to the request. The status code is a 3-digit HTTP
 status code, like <code>404</code>. The last argument, <code>headers</code>, are the response headers.
 Optionally one can give a human-readable <code>reasonPhrase</code> as the second
@@ -425,7 +426,7 @@ be called before <code>response.end()</code> is called.
 implicit/mutable headers will be calculated and call this function for you.
 
 </p>
-<h3>response.statusCode<span><a class="mark" href="#http_response_statuscode" id="http_response_statuscode">#</a></span></h3>
+<h3>response.statusCode<span><a class="mark" href="#http_es_response_statuscode" id="http_es_response_statuscode">#</a></span></h3>
 <p>When using implicit headers (not calling <code>response.writeHead()</code> explicitly), this property
 controls the status code that will be send to the client when the headers get
 flushed.
@@ -435,7 +436,7 @@ flushed.
 
 </p>
 <pre><code>response.statusCode = 404;</code></pre>
-<h3>response.setHeader(name, value)<span><a class="mark" href="#http_response_setheader_name_value" id="http_response_setheader_name_value">#</a></span></h3>
+<h3>response.setHeader(name, value)<span><a class="mark" href="#http_es_response_setheader_name_value" id="http_es_response_setheader_name_value">#</a></span></h3>
 <p>Sets a single header value for implicit headers.  If this header already exists
 in the to-be-sent headers, it&apos;s value will be replaced.  Use an array of strings
 here if you need to send multiple headers with the same name.
@@ -449,7 +450,7 @@ here if you need to send multiple headers with the same name.
 
 </p>
 <pre><code>response.setHeader(&quot;Set-Cookie&quot;, [&quot;type=ninja&quot;, &quot;language=javascript&quot;]);</code></pre>
-<h3>response.getHeader(name)<span><a class="mark" href="#http_response_getheader_name" id="http_response_getheader_name">#</a></span></h3>
+<h3>response.getHeader(name)<span><a class="mark" href="#http_es_response_getheader_name" id="http_es_response_getheader_name">#</a></span></h3>
 <p>Reads out a header that&apos;s already been queued but not sent to the client.  Note
 that the name is case insensitive.  This can only be called before headers get
 implicitly flushed.
@@ -459,7 +460,7 @@ implicitly flushed.
 
 </p>
 <pre><code>var contentType = response.getHeader(&apos;content-type&apos;);</code></pre>
-<h3>response.removeHeader(name)<span><a class="mark" href="#http_response_removeheader_name" id="http_response_removeheader_name">#</a></span></h3>
+<h3>response.removeHeader(name)<span><a class="mark" href="#http_es_response_removeheader_name" id="http_es_response_removeheader_name">#</a></span></h3>
 <p>Removes a header that&apos;s queued for implicit sending.
 
 </p>
@@ -467,7 +468,7 @@ implicitly flushed.
 
 </p>
 <pre><code>response.removeHeader(&quot;Content-Encoding&quot;);</code></pre>
-<h3>response.write(chunk, encoding=&apos;utf8&apos;)<span><a class="mark" href="#http_response_write_chunk_encoding_utf8" id="http_response_write_chunk_encoding_utf8">#</a></span></h3>
+<h3>response.write(chunk, encoding=&apos;utf8&apos;)<span><a class="mark" href="#http_es_response_write_chunk_encoding_utf8" id="http_es_response_write_chunk_encoding_utf8">#</a></span></h3>
 <p>If this method is called and <code>response.writeHead()</code> has not been called, it will
 switch to implicit header mode and flush the implicit headers.
 
@@ -492,7 +493,7 @@ data, and sends that separately. That is, the response is buffered up to the
 first chunk of body.
 
 </p>
-<h3>response.addTrailers(headers)<span><a class="mark" href="#http_response_addtrailers_headers" id="http_response_addtrailers_headers">#</a></span></h3>
+<h3>response.addTrailers(headers)<span><a class="mark" href="#http_es_response_addtrailers_headers" id="http_es_response_addtrailers_headers">#</a></span></h3>
 <p>This method adds HTTP trailing headers (a header but at the end of the
 message) to the response.
 
@@ -511,7 +512,7 @@ emit trailers, with a list of the header fields in its value. E.g.,
 response.write(fileData);
 response.addTrailers({&apos;Content-MD5&apos;: &quot;7895bf4b8828b55ceaf47747b4bca667&quot;});
 response.end();</code></pre>
-<h3>response.end([data], [encoding])<span><a class="mark" href="#http_response_end_data_encoding" id="http_response_end_data_encoding">#</a></span></h3>
+<h3>response.end([data], [encoding])<span><a class="mark" href="#http_es_response_end_data_encoding" id="http_es_response_end_data_encoding">#</a></span></h3>
 <p>This method signals to the server that all of the response headers and body
 has been sent; that server should consider this message complete.
 The method, <code>response.end()</code>, MUST be called on each
@@ -523,7 +524,7 @@ followed by <code>response.end()</code>.
 
 
 </p>
-<h2>http.request(options, callback)<span><a class="mark" href="#http_http_request_options_callback" id="http_http_request_options_callback">#</a></span></h2>
+<h2>http.request(options, callback)<span><a class="mark" href="#http_es_http_request_options_callback" id="http_es_http_request_options_callback">#</a></span></h2>
 <p>Node maintains several connections per server to make HTTP requests.
 This function allows one to transparently issue requests.
 
@@ -593,7 +594,7 @@ and listen for the <code>continue</code> event. See RFC2616 Section 8.2.3 for mo
 information.</p>
 </li>
 </ul>
-<h2>http.get(options, callback)<span><a class="mark" href="#http_http_get_options_callback" id="http_http_get_options_callback">#</a></span></h2>
+<h2>http.get(options, callback)<span><a class="mark" href="#http_es_http_get_options_callback" id="http_es_http_get_options_callback">#</a></span></h2>
 <p>Since most requests are GET requests without bodies, Node provides this
 convenience method. The only difference between this method and <code>http.request()</code> is
 that it sets the method to GET and calls <code>req.end()</code> automatically.
@@ -613,15 +614,15 @@ http.get(options, function(res) {
 }).on(&apos;error&apos;, function(e) {
   console.log(&quot;Got error: &quot; + e.message);
 });</code></pre>
-<h2>http.Agent<span><a class="mark" href="#http_http_agent" id="http_http_agent">#</a></span></h2>
-<h2>http.getAgent(host, port)<span><a class="mark" href="#http_http_getagent_host_port" id="http_http_getagent_host_port">#</a></span></h2>
+<h2>http.Agent<span><a class="mark" href="#http_es_http_agent" id="http_es_http_agent">#</a></span></h2>
+<h2>http.getAgent(host, port)<span><a class="mark" href="#http_es_http_getagent_host_port" id="http_es_http_getagent_host_port">#</a></span></h2>
 <p><code>http.request()</code> uses a special <code>Agent</code> for managing multiple connections to
 an HTTP server. Normally <code>Agent</code> instances should not be exposed to user
 code, however in certain situations it&apos;s useful to check the status of the
 agent. The <code>http.getAgent()</code> function allows you to access the agents.
 
 </p>
-<h3>Event: &apos;upgrade&apos;<span><a class="mark" href="#http_event_upgrade" id="http_event_upgrade">#</a></span></h3>
+<h3>Event: &apos;upgrade&apos;<span><a class="mark" href="#http_es_event_upgrade" id="http_es_event_upgrade">#</a></span></h3>
 <p><code>function (request, socket, head)</code>
 
 </p>
@@ -633,7 +634,7 @@ connections closed.
 <p>See the description of the <code>upgrade</code> event for <code>http.Server</code> for further details.
 
 </p>
-<h3>Event: &apos;continue&apos;<span><a class="mark" href="#http_event_continue" id="http_event_continue">#</a></span></h3>
+<h3>Event: &apos;continue&apos;<span><a class="mark" href="#http_es_event_continue" id="http_es_event_continue">#</a></span></h3>
 <p><code>function ()</code>
 
 </p>
@@ -642,21 +643,21 @@ the request contained &apos;Expect: 100-continue&apos;. This is an instruction t
 the client should send the request body.
 
 </p>
-<h3>agent.maxSockets<span><a class="mark" href="#http_agent_maxsockets" id="http_agent_maxsockets">#</a></span></h3>
+<h3>agent.maxSockets<span><a class="mark" href="#http_es_agent_maxsockets" id="http_es_agent_maxsockets">#</a></span></h3>
 <p>By default set to 5. Determines how many concurrent sockets the agent can have open.
 
 </p>
-<h3>agent.sockets<span><a class="mark" href="#http_agent_sockets" id="http_agent_sockets">#</a></span></h3>
+<h3>agent.sockets<span><a class="mark" href="#http_es_agent_sockets" id="http_es_agent_sockets">#</a></span></h3>
 <p>An array of sockets currently in use by the Agent. Do not modify.
 
 </p>
-<h3>agent.queue<span><a class="mark" href="#http_agent_queue" id="http_agent_queue">#</a></span></h3>
+<h3>agent.queue<span><a class="mark" href="#http_es_agent_queue" id="http_es_agent_queue">#</a></span></h3>
 <p>A queue of requests waiting to be sent to sockets.
 
 
 
 </p>
-<h2>http.ClientRequest<span><a class="mark" href="#http_http_clientrequest" id="http_http_clientrequest">#</a></span></h2>
+<h2>http.ClientRequest<span><a class="mark" href="#http_es_http_clientrequest" id="http_es_http_clientrequest">#</a></span></h2>
 <p>This object is created internally and returned from <code>http.request()</code>.  It
 represents an <em>in-progress</em> request whose header has already been queued.  The 
 header is still mutable using the <code>setHeader(name, value)</code>, <code>getHeader(name)</code>,
@@ -700,7 +701,7 @@ request.on(&apos;response&apos;, function (response) {
 <p>This is an <code>EventEmitter</code> with the following events:
 
 </p>
-<h3>Event &apos;response&apos;<span><a class="mark" href="#http_event_response" id="http_event_response">#</a></span></h3>
+<h3>Event &apos;response&apos;<span><a class="mark" href="#http_es_event_response" id="http_es_event_response">#</a></span></h3>
 <p><code>function (response) { }</code>
 
 </p>
@@ -709,7 +710,7 @@ request.on(&apos;response&apos;, function (response) {
 
 
 </p>
-<h3>request.write(chunk, encoding=&apos;utf8&apos;)<span><a class="mark" href="#http_request_write_chunk_encoding_utf8" id="http_request_write_chunk_encoding_utf8">#</a></span></h3>
+<h3>request.write(chunk, encoding=&apos;utf8&apos;)<span><a class="mark" href="#http_es_request_write_chunk_encoding_utf8" id="http_es_request_write_chunk_encoding_utf8">#</a></span></h3>
 <p>Sends a chunk of the body.  By calling this method
 many times, the user can stream a request body to a
 server--in that case it is suggested to use the
@@ -726,7 +727,7 @@ applies when <code>chunk</code> is a string.
 
 
 </p>
-<h3>request.end([data], [encoding])<span><a class="mark" href="#http_request_end_data_encoding" id="http_request_end_data_encoding">#</a></span></h3>
+<h3>request.end([data], [encoding])<span><a class="mark" href="#http_es_request_end_data_encoding" id="http_es_request_end_data_encoding">#</a></span></h3>
 <p>Finishes sending the request. If any parts of the body are
 unsent, it will flush them to the stream. If the request is
 chunked, this will send the terminating <code>&apos;0\r\n\r\n&apos;</code>.
@@ -736,12 +737,12 @@ chunked, this will send the terminating <code>&apos;0\r\n\r\n&apos;</code>.
 followed by <code>request.end()</code>.
 
 </p>
-<h3>request.abort()<span><a class="mark" href="#http_request_abort" id="http_request_abort">#</a></span></h3>
+<h3>request.abort()<span><a class="mark" href="#http_es_request_abort" id="http_es_request_abort">#</a></span></h3>
 <p>Aborts a request.  (New since v0.3.8.)
 
 
 </p>
-<h2>http.ClientResponse<span><a class="mark" href="#http_http_clientresponse" id="http_http_clientresponse">#</a></span></h2>
+<h2>http.ClientResponse<span><a class="mark" href="#http_es_http_clientresponse" id="http_es_http_clientresponse">#</a></span></h2>
 <p>This object is created when making a request with <code>http.request()</code>. It is
 passed to the <code>&apos;response&apos;</code> event of the request object.
 
@@ -749,7 +750,7 @@ passed to the <code>&apos;response&apos;</code> event of the request object.
 <p>The response implements the <code>Readable Stream</code> interface.
 
 </p>
-<h3>Event: &apos;data&apos;<span><a class="mark" href="#http_event_data_1" id="http_event_data_1">#</a></span></h3>
+<h3>Event: &apos;data&apos;<span><a class="mark" href="#http_es_event_data_1" id="http_es_event_data_1">#</a></span></h3>
 <p><code>function (chunk) {}</code>
 
 </p>
@@ -757,7 +758,7 @@ passed to the <code>&apos;response&apos;</code> event of the request object.
 
 
 </p>
-<h3>Event: &apos;end&apos;<span><a class="mark" href="#http_event_end_1" id="http_event_end_1">#</a></span></h3>
+<h3>Event: &apos;end&apos;<span><a class="mark" href="#http_es_event_end_1" id="http_es_event_end_1">#</a></span></h3>
 <p><code>function () {}</code>
 
 </p>
@@ -765,35 +766,35 @@ passed to the <code>&apos;response&apos;</code> event of the request object.
 emitted no other events will be emitted on the response.
 
 </p>
-<h3>response.statusCode<span><a class="mark" href="#http_response_statuscode_1" id="http_response_statuscode_1">#</a></span></h3>
+<h3>response.statusCode<span><a class="mark" href="#http_es_response_statuscode_1" id="http_es_response_statuscode_1">#</a></span></h3>
 <p>The 3-digit HTTP response status code. E.G. <code>404</code>.
 
 </p>
-<h3>response.httpVersion<span><a class="mark" href="#http_response_httpversion" id="http_response_httpversion">#</a></span></h3>
+<h3>response.httpVersion<span><a class="mark" href="#http_es_response_httpversion" id="http_es_response_httpversion">#</a></span></h3>
 <p>The HTTP version of the connected-to server. Probably either
 <code>&apos;1.1&apos;</code> or <code>&apos;1.0&apos;</code>.
 Also <code>response.httpVersionMajor</code> is the first integer and
 <code>response.httpVersionMinor</code> is the second.
 
 </p>
-<h3>response.headers<span><a class="mark" href="#http_response_headers" id="http_response_headers">#</a></span></h3>
+<h3>response.headers<span><a class="mark" href="#http_es_response_headers" id="http_es_response_headers">#</a></span></h3>
 <p>The response headers object.
 
 </p>
-<h3>response.trailers<span><a class="mark" href="#http_response_trailers" id="http_response_trailers">#</a></span></h3>
+<h3>response.trailers<span><a class="mark" href="#http_es_response_trailers" id="http_es_response_trailers">#</a></span></h3>
 <p>The response trailers object. Only populated after the &apos;end&apos; event.
 
 </p>
-<h3>response.setEncoding(encoding=null)<span><a class="mark" href="#http_response_setencoding_encoding_null" id="http_response_setencoding_encoding_null">#</a></span></h3>
+<h3>response.setEncoding(encoding=null)<span><a class="mark" href="#http_es_response_setencoding_encoding_null" id="http_es_response_setencoding_encoding_null">#</a></span></h3>
 <p>Set the encoding for the response body. Either <code>&apos;utf8&apos;</code>, <code>&apos;ascii&apos;</code>, or <code>&apos;base64&apos;</code>.
 Defaults to <code>null</code>, which means that the <code>&apos;data&apos;</code> event will emit a <code>Buffer</code> object..
 
 </p>
-<h3>response.pause()<span><a class="mark" href="#http_response_pause" id="http_response_pause">#</a></span></h3>
+<h3>response.pause()<span><a class="mark" href="#http_es_response_pause" id="http_es_response_pause">#</a></span></h3>
 <p>Pauses response from emitting events.  Useful to throttle back a download.
 
 </p>
-<h3>response.resume()<span><a class="mark" href="#http_response_resume" id="http_response_resume">#</a></span></h3>
+<h3>response.resume()<span><a class="mark" href="#http_es_response_resume" id="http_es_response_resume">#</a></span></h3>
 <p>Resumes a paused response.
 </p>
 
@@ -807,7 +808,7 @@ Defaults to <code>null</code>, which means that the <code>&apos;data&apos;</code
             <li><a href="http://twitter.com/nodejs_es" class="twitter">@nodejs_es</a></li>
         </ul>
 
-        <p>Copyright <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.18/LICENSE">license</a>.</p>
+        <p>Copyright <a href="http://joyent.com">Joyent, Inc</a>, Node.js is a <a href="/trademark-policy.pdf">trademark</a> of Joyent, Inc. View <a href="https://raw.github.com/joyent/node/v0.6.19/LICENSE">license</a>.</p>
     </div>
 </body>
 </html>

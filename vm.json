@@ -1,5 +1,5 @@
 {
-  "source": "doc/api/vm.markdown",
+  "source": "doc/api/vm-es.markdown",
   "modules": [
     {
       "textRaw": "Executing JavaScript",

@@ -1,5 +1,5 @@
 {
-  "source": "doc/api/cluster.markdown",
+  "source": "doc/api/cluster-es.markdown",
   "modules": [
     {
       "textRaw": "Cluster",

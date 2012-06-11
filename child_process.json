@@ -1,5 +1,5 @@
 {
-  "source": "doc/api/child_process.markdown",
+  "source": "doc/api/child_process-es.markdown",
   "modules": [
     {
       "textRaw": "Child Process",

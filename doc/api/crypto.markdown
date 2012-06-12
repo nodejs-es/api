@@ -15,15 +15,14 @@ Además ofrece un conjunto de envoltorios para los métodos hash, hmac, cipher, 
 Crea un objeto credenciales, con los detalles opcionales en forma de diccionario con las siguientes claves:
 
 * `key` : cadena que contiene la clave privada codificada en PEM.
-* `passphrase` : A string of passphrase for the private key
+* `passphrase` : cadena que contiene la passphrase de la clave privada.
 * `cert` : cadena que contiene el certificado codificado en PEM.
 * `ca` : cadena o lista de cadenas de certificados de confianza codificados en PEM.
-* `crl` : Either a string or list of strings of PEM encoded CRLs (Certificate Revocation List)
-* `ciphers`: A string describing the ciphers to use or exclude. Consult
-  <http://www.openssl.org/docs/apps/ciphers.html#CIPHER_LIST_FORMAT> for details
-  on the format.
+* `crl` : una cadena o lista de cadenas de CRL (lista de revocación de certificados) codificados en formato PEM.
+* `ciphers`: una cadena que especifica los algoritmos de cifrado que deben usarse o excluirse. Consulte
+<http://www.openssl.org/docs/apps/ciphers.html#CIPHER_LIST_FORMAT> para detalles relativos al formato
 
-Si no se han dado ningún elemento en `ca`, node.js usará la lista de CAs de confianza publicadas como dice en
+Si no se ha dado ningún elemento en `ca`, node.js usará la lista de CAs de confianza publicadas como dice en
 <http://mxr.mozilla.org/mozilla/source/security/nss/lib/ckfw/builtins/certdata.txt>.
 
 
@@ -36,7 +35,7 @@ dado que puede ser usado para generar el hash digests.
 Algunos ejemplos son `'sha1'`, `'md5'`, `'sha256'`, `'sha512'`, etc. 
 En versiones recientes, `openssl list-message-digest-algorithms` mostrará los algoritmos digest disponibles.
 
-Example: this program that takes the sha1 sum of a file
+Ejemplo: este programa calcula la suma sha1 de un fichero
 
     var filename = process.argv[2];
     var crypto = require('crypto');
@@ -56,24 +55,24 @@ Example: this program that takes the sha1 sum of a file
 
 ## Class: Hash
 
-The class for creating hash digests of data.
+Clase para calcular sumas hash de datos
 
-Returned by `crypto.createHash`.
+Devuelto  por `crypto.createHash`.
 
 ### hash.update(data)
 
-Actualiza el contenido del hash con el `data` dado. the encoding of which is given
-in `input_encoding` and can be `'utf8'`, `'ascii'` or `'binary'`.
-Defaults to `'binary'`.
+Actualiza el contenido del hash con el `data` dado. La codificación de este viene dada en
+ `input_encoding` y puede ser `'utf8'`, `'ascii'` o `'binary'`.
+Por defecto es `'binary'`.
 Esto puede ser invocado muchas veces con dato nuevo mientras estos van llegando.
 
 ### hash.digest([encoding])
 
 Calcula el digest todos los datos que van al hash.
 La codificación (`encoding`) puede ser `'hex'`, `'binary'` o `'base64'`.
-Por omisíón es `'binary'`.
+Por omisión es `'binary'`.
 
-Note: `hash` object can not be used after `digest()` method been called.
+Nota: el objeto `hash` no puede ser usado después de haber invocado `digest()`.
 
 
 ### crypto.createHmac(algorithm, key)
@@ -85,9 +84,9 @@ Crea y devuelve un objeto hmac, un hmac criptográfico con el algoritmo y la cla
 
 ## Class: Hmac
 
-Class for creating cryptographic hmac content.
+Clase para crear contenidos autenticados mediante hmac.
 
-Returned by `crypto.createHmac`.
+Devuelto por `crypto.createHmac`.
 
 ### hmac.update(data)
 
@@ -100,7 +99,7 @@ Calcula el digest (resumen) de todos los datos que van al hmac.
 La codificación (`encoding`) puede ser `'hex'`, `'binary'` o `'base64'`.
 Por omisíón es `'binary'`.
 
-Note: `hmac` object can not be used after `digest()` method been called.
+Nota: El objeto `hmac` no puede ser usado tras la llamada a `digest()`.
 
 
 ### crypto.createCipher(algorithm, key)
@@ -110,22 +109,22 @@ Crea y devuelve un objeto cipher (codificador), con el algoritmo y la clave dada
 `algorithm` es dependiente de OpenSSL, por ejemplo `'aes192'`, etc.
 En versiones recientes, `openssl list-cipher-algorithms` mostrará 
 los algoritmos cipher disponibles.
-`password` is used to derive key and IV, which must be `'binary'` encoded
-string (See the [Buffer section](buffer.html) for more information).
+`password` se usa para derivar la clave y el IV (vector de inicialización), debe ser una cadena de texto codificada en  `'binary'` 
+(consulta [Buffer section](buffer.html) para más información).
 
 ## crypto.createCipheriv(algorithm, key, iv)
 
-Creates and returns a cipher object, with the given algorithm, key and iv.
+Crea y obtiene un objeto de cifrado configurado con el algoritmo dado, clave e IV.
 
-`algorithm` is the same as the `createCipher()`. `key` is a raw key used in
-algorithm. `iv` is an Initialization vector. `key` and `iv` must be `'binary'`
-encoded string (See the [Buffer section](buffer.html) for more information).
+`algorithm` es el mismo que `createCipher()`. `key` es la clave usada por 
+el algoritmo. `iv` es el vector de inicialización. `key` e `iv` deben ser cadenas de texto codificadas como `'binary'`
+(Consulta [Buffer section](buffer.html) para más información).
 
 ## Class: Cipher
 
-Class for encrypting data.
+Clase para encriptar datos.
 
-Returned by `crypto.createCipher` and `crypto.createCipheriv`.
+Devuelto por `crypto.createCipher` y `crypto.createCipheriv`.
 
 ### cipher.update(data, [input_encoding], [output_encoding])
 
@@ -143,13 +142,13 @@ Devuelve el contenido codificado, y puede ser llamado muchas veces a medida que 
 Devuelve cualquier contenido codificado restante, donde `output_encoding` puede ser:
 `'binary'`, `'base64'` o `'hex'`. Por omisión `'binary'`.
 
-Note: `cipher` object can not be used after `final()` method been called.
+Nota: El objeto `cipher` no puede ser usado tras la llamada a `final()`.
 
 ### cipher.setAutoPadding(auto_padding=true)
 
-You can disable automatic padding of the input data to block size. If `auto_padding` is false,
-the length of the entire input data must be a multiple of the cipher's block size or `final` will fail.
-Useful for non-standard padding, e.g. using `0x0` instead of PKCS padding. You must call this before `cipher.final`.
+Puede deshabilitar el relleno (padding) automático. Si `auto_padding` se establece en false,
+el tamaño de los datos a cifrar debe ser múltiplo del tamaño del bloque de cifrado. De lo contrario `final` fallará.
+Es útil si desea utilizar un relleno no estándar, p.e. `0x0` en vez de PKCS. Debe invocarlo antes que a `cipher.final`.
 
 
 ### crypto.createDecipher(algorithm, key)
@@ -164,9 +163,9 @@ El `output_decoding` especifica en qué formato devolver el texto plano decodifi
 
 ## Class: Decipher
 
-Class for decrypting data.
+Clase para decodificar datos
 
-Returned by `crypto.createDecipher` and `crypto.createDecipheriv`.
+Devuelto por `crypto.createDecipher` y `crypto.createDecipheriv`.
 
 ### decipher.update(data, [input_encoding], [output_encoding])
 
@@ -194,7 +193,7 @@ ciphers block size. You must call this before streaming data to `decipher.update
 
 Crea y devuelve un objeto firma (signing) con el algoritmo dado.
 En versiones recientes, `openssl list-public-key-algorithms` muestra
-los algoritmos de firmado disponibles. Por ejemplo: `'RSA-SHA256
+los algoritmos de firmado disponibles. Por ejemplo: `'RSA-SHA256'`
 
 ## Class: Signer
 

@@ -169,11 +169,11 @@ Devuelto por `crypto.createDecipher` y `crypto.createDecipheriv`.
 
 ### decipher.update(data, [input_encoding], [output_encoding])
 
-Updates the decipher with `data`, which is encoded in `'binary'`, `'base64'`
-or `'hex'`. Defaults to `'binary'`.
+Actualiza el descifrador con los datos (`'data'`) suministrados, que
+habrán sido codificados en `'binary'`, `'base64'` o `'hex'`. Por defecto `'binary'`.
 
-The `output_decoding` specifies in what format to return the deciphered
-plaintext: `'binary'`, `'ascii'` or `'utf8'`. Defaults to `'binary'`.
+`output_decoding` especifica en que codificación debe retornarse el texto descifrado. 
+Esta puede ser: `'binary'`, `'ascii'` o `'utf8'`. Por defecto `'binary'`.
 
 ### decipher.final([output_encoding])
 
@@ -181,13 +181,14 @@ Devuelve el texto plano decodificado restante, siendo
 `output_encoding` `'binary'`, `'ascii'` o `'utf8'`.
 Por omisión `'binary'`.
 
-Note: `decipher` object can not be used after `final()` method been called.
+Nota: El objeto `decipher` no podrá ser usado tras la llamada a `final()`.
 
 ### decipher.setAutoPadding(auto_padding=true)
 
-You can disable auto padding if the data has been encrypted without standard block padding to prevent
-`decipher.final` from checking and removing it. Can only work if the input data's length is a multiple of the
-ciphers block size. You must call this before streaming data to `decipher.update`.
+Puede desactivar el relleno automático si los datos fueron cifrados sin un relleno de bloque estándar.
+Con esto previene que `decipher.final` chequee y elimine el relleno. 
+Solo puede funcionar si el tamaño de los datos es múltiplo del tamaño del bloque de cifrado.
+Debe invocar esta función antes de enviar datos a `decipher.update`.
 
 ## crypto.createSign(algorithm)
 
@@ -197,9 +198,9 @@ los algoritmos de firmado disponibles. Por ejemplo: `'RSA-SHA256'`
 
 ## Class: Signer
 
-Class for generating signatures.
+Clase para generar firmas.
 
-Returned by `crypto.createSign`.
+Devuelto por `crypto.createSign`.
 
 ### signer.update(data)
 
@@ -208,13 +209,13 @@ Puede ser llamado muchas veces a medida que nuevos datos van llegando.
 
 ### signer.sign(private_key, output_format='binary')
 
-Calcula la firma en todos los datos actualizados pasados a través del objetvo firma.
+Calcula la firma en todos los datos actualizados pasados a través del objeto firma.
 `private_key` es una cadena que contiene la clave privada para firmar codificada en PEM.
 
 Devuelve la firma en `output_format` que puede estar en `'binary'`, `'hex'` o 
 `'base64'`. Por omisión `'binary'`.
 
-Note: `signer` object can not be used after `sign()` method been called.
+Nota: El objeto `signer` no puede usarse tras la llamada a `sign()`.
 
 ### crypto.createVerify(algorithm)
 
@@ -238,87 +239,91 @@ Verifica los datos firmados usando `cert`, que es una cadena que contiene la lla
 
 Devuelve true o false dependiendo en la validez de la firma para el dato y la clave pública dadas.
 
-Note: `verifier` object can not be used after `verify()` method been called.
+Nota: El objeto `verifier` no debe usarse tras la llamada a `verify()`.
 
 ## crypto.createDiffieHellman(prime_length)
 
-Creates a Diffie-Hellman key exchange object and generates a prime of the
-given bit length. The generator used is `2`.
+Crea un objeto para el intercambio de claves mediante el protocolo criptográfico Diffie-Hellman 
+y genera un número primo con la longitud de bits indicada en `prime_length`.
+El generador usado es `2`.
 
 ## crypto.createDiffieHellman(prime, [encoding])
 
-Creates a Diffie-Hellman key exchange object using the supplied prime. The
-generator used is `2`. Encoding can be `'binary'`, `'hex'`, or `'base64'`.
-Defaults to `'binary'`.
+Crea un objeto para el intercambio de claves mediante el protocolo criptográfico Diffie-Hellman 
+usando el número primo suministrado.
+El generador usado es `2`.
+La codificación puede ser `'binary'`, `'hex'`, o `'base64'`.
+Por defecto `'binary'`.
 
 ## Class: DiffieHellman
 
-The class for creating Diffie-Hellman key exchanges.
+Clase para crear intercambios de clave mediante el protocolo criptográfico Diffie-Hellman
 
-Returned by `crypto.createDiffieHellman`.
+Devuelto por `crypto.createDiffieHellman`.
 
 ### diffieHellman.generateKeys([encoding])
 
-Generates private and public Diffie-Hellman key values, and returns the
-public key in the specified encoding. This key should be transferred to the
-other party. Encoding can be `'binary'`, `'hex'`, or `'base64'`.
-Defaults to `'binary'`.
+Genera claves Diffie-Hellman, pública y privada y devuelve la clave pública con la codificación especificada.
+Esta clave debe ser transferida a la otra parte —la otra persona, máquina, etc.
+La codificación puede ser `'binary'`, `'hex'`, o `'base64'`.
+Por defecto `'binary'`.
 
 ### diffieHellman.computeSecret(other_public_key, [input_encoding], [output_encoding])
 
-Computes the shared secret using `other_public_key` as the other party's
-public key and returns the computed shared secret. Supplied key is
-interpreted using specified `input_encoding`, and secret is encoded using
-specified `output_encoding`. Encodings can be `'binary'`, `'hex'`, or
-`'base64'`. The input encoding defaults to `'binary'`.
-If no output encoding is given, the input encoding is used as output encoding.
+Computa el secreto compartido sirviéndose de la clave pública (`other_public_key`) del emisor del mensaje 
+y devuelve el valor ya computado del secreto compartido.
+La clave suministrada es interpretada usando la codificación especificada en `input_encoding`.
+Para el secreto se usa la especificada en `output_encoding`.
+
+Las codificaciones admitidas son: `'binary'`, `'hex'`, o `'base64'`.
+La codificación por omisión para `input_encoding` es `'binary'`.
+Si no se especifica una codificación para `output_encoding` se usará la misma que para `input_encoding`.
 
 ### diffieHellman.getPrime([encoding])
 
-Returns the Diffie-Hellman prime in the specified encoding, which can be
-`'binary'`, `'hex'`, or `'base64'`. Defaults to `'binary'`.
+Devuelve el primo Diffie-Hellman en la codificación especificada que puede ser
+`'binary'`, `'hex'`, o `'base64'`. Por defecto `'binary'`.
 
 ### diffieHellman.getGenerator([encoding])
 
-Returns the Diffie-Hellman prime in the specified encoding, which can be
-`'binary'`, `'hex'`, or `'base64'`. Defaults to `'binary'`.
+Devuelve el primo Diffie-Hellman en la codificación especificada que puede ser
+`'binary'`, `'hex'`, o `'base64'`. Por defecto `'binary'`.
 
 ### diffieHellman.getPublicKey([encoding])
 
-Returns the Diffie-Hellman public key in the specified encoding, which can
-be `'binary'`, `'hex'`, or `'base64'`. Defaults to `'binary'`.
+Devuelve la clave pública Diffie-Hellman en la codificación especificada que puede ser
+`'binary'`, `'hex'`, o `'base64'`. Por defecto `'binary'`.
 
 ### diffieHellman.getPrivateKey([encoding])
 
-Returns the Diffie-Hellman private key in the specified encoding, which can
-be `'binary'`, `'hex'`, or `'base64'`. Defaults to `'binary'`.
+Devuelve la clave privada Diffie-Hellman en la codificación especificada que puede ser
+`'binary'`, `'hex'`, o `'base64'`. Por defecto `'binary'`.
 
 ### diffieHellman.setPublicKey(public_key, [encoding])
 
-Sets the Diffie-Hellman public key. Key encoding can be `'binary'`, `'hex'`,
-or `'base64'`. Defaults to `'binary'`.
+Establece la clave pública Diffie-Hellman en la codificación especificada que puede ser
+`'binary'`, `'hex'`, o `'base64'`. Por defecto `'binary'`.
 
 ### diffieHellman.setPrivateKey(public_key, [encoding])
 
-Sets the Diffie-Hellman private key. Key encoding can be `'binary'`, `'hex'`,
-or `'base64'`. Defaults to `'binary'`.
+Establece la clave privada Diffie-Hellman en la codificación especificada que puede ser
+`'binary'`, `'hex'`, o `'base64'`. Por defecto `'binary'`.
 
 ## crypto.getDiffieHellman(group_name)
+Crea un objeto predefinido Diffie-Hellman para el intercambio de claves.
+Los grupos soportados son: `'modp1'`, `'modp2'`, `'modp5'`
+(definidos en el [RFC 2412](http://www.rfc-editor.org/rfc/rfc2412.txt ))
+y `'modp14'`, `'modp15'`, `'modp16'`, `'modp17'`, `'modp18'`
+(definidos en el [RFC 3526](http://www.rfc-editor.org/rfc/rfc3526.txt )).
+El objeto devuelto tiene la misma interfaz que los objetos creados mediante
 
-Creates a predefined Diffie-Hellman key exchange object.
-The supported groups are: `'modp1'`, `'modp2'`, `'modp5'`
-(defined in [RFC 2412](http://www.rfc-editor.org/rfc/rfc2412.txt ))
-and `'modp14'`, `'modp15'`, `'modp16'`, `'modp17'`, `'modp18'`
-(defined in [RFC 3526](http://www.rfc-editor.org/rfc/rfc3526.txt )).
-The returned object mimics the interface of objects created by
-[crypto.createDiffieHellman()](#crypto.createDiffieHellman) above, but
-will not allow to change the keys (with
-[diffieHellman.setPublicKey()](#diffieHellman.setPublicKey) for example).
-The advantage of using this routine is that the parties don't have to
-generate nor exchange group modulus beforehand, saving both processor and
-communication time.
+[crypto.createDiffieHellman()](#crypto.createDiffieHellman), pero no permitirá
+el cambio de claves (mediante
+[diffieHellman.setPublicKey()](#diffieHellman.setPublicKey) por ejemplo).
+La ventaja de usar esta rutina radica en que las partes no tienen que generar ni 
+intercambiar el grupo de antemano, ahorrándose ambos tanto tiempo de proceso como de comunicación.
 
-Example (obtaining a shared secret):
+Ejemplo (obteniendo un secreto compartido):
 
     var crypto = require('crypto');
     var alice = crypto.getDiffieHellman('modp5');
@@ -330,18 +335,18 @@ Example (obtaining a shared secret):
     var alice_secret = alice.computeSecret(bob.getPublicKey(), 'binary', 'hex');
     var bob_secret = bob.computeSecret(alice.getPublicKey(), 'binary', 'hex');
 
-    /* alice_secret and bob_secret should be the same */
+    /* alice_secret y bob_secret deben ser iguales */
     console.log(alice_secret == bob_secret);
 
 ## crypto.pbkdf2(password, salt, iterations, keylen, callback)
 
-Asynchronous PBKDF2 applies pseudorandom function HMAC-SHA1 to derive
-a key of given length from the given password, salt and iterations.
-The callback gets two arguments `(err, derivedKey)`.
+El (asíncrono) PBKDF2 aplica una función pseudoaleatoria HMAC-SHA1 para derivar una clave, con 
+la longitud dada para el `password` suministrado, valor salt e iteraciones.
+El callback recibe dos argumentos `(err, derivedKey)`.
 
 ## crypto.randomBytes(size, [callback])
 
-Generates cryptographically strong pseudo-random data. Usage:
+Genera números pseudoaleatorios criptográficamente fuertes. Uso:
 
     // async
     crypto.randomBytes(256, function(ex, buf) {

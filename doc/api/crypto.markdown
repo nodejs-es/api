@@ -117,7 +117,7 @@ los algoritmos cipher disponibles.
 Crea y obtiene un objeto de cifrado configurado con el algoritmo dado, clave e IV.
 
 `algorithm` es el mismo que `createCipher()`. `key` es la clave usada por 
-el algoritmo. `iv` es el vector de inicialización. `key` e `iv` deben ser cadenas de text codificadas como `'binary'`
+el algoritmo. `iv` es el vector de inicialización. `key` e `iv` deben ser cadenas de texto codificadas como `'binary'`
 (Consulta [Buffer section](buffer.html) para más información).
 
 ## Class: Cipher

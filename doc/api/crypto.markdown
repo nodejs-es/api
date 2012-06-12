@@ -263,7 +263,7 @@ Devuelto por `crypto.createDiffieHellman`.
 
 ### diffieHellman.generateKeys([encoding])
 
-Genera claves Diffie-Hellman, pública y privada y devuelve la clave pública con la codificación especificada.
+Genera claves Diffie-Hellman, pública y privada, y devuelve la clave pública con la codificación especificada.
 Esta clave debe ser transferida a la otra parte —la otra persona, máquina, etc.
 La codificación puede ser `'binary'`, `'hex'`, o `'base64'`.
 Por defecto `'binary'`.
@@ -346,7 +346,7 @@ El callback recibe dos argumentos `(err, derivedKey)`.
 
 ## crypto.randomBytes(size, [callback])
 
-Genera números pseudoaleatorios criptográficamente fuertes. Uso:
+Genera números pseudoaleatorios. Criptográficamente fuerte. Uso:
 
     // async
     crypto.randomBytes(256, function(ex, buf) {
